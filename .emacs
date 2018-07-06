@@ -5,8 +5,6 @@
 (global-set-key (kbd "C-x C-c") nil) ;; I never use it, but do accidantally press
 (setq kill-ring-max 1) ;; I never use more than one entry anyway
 
-(package-initialize)
-
 (setq reb-re-syntax 'string) ;;standard syntax for re-builder
 
 (add-to-list 'load-path "/home/constantine/.emacs.d/lisp")
