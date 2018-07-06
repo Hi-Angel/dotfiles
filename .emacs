@@ -823,8 +823,8 @@ Version 2015-04-12"
 
 (defun my-isearch-yank-clipboard ()
   (interactive)
-  (isearch-yank-string (or (x-get-selection 'PRIMARY)
-                           (x-get-selection 'CLIPBOARD)
+  (isearch-yank-string (or (gui-get-selection 'PRIMARY)
+                           (gui-get-selection 'CLIPBOARD)
                            "")))
 
 (setq compile-command "ninja -C build")
