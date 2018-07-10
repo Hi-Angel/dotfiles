@@ -123,14 +123,11 @@ endfunction
 call pathogen#infect()
 
 
-" :set number relativenumber
-" :set nonumber norelativenumber  " turn hybrid line numbers off
-" :set !number !relativenumber    " toggle hybrid line numbers
-
 :set relativenumber
 :set norelativenumber  " turn relative line numbers off
 :set relativenumber!   " toggle relative line numbers
 :set hlsearch " highlighting all search occurences
+:set numberwidth=1 " to make vim to not align number to right very often
 
 " ---------
 " by default vim has bad aliasing functional, so use this instead
