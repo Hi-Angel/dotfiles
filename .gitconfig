@@ -1,0 +1,19 @@
+[core]
+	editor = "vim -c 'set spell spelllang=en_us'"
+[user]
+	email = Hi-Angel@yandex.ru
+	name = Konstantin Kharlamov
+[diff]
+	tool = gvimdiff
+[credential "https://github.com"]
+    username = Hi-Angel
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.yandex.com
+	smtpuser = Hi-Angel
+	suppresscc = all
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
+	l = "log --format=\"%ad %an, %h:\t[34m%s[0m\""
