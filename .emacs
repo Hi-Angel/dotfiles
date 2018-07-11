@@ -70,17 +70,15 @@
  ;; If there is more than one, they won't work right.
  '(company-dabbrev-downcase nil)
  '(custom-safe-themes
-   (quote
-    ("e9460a84d876da407d9e6accf9ceba453e2f86f8b86076f37c08ad155de8223c" "a1289424bbc0e9f9877aa2c9a03c7dfd2835ea51d8781a0bf9e2415101f70a7e" "54a63c60d03a025672ad021381a8bf96788c045908593d535fadb3695fd852c6" default)))
+   '("e9460a84d876da407d9e6accf9ceba453e2f86f8b86076f37c08ad155de8223c" "a1289424bbc0e9f9877aa2c9a03c7dfd2835ea51d8781a0bf9e2415101f70a7e" "54a63c60d03a025672ad021381a8bf96788c045908593d535fadb3695fd852c6" default))
  '(inhibit-startup-screen t)
  '(omnisharp-imenu-support t)
  '(package-selected-packages
-   (quote
-    (company company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode rust-mode flycheck surround ess minizinc-mode rainbow-delimiters atom-dark-theme highlight-numbers color-identifiers-mode twittering-mode company-anaconda anaconda-mode markdown-mode yasnippet wrap-region smartparens slime pretty-symbols paredit omnisharp lua-mode indent-guide idomenu highlight-parentheses helm-company ggtags flycheck-irony flycheck-haskell evil emms ctypes company-irony company-c-headers cmake-mode autopair)))
+   '(company company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode rust-mode flycheck surround ess minizinc-mode rainbow-delimiters atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode yasnippet wrap-region smartparens slime pretty-symbols paredit omnisharp lua-mode indent-guide idomenu highlight-parentheses helm-company ggtags flycheck-irony flycheck-haskell evil emms ctypes company-irony company-c-headers cmake-mode autopair))
  '(semantic-imenu-bucketize-file nil)
  '(semantic-imenu-bucketize-type-members nil)
  '(semantic-imenu-buckets-to-submenu nil)
- '(send-mail-function (quote smtpmail-send-it))
+ '(send-mail-function 'smtpmail-send-it)
  '(smtpmail-smtp-server "smtp.yandex.com")
  '(smtpmail-smtp-service 25))
 
@@ -597,9 +595,10 @@ in a few lines, and puts the cursor at the middle line"
 ;;     std::|
 (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 
-;; (add-hook 'text-mode-hook
-;;           (lambda ()
-;; 			(flyspell-mode t)))
+(defun myfunc-text-mode ()
+  (set (make-local-variable 'company-idle-delay) 0)
+  )
+(add-hook 'text-mode-hook 'myfunc-text-mode)
 
 (add-to-list 'company-backends 'company-c-headers)
 
