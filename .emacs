@@ -99,7 +99,6 @@
 
 ;(add-to-list 'company-backends 'company-yasnippet) commented out due to killing company's completition
 
-(require 'omnisharp)
 (require 'yasnippet)
 (yas-global-mode)
 
@@ -557,9 +556,6 @@ in a few lines, and puts the cursor at the middle line"
 ;;   (imenu-add-to-menubar "TAGS"))
 ;; (add-hook 'semantic-init-hooks 'my-semantic-hook)
 ;; (setq-default imenu-create-index-function 'imenu-default-create-index-function)
-
-;;load an omnisharp completition for the evil keymap
-(load-file "~/.emacs.d/lisp/example-config-for-evil-mode.elc")
 
 ;;enable and configure wrap-mode
 ;; (require 'wrap-region) → don't need beacuase of smart-parens, but I still leaved it for a safe case
