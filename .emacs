@@ -1,3 +1,7 @@
+;; run garbage collection only when idle
+(setq gc-cons-threshold most-positive-fixnum)
+(run-with-idle-timer 2 t (lambda () (garbage-collect)))
+
 ;;turn off the bars (I prefer to disable it in the very beginning ⇒ before Emacs starts loading
 ;;unneeded bars increasing a load time without a sense)
 (tool-bar-mode -1)
