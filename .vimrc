@@ -69,7 +69,7 @@ imap <M-n> <Down>
 imap <M-p> <Up>
 
 "adequate search'n'replce for visual mode
-vnoremap : :<BS><BS><BS><BS><BS>s/\%V
+"vnoremap : :<BS><BS><BS><BS><BS>s/\%V
 
 "comfortable split usage
 nmap <S-Left> <C-w>h
