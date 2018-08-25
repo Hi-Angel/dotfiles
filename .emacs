@@ -19,10 +19,6 @@
  'c-mode
  '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
 
-(font-lock-add-keywords
- 'c++-mode
- '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
