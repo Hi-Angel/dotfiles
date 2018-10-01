@@ -460,7 +460,7 @@ in a few lines, and puts the cursor at the middle line"
 (global-set-key (kbd "s-i") 'idomenu)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "<RET>") 'improved-newline-and-indent)
-(global-set-key (kbd "<f11>") 'ff-find-other-file) ;switch between a corresponding c/c++ header and a file
+(global-set-key (kbd "<f11>") (lambda () (interactive) '(ff-find-other-file nil t))) ;switch between a corresponding c/c++ header and a file
 (global-set-key (kbd "s-o") 'newline-without-break-of-line)
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease);set in wheel font decrease
 (global-set-key (kbd "<C-mouse-5>") 'text-scale-increase);set in wheel font increase
@@ -593,6 +593,7 @@ in a few lines, and puts the cursor at the middle line"
 
 (defun myfunc-text-mode ()
   (set (make-local-variable 'company-idle-delay) 0)
+  (set (make-local-variable 'company-minimum-prefix-length) 1)
   )
 (add-hook 'text-mode-hook 'myfunc-text-mode)
 
