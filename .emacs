@@ -258,9 +258,9 @@ opening symbol, thus the function seeks only the closing"
     (my-activate-ctypes)
     (modify-syntax-entry ?_ "w" c++-mode-syntax-table);;make underscore part of a word
     (modify-syntax-entry ?_ "w" c-mode-syntax-table);;make underscore part of a word
-    (setq flycheck-clang-language-standard "c++17")
     (semantic-mode)
     (require 'flycheck)
+    (setq flycheck-clang-language-standard "c++17")
     (add-to-list 'flycheck-clang-warnings '"-Wno-missing-braces")
     (add-to-list 'flycheck-clang-args "-frelaxed-template-template-args")
               ))
@@ -460,7 +460,7 @@ in a few lines, and puts the cursor at the middle line"
 (global-set-key (kbd "s-i") 'idomenu)
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "<RET>") 'improved-newline-and-indent)
-(global-set-key (kbd "<f11>") (lambda () (interactive) '(ff-find-other-file nil t))) ;switch between a corresponding c/c++ header and a file
+(global-set-key (kbd "<f11>") (lambda () (interactive) (ff-find-other-file nil t))) ;switch between a corresponding c/c++ header and a file
 (global-set-key (kbd "s-o") 'newline-without-break-of-line)
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease);set in wheel font decrease
 (global-set-key (kbd "<C-mouse-5>") 'text-scale-increase);set in wheel font increase
@@ -790,6 +790,12 @@ Version 2015-04-12"
   (modify-syntax-entry ?_ "w");;make underscore part of a word
   )
 (add-hook 'patch-mode-hook 'myfunc-patch-mode)
+
+(defun myfunc-diff-mode ()
+  (define-key diff-mode-map (kbd "<M-DEL>") nil)
+  (modify-syntax-entry ?_ "w" diff-mode-syntax-table) ;;make underscore part of a word
+  )
+(add-hook 'diff-mode-hook 'myfunc-diff-mode)
 (split-window-right) ;; something I always do, let's automatize that
 (load-file "~/.emacs.d/elpa/markdown-mode-20170712.1703/markdown-mode.elc")
 
@@ -824,3 +830,8 @@ Version 2015-04-12"
                            "")))
 
 (setq compile-command "ninja -C build")
+
+;; use a better color to determine focused tile
+(custom-set-faces
+ '(mode-line ((t (:background "light yellow" :foreground "dim gray"))))
+ '(mode-line-inactive ((t (:background "dim gray" :foreground "white")))))
