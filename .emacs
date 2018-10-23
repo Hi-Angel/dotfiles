@@ -35,6 +35,8 @@
  '(font-lock-type-face ((t (:foreground "ForestGreen" :height 105 :family "Ubuntu Mono"))))
  '(line-number ((t (:inherit (shadow default) :family "Ubuntu Mono"))))
  '(markdown-inline-code-face ((t (:inherit markdown-code-face :background "light blue"))))
+ '(mode-line ((t (:background "light yellow" :foreground "dim gray"))))
+ '(mode-line-inactive ((t (:background "dim gray" :foreground "white"))))
  '(region ((t (:background "gray")))))
 
 ;;theme loading should be done first, as below I changing some it's variables
@@ -575,10 +577,6 @@ in a few lines, and puts the cursor at the middle line"
 	))
 (global-highlight-symbol-mode);;enable it
 
-;;moving between windows with «Shift + "Arrow"
-(windmove-default-keybindings)
-(setq windmove-wrap-around t)
-
 (eval-after-load 'irony-mode
   '(progn
 	 (irony-mode t)
@@ -835,3 +833,16 @@ Version 2015-04-12"
 (custom-set-faces
  '(mode-line ((t (:background "light yellow" :foreground "dim gray"))))
  '(mode-line-inactive ((t (:background "dim gray" :foreground "white")))))
+
+
+(require 'winum)
+(winum-mode) ;; for some reason keybindings doesn't work otherwise
+(global-set-key (kbd "M-1") 'winum-select-window-1)
+(global-set-key (kbd "M-2") 'winum-select-window-2)
+(global-set-key (kbd "M-3") 'winum-select-window-3)
+(global-set-key (kbd "M-4") 'winum-select-window-4)
+(global-set-key (kbd "M-5") 'winum-select-window-5)
+(global-set-key (kbd "M-6") 'winum-select-window-6)
+(global-set-key (kbd "M-7") 'winum-select-window-7)
+(global-set-key (kbd "M-8") 'winum-select-window-8)
+(global-set-key (kbd "M-9") 'winum-select-window-9)
