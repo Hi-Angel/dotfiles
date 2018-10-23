@@ -791,6 +791,15 @@ Version 2015-04-12"
 
 (defun myfunc-diff-mode ()
   (define-key diff-mode-map (kbd "<M-DEL>") nil)
+  (define-key diff-mode-map (kbd "M-1") nil)
+  (define-key diff-mode-map (kbd "M-2") nil)
+  (define-key diff-mode-map (kbd "M-3") nil)
+  (define-key diff-mode-map (kbd "M-4") nil)
+  (define-key diff-mode-map (kbd "M-5") nil)
+  (define-key diff-mode-map (kbd "M-6") nil)
+  (define-key diff-mode-map (kbd "M-7") nil)
+  (define-key diff-mode-map (kbd "M-8") nil)
+  (define-key diff-mode-map (kbd "M-9") nil)
   (modify-syntax-entry ?_ "w" diff-mode-syntax-table) ;;make underscore part of a word
   )
 (add-hook 'diff-mode-hook 'myfunc-diff-mode)
