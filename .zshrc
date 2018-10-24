@@ -72,6 +72,7 @@ bindkey "^[l" down-case-word
 
 #useful aliases
 alias grep1="grep --exclude-dir=\".*\" --exclude=tags --exclude=TAGS"
+alias ack='ack --ignore-dir=\\".*\\" --ignore-file=is:tags --ignore-file=is:TAGS'
 alias dmesg="dmesg --color=always"
 alias gdb="gdb -q"
 alias ll="ls -l"
