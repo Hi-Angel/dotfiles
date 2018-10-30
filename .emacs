@@ -508,7 +508,7 @@ in a few lines, and puts the cursor at the middle line"
 ;; 				   )));;enable for c++
 ;; (dolist (hook '(twittering-edit-mode-hook)) commented out — the flycheck is a scum! It mess up with input.
 ;;   (add-hook hook (lambda ()
-;; 				   (ispell-change-dictionary "russian")
+;; 				   (ispell-change-dictionary "ru"
 ;; 				   (flyspell-mode 1))));;enable for twittering-mode
 
 (require 'smartparens-config)
