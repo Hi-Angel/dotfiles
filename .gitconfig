@@ -5,6 +5,7 @@
 	name = Konstantin Kharlamov
 [diff]
 	tool = gvimdiff
+	algorithm = histogram
 [credential "https://github.com"]
     username = Hi-Angel
 [sendemail]
