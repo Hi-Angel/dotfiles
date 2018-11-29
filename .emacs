@@ -424,12 +424,9 @@ point reaches the beginning or end of the buffer, stop there."
 Works just as the standard «toggle-input-method»(and in fact
 calls it), but before checks if an input method one of russian or
 english. If it isn't, set the lang to english."
-  (if (and current-input-method
-		   (not (eq current-input-method  "russian-computer")))
-	  (progn
-		(set-input-method "russian-computer")
-		(deactivate-input-method));;set to english
-	(toggle-input-method)))
+  (if (not current-input-method)
+      (set-input-method "russian-computer")
+    (deactivate-input-method)))
 (global-set-key (kbd "C-\\") 'input-switch-eng-ru)
 (global-set-key (kbd "s-\\") (lambda () (interactive);;sets input method to «TeX»
 							   (set-input-method "TeX")))
