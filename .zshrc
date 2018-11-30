@@ -120,5 +120,9 @@ fpath=(~/.zsh/ninja-completion.zsh $fpath)
 
 # sed analog in perl, called like "sed_perl pattern_from pattern_to"
 function sed_perl() {
-	/usr/bin/vendor_perl/ack -l --print0 "$1" | xargs -r0 perl -i -pe "s\`$1\`$2\`g"
+	local from=$1
+	local to=$2
+	shift 2
+	#/usr/bin/vendor_perl/ack -l --print0 "$from" $@ | xargs -r0 perl -i -pe "s\`$from\`$to\`g"
+	/usr/bin/vendor_perl/ack -l --print0 "$from" $@ | xargs -r0 perl -Mutf8 -i -CS -pe "s α${from}α${to}αg"
 }
