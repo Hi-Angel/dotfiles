@@ -240,7 +240,8 @@ opening symbol, thus the function seeks only the closing"
 								;; '("float" . ?ℚ);;rational numbers
 								)))
 
-(modify-syntax-entry ?_ "w" text-mode-syntax-table) ;;make underscore part of a word
+(eval-after-load 'text-mode
+  '(modify-syntax-entry ?_ "w" text-mode-syntax-table)) ;; make underscore part of a word
 
 (require 'rust-mode)
 (modify-syntax-entry ?_ "w" rust-mode-syntax-table) ;;make underscore part of a word
@@ -252,7 +253,6 @@ opening symbol, thus the function seeks only the closing"
   (c-set-offset 'case-label '+)
   (fix-c-style-indentation)
   (turn-on-auto-fill) ;;auto fill mode for c modes.
-  (modify-syntax-entry ?_ "w" c++-mode-syntax-table);;make underscore part of a word
   (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'csharp-mode 'lua-mode)
     (ggtags-mode 1)
     (init-prettify-table-c-like)
