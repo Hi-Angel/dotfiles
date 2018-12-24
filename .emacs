@@ -76,7 +76,7 @@
  '(inhibit-startup-screen t)
  '(omnisharp-imenu-support t)
  '(package-selected-packages
-   '(company company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode rust-mode flycheck surround ess minizinc-mode rainbow-delimiters atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode yasnippet wrap-region smartparens slime pretty-symbols paredit omnisharp lua-mode indent-guide idomenu highlight-parentheses helm-company ggtags flycheck-irony flycheck-haskell evil emms ctypes company-irony company-c-headers cmake-mode autopair))
+   '(irony-eldoc go-mode winum company company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode rust-mode flycheck surround ess minizinc-mode rainbow-delimiters atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode yasnippet wrap-region smartparens slime pretty-symbols paredit omnisharp lua-mode indent-guide idomenu highlight-parentheses helm-company flycheck-irony flycheck-haskell evil emms ctypes company-irony company-c-headers cmake-mode autopair))
  '(semantic-imenu-bucketize-file nil)
  '(semantic-imenu-bucketize-type-members nil)
  '(semantic-imenu-buckets-to-submenu nil)
@@ -251,7 +251,6 @@ opening symbol, thus the function seeks only the closing"
   (fix-c-style-indentation)
   (turn-on-auto-fill) ;;auto fill mode for c modes.
   (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'csharp-mode 'lua-mode)
-    (ggtags-mode 1)
     (init-prettify-table-c-like)
     (prettify-symbols-mode 1)
     (semantic-mode)
