@@ -302,7 +302,7 @@ opening symbol, thus the function seeks only the closing"
 ;; (require 'flycheck)
 ;; (global-flycheck-mode)
 ;; (setq flycheck-checker-error-threshold 2000)
-(setq flycheck-clang-language-standard "C++11")
+(setq flycheck-clang-language-standard "C++17")
 
 ;;Enable Evil, and disable it's keybinds except for «ESC» in an insert mode
 (require 'emvil)
