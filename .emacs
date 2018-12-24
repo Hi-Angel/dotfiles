@@ -90,6 +90,8 @@
 
 (setq-default tab-width 4) ;;set tab width
 
+(require 'flycheck) ;; I always use it anyway
+
 (require 'evil-surround)
 (global-evil-surround-mode 1)
 (semantic-mode 1)
@@ -245,9 +247,6 @@ opening symbol, thus the function seeks only the closing"
 (require 'rust-mode)
 (modify-syntax-entry ?_ "w" rust-mode-syntax-table) ;;make underscore part of a word
 
-;;GNU Global mode for c/C++/Java/C#
-(require 'ggtags)
-(defun my-activate-ctypes () (require 'ctypes))
 (defun myactionsfor-c-mode-common-hook ()
   (c-set-offset 'case-label '+)
   (fix-c-style-indentation)
@@ -256,11 +255,9 @@ opening symbol, thus the function seeks only the closing"
     (ggtags-mode 1)
     (init-prettify-table-c-like)
     (prettify-symbols-mode 1)
-    (my-activate-ctypes)
     (modify-syntax-entry ?_ "w" c++-mode-syntax-table);;make underscore part of a word
     (modify-syntax-entry ?_ "w" c-mode-syntax-table);;make underscore part of a word
     (semantic-mode)
-    (require 'flycheck)
     (setq flycheck-clang-language-standard "c++17")
     (add-to-list 'flycheck-clang-warnings '"-Wno-missing-braces")
     (add-to-list 'flycheck-clang-args "-frelaxed-template-template-args")
@@ -298,7 +295,6 @@ opening symbol, thus the function seeks only the closing"
 							))
 
 
-;; (require 'flycheck)
 ;; (global-flycheck-mode)
 ;; (setq flycheck-checker-error-threshold 2000)
 (setq flycheck-clang-language-standard "C++17")
