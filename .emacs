@@ -104,7 +104,6 @@
 (require 'yasnippet)
 (yas-global-mode)
 
-(require 'minizinc-mode)
 (add-to-list 'auto-mode-alist '("\\.mzn\\'" . minizinc-mode))
 
 (defun sort-lines-nocase (reverse beg end)
