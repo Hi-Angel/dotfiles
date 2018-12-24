@@ -852,3 +852,16 @@ Version 2015-04-12"
 (global-set-key (kbd "M-7") 'winum-select-window-7)
 (global-set-key (kbd "M-8") 'winum-select-window-8)
 (global-set-key (kbd "M-9") 'winum-select-window-9)
+
+;; START: enable irony-mode for c++
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+
+(defun myactionsfor-irony-mode-hook ()
+  (irony-cdb-autosetup-compile-options)
+  (assert (boundp 'company-backends)) ;; I always use company-mode
+  (set (make-local-variable 'company-backends)
+       '(company-irony company-etags company-dabbrev))
+  )
+(add-hook 'irony-mode-hook 'myactionsfor-irony-mode-hook)
+;; END: enable irony-mode for c++
