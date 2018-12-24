@@ -525,10 +525,6 @@ in a few lines, and puts the cursor at the middle line"
 (push '("melpa" . "http://melpa.milkbox.net/packages/")
 	  package-archives)
 
-(require 'twittering-mode)
-(setq twittering-use-master-password t)
-(setq twittering-icon-mode t) ;enable icons in the twittering mode
-
 ;deletes trailing whitespaces before saving the file and sort includes
 (defun myfunc-before-save-hook () (interactive)
 							   (delete-trailing-whitespace)
