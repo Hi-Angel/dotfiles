@@ -313,7 +313,8 @@ opening symbol, thus the function seeks only the closing"
 (setq-default ido-case-fold t);;case insensistivity
 (ido-mode)
 
-(setq whitespace-style (list 'face 'tabs 'spaces 'space-before-tab 'empty 'space-mark 'tab-mark))
+;; visible whitespace config
+;; (setq whitespace-style (list 'face 'tabs 'spaces 'space-before-tab 'empty 'space-mark 'tab-mark))
 ;; (global-whitespace-mode 1) commented out due to problems with markdown
 
 ;;scrolling related fixes
