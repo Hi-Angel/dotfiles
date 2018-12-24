@@ -241,11 +241,10 @@ opening symbol, thus the function seeks only the closing"
 								;; '("float" . ?ℚ);;rational numbers
 								)))
 
-(eval-after-load 'text-mode
-  '(modify-syntax-entry ?_ "w" text-mode-syntax-table)) ;; make underscore part of a word
-
-(require 'rust-mode)
-(modify-syntax-entry ?_ "w" rust-mode-syntax-table) ;;make underscore part of a word
+;; make underscore part of a word
+(dolist (mode '(text-mode rust-mode cc-mode python lisp-mode gud php-mode haskell-mode shell-mode markdown-mode diff-mode))
+  (eval-after-load mode
+    '(modify-syntax-entry ?_ "w")))
 
 (defun myactionsfor-c-mode-common-hook ()
   (c-set-offset 'case-label '+)
@@ -255,25 +254,12 @@ opening symbol, thus the function seeks only the closing"
     (ggtags-mode 1)
     (init-prettify-table-c-like)
     (prettify-symbols-mode 1)
-    (modify-syntax-entry ?_ "w" c++-mode-syntax-table);;make underscore part of a word
-    (modify-syntax-entry ?_ "w" c-mode-syntax-table);;make underscore part of a word
     (semantic-mode)
     (setq flycheck-clang-language-standard "c++17")
     (add-to-list 'flycheck-clang-warnings '"-Wno-missing-braces")
     (add-to-list 'flycheck-clang-args "-frelaxed-template-template-args")
               ))
 (add-hook 'c-mode-common-hook 'myactionsfor-c-mode-common-hook)
-
-(defun myactionsfor-python-mode-common-hook ()
-  (modify-syntax-entry ?_ "w" python-mode-syntax-table);;make underscore part of a word
-  ;; (semantic-mode) — commented out: seems to be enabled automatically
-  )
-(add-hook 'python-mode-common-hook 'myactionsfor-python-mode-common-hook)
-
-(defun myactionsfor-prog-mode-hook ()
-  (modify-syntax-entry ?_ "w" prog-mode-syntax-table);;make underscore part of a word
-  )
-(add-hook 'prog-mode-hook 'myactionsfor-prog-mode-hook)
 
 (add-hook  'csharp-mode-hook (lambda () (interactive)
 								(flycheck-mode -1);;disable, it for some reason lags with C#
@@ -336,7 +322,6 @@ opening symbol, thus the function seeks only the closing"
 (setq-default inferior-lisp-program "/usr/bin/sbcl")
 (add-hook 'lisp-mode-hook (lambda ()
 							(turn-on-auto-fill) ;;auto fill mode for c modes.
-							(modify-syntax-entry ?- "w" lisp-mode-syntax-table);;make underscore part of a word
 							))
 
 ;;set apropriate lenght of a line
@@ -587,7 +572,6 @@ in a few lines, and puts the cursor at the middle line"
 (add-to-list 'company-backends 'company-c-headers)
 
 (defun myfunc-gud-gdb-mode ()
-  (modify-syntax-entry ?_ "w" gud-mode-syntax-table);;make underscore part of a word
   (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)
   (company-mode 0)
   (local-set-key (kbd "C-d") 'c-electric-delete-forward) ;; gdb rebinds the key
@@ -595,12 +579,6 @@ in a few lines, and puts the cursor at the middle line"
 (add-hook 'gud-mode-hook 'myfunc-gud-gdb-mode)
 (add-hook 'gdb-mode-hook '(lambda () (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)))
 (put 'erase-buffer 'disabled nil)
-
-(defun myfunc-php-mode-hook ()
-  ;; (setq c-basic-offset 2) ;;in my company indentation is two spaces
-  (modify-syntax-entry ?_ "w" php-mode-syntax-table)
-  )
-(add-hook 'php-mode-hook 'myfunc-php-mode-hook)
 
 (defun myfunc-web-mode-hook ()
   (myfunc-php-mode-hook))
@@ -662,13 +640,11 @@ Version 2015-04-12"
 
 (defun myactions-haskell-mode-hook ()
   (haskell-indent-mode)
-  (modify-syntax-entry ?_ "w" haskell-mode-syntax-table)
   )
 (add-hook 'haskell-mode-hook 'myactions-haskell-mode-hook)
 
 (defun myfunc-shell-mode ()
   (flycheck-mode 1)
-  (modify-syntax-entry ?_ "w") ;; make underscore part of a word
   )
 (add-hook 'shell-mode-hook 'myfunc-shell-mode)
 
@@ -680,7 +656,6 @@ Version 2015-04-12"
   (setq dabbrev-upcase-means-case-search nil) ;;ignore case
   (flyspell-mode)
   (ispell-change-dictionary "english")
-  (modify-syntax-entry ?_ "w" markdown-mode-syntax-table);;make underscore part of a word
   )
 (add-hook 'markdown-mode-hook 'myfunc-markdown-mode)
 
@@ -773,11 +748,6 @@ Version 2015-04-12"
 
 ;; ---------- end of color-identifiers specific setup
 
-(defun myfunc-patch-mode ()
-  (modify-syntax-entry ?_ "w");;make underscore part of a word
-  )
-(add-hook 'patch-mode-hook 'myfunc-patch-mode)
-
 (defun myfunc-diff-mode ()
   (define-key diff-mode-map (kbd "<M-DEL>") nil)
   (define-key diff-mode-map (kbd "M-1") nil)
@@ -789,7 +759,6 @@ Version 2015-04-12"
   (define-key diff-mode-map (kbd "M-7") nil)
   (define-key diff-mode-map (kbd "M-8") nil)
   (define-key diff-mode-map (kbd "M-9") nil)
-  (modify-syntax-entry ?_ "w" diff-mode-syntax-table) ;;make underscore part of a word
   )
 (add-hook 'diff-mode-hook 'myfunc-diff-mode)
 (split-window-right) ;; something I always do, let's automatize that
