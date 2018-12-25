@@ -242,15 +242,32 @@ opening symbol, thus the function seeks only the closing"
 								)))
 
 ;; START: make underscore part of a word
-(dolist (mode '(text-mode rust-mode python lisp-mode gud php-mode haskell-mode shell-mode markdown-mode diff-mode))
-  (eval-after-load mode
-    '(modify-syntax-entry ?_ "w")))
-
-;; the above trick doesn't work for cc-mode file
+(eval-after-load 'text-mode
+  '(modify-syntax-entry ?_ "w" text-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'rust-mode
+  '(modify-syntax-entry ?_ "w" rust-mode-syntax-table)) ;; make underscore part of a word
 (eval-after-load 'cc-mode
   '(modify-syntax-entry ?_ "w" c++-mode-syntax-table)) ;; make underscore part of a word
 (eval-after-load 'cc-mode
   '(modify-syntax-entry ?_ "w" c-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'python
+  '(modify-syntax-entry ?_ "w" python-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'lisp-mode
+  '(modify-syntax-entry ?_ "w" lisp-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'elisp-mode
+  '(modify-syntax-entry ?_ "w" emacs-lisp-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'gud
+  '(modify-syntax-entry ?_ "w" gud-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'php-mode
+  '(modify-syntax-entry ?_ "w" php-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'haskell-mode
+  '(modify-syntax-entry ?_ "w" haskell-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'shell-mode
+  '(modify-syntax-entry ?_ "w")) ;; make underscore part of a word
+(eval-after-load 'markdown-mode
+  '(modify-syntax-entry ?_ "w" markdown-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'diff-mode
+  '(modify-syntax-entry ?_ "w" diff-mode-syntax-table)) ;; make underscore part of a word
 ;; END: make underscore part of a word
 
 (defun myactionsfor-c-mode-common-hook ()
