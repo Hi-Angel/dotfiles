@@ -241,10 +241,17 @@ opening symbol, thus the function seeks only the closing"
 								;; '("float" . ?ℚ);;rational numbers
 								)))
 
-;; make underscore part of a word
-(dolist (mode '(text-mode rust-mode cc-mode python lisp-mode gud php-mode haskell-mode shell-mode markdown-mode diff-mode))
+;; START: make underscore part of a word
+(dolist (mode '(text-mode rust-mode python lisp-mode gud php-mode haskell-mode shell-mode markdown-mode diff-mode))
   (eval-after-load mode
     '(modify-syntax-entry ?_ "w")))
+
+;; the above trick doesn't work for cc-mode file
+(eval-after-load 'cc-mode
+  '(modify-syntax-entry ?_ "w" c++-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'cc-mode
+  '(modify-syntax-entry ?_ "w" c-mode-syntax-table)) ;; make underscore part of a word
+;; END: make underscore part of a word
 
 (defun myactionsfor-c-mode-common-hook ()
   (c-set-offset 'case-label '+)
