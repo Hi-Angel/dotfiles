@@ -60,7 +60,6 @@ end
 
 source ~/gdb.py
 
-# stupid asan neither work under gdb, nor can disable itself instead of screwing the session
 set environment ASAN_OPTIONS=detect_leaks=0
 
 # fancy prompt
