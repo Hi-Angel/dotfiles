@@ -212,20 +212,11 @@ opening symbol, thus the function seeks only the closing"
   "Sorts and aligns Haskell imports"
   (interactive)
   (save-excursion
-	(let (beg end)
-	  (goto-char (point-min))
-	  (while (and (not (looking-at "import "));;look for usings, if no then
-				  (eq (forward-line 1) 0) ;;go one line down (if not EOF).
-				  ))
-	  ;; (setq beg (point))
-	  ;; (while (and (looking-at "import ")
-	  ;; 			  (eq (forward-line 1) 0)));;to not hang cuz of EOF
-	  ;; (setq end (point))
-	  (haskell-sort-imports)
-	  ;; (let ((case-fold-search nil)) ;; to make sure [A-Z] works as expected
-	  ;; 	(align-regexp beg end "\\(\\s-*\\)[A-Z].*$"))
-	  ;; (haskell-align-imports)
-	  )))
+    (goto-char (point-min))
+    (while (and (not (looking-at "import "));;look for usings, if no then
+                (eq (forward-line 1) 0) ;;go one line down (if not EOF).
+                ))
+    (haskell-sort-imports)))
 
 ;;Ponification syntax table for c=like lamguages
 (defun init-prettify-table-c-like ()
@@ -409,9 +400,8 @@ point reaches the beginning or end of the buffer, stop there."
   "1. remove to end of the line.
   2. insert newline with index"
   (interactive)
-  (let ((oldpos (point)))
-    (end-of-line)
-    (newline-and-indent)))
+  (end-of-line)
+  (newline-and-indent))
 (global-set-key (kbd "s-o") 'newline-without-break-of-line)
 
 ;;A fix for align-regexp to use spaces instead of tabs to align
