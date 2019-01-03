@@ -111,7 +111,6 @@ export EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 setopt HIST_IGNORE_ALL_DUPS
-setopt hist_expire_dups_first
 setopt hist_reduce_blanks
 unsetopt share_history
 
