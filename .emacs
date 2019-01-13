@@ -558,12 +558,14 @@ in a few lines, and puts the cursor at the middle line"
 ;; (indent-guide-global-mode t)
 
 (require 'highlight-symbol)
-(global-set-key (kbd "s-`") 'highlight-symbol-at-point)
+(defun enable-highlight-symbol-mode ()
+  (unless (minibufferp)
+    (highlight-symbol-mode t)))
 (define-global-minor-mode global-highlight-symbol-mode ;;the name of the new global mode
   highlight-symbol-mode ;;the name of the minor mode
-  (lambda () (highlight-symbol-mode t)
-	))
+  enable-highlight-symbol-mode)
 (global-highlight-symbol-mode);;enable it
+(global-set-key (kbd "s-`") 'highlight-symbol-at-point)
 
 (eval-after-load 'irony-mode
   '(progn
