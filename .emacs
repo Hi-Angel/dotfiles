@@ -304,9 +304,10 @@ opening symbol, thus the function seeks only the closing"
 (global-set-key (kbd "C-S-z") 'undo-tree-redo)
 (setq evil-jumps-cross-buffers nil)
 
-(require 'ido)
+(require 'flx-ido) ;; ido-mode with fuzzy matches
 (setq-default ido-case-fold t);;case insensistivity
 (ido-mode)
+(flx-ido-mode)
 
 ;; visible whitespace config
 ;; (setq whitespace-style (list 'face 'tabs 'spaces 'space-before-tab 'empty 'space-mark 'tab-mark))
