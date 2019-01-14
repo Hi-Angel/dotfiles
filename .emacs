@@ -309,6 +309,10 @@ opening symbol, thus the function seeks only the closing"
 (setq ido-enable-flex-matching t) ;; fuzzy match
 (ido-mode)
 
+(require 'smex)
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+
 ;; visible whitespace config
 ;; (setq whitespace-style (list 'face 'tabs 'spaces 'space-before-tab 'empty 'space-mark 'tab-mark))
 ;; (global-whitespace-mode 1) commented out due to problems with markdown
