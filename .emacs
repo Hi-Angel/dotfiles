@@ -540,6 +540,14 @@ in a few lines, and puts the cursor at the middle line"
 							   )
 (add-hook 'before-save-hook 'myfunc-before-save-hook)
 
+(defun myfunc-rust-mode-hook ()
+  (racer-mode)
+  (assert (boundp 'company-backends)) ;; I always use company-mode
+  (set (make-local-variable 'company-backends)
+       '(company-capf company-etags company-dabbrev))
+       )
+(add-hook 'rust-mode-hook 'myfunc-rust-mode-hook)
+
 ;; ;;CEDET loading
 ;; (load-file "~/Projects/cedet-1.1/common/cedet.el")
 ;; (global-ede-mode 1)
