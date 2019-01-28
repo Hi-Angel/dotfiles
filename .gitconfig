@@ -18,3 +18,4 @@
 [alias]
 	d = difftool
 	l = "log --format=\"%ad %an, %h:\t[34m%s[0m\""
+	ret = checkout @{-1}
