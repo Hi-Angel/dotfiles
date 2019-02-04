@@ -42,7 +42,6 @@ filetype plugin indent on    " required
 set nobackup
 set number
 
-set smartindent
 set tabstop=4
 set shiftwidth=4
 set smarttab
