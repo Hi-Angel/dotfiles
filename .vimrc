@@ -41,9 +41,13 @@ filetype plugin indent on    " required
 
 set nobackup
 set number
+
 set smartindent
 set tabstop=4
 set shiftwidth=4
+set smarttab
+set expandtab
+
 set incsearch
 imap <C-BS> <C-W>
 nmap o <END>a<CR>i<BS><ESC>a
