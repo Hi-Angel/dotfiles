@@ -854,3 +854,10 @@ Version 2015-04-12"
   )
 (add-hook 'irony-mode-hook 'myactionsfor-irony-mode-hook)
 ;; END: enable irony-mode for c++
+
+
+;; C++ regex to conver constructor args to initialization (assumes no types with spaces & commas)
+;; \b[^,]+? \b\(.+?\)\b → \1(\1)
+
+;; allegedly it should help with "unrecognized entry in undo list" https://emacs.stackexchange.com/questions/31438/possible-not-to-use-undo-tree-in-evil-mode
+(setq undo-tree-enable-undo-in-region nil)
