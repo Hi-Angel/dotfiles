@@ -259,6 +259,8 @@ opening symbol, thus the function seeks only the closing"
   '(modify-syntax-entry ?_ "w" markdown-mode-syntax-table)) ;; make underscore part of a word
 (eval-after-load 'diff-mode
   '(modify-syntax-entry ?_ "w" diff-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'meson-mode
+  '(modify-syntax-entry ?_ "w" meson-mode-syntax-table)) ;; make underscore part of a word
 ;; END: make underscore part of a word
 
 (defun myactionsfor-c-mode-common-hook ()
