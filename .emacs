@@ -863,3 +863,21 @@ Version 2015-04-12"
 
 ;; allegedly it should help with "unrecognized entry in undo list" https://emacs.stackexchange.com/questions/31438/possible-not-to-use-undo-tree-in-evil-mode
 (setq undo-tree-enable-undo-in-region nil)
+
+(defun smerge-next-safe ()
+    "returns t on success, nil otherwise"
+  (condition-case err
+      (not (smerge-next))
+    ('error
+     nil)))
+
+
+(defun next-conflict ()
+  (interactive)
+  (let ((buffer (current-buffer)))
+    (when (not (smerge-next-safe))
+      (vc-find-conflicted-file)
+      (if (eq buffer (current-buffer))
+        (message "No conflicts found"))
+        (smerge-next-safe)))
+  )
