@@ -879,5 +879,6 @@ Version 2015-04-12"
       (vc-find-conflicted-file)
       (if (eq buffer (current-buffer))
         (message "No conflicts found"))
-        (smerge-next-safe)))
+      (goto-char 0)
+      (smerge-next-safe)))
   )
