@@ -573,7 +573,8 @@ in a few lines, and puts the cursor at the middle line"
 
 (require 'highlight-symbol)
 (defun enable-highlight-symbol-mode ()
-  (unless (minibufferp)
+  (unless (or (minibufferp)
+              (derived-mode-p 'magit-mode))
     (highlight-symbol-mode t)))
 (define-global-minor-mode global-highlight-symbol-mode ;;the name of the new global mode
   highlight-symbol-mode ;;the name of the minor mode
