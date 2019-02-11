@@ -806,12 +806,6 @@ Version 2015-04-12"
   		           )
   		        )
 
-(defun my-isearch-yank-clipboard ()
-  (interactive)
-  (isearch-yank-string (or (gui-get-selection 'PRIMARY)
-                           (gui-get-selection 'CLIPBOARD)
-                           "")))
-
 (setq compile-command "ninja -C build")
 
 ;; use a better color to determine focused tile
