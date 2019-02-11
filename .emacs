@@ -779,19 +779,6 @@ Version 2015-04-12"
 
 ;; ---------- end of color-identifiers specific setup
 
-(defun myfunc-diff-mode ()
-  (define-key diff-mode-map (kbd "<M-DEL>") nil)
-  (define-key diff-mode-map (kbd "M-1") nil)
-  (define-key diff-mode-map (kbd "M-2") nil)
-  (define-key diff-mode-map (kbd "M-3") nil)
-  (define-key diff-mode-map (kbd "M-4") nil)
-  (define-key diff-mode-map (kbd "M-5") nil)
-  (define-key diff-mode-map (kbd "M-6") nil)
-  (define-key diff-mode-map (kbd "M-7") nil)
-  (define-key diff-mode-map (kbd "M-8") nil)
-  (define-key diff-mode-map (kbd "M-9") nil)
-  )
-(add-hook 'diff-mode-hook 'myfunc-diff-mode)
 (split-window-right) ;; something I always do, let's automatize that
 (load-file "~/.emacs.d/elpa/markdown-mode-20170712.1703/markdown-mode.elc")
 
@@ -844,6 +831,31 @@ Version 2015-04-12"
 (global-set-key (kbd "M-7") 'winum-select-window-7)
 (global-set-key (kbd "M-8") 'winum-select-window-8)
 (global-set-key (kbd "M-9") 'winum-select-window-9)
+
+(defun myfunc-diff-mode ()
+  (define-key diff-mode-map (kbd "<M-DEL>") nil)
+  (define-key diff-mode-map (kbd "M-1") nil)
+  (define-key diff-mode-map (kbd "M-2") nil)
+  (define-key diff-mode-map (kbd "M-3") nil)
+  (define-key diff-mode-map (kbd "M-4") nil)
+  (define-key diff-mode-map (kbd "M-5") nil)
+  (define-key diff-mode-map (kbd "M-6") nil)
+  (define-key diff-mode-map (kbd "M-7") nil)
+  (define-key diff-mode-map (kbd "M-8") nil)
+  (define-key diff-mode-map (kbd "M-9") nil))
+(add-hook 'diff-mode-hook 'myfunc-diff-mode)
+
+(defun myfunc-magit-mode ()
+  (define-key magit-mode-map (kbd "M-1") nil)
+  (define-key magit-mode-map (kbd "M-2") nil)
+  (define-key magit-mode-map (kbd "M-3") nil)
+  (define-key magit-mode-map (kbd "M-4") nil)
+  (define-key magit-mode-map (kbd "M-5") nil)
+  (define-key magit-mode-map (kbd "M-6") nil)
+  (define-key magit-mode-map (kbd "M-7") nil)
+  (define-key magit-mode-map (kbd "M-8") nil)
+  (define-key magit-mode-map (kbd "M-9") nil))
+(add-hook 'magit-mode-hook 'myfunc-magit-mode)
 
 ;; START: enable irony-mode for c++
 (eval-after-load 'flycheck
