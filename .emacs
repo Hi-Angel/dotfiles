@@ -821,7 +821,7 @@ Version 2015-04-12"
 
 
 (require 'winum)
-(winum-mode) ;; for some reason keybindings doesn't work otherwise
+(winum-mode)
 (global-set-key (kbd "M-1") 'winum-select-window-1)
 (global-set-key (kbd "M-2") 'winum-select-window-2)
 (global-set-key (kbd "M-3") 'winum-select-window-3)
@@ -833,7 +833,7 @@ Version 2015-04-12"
 (global-set-key (kbd "M-9") 'winum-select-window-9)
 (global-set-key (kbd "M-0") 'winum-select-window-0) ;; minibuf
 
-(defun myfunc-diff-mode ()
+(defun myfunc-diff-mode () ;; diff mode overrides the keys, undo that
   (define-key diff-mode-map (kbd "<M-DEL>") nil)
   (define-key diff-mode-map (kbd "M-1") nil)
   (define-key diff-mode-map (kbd "M-2") nil)
@@ -847,7 +847,7 @@ Version 2015-04-12"
   (define-key diff-mode-map (kbd "M-0") nil))
 (add-hook 'diff-mode-hook 'myfunc-diff-mode)
 
-(defun myfunc-magit-mode ()
+(defun myfunc-magit-mode () ;; magit overrides the keys, undo that
   (define-key magit-mode-map (kbd "M-1") nil)
   (define-key magit-mode-map (kbd "M-2") nil)
   (define-key magit-mode-map (kbd "M-3") nil)
