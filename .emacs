@@ -611,10 +611,6 @@ in a few lines, and puts the cursor at the middle line"
 (add-hook 'gdb-mode-hook '(lambda () (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)))
 (put 'erase-buffer 'disabled nil)
 
-(defun myfunc-web-mode-hook ()
-  (myfunc-php-mode-hook))
-(add-hook 'web-mode-hook 'myfunc-web-mode-hook)
-
 ;;fallback font (if the default have no some gliphs)
 (set-fontset-font "fontset-default" 'unicode "Ubuntu Mono")
 
