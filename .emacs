@@ -831,6 +831,7 @@ Version 2015-04-12"
 (global-set-key (kbd "M-7") 'winum-select-window-7)
 (global-set-key (kbd "M-8") 'winum-select-window-8)
 (global-set-key (kbd "M-9") 'winum-select-window-9)
+(global-set-key (kbd "M-0") 'winum-select-window-0) ;; minibuf
 
 (defun myfunc-diff-mode ()
   (define-key diff-mode-map (kbd "<M-DEL>") nil)
@@ -842,7 +843,8 @@ Version 2015-04-12"
   (define-key diff-mode-map (kbd "M-6") nil)
   (define-key diff-mode-map (kbd "M-7") nil)
   (define-key diff-mode-map (kbd "M-8") nil)
-  (define-key diff-mode-map (kbd "M-9") nil))
+  (define-key diff-mode-map (kbd "M-9") nil)
+  (define-key diff-mode-map (kbd "M-0") nil))
 (add-hook 'diff-mode-hook 'myfunc-diff-mode)
 
 (defun myfunc-magit-mode ()
@@ -854,7 +856,8 @@ Version 2015-04-12"
   (define-key magit-mode-map (kbd "M-6") nil)
   (define-key magit-mode-map (kbd "M-7") nil)
   (define-key magit-mode-map (kbd "M-8") nil)
-  (define-key magit-mode-map (kbd "M-9") nil))
+  (define-key magit-mode-map (kbd "M-9") nil)
+  (define-key magit-mode-map (kbd "M-0") nil))
 (add-hook 'magit-mode-hook 'myfunc-magit-mode)
 
 ;; START: enable irony-mode for c++
