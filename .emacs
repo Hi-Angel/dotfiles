@@ -108,9 +108,9 @@
 
 (add-to-list 'auto-mode-alist '("\\.mzn\\'" . minizinc-mode))
 
-(defun sort-lines-nocase (reverse beg end)
+(defun sort-lines-nocase (beg end)
   (let ((sort-fold-case t))
-    (sort-lines reverse beg end)))
+    (sort-lines nil beg end)))
 
 (defun replace-char-after (character-number replacement)
   "Replaces char in the buffer after the `character-number' with `replacement'"
@@ -172,7 +172,7 @@ opening symbol, thus the function seeks only the closing"
 	  (while (and (looking-at string)
 				  (eq (forward-line 1) 0)));;to not hang cuz of EOF
 	  (setq end (point))
-	  (sort-lines-nocase nil beg end)
+	  (sort-lines-nocase beg end)
 	  )))
 
 (defun c-sort-includes ()
@@ -189,7 +189,7 @@ opening symbol, thus the function seeks only the closing"
 				  (eq (forward-line 1) 0)));;to not hang cuz of EOF
 	  (setq end (point))
 	  (swap-<-and-quote-includes beg end);;swap characters < and > in includes
-	  (sort-lines-nocase nil beg end) ;;sort
+	  (sort-lines-nocase beg end) ;;sort
 	  (swap-<-and-quote-includes beg end);;swap the characters  back
 	  )))
 
@@ -206,7 +206,7 @@ opening symbol, thus the function seeks only the closing"
 	  (while (and (looking-at "using ")
 				  (eq (forward-line 1) 0)));;to not hang cuz of EOF
 	  (setq end (point))
-	  (sort-lines-nocase nil beg end))))
+	  (sort-lines-nocase beg end))))
 
 (defun haskell-sort-n-align-imports ()
   "Sorts and aligns Haskell imports"
