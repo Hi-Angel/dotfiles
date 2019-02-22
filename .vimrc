@@ -137,3 +137,9 @@ call pathogen#infect()
 :source ~/.vim/cmdalias.vim
 :Alias ack Ack
 noremap gs "jyiw:Ack <C-r>j .<CR>
+
+" Increment global variable i, and return it. Can be used in regexps
+function Inc(...)
+  let g:i += 1
+  return g:i
+endfunction
