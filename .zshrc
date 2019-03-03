@@ -80,7 +80,7 @@ alias ghci512="stack ghci --ghci-options '+RTS -M512m -RTS'"
 # alias ghci="stack ghci --ghci-options ''"
 alias ghciMath="stack ghci --ghci-options '-ghci-script /home/constantine/.ghciMath'"
 # alias ghciMath512="stack ghci --ghci-options '+RTS -M512m -RTS -ghci-script /home/constantine/.ghciMath'"
-alias ghc="stack ghc --ghc-options ''"
+alias ghc="stack ghc -- "
 # export MANPATH="/usr/local/man:$MANPATH"
 alias git-head='git checkout $(git log --branches -1 --pretty=format:"%D" | sed "s/.*, //g")'
 
