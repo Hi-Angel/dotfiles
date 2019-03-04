@@ -126,3 +126,12 @@ function sed_perl() {
 	#/usr/bin/vendor_perl/ack -l --print0 "$from" $@ | xargs -r0 perl -i -pe "s\`$from\`$to\`g"
 	/usr/bin/vendor_perl/ack -l --print0 "$from" $@ | xargs -r0 perl -Mutf8 -i -CS -pe "s α${from}α${to}αg"
 }
+
+# adds reviwed-by to n commits
+function git_rb() {
+    # export arguments, otherwise they're not visible to inline shell executions
+	export who=$1
+	export mail=$2
+	export n=$3
+    git rebase HEAD~$n -x 'git commit --amend -m"$(git log --format=%B -n1)$(echo -e \\nReviewed-by: ${who} \<${mail}\>.)"'
+}
