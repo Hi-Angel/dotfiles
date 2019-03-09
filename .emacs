@@ -108,6 +108,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.mzn\\'" . minizinc-mode))
 (add-to-list 'auto-mode-alist '("\\.glade$\\'" . xml-mode))
+(add-to-list 'auto-mode-alist '("\\PKGBUILD\\'" . sh-mode))
 
 (defun sort-lines-nocase (beg end)
   (let ((sort-fold-case t))
