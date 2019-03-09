@@ -76,11 +76,11 @@ alias ack='ack --ignore-dir=\\".*\\" --ignore-dir=build --ignore-file=is:tags --
 alias dmesg="dmesg --color=always"
 alias gdb="gdb -q"
 alias ll="ls -l"
+alias ghc="stack ghc -- "
+alias ghci="stack ghci -- "
 alias ghci512="stack ghci --ghci-options '+RTS -M512m -RTS'"
-# alias ghci="stack ghci --ghci-options ''"
 alias ghciMath="stack ghci --ghci-options '-ghci-script /home/constantine/.ghciMath'"
 # alias ghciMath512="stack ghci --ghci-options '+RTS -M512m -RTS -ghci-script /home/constantine/.ghciMath'"
-alias ghc="stack ghc -- "
 # export MANPATH="/usr/local/man:$MANPATH"
 alias git-head='git checkout $(git log --branches -1 --pretty=format:"%D" | sed "s/.*, //g")'
 
