@@ -468,7 +468,7 @@ in a few lines, and puts the cursor at the middle line"
 (global-set-key (kbd "s-o") 'newline-without-break-of-line)
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease);set in wheel font decrease
 (global-set-key (kbd "<C-mouse-5>") 'text-scale-increase);set in wheel font increase
-(global-set-key (kbd "s-.") 'company-complete)
+(global-set-key (kbd "s-/") 'company-complete)
 
 ;;set apropriate lenght of a line
 (setq-default fill-column 85)
