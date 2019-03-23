@@ -809,7 +809,7 @@ Version 2015-04-12"
                            (goto-char (point-min))
   			               (insert ifDef)
   			               (goto-char (point-max))
-  			               (insert (maybe-add-newline-at-buf-end) "#endif" " //" fName "_H")
+  			               (insert (maybe-add-newline-at-buf-end) "#endif" " // " fName "_H")
   			               (goto-char begin))
   			             )
                                         ;else
