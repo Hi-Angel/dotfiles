@@ -784,13 +784,24 @@ Version 2015-04-12"
 (load-file "~/.emacs.d/elpa/markdown-mode-20170712.1703/markdown-mode.elc")
 
 ;; heaader guards, source https://www.emacswiki.org/emacs/AutoInsertHeaderGuards
+(defun maybe-add-newline-at-buf-start ()
+  (if (and (char-equal (char-after (point-min)) ?\n)
+           (char-equal (char-after (1+ (point-min))) ?\n))
+      ""
+    "\n"))
+(defun maybe-add-newline-at-buf-end ()
+  (if (and (char-equal (char-before (point-max)) ?\n)
+           (char-equal (char-before (1- (point-max))) ?\n))
+      ""
+    "\n"))
 (global-set-key [f12]
                 '(lambda ()
                    (interactive)
                    (if (buffer-file-name)
                        (let*
                            ((fName (upcase (file-name-nondirectory (file-name-sans-extension buffer-file-name))))
-                            (ifDef (concat "#ifndef " fName "_H" "\n#define " fName "_H" "\n"))
+                            (ifDef (concat "#ifndef " fName "_H" "\n#define " fName "_H"
+                                           (maybe-add-newline-at-buf-start)))
                             (begin (point-marker))
                             )
                          (progn
@@ -798,7 +809,7 @@ Version 2015-04-12"
                            (goto-char (point-min))
   			               (insert ifDef)
   			               (goto-char (point-max))
-  			               (insert "\n#endif" " //" fName "_H")
+  			               (insert (maybe-add-newline-at-buf-end) "#endif" " //" fName "_H")
   			               (goto-char begin))
   			             )
                                         ;else
