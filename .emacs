@@ -181,7 +181,7 @@ opening symbol, thus the function seeks only the closing"
   "Sorts #include statements"
   (interactive)
   (save-excursion
-	(let (beg end)
+	(let (beg end orig-content sorted-content)
 	  (goto-char (point-min))
 	  (while (and (not (looking-at "#include "));;look for includes, if no then
 				  (eq (forward-line 1) 0) ;;go one line down (if not EOF).
@@ -190,9 +190,16 @@ opening symbol, thus the function seeks only the closing"
 	  (while (and (looking-at "#include ")
 				  (eq (forward-line 1) 0)));;to not hang cuz of EOF
 	  (setq end (point))
-	  (swap-<-and-quote-includes beg end);;swap characters < and > in includes
-	  (sort-lines-nocase beg end) ;;sort
-	  (swap-<-and-quote-includes beg end);;swap the characters  back
+      (setq orig-content (buffer-substring-no-properties beg end))
+      (setq sorted-content (with-temp-buffer
+                             (insert orig-content)
+                             (swap-<-and-quote-includes beg end);;swap characters < and > in includes
+                             (sort-lines-nocase beg end) ;;sort
+                             (swap-<-and-quote-includes beg end);;swap the characters  back
+                             (buffer-string)))
+      (when (not (string= orig-content sorted-content))
+        (kill-region beg end)
+        (insert sorted-content))
 	  )))
 
 (defun csharp-sort-usings ()
