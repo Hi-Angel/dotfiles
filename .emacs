@@ -263,6 +263,12 @@ opening symbol, thus the function seeks only the closing"
   '(modify-syntax-entry ?_ "w" diff-mode-syntax-table)) ;; make underscore part of a word
 (eval-after-load 'meson-mode
   '(modify-syntax-entry ?_ "w" meson-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'vala-mode
+  '(modify-syntax-entry ?_ "w" vala-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'sh-mode
+  '(modify-syntax-entry ?_ "w" sh-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'perl-mode
+  '(modify-syntax-entry ?_ "w" perl-mode-syntax-table)) ;; make underscore part of a word
 ;; END: make underscore part of a word
 
 (defun myactionsfor-c-mode-common-hook ()
