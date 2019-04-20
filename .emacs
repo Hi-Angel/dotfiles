@@ -294,14 +294,16 @@ opening symbol, thus the function seeks only the closing"
               ))
 (add-hook 'c-mode-common-hook 'myactionsfor-c-mode-common-hook)
 
-(add-hook  'csharp-mode-hook (lambda () (interactive)
-								(flycheck-mode -1);;disable, it for some reason lags with C#
-								(c-set-offset 'innamespace '+)
-								(local-set-key (kbd "{") 'c-electric-brace)
-								(set (make-local-variable 'company-backends)
-									 '(company-omnisharp))
-								(omnisharp-mode)
-								))
+(defun myactionsfor-csharp-mode-common-hook ()
+  (when (string= major-mode "csharp-mode")
+    (flycheck-mode -1);;disable, it for some reason lags with C#
+    (c-set-offset 'innamespace '+)
+    (local-set-key (kbd "{") 'c-electric-brace)
+    (set (make-local-variable 'company-backends)
+         '(company-omnisharp))
+    (omnisharp-mode)
+    ))
+(add-hook  'csharp-mode-hook 'myactionsfor-csharp-mode-common-hook)
 
 ;;in term-mode the «yas» have no a sense, plus causes a problem with <tab>. So disable it.
 (add-hook 'term-mode-hook (lambda()
