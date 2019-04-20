@@ -698,7 +698,6 @@ Version 2015-04-12"
 (defun myfunc-markdown-mode ()
   (make-local-variable 'company-idle-delay);;delay before completition
   (setq company-idle-delay 0);;delay before completition
-  (setq company-dabbrev-downcase t) ;; ignore case in completions
   (setq case-fold-search t) ;; ignore case in search
   (setq dabbrev-upcase-means-case-search nil) ;;ignore case
   (flyspell-mode)
