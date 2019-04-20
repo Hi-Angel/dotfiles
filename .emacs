@@ -907,7 +907,7 @@ Version 2015-04-12"
     ('error
      nil)))
 
-
+(require 'vc)
 (defun next-conflict ()
   (interactive)
   (let ((buffer (current-buffer)))
