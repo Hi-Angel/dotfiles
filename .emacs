@@ -590,17 +590,18 @@ in a few lines, and puts the cursor at the middle line"
 ;; (set 'indent-guide-char "¦") ;;character to show an indentation
 ;; (indent-guide-global-mode t)
 
-(require 'highlight-symbol)
-(defun enable-highlight-symbol-mode ()
+(require 'symbol-overlay)
+(defun enable-symbol-overlay-mode ()
   (unless (or (minibufferp)
               (derived-mode-p 'magit-mode)
               (derived-mode-p 'xref--xref-buffer-mode))
-    (highlight-symbol-mode t)))
-(define-global-minor-mode global-highlight-symbol-mode ;;the name of the new global mode
-  highlight-symbol-mode ;;the name of the minor mode
-  enable-highlight-symbol-mode)
-(global-highlight-symbol-mode);;enable it
-(global-set-key (kbd "s-`") 'highlight-symbol-at-point)
+    (symbol-overlay-mode t)))
+(define-global-minor-mode global-symbol-overlay-mode ;;the name of the new global mode
+  symbol-overlay-mode ;;the name of the minor mode
+  enable-symbol-overlay-mode)
+(global-symbol-overlay-mode);;enable it
+(global-set-key (kbd "s-`") 'symbol-overlay-put)
+(setq symbol-overlay-map (make-sparse-keymap)) ;; disable special cmds on overlays
 
 (eval-after-load 'irony-mode
   '(progn
