@@ -512,7 +512,7 @@ in a few lines, and puts the cursor at the middle line"
 										(flyspell-mode 1)))
 
 ;; setup and enable flyspell mode
-(setq-default flyspell-issue-message-flag 'nil)
+(setq-default flyspell-issue-message-flag nil)
 ;; (dolist (hook '(c-mode-hook))
 ;;   (add-hook hook (lambda ()
 ;; 				   (ispell-change-dictionary "english")
