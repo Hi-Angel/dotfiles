@@ -2,10 +2,14 @@
 
 # creates template for git-commit
 
-from sys import argv
+from sys import argv, exit
 import subprocess
 
-commit_msg_file = argv[1]
+commit_msg_file = open(argv[1], 'r+')
+
+old_msg = commit_msg_file.read()
+if old_msg.split('\n')[0] != "": # don't change anything for git commit --amend
+    exit(0)
 
 # String → [String]
 def run_cmd(cmd):
@@ -17,7 +21,5 @@ files_changed = run_cmd("git diff --name-only --cached")
 # be added
 dirs = files_changed[0].split('/')
 msg_template = (dirs[len(dirs)-2] if len(dirs) > 1 else "") + ": \n"
-with open(commit_msg_file, 'r+') as file:
-    old_msg = file.read()
-    file.seek(0)
-    file.write(msg_template + old_msg)
+commit_msg_file.seek(0)
+commit_msg_file.write(msg_template + old_msg)
