@@ -7,19 +7,22 @@ import subprocess
 
 commit_msg_file = open(argv[1], 'r+')
 
-old_msg = commit_msg_file.read()
-if old_msg.split('\n')[0] != "": # don't change anything for git commit --amend
+commit_msg_split = commit_msg_file.read().split('\n')
+if commit_msg_split[0] != "": # don't change anything for git commit --amend
     exit(0)
 
 # String → [String]
 def run_cmd(cmd):
     return subprocess.run(cmd.split(), stdout=subprocess.PIPE).stdout.decode('utf-8').split('\n')
 
+def last_dir_or_empty(filepath):
+    path_units = filepath.split('/')
+    return (path_units[len(path_units)-2] if len(path_units) > 1 else "")
+
 files_changed = run_cmd("git diff --name-only --cached")
 
 # more fine-grained logic (such as per project, and different conditions) can
 # be added
-dirs = files_changed[0].split('/')
-msg_template = (dirs[len(dirs)-2] if len(dirs) > 1 else "") + ": \n"
+commit_msg_split[0] = last_dir_or_empty(files_changed[0]) + ": "
 commit_msg_file.seek(0)
-commit_msg_file.write(msg_template + old_msg)
+commit_msg_file.write('\n'.join(commit_msg_split))
