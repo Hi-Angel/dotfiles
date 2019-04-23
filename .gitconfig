@@ -1,5 +1,6 @@
 [core]
-	editor = "vim -c 'set spell spelllang=en_us'"
+    editor = "vim -c 'set spell spelllang=en_us'"
+    hooksPath = "~/.git_hooks"
 [user]
 	email = Hi-Angel@yandex.ru
 	name = Konstantin Kharlamov
