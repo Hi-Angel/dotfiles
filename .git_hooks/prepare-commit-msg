@@ -15,14 +15,14 @@ if commit_msg_split[0] != "": # don't change anything for git commit --amend
 def run_cmd(cmd):
     return subprocess.run(cmd.split(), stdout=subprocess.PIPE).stdout.decode('utf-8').split('\n')
 
-def last_dir_or_empty(filepath):
+def last_dir_or_filename(filepath):
     path_units = filepath.split('/')
-    return (path_units[len(path_units)-2] if len(path_units) > 1 else "")
+    return (path_units[len(path_units)-2] if (len(path_units) > 1) else path_units[len(path_units)-1])
 
 files_changed = run_cmd("git diff --name-only --cached")
 
 # more fine-grained logic (such as per project, and different conditions) can
 # be added
-commit_msg_split[0] = last_dir_or_empty(files_changed[0]) + ": "
+commit_msg_split[0] = last_dir_or_filename(files_changed[0]) + ": "
 commit_msg_file.seek(0)
 commit_msg_file.write('\n'.join(commit_msg_split))
