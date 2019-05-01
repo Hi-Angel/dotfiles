@@ -918,3 +918,23 @@ Version 2015-04-12"
           (message "No conflicts found")
         (goto-char 0)
         (smerge-next-safe)))))
+
+;;;; BUGS workarounds START
+;;; as of today out of nowhere appeared problems that turned out to be bugs reported
+;;; somewhere. Idk why I've never met these before. *sigh* I hate Emacs for this.
+
+;; Smartparens is broken in `cc-mode' as of Emacs 27. See
+;; <https://github.com/Fuco1/smartparens/issues/963>.
+(when (version< emacs-version "27")
+  (dolist (fun '(c-electric-paren c-electric-brace))
+    (add-to-list 'sp--special-self-insert-commands fun)))
+
+;; removes warning: backend company-capf error "Nothing to complete" with args (prefix)
+(defun et/semantic-remove-hooks ()
+  (remove-hook 'completion-at-point-functions
+               'semantic-analyze-completion-at-point-function)
+  (remove-hook 'completion-at-point-functions
+               'semantic-analyze-notc-completion-at-point-function)
+  (remove-hook 'completion-at-point-functions
+               'semantic-analyze-nolongprefix-completion-at-point-function))
+;;;; BUGS workarounds END
