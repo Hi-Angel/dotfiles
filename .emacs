@@ -149,7 +149,7 @@ opening symbol, thus the function seeks only the closing"
 	(let ((curr-point beg))
 	  (while (< curr-point end)
 		(setq curr-point (+ curr-point 1))
-		;;first chack «"»
+		;;first check «"»
 		(if (eq (char-after curr-point) ?\")
 			(progn
 			  (setq curr-point (replace-delimiters ?\" ?< ?> curr-point end))
@@ -193,9 +193,9 @@ opening symbol, thus the function seeks only the closing"
       (setq orig-content (buffer-substring-no-properties beg end))
       (setq sorted-content (with-temp-buffer
                              (insert orig-content)
-                             (swap-<-and-quote-includes beg end);;swap characters < and > in includes
-                             (sort-lines-nocase beg end) ;;sort
-                             (swap-<-and-quote-includes beg end);;swap the characters  back
+                             (swap-<-and-quote-includes (point-min) (point-max)) ;;swap characters < and > in includes
+                             (sort-lines-nocase (point-min) (point-max)) ;;sort
+                             (swap-<-and-quote-includes (point-min) (point-max)) ;;swap the characters  back
                              (buffer-string)))
       (when (not (string= orig-content sorted-content))
         (kill-region beg end)
