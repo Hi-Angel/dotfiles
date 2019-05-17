@@ -632,9 +632,6 @@ in a few lines, and puts the cursor at the middle line"
 (add-hook 'gdb-mode-hook '(lambda () (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)))
 (put 'erase-buffer 'disabled nil)
 
-;;fallback font (if the default have no some gliphs)
-(set-fontset-font "fontset-default" 'unicode "Ubuntu Mono")
-
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
