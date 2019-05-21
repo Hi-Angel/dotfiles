@@ -1,3 +1,20 @@
+######## interactive python functions
+# these are function helpers that I'd use not from gdb prompt, but rather from gdb
+# python prompt (or in other gdb scripts).
+
+def fold_threads(accum, func):
+    assert(len(gdb.inferiors()) == 1) # FIXME
+    for thr in gdb.inferiors()[0].threads():
+        thr.switch() # change context
+        accum = func(accum, thr)
+    return accum
+
+def backtrace():
+    return gdb.execute('bt', to_string=True)
+
+######## gdb python commands
+# these are commands that are defined in python, but can be called from gdb prompt.
+
 # class my_print:
 #     def __init__(self, val):
 #         self.val = val
