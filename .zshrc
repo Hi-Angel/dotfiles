@@ -127,6 +127,8 @@ function sed_perl() {
 	/usr/bin/vendor_perl/ack -l --print0 "$from" $@ | xargs -r0 perl -Mutf8 -i -CS -pe "s α${from}α${to}αg"
 }
 
+alias sp=sed_perl
+
 # adds reviwed-by to n commits
 function git_rb() {
     # export arguments, otherwise they're not visible to inline shell executions
