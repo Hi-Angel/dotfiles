@@ -126,8 +126,14 @@ function sed_perl() {
 	#/usr/bin/vendor_perl/ack -l --print0 "$from" $@ | xargs -r0 perl -i -pe "s\`$from\`$to\`g"
 	/usr/bin/vendor_perl/ack -l --print0 "$from" $@ | xargs -r0 perl -Mutf8 -i -CS -pe "s α${from}α${to}αg"
 }
-
 alias sp=sed_perl
+
+# sed analog in perl, called like "sed_perl pattern_from pattern_to"
+function del_lines() {
+	local pattern=$1
+	shift 1
+	/usr/bin/vendor_perl/ack -l --print0 "$pattern" $@ | xargs -r0 perl -i -ne 'BEGIN { $re = shift } print if not m/$re/' ${pattern}
+}
 
 # adds reviwed-by to n commits
 function git_rb() {
