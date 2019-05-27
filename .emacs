@@ -942,9 +942,14 @@ Version 2015-04-12"
 Returns point."
   (interactive)
   (while
-    (progn (comment-forward most-positive-fixnum)
+    (progn
+      (comment-forward most-positive-fixnum)
       (looking-at "[^,)]"))
-    (forward-sexp))
+    (condition-case ex (forward-sexp)
+      ('scan-error (if (looking-at "[<>]") ;; likely c++ template
+                       (forward-char)
+                     (throw ex))))
+    )
   (point)
   )
 
@@ -953,7 +958,9 @@ Returns point."
 Returns point."
   (interactive)
   (let ((pt (point)) cur)
-    (up-list -1)
+    (up-list -1) ;; try to quit first balanced expression
+    (while (looking-at "<") ;; c++ template opening bracket
+      (up-list -1))
     (forward-char)
     (while
       (progn
