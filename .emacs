@@ -936,7 +936,7 @@ Version 2015-04-12"
                'semantic-analyze-nolongprefix-completion-at-point-function))
 ;;;; BUGS workarounds END
 
-;;; Transpose arguments in c-like mode. Credits: https://emacs.stackexchange.com/a/47934/2671
+;;; START Transpose arguments in c-like mode. Credits: https://emacs.stackexchange.com/a/47934/2671
 (defun c-forward-to-argsep ()
   "Move to the end of the current c function argument.
 Returns point."
@@ -1047,4 +1047,4 @@ The first arg is the one with point in it."
 (defun c-transpose-args-backward () (interactive) (c-transpose-args-direction nil))
 (define-key evil-normal-state-map (kbd "t f") 'c-transpose-args-forward)
 (define-key evil-normal-state-map (kbd "t b") 'c-transpose-args-backward)
-;;;
+;;; END Transpose arguments in c-like mode.
