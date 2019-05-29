@@ -6,7 +6,7 @@
 it's either of «)» «}». This predicate is only tested on
 \"insert\" action."
   (when (or (eq action 'insert) (eq action 'autoskip))
-    (looking-at "\\s)\\|\}")))
+    (looking-at ")\\|}")))
 
 (defun sp-point-before-whitespace (id action context)
   "Return t if point is followed by a whitespace or newline.
