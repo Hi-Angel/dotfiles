@@ -4,6 +4,7 @@ set history size 1000
 set height 0
 set pagination off
 set print pretty on
+set print elements unlimited
 #set auto-load python-scripts on
 
 # LO autoloads helpers for GDB.
