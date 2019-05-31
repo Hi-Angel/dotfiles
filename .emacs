@@ -530,7 +530,8 @@ in a few lines, and puts the cursor at the middle line"
 
 (require 'smartparens-config)
 (require 'sp-sublimelike) ;;sublime like behavior of smartparens
-(smartparens-global-mode 1);;enable
+(smartparens-global-mode 1)
+(setq sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
 
 ;;mode to highlight a matching parenthese for inside of a code between these
 (require 'highlight-parentheses)
