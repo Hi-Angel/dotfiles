@@ -535,6 +535,9 @@ in a few lines, and puts the cursor at the middle line"
 (setq sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
 
 (defun maybe-add-semicolon (_id action _context)
+  "A helper function that inserts semicolon after closing
+parentheses when appropriate. Mainly useful in C, C++, and other
+languages with similar syntax"
   (when (eq action 'insert)
     (save-excursion
       (forward-char) ;; skip closing brace
