@@ -528,10 +528,25 @@ in a few lines, and puts the cursor at the middle line"
 ;; 				   (ispell-change-dictionary "ru"
 ;; 				   (flyspell-mode 1))));;enable for twittering-mode
 
+;;; BEGIN: smartparens configuation
 (require 'smartparens-config)
 (require 'sp-sublimelike) ;;sublime like behavior of smartparens
 (smartparens-global-mode 1)
 (setq sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
+
+(defun maybe-add-semicolon (_id action _context)
+  (when (eq action 'insert)
+    (save-excursion
+      (forward-char) ;; skip closing brace
+      (when (and (looking-at "\\s-*$") ;; if at end-of-line and no if/else/switch/for/while/do keywords
+                 (not (string-match-p
+                       "\\(\\bif\\b\\)\\|\\(\\belse\\b\\)\\|\\(\\bswitch\\b\\)\\|\\(\\bfor\\b\\)\\|\\(\\bwhile\\b\\)\\|\\(\\bdo\\b\\)"
+                       (buffer-substring (line-beginning-position) (line-end-position)))))
+        (insert ";")))))
+
+(let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode)))
+  (sp-local-pair c-like-modes-list "(" nil :post-handlers '(:add maybe-add-semicolon)))
+;;; END: smartparens configuation
 
 ;;mode to highlight a matching parenthese for inside of a code between these
 (require 'highlight-parentheses)
