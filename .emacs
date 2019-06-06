@@ -528,6 +528,10 @@ in a few lines, and puts the cursor at the middle line"
 ;; 				   (ispell-change-dictionary "ru"
 ;; 				   (flyspell-mode 1))));;enable for twittering-mode
 
+(defun is-in-comment ()
+  "tests if point is in comment"
+  (nth 4 (syntax-ppss)))
+
 ;;; BEGIN: smartparens configuation
 (require 'smartparens-config)
 (require 'sp-sublimelike) ;;sublime like behavior of smartparens
@@ -544,7 +548,8 @@ languages with similar syntax"
       (when (and (looking-at "\\s-*$") ;; if at end-of-line and no if/else/switch/for/while/do keywords
                  (not (string-match-p
                        "\\(\\bif\\b\\)\\|\\(\\belse\\b\\)\\|\\(\\bswitch\\b\\)\\|\\(\\bfor\\b\\)\\|\\(\\bwhile\\b\\)\\|\\(\\bdo\\b\\)"
-                       (buffer-substring (line-beginning-position) (line-end-position)))))
+                       (buffer-substring (line-beginning-position) (line-end-position))))
+                 (not (is-in-comment)))
         (insert ";")))))
 
 (let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode)))
