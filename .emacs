@@ -547,7 +547,7 @@ languages with similar syntax"
       (forward-char) ;; skip closing brace
       (when (and (looking-at "\\s-*$") ;; if at end-of-line and no if/else/switch/for/while/do keywords
                  (not (string-match-p
-                       "\\(\\bif\\b\\)\\|\\(\\belse\\b\\)\\|\\(\\bswitch\\b\\)\\|\\(\\bfor\\b\\)\\|\\(\\bwhile\\b\\)\\|\\(\\bdo\\b\\)"
+                       "\\(\\bif\\b\\)\\|\\(\\belse\\b\\)\\|\\(\\bswitch\\b\\)\\|\\(\\bfor\\b\\)\\|\\(\\bwhile\\b\\)\\|\\(\\bdo\\b\\)\\|\\(\\bdefine\\b\\)"
                        (buffer-substring (line-beginning-position) (line-end-position))))
                  (not (is-in-comment)))
         (insert ";")))))
