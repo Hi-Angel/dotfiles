@@ -532,7 +532,11 @@ in a few lines, and puts the cursor at the middle line"
   "tests if point is in comment"
   (nth 4 (syntax-ppss)))
 
-;;; BEGIN: smartparens configuation
+(defun current-line ()
+  "returns current line as a string"
+  (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+
+;;; BEGIN: smartparens configuration
 (require 'smartparens-config)
 (require 'sp-sublimelike) ;;sublime like behavior of smartparens
 (smartparens-global-mode 1)
@@ -544,17 +548,29 @@ parentheses when appropriate. Mainly useful in C, C++, and other
 languages with similar syntax"
   (when (eq action 'insert)
     (save-excursion
+      ;; here, caret supposed to be in between parens, i.e. (|)
       (forward-char) ;; skip closing brace
       (when (and (looking-at "\\s-*$") ;; if at end-of-line and no if/else/switch/for/while/do keywords
                  (not (string-match-p
                        "\\(\\bif\\b\\)\\|\\(\\belse\\b\\)\\|\\(\\bswitch\\b\\)\\|\\(\\bfor\\b\\)\\|\\(\\bwhile\\b\\)\\|\\(\\bdo\\b\\)\\|\\(\\bdefine\\b\\)"
-                       (buffer-substring (line-beginning-position) (line-end-position))))
+                       (current-line)))
                  (not (is-in-comment)))
         (insert ";")))))
 
+(defun maybe-complete-lambda (_id action _context)
+  "Completes C++ lambda, given a pair of square brackets"
+  (when (eq action 'insert)
+    (when (string-match-p "=\\s-*\\\[\\\]$" (current-line))
+      (save-excursion
+        ;; here, caret supposed to be in between brackets, i.e. [|]
+        (forward-char) ;; skip closing brace
+        (insert "() {};")
+        ))))
+
 (let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode)))
   (sp-local-pair c-like-modes-list "(" nil :post-handlers '(:add maybe-add-semicolon)))
-;;; END: smartparens configuation
+(sp-local-pair 'c++-mode "[" nil :post-handlers '(:add maybe-complete-lambda))
+;;; END: smartparens configuration
 
 ;;mode to highlight a matching parenthese for inside of a code between these
 (require 'highlight-parentheses)
