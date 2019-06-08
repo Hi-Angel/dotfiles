@@ -532,7 +532,7 @@ in a few lines, and puts the cursor at the middle line"
   "tests if point is in comment"
   (nth 4 (syntax-ppss)))
 
-(defun current-line ()
+(defun current-line-string ()
   "returns current line as a string"
   (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
 
@@ -553,14 +553,14 @@ languages with similar syntax"
       (when (and (looking-at "\\s-*$") ;; if at end-of-line and no if/else/switch/for/while/do keywords
                  (not (string-match-p
                        "\\(\\bif\\b\\)\\|\\(\\belse\\b\\)\\|\\(\\bswitch\\b\\)\\|\\(\\bfor\\b\\)\\|\\(\\bwhile\\b\\)\\|\\(\\bdo\\b\\)\\|\\(\\bdefine\\b\\)"
-                       (current-line)))
+                       (current-line-string)))
                  (not (is-in-comment)))
         (insert ";")))))
 
 (defun maybe-complete-lambda (_id action _context)
   "Completes C++ lambda, given a pair of square brackets"
   (when (eq action 'insert)
-    (when (string-match-p "=\\s-*\\\[\\\]$" (current-line))
+    (when (string-match-p "=\\s-*\\\[\\\]$" (current-line-string))
       (save-excursion
         ;; here, caret supposed to be in between brackets, i.e. [|]
         (forward-char) ;; skip closing brace
