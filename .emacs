@@ -560,12 +560,20 @@ languages with similar syntax"
 (defun maybe-complete-lambda (_id action _context)
   "Completes C++ lambda, given a pair of square brackets"
   (when (eq action 'insert)
-    (when (string-match-p "=\\s-*\\\[\\\]$" (current-line-string))
-      (save-excursion
-        ;; here, caret supposed to be in between brackets, i.e. [|]
-        (forward-char) ;; skip closing brace
-        (insert "() {};")
-        ))))
+    (let ((curr-line (current-line-string))
+          ;; try detecting "auto foo = []"
+          (lambda-assign-regex "=\\s-*\\\[\\\]$")
+          ;; try detecting "func([])" and "func(arg1, [])"
+          (lambda-inline-regex "[(,]\\s-*\\\[\\\]"))
+      (when (or (string-match-p lambda-assign-regex curr-line)
+                (string-match-p lambda-inline-regex curr-line))
+        (save-excursion
+          ;; here, caret supposed to be in between brackets, i.e. [|]
+          (forward-char) ;; skip closing brace
+          (insert "() {}")
+          (when (eolp)
+            (insert ";"))
+          )))))
 
 (let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode)))
   (sp-local-pair c-like-modes-list "(" nil :post-handlers '(:add maybe-add-semicolon)))
