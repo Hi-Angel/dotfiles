@@ -562,9 +562,9 @@ languages with similar syntax"
   (when (eq action 'insert)
     (let ((curr-line (current-line-string))
           ;; try detecting "auto foo = []"
-          (lambda-assign-regex "=\\s-*\\\[\\\]$")
+          (lambda-assign-regex "=\\s-*\\[\\]$")
           ;; try detecting "func([])" and "func(arg1, [])"
-          (lambda-inline-regex "[(,]\\s-*\\\[\\\]"))
+          (lambda-inline-regex "[(,]\\s-*\\[\\]"))
       (when (or (string-match-p lambda-assign-regex curr-line)
                 (string-match-p lambda-inline-regex curr-line))
         (save-excursion
