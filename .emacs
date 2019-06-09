@@ -546,6 +546,7 @@ in a few lines, and puts the cursor at the middle line"
 ;;; BEGIN: smartparens configuration
 (require 'smartparens-config)
 (require 'sp-sublimelike) ;;sublime like behavior of smartparens
+(setq-default sp-autoskip-closing-pair t) ;; skip only when it's active
 (smartparens-global-mode 1)
 (setq sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
 
