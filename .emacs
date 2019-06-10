@@ -131,19 +131,19 @@
   "Replaces delimiters between `opening-point' and the
 `end-point'. Note, that the `opening-point' should point to the
 opening symbol, thus the function seeks only the closing"
-  (block replace-delimiters
+  (cl-block replace-delimiters
 	(let ((closing-point opening-point))
 	  (setq closing-point (+ 1 opening-point))
 	  (while (< closing-point end-point)
 		(if (eq (char-after closing-point) ?\n) ;;no closing delimiter
 			(progn
 			  (print "Err: no closing delimiter")
-			  (return-from replace-delimiters nil))
+			  (cl-return-from replace-delimiters nil))
 		  (when (eq (char-after closing-point) old-closing-char)
 			(progn
 			  (replace-char-after opening-point new-opening-char);;opening delimiter
 			  (replace-char-after closing-point new-closing-char);;closing delimiter
-			  (return-from replace-delimiters (+ 1 closing-point)))))
+			  (cl-return-from replace-delimiters (+ 1 closing-point)))))
 		(setq closing-point (+ closing-point 1))))))
 
 (defun swap-<-and-quote-includes (beg end)
@@ -151,7 +151,7 @@ opening symbol, thus the function seeks only the closing"
   «>» character to the \" quote, and vice versa. Mainly used
   before sorting to swap the order of these characters, next
   after the sort to restore the text."
-  (block swap-<-and-quote-includes
+  (cl-block swap-<-and-quote-includes
 	(let ((curr-point beg))
 	  (while (< curr-point end)
 		(setq curr-point (+ curr-point 1))
@@ -160,13 +160,13 @@ opening symbol, thus the function seeks only the closing"
 			(progn
 			  (setq curr-point (replace-delimiters ?\" ?< ?> curr-point end))
 			  (if (eq curr-point nil)
-				  (return-from swap-<-and-quote-includes t)))
+				  (cl-return-from swap-<-and-quote-includes t)))
 		  ;;else if «<»
 		  (if (eq (char-after curr-point) ?<)
 			  (progn
 				(setq curr-point (replace-delimiters ?\> ?\" ?\" curr-point end))
 				(if (eq curr-point nil)
-					(return-from swap-<-and-quote-includes t)))))))))
+					(cl-return-from swap-<-and-quote-includes t)))))))))
 
 (defun sort-paragraphs-with-keyword (string)
   "Sorts statements with the `string', case insensitive"
@@ -617,7 +617,7 @@ languages with similar syntax"
 
 (defun myfunc-rust-mode-hook ()
   (racer-mode)
-  (assert (boundp 'company-backends)) ;; I always use company-mode
+  (cl-assert (boundp 'company-backends)) ;; I always use company-mode
   (set (make-local-variable 'company-backends)
        '(company-capf company-etags company-dabbrev))
        )
@@ -938,7 +938,7 @@ Version 2015-04-12"
 
 (defun myactionsfor-irony-mode-hook ()
   (irony-cdb-autosetup-compile-options)
-  (assert (boundp 'company-backends)) ;; I always use company-mode
+  (cl-assert (boundp 'company-backends)) ;; I always use company-mode
   (set (make-local-variable 'company-backends)
        '(company-irony company-etags company-dabbrev))
   )
