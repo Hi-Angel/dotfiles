@@ -557,9 +557,9 @@ languages with similar syntax"
     (save-excursion
       ;; here, caret supposed to be in between parens, i.e. (|)
       (forward-char) ;; skip closing brace
-      (when (and (looking-at "\\s-*$") ;; if at end-of-line and no if/else/switch/for/while/do keywords
+      (when (and (looking-at "\\s-*$")
                  (not (string-match-p
-                       "\\(\\bif\\b\\)\\|\\(\\belse\\b\\)\\|\\(\\bswitch\\b\\)\\|\\(\\bfor\\b\\)\\|\\(\\bwhile\\b\\)\\|\\(\\bdo\\b\\)\\|\\(\\bdefine\\b\\)"
+                       (regexp-opt '("if" "else" "switch" "for" "while" "do" "define") 'words)
                        (current-line-string)))
                  (not (is-in-comment)))
         (insert ";")))))
