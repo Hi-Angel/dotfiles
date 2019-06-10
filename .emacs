@@ -93,7 +93,6 @@
 
 (setq-default display-line-numbers 'visual) ;; show the line numbers
 (show-paren-mode 1) ;; show matching braces
-;; (electric-indent-mode -1) ;; I don't like it, really
 
 (setq-default tab-width 4) ;;set tab width
 
@@ -305,7 +304,6 @@ opening symbol, thus the function seeks only the closing"
   (when (string= major-mode "csharp-mode")
     (flycheck-mode -1);;disable, it for some reason lags with C#
     (c-set-offset 'innamespace '+)
-    (local-set-key (kbd "{") 'c-electric-brace)
     (set (make-local-variable 'company-backends)
          '(company-omnisharp))
     (omnisharp-mode)
@@ -532,7 +530,7 @@ in a few lines, and puts the cursor at the middle line"
 ;; 				   )));;enable for c++
 ;; (dolist (hook '(twittering-edit-mode-hook)) commented out — the flycheck is a scum! It mess up with input.
 ;;   (add-hook hook (lambda ()
-;; 				   (ispell-change-dictionary "ru"
+;; 				   (ispell-change-dictionary "ru")
 ;; 				   (flyspell-mode 1))));;enable for twittering-mode
 
 (defun is-in-comment ()
@@ -682,7 +680,7 @@ languages with similar syntax"
 (defun myfunc-gud-gdb-mode ()
   (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)
   (company-mode 0)
-  (local-set-key (kbd "C-d") 'c-electric-delete-forward) ;; gdb rebinds the key
+  (local-set-key (kbd "C-d") 'delete-char) ;; gdb rebinds the key
   )
 (add-hook 'gud-mode-hook 'myfunc-gud-gdb-mode)
 (add-hook 'gdb-mode-hook '(lambda () (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)))
@@ -978,7 +976,7 @@ Version 2015-04-12"
 
 ;; Smartparens is broken in `cc-mode' as of Emacs 27. See
 ;; <https://github.com/Fuco1/smartparens/issues/963>.
-(when (version< emacs-version "27")
+(when (version< "27" emacs-version)
   (dolist (fun '(c-electric-paren c-electric-brace))
     (add-to-list 'sp--special-self-insert-commands fun)))
 
