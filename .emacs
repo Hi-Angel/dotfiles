@@ -100,6 +100,7 @@
 
 (require 'evil-surround)
 (global-evil-surround-mode 1)
+(require 'evil-magit) ;; without this Evil keys are broken in magit
 (semantic-mode 1)
 (global-company-mode 1)
 (add-to-list 'company-dabbrev-code-modes 'c++-mode)
