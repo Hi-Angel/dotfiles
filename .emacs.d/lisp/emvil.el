@@ -18,7 +18,7 @@
 (defun find-window (f)
   "loops over subwindows in current window until they're finished
 to `f' returns t. Returns nil on fail or a window on success"
-  (let ((curr-window (selected-window))
+  (let* ((curr-window (selected-window))
         (next-window (next-window))
         (fail        (lambda () (eq curr-window next-window))))
     (while (and (not (funcall f next-window))
