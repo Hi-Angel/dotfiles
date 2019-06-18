@@ -15,28 +15,41 @@
 (evil-mode t)
 (define-key evil-normal-state-map (kbd "C-z") 'undo-tree-redo)
 
+(defun find-window (f)
+  "loops over subwindows in current window until they're finished
+to `f' returns t. Returns nil on fail or a window on success"
+  (let ((curr-window (selected-window))
+        (next-window (next-window))
+        (fail        (lambda () (eq curr-window next-window))))
+    (while (and (not (funcall f next-window))
+                (not (funcall fail)))
+      (setq next-window (next-window next-window)))
+    (if (funcall fail)
+        nil
+      next-window)))
+
 (defun evil-goto-definition-next-split ()
-	"If there's a free split, goto definition in this split,
-	otherwise use current one (except when a definition in the
-	current split)"
-	(interactive)
-	(let ((origin-spl (selected-window))
-		  (origin-buf (current-buffer)))
-      (evil--jumps-push)
-      (if (bound-and-true-p racer-mode)
-          (racer-find-definition)
-        (evil-goto-definition))
-	  (when (and (eq origin-spl (selected-window)) ;; otherwise it's done
-				 (not (eq origin-buf (current-buffer)))) ;; otherwise either definition not found, or
-														 ;; it's in the same buffer
-		(let ((defin-buf (current-buffer))
-			  (defin-point (point)))
-		  (switch-to-buffer origin-buf)
-		  (other-window 1)
-		  (switch-to-buffer defin-buf)
-		  (goto-char defin-point)
-		  ))
-	  ))
+  "If there's a free split, goto definition in this split,
+    otherwise use current one (except when a definition in the
+    current split)"
+  (interactive)
+  (let ((origin-spl (selected-window))
+        (origin-buf (current-buffer)))
+    (evil--jumps-push)
+    (evil-goto-definition)
+    (when (and (eq origin-spl (selected-window)) ;; otherwise it's done
+               (not (eq origin-buf (current-buffer)))) ;; otherwise either definition not found, or
+                                                       ;; it's in the same buffer
+      (let ((defin-buf (current-buffer))
+            (defin-point (point)))
+        (switch-to-buffer origin-buf)
+        (let ((maybe-win-with-defin (find-window (lambda (win) (eq defin-buf (window-buffer win))))))
+          (if maybe-win-with-defin
+              (select-window maybe-win-with-defin)
+            (progn (other-window 1)
+                   (switch-to-buffer defin-buf)))
+          (goto-char defin-point)
+          )))))
 (define-key evil-normal-state-map (kbd "g d") 'evil-goto-definition-next-split)
 
 ;; add a "function" text object
