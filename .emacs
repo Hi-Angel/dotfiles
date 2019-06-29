@@ -420,6 +420,10 @@ point reaches the beginning or end of the buffer, stop there."
 	(clipboard-kill-ring-save (region-beginning)(region-end))))
 (global-set-key (kbd "M-w") 'clipboard-copy-fixed)
 
+(defun copy-text-to-clipboard (text)
+  (with-temp-buffer
+    (insert text)
+    (clipboard-kill-region (point-min) (point-max))))
 (defun what-face (pos)
   (interactive "d")
   (let ((face (or (get-char-property (point) 'read-face-name)
@@ -1103,3 +1107,11 @@ The first arg is the one with point in it."
 (define-key evil-normal-state-map (kbd "t f") 'c-transpose-args-forward)
 (define-key evil-normal-state-map (kbd "t b") 'c-transpose-args-backward)
 ;;; END Transpose arguments in c-like mode.
+
+(defun get-file:line (&optional is-interactive)
+  "returns a string \"buffer_name:line_at_point\""
+  (interactive "p")
+  (let ((ret (concat (buffer-name) ":" (number-to-string (line-number-at-pos)))))
+    (if is-interactive
+        (copy-text-to-clipboard ret)
+      ret)))
