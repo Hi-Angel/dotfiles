@@ -1007,7 +1007,7 @@ Returns point."
     (condition-case ex (forward-sexp)
       ('scan-error (if (looking-at "[<>]") ;; likely c++ template
                        (forward-char)
-                     (throw ex))))
+                     (throw ex nil))))
     )
   (point)
   )
