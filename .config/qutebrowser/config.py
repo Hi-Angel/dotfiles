@@ -619,7 +619,7 @@ c.content.host_blocking.whitelist = ['www.phoronix.com', 'lwn.net', 'cpu-world.c
 ## can still be downloaded by clicking the download button in the pdf.js
 ## viewer.
 ## Type: Bool
-c.content.pdfjs = False
+c.content.pdfjs = True
 
 ## Enables or disables plugins in Web pages.
 ## Type: Bool
