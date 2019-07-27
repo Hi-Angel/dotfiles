@@ -714,7 +714,8 @@ c.content.ssl_strict = False
 ## gets replaced by the filename of the file to be edited.
 ## Type: ShellCommand
 # c.editor.command = ['gvim', '-f', '{}']
-c.editor.command = ['gvim', '-c', 'set spell spelllang=en_us', '-f', '{}']
+# c.editor.command = ['gvim', '-c', 'set spell spelllang=en_us', '-f', '{}']
+c.editor.command = ['emacsclient', '--eval', '(progn (find-file "{}") (refill-mode) (select-frame-set-input-focus (selected-frame)))', '-c']
 
 ## Encoding to use for the editor.
 ## Type: Encoding
