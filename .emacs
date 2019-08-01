@@ -330,6 +330,7 @@ opening symbol, thus the function seeks only the closing"
 (require 'emvil)
 (global-set-key (kbd "C-S-z") 'undo-tree-redo)
 (setq evil-jumps-cross-buffers nil)
+(setq-default evil-shift-round nil) ;; make '>' not to round the indentation
 
 (require 'ido)
 (setq-default ido-case-fold t) ;; case insensistivity
