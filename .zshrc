@@ -143,3 +143,10 @@ function git_rb() {
 	export n=$3
     git rebase HEAD~$n -x 'git commit --amend -m"$(git log --format=%B -n1)$(echo -e \\nReviewed-by: ${who} \<${mail}\>.)"'
 }
+
+# rebase-at <action> <comit-ids-and-co>
+function rebase-at() {
+    local action=$1
+    shift 1
+    GIT_EDITOR="sed -i -E \"1s/\w+/$action/\"" git rebase -i $@
+}
