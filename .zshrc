@@ -64,6 +64,9 @@ select-word-style bash
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
+ZSH_AUTOSUGGEST_STRATEGY=(history completion) # first history, then what tab would suggest
+ZSH_AUTOSUGGEST_USE_ASYNC=t
+
 zstyle ':completion:*' matcher-list '' \
         'm:{a-z\-}={A-Z\_}' \
         'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
