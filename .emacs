@@ -587,9 +587,18 @@ languages with similar syntax"
             (insert ";"))
           )))))
 
+(defun maybe-add-colon-python (_id action _context)
+  (when (eq action 'insert)
+    (save-excursion
+      (forward-char) ;; skip closing brace
+      (when (and (looking-at "\\s-*$")
+                 (string-match-p "\\s-*def.*" (current-line-string)))
+        (insert ":")))))
+
 (let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode)))
   (sp-local-pair c-like-modes-list "(" nil :post-handlers '(:add maybe-add-semicolon)))
 (sp-local-pair 'c++-mode "[" nil :post-handlers '(:add maybe-complete-lambda))
+(sp-local-pair 'python-mode "(" nil :post-handlers '(:add maybe-add-colon-python))
 ;;; END: smartparens configuration
 
 ;;mode to highlight a matching parenthese for inside of a code between these
