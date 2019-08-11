@@ -754,8 +754,7 @@ Version 2015-04-12"
 (add-hook 'shell-mode-hook 'myfunc-shell-mode)
 
 (defun myfunc-markdown-mode ()
-  (make-local-variable 'company-idle-delay);;delay before completition
-  (setq company-idle-delay 0);;delay before completition
+  (set (make-local-variable 'company-idle-delay) 0.3);;delay before completition
   (setq case-fold-search t) ;; ignore case in search
   (setq dabbrev-upcase-means-case-search nil) ;;ignore case
   (flyspell-mode)
