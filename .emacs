@@ -283,6 +283,8 @@ opening symbol, thus the function seeks only the closing"
   '(modify-syntax-entry ?_ "w" sh-mode-syntax-table)) ;; make underscore part of a word
 (eval-after-load 'perl-mode
   '(modify-syntax-entry ?_ "w" perl-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'cmake-mode
+  '(modify-syntax-entry ?_ "w" cmake-mode-syntax-table)) ;; make underscore part of a word
 ;; END: make underscore part of a word
 
 (defun myactionsfor-c-mode-common-hook ()
