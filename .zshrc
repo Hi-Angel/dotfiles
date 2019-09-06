@@ -69,7 +69,6 @@ zstyle ':completion:*' matcher-list '' \
         'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
         'r:|?=** m:{a-z\-}={A-Z\_}'
 
-bindkey \^U backward-kill-line
 bindkey "^[l" down-case-word
 
 #useful aliases
