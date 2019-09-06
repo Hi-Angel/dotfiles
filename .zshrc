@@ -123,7 +123,7 @@ unsetopt share_history
 # completion for ninja command
 fpath=(~/.zsh/ninja-completion.zsh $fpath)
 
-# sed analog in perl, called like "sed_perl pattern_from pattern_to"
+# sed analog in perl, called like "sed_perl pattern_from pattern_to [filenames]"
 function sed_perl() {
 	local from=$1
 	local to=$2
@@ -133,7 +133,7 @@ function sed_perl() {
 }
 alias sp=sed_perl
 
-# sed analog in perl, called like "sed_perl pattern_from pattern_to"
+# deletes lines, called like "del_lines pattern [filenames]"
 function del_lines() {
 	local pattern=$1
 	shift 1
