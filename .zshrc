@@ -162,3 +162,7 @@ function rebase-at() {
     shift 1
     GIT_EDITOR="sed -i -E \"1s/\w+/$action/\"" git rebase -i $@
 }
+
+alias garc="git add -u && git rebase --continue"
+alias gaca="git add -u && git commit --amend -v"
+alias gagc="git add -u && git commit -sv"
