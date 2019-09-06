@@ -622,14 +622,15 @@ languages with similar syntax"
 
 ;deletes trailing whitespaces before saving the file and sort includes
 (defun myfunc-before-save-hook () (interactive)
-							   (delete-trailing-whitespace)
-							   ;; (when (derived-mode-p 'c-mode 'c++-mode)
-							   ;; 	 (c-sort-includes))
-							   (when (derived-mode-p 'csharp-mode)
-								 (csharp-sort-usings))
-							   (when (derived-mode-p 'haskell-mode)
-								 (haskell-sort-n-align-imports))
-							   )
+       (unless (derived-mode-p 'diff-mode)
+         (delete-trailing-whitespace))
+       ;; (when (derived-mode-p 'c-mode 'c++-mode)
+       ;; 	 (c-sort-includes))
+       (when (derived-mode-p 'csharp-mode)
+         (csharp-sort-usings))
+       (when (derived-mode-p 'haskell-mode)
+         (haskell-sort-n-align-imports))
+       )
 (add-hook 'before-save-hook 'myfunc-before-save-hook)
 
 (defun myfunc-rust-mode-hook ()
