@@ -163,6 +163,7 @@ function rebase-at() {
     GIT_EDITOR="sed -i -E \"1s/\w+/$action/\"" git rebase -i $@
 }
 
-alias garc="git add -u && git rebase --continue"
-alias gaca="git add -u && git commit --amend -v"
-alias gagc="git add -u && git commit -sv"
+alias rc="git add -u && git rebase --continue"
+alias ca="git add -u && git commit --amend -v"
+alias cs="git add -u && git commit -sv"
+alias c="git add -u && git commit -v"
