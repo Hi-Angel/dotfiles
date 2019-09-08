@@ -17,7 +17,10 @@ def run_cmd(cmd):
 
 def last_dir_or_filename(filepath):
     path_units = filepath.split('/')
-    return (path_units[len(path_units)-2] if (len(path_units) > 1) else path_units[len(path_units)-1])
+    dirs_blacklist = ["src"] # these are dirs that never mean a subsystem
+    last_dir = lambda: path_units[len(path_units)-2]
+    return (last_dir() if (len(path_units) > 1 and last_dir() not in dirs_blacklist) \
+                       else path_units[len(path_units)-1])
 
 files_changed = run_cmd("git diff --name-only --cached")
 
