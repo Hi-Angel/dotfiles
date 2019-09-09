@@ -1131,3 +1131,5 @@ The first arg is the one with point in it."
     (if is-interactive
         (copy-text-to-clipboard ret)
       ret)))
+
+(setq-default require-final-newline nil)
