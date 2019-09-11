@@ -307,6 +307,23 @@ opening symbol, thus the function seeks only the closing"
               ))
 (add-hook 'c-mode-common-hook 'myactionsfor-c-mode-common-hook)
 
+(defun exec-cmd-foreach-backward (regex cmd begin end)
+  "Executes a command for every match of group #1. Searches
+backward, so you can mutate text forward"
+  (save-excursion
+    (goto-char end)
+    (while (re-search-backward regex begin t)
+      (goto-char (match-beginning 1))
+      (funcall cmd)
+      )))
+
+(defun expand-c-args-in-region ()
+  (interactive)
+  (let ((begin (region-beginning))
+        (end (region-end)))
+    (exec-cmd-foreach-backward ",\\( \\)" 'improved-newline-and-indent
+                               begin end)))
+
 (defun myactionsfor-csharp-mode-common-hook ()
   (when (string= major-mode "csharp-mode")
     (flycheck-mode -1);;disable, it for some reason lags with C#
