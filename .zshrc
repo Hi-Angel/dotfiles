@@ -69,6 +69,8 @@ zstyle ':completion:*' matcher-list '' \
         'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
         'r:|?=** m:{a-z\-}={A-Z\_}'
 
+# Note: by default zsh *deletes whole* line with this key
+bindkey "^U" backward-kill-line
 bindkey "^[l" down-case-word
 
 #useful aliases
