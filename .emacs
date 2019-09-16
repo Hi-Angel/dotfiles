@@ -590,6 +590,19 @@ languages with similar syntax"
                  (not (is-in-comment)))
         (insert ";")))))
 
+(defun maybe-add-semicolon-bracket (_id action _context)
+  "A helper function that inserts semicolon after closing
+parentheses when appropriate. Mainly useful in C, C++, and other
+languages with similar syntax"
+  (when (eq action 'insert)
+    (save-excursion
+      ;; here, caret supposed to be in between parens, i.e. {|}
+      (forward-char) ;; skip closing brace
+      (when (and (looking-at "\\s-*$")
+                 (string-match-p "\\breturn\\b" (current-line-string))
+                 (not (is-in-comment)))
+        (insert ";")))))
+
 (defun maybe-complete-lambda (_id action _context)
   "Completes C++ lambda, given a pair of square brackets"
   (when (eq action 'insert)
@@ -617,7 +630,8 @@ languages with similar syntax"
         (insert ":")))))
 
 (let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode)))
-  (sp-local-pair c-like-modes-list "(" nil :post-handlers '(:add maybe-add-semicolon)))
+  (sp-local-pair c-like-modes-list "(" nil :post-handlers '(:add maybe-add-semicolon-paren))
+  (sp-local-pair c-like-modes-list "{" nil :post-handlers '(:add maybe-add-semicolon-bracket)))
 (sp-local-pair 'c++-mode "[" nil :post-handlers '(:add maybe-complete-lambda))
 (sp-local-pair 'python-mode "(" nil :post-handlers '(:add maybe-add-colon-python))
 ;;; END: smartparens configuration
