@@ -140,6 +140,7 @@ function rebase-at() {
 
 alias rc="git add -u && git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
+alias cax="git add -u && git commit --amend -v --no-edit"
 alias cs="git add -u && git commit -sv"
 alias c="git add -u && git commit -v"
 alias gp="git push origin HEAD"
