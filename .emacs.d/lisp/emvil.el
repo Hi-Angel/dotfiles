@@ -63,6 +63,51 @@ there. Otherwise jump to definition in the next split"
 (define-key evil-outer-text-objects-map "m" 'evil-a-defun)
 (define-key evil-inner-text-objects-map "m" 'evil-inner-defun)
 
+;;; START c++-like variable detection
+(defvar c++-like-variable-regex (rx (or whitespace "("  "{" "," line-end line-start)))
+
+(defun scan-fwd-c++-like-variable ()
+  "Walks forward until the first symbol that doesn't look like variable"
+  (if (re-search-forward c++-like-variable-regex nil t)
+      ;; Note: now we at past_end point
+      (progn
+        (if (or (eq (char-after (point)) ?\)) ;; let's match foo() and foo{} too.
+                (eq (char-after (point)) ?\}))
+            (+ (point) 1)
+          (- (point) 1)))
+    nil))
+
+(defun range-c++-like-variable ()
+  (when (or (eq (char-after (point)) ?\}) (eq (char-after (point)) ?\)))
+    (backward-char))
+  (when (or (eq (char-after (point)) ?\() (eq (char-after (point)) ?\{))
+    (backward-char))
+  (let ((beg (re-search-backward c++-like-variable-regex nil t)))
+    (if (eq beg nil)
+        nil
+      (unless (eq (char-after (+ 1 (point))) ?\n)
+        (forward-char) ;; whitespace of whatever matched gotta be skipped
+        (setq beg (point)))
+      (let ((end (scan-fwd-c++-like-variable)))
+        (if (eq end nil)
+            nil
+          `(,beg ,end))))))
+
+(evil-define-text-object evil-inner-variable (count &optional beg end type)
+  "Tries to select a variable or an expression that would result in a variable"
+  (range-c++-like-variable))
+
+(evil-define-text-object evil-a-variable (count &optional beg end type)
+  "Tries to select a variable or an expression that would result in a variable"
+  (let ((beg-end (range-c++-like-variable)))
+    (goto-char (nth 1 beg-end))
+    (re-search-forward "\\s-*" nil t)
+    `(,(nth 0 beg-end) ,(point))))
+
+(define-key evil-inner-text-objects-map "v" 'evil-inner-variable)
+(define-key evil-outer-text-objects-map "v" 'evil-a-variable)
+;;; END c++-like variable detection
+
 ;;; START html navigation
 ;; make sp-select-next-thing works even the cusor is in the open/close tag
 ;; like matchit in vim
