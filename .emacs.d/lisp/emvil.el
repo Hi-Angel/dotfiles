@@ -67,13 +67,17 @@ to `f' returns t. Returns nil on fail or a window on success"
 ;;; START c++-like variable detection
 (defvar c++-like-variable-regex (rx (or whitespace "(" ")"  "{" "}" "," line-end line-start)))
 
+(defun is-in-between-parens ()
+  "t if point is as (|) or {|}"
+  (and (or (eq (char-after) ?\}) (eq (char-after) ?\)))
+       (or (eq (char-after (- (point) 1)) ?\() (eq (char-after (- (point) 1)) ?\{))))
+
 (defun scan-fwd-c++-like-variable ()
   "Walks forward until the first symbol that doesn't look like variable"
   (if (re-search-forward c++-like-variable-regex nil t)
       ;; Note: now we at past_end point
       (progn
-        (if (or (eq (char-after) ?\)) ;; let's match foo() and foo{} too.
-                (eq (char-after) ?\}))
+        (if (is-in-between-parens) ;; let's match foo() and foo{} too.
             (progn
              (forward-char)
              (if (or (eq (char-after) ?.)
@@ -85,8 +89,7 @@ to `f' returns t. Returns nil on fail or a window on success"
 
 (defun skip-paren-back ()
   "Skips a single () or {} sentence. Return t if these were skipped."
-  (if (and (or (eq (char-after) ?\}) (eq (char-after) ?\)))
-           (or (eq (char-after (- (point) 1)) ?\() (eq (char-after (- (point) 1)) ?\{)))
+  (if (is-in-between-parens)
       (progn
         (backward-char 2)
         t)
