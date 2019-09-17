@@ -29,9 +29,8 @@ to `f' returns t. Returns nil on fail or a window on success"
       next-window)))
 
 (defun evil-goto-definition-next-split ()
-  "If there's a free split, goto definition in this split,
-    otherwise use current one (except when a definition in the
-    current split)"
+  "If the buffer where definition found has a frame, jump
+there. Otherwise jump to definition in the next split"
   (interactive)
   (let ((origin-spl (selected-window))
         (origin-buf (current-buffer)))
