@@ -64,7 +64,7 @@ there. Otherwise jump to definition in the next split"
 (define-key evil-inner-text-objects-map "m" 'evil-inner-defun)
 
 ;;; START c++-like variable detection
-(defvar c++-like-variable-regex (rx (or whitespace "("  "{" "," line-end line-start)))
+(defvar c++-like-variable-regex (rx (or whitespace "(" ")"  "{" "}" "," line-end line-start)))
 
 (defun scan-fwd-c++-like-variable ()
   "Walks forward until the first symbol that doesn't look like variable"
@@ -77,21 +77,29 @@ there. Otherwise jump to definition in the next split"
           (- (point) 1)))
     nil))
 
+(defun skip-paren-back ()
+  "Skips a single () or {} sentence. Return t if these were skipped."
+  (if (and (or (eq (char-after (point)) ?\}) (eq (char-after (point)) ?\)))
+           (or (eq (char-after (- (point) 1)) ?\() (eq (char-after (- (point) 1)) ?\{)))
+      (progn
+        (backward-char 2)
+        t)
+    nil))
+
 (defun range-c++-like-variable ()
-  (when (or (eq (char-after (point)) ?\}) (eq (char-after (point)) ?\)))
-    (backward-char))
-  (when (or (eq (char-after (point)) ?\() (eq (char-after (point)) ?\{))
-    (backward-char))
+  (skip-paren-back)
   (let ((beg (re-search-backward c++-like-variable-regex nil t)))
     (if (eq beg nil)
         nil
-      (unless (eq (char-after (+ 1 (point))) ?\n)
-        (forward-char) ;; whitespace of whatever matched gotta be skipped
-        (setq beg (point)))
-      (let ((end (scan-fwd-c++-like-variable)))
-        (if (eq end nil)
-            nil
-          `(,beg ,end))))))
+      (if (skip-paren-back)
+          (range-c++-like-variable)
+        (unless (eq (char-after (+ 1 (point))) ?\n)
+          (forward-char) ;; whitespace of whatever matched gotta be skipped
+          (setq beg (point)))
+        (let ((end (scan-fwd-c++-like-variable)))
+          (if (eq end nil)
+              nil
+            `(,beg ,end)))))))
 
 (evil-define-text-object evil-inner-variable (count &optional beg end type)
   "Tries to select a variable or an expression that would result in a variable"
