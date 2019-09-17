@@ -29,8 +29,9 @@ to `f' returns t. Returns nil on fail or a window on success"
       next-window)))
 
 (defun evil-goto-definition-next-split ()
-  "If the buffer where definition found has a frame, jump
-there. Otherwise jump to definition in the next split"
+  "If there's a free split, goto definition in this split,
+    otherwise use current one (except when a definition in the
+    current split)"
   (interactive)
   (let ((origin-spl (selected-window))
         (origin-buf (current-buffer)))
@@ -71,15 +72,20 @@ there. Otherwise jump to definition in the next split"
   (if (re-search-forward c++-like-variable-regex nil t)
       ;; Note: now we at past_end point
       (progn
-        (if (or (eq (char-after (point)) ?\)) ;; let's match foo() and foo{} too.
-                (eq (char-after (point)) ?\}))
-            (+ (point) 1)
+        (if (or (eq (char-after) ?\)) ;; let's match foo() and foo{} too.
+                (eq (char-after) ?\}))
+            (progn
+             (forward-char)
+             (if (or (eq (char-after) ?.)
+                     (eq (char-after) ?-))
+                 (scan-fwd-c++-like-variable)
+               (point)))
           (- (point) 1)))
     nil))
 
 (defun skip-paren-back ()
   "Skips a single () or {} sentence. Return t if these were skipped."
-  (if (and (or (eq (char-after (point)) ?\}) (eq (char-after (point)) ?\)))
+  (if (and (or (eq (char-after) ?\}) (eq (char-after) ?\)))
            (or (eq (char-after (- (point) 1)) ?\() (eq (char-after (- (point) 1)) ?\{)))
       (progn
         (backward-char 2)
