@@ -353,6 +353,11 @@ backward, so you can mutate text forward"
 (setq evil-jumps-cross-buffers nil)
 (setq-default evil-shift-round nil) ;; make '>' not to round the indentation
 
+;; newer Evil versions seem to handle this by default, however the older one was
+;; removing trailing space when you press Escape. This however can be worked around
+;; by overriding the function below to do nothing.
+(defun evil-maybe-remove-spaces (&optional do-remove))
+
 (require 'ido)
 (setq-default ido-case-fold t) ;; case insensistivity
 (setq ido-enable-flex-matching t) ;; fuzzy match
