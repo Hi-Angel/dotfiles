@@ -942,12 +942,6 @@ Version 2015-04-12"
 
 (setq compile-command "ninja -C build")
 
-;; use a better color to determine focused tile
-(custom-set-faces
- '(mode-line ((t (:background "light yellow" :foreground "dim gray"))))
- '(mode-line-inactive ((t (:background "dim gray" :foreground "white")))))
-
-
 (require 'winum)
 (winum-mode)
 (global-set-key (kbd "M-1") 'winum-select-window-1)
