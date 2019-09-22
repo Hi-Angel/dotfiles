@@ -64,7 +64,7 @@ there. Otherwise jump to definition in the next split"
 (define-key evil-inner-text-objects-map "m" 'evil-inner-defun)
 
 ;;; START c++-like variable detection
-(defvar c++-like-variable-regex (rx (or whitespace "(" ")"  "{" "}" "," line-end line-start)))
+(defvar c++-like-variable-regex (rx (or whitespace "(" ")"  "{" "}" "," line-end line-start "'" "\"")))
 
 (defun is-in-between-parens ()
   "t if point is as (|) or {|}"
