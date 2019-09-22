@@ -1,6 +1,7 @@
 ;; run garbage collection only when idle
 (setq gc-cons-threshold most-positive-fixnum)
 (run-with-idle-timer 2 t (lambda () (garbage-collect)))
+(setq frame-resize-pixelwise t) ;; needs to be set before a frame is created
 
 ;; this warns about replace-regexp, and I tried rewriting this function in terms of
 ;; others — the simple loop they documented is not what I get. Screw this warning, it
