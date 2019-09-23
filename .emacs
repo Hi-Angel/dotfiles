@@ -34,6 +34,9 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Ubuntu Mono" :foundry "unknown" :slant normal :weight normal :height 95 :width normal))))
  '(fixed-pitch ((t (:family "Ubuntu Mono"))))
+ '(flycheck-error-list-warning ((t (:inherit warning :foreground "blue"))))
+ '(flycheck-fringe-warning ((t (:inherit warning :foreground "blue"))))
+ '(flycheck-warning ((t (:underline (:color "blue" :style wave)))))
  '(font-lock-comment-face ((t (:foreground "dim gray" :slant italic :weight bold :height 95 :family "Ubuntu Mono"))))
  '(font-lock-doc-face ((t (:foreground "blue"))))
  '(font-lock-doc-string-face ((t (:foreground "medium blue" :slant italic :height 95 :family "Ubuntu Mono"))))
