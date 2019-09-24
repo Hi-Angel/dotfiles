@@ -78,12 +78,14 @@ there. Otherwise jump to definition in the next split"
       (progn
         (if (is-in-between-parens) ;; let's match foo() and foo{} too.
             (progn
-             (forward-char)
-             (if (or (eq (char-after) ?.)
-                     (eq (char-after) ?-))
-                 (scan-fwd-c++-like-variable)
-               (point)))
-          (- (point) 1)))
+              (forward-char)
+              (if (or (eq (char-after) ?.)  ;; like "foo()."
+                      (eq (char-after) ?-)) ;; like "foo()->"
+                  (scan-fwd-c++-like-variable)
+                (point)))
+          (if (eolp)
+              (point)
+            (- (point) 1))))
     nil))
 
 (defun skip-paren-back ()
