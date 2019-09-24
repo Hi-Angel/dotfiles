@@ -401,9 +401,6 @@ backward, so you can mutate text forward"
 							(turn-on-auto-fill) ;;auto fill mode for c modes.
 							))
 
-;;set apropriate lenght of a line
-(setq-default fill-column 86)
-
 ;;force inserting tabs instead of spaces
 ;; (setq indent-line-function 'insert-tab)
 
@@ -526,8 +523,8 @@ in a few lines, and puts the cursor at the middle line"
 (global-set-key (kbd "<C-mouse-5>") 'text-scale-increase);set in wheel font increase
 (global-set-key (kbd "s-/") 'company-complete)
 
-;;set apropriate lenght of a line
-(setq-default fill-column 85)
+
+(setq-default fill-column 85) ;; set apropriate lenght of a line
 (setq-default cursor-type 'bar) ;set flat cursor type
 (setq-default major-mode 'text-mode) ;;why Fundamental-mode? Text-mode more aproppriate
 
