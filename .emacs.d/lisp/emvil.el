@@ -103,9 +103,10 @@ there. Otherwise jump to definition in the next split"
         nil
       (if (skip-paren-back)
           (range-c++-like-variable)
-        (unless (eq (char-after (+ 1 (point))) ?\n)
-          (forward-char) ;; whitespace of whatever matched gotta be skipped
-          (setq beg (point)))
+        (if (bolp)
+            (setq beg (point))
+          (setq beg (+ 1 (point))))
+        (forward-char) ;; the match gotta be skipped
         (let ((past_end (scan-fwd-c++-like-variable)))
           (if (eq past_end nil)
               nil
