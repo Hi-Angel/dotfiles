@@ -138,10 +138,19 @@ function rebase-at() {
     GIT_EDITOR="sed -i -E \"1s/\w+/$action/\"" git rebase -i $@
 }
 
+function cs() {
+    if [[ $# == 0 ]]; then
+        git add -u && git commit -sv
+    elif [[ $# == 1 ]]; then
+        git add -u && git commit -sm "$1"
+    else
+        echo "Wrong params number!"
+    fi
+}
+
 alias rc="git add -u && git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
 alias cax="git add -u && git commit --amend -v --no-edit"
-alias cs="git add -u && git commit -sv"
 alias c="git add -u && git commit -v"
 alias po="git push origin HEAD"
 alias pu="git push upstream HEAD"
