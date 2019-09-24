@@ -1163,3 +1163,5 @@ The first arg is the one with point in it."
 
 ;; note: some modes override this. In particular, C and C++ standard requires a newline
 (setq-default require-final-newline nil)
+
+(defalias 'ss 'server-start)
