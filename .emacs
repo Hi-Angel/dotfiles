@@ -104,6 +104,7 @@
 
 (require 'evil-surround)
 (global-evil-surround-mode 1)
+(define-key evil-normal-state-map "S" 'evil-surround-region)
 (require 'evil-magit) ;; without this Evil keys are broken in magit
 (semantic-mode 1)
 (global-company-mode 1)
