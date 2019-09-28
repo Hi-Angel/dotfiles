@@ -83,7 +83,7 @@ there. Otherwise jump to definition in the next split"
                       (eq (char-after) ?-)) ;; like "foo()->"
                   (scan-fwd-c++-like-variable)
                 (point)))
-          (if (string-equal match "") ;; this means we matched EOL
+          (if (string-empty-p match) ;; this means we matched EOL
               (point)
             (- (point) 1))))
     nil))
