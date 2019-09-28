@@ -74,8 +74,8 @@ there. Otherwise jump to definition in the next split"
 (defun scan-fwd-c++-like-variable ()
   "Walks forward until the first symbol that doesn't look like variable"
   (if (re-search-forward c++like-non-variable-regex nil t)
-      ;; Note: now we at past_end point
-      (progn
+      (let ((match (match-string 0)))
+        ;; Note: now we're at past_end point
         (if (is-in-between-parens) ;; let's match foo() and foo{} too.
             (progn
               (forward-char)
@@ -83,7 +83,7 @@ there. Otherwise jump to definition in the next split"
                       (eq (char-after) ?-)) ;; like "foo()->"
                   (scan-fwd-c++-like-variable)
                 (point)))
-          (if (eolp)
+          (if (string-equal match "") ;; this means we matched EOL
               (point)
             (- (point) 1))))
     nil))
