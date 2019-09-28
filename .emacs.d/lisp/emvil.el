@@ -83,7 +83,7 @@ there. Otherwise jump to definition in the next split"
                       (eq (char-after) ?-)) ;; like "foo()->"
                   (scan-fwd-c++-like-variable)
                 (point)))
-          (if (string-empty-p match) ;; this means we matched EOL
+          (if (string-empty-p match) ;; means we matched EOL
               (point)
             (- (point) 1))))
     nil))
@@ -101,16 +101,17 @@ there. Otherwise jump to definition in the next split"
   (let ((beg (re-search-backward c++like-non-variable-regex nil t)))
     (if (eq beg nil)
         nil
-      (if (skip-paren-back)
-          (range-c++-like-variable)
-        (if (bolp)
-            (setq beg (point))
-          (setq beg (+ 1 (point))))
-        (forward-char) ;; the match gotta be skipped
-        (let ((past_end (scan-fwd-c++-like-variable)))
-          (if (eq past_end nil)
-              nil
-            `(,beg ,past_end)))))))
+      (let ((match (match-string 0)))
+        (if (skip-paren-back)
+            (range-c++-like-variable)
+          (if (string-empty-p match) ;; means we matched line-beginning
+              (setq beg (point))
+            (setq beg (+ 1 (point))))
+          (forward-char) ;; the match gotta be skipped
+          (let ((past_end (scan-fwd-c++-like-variable)))
+            (if (eq past_end nil)
+                nil
+              `(,beg ,past_end))))))))
 
 (evil-define-text-object evil-inner-variable (count &optional beg past_end type)
   "Tries to select a variable or an expression that would result in a variable"
