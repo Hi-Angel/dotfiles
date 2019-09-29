@@ -111,9 +111,9 @@ there. Otherwise jump to definition in the next split"
       (let ((match (match-string 0)))
         (if (skip-paren-back)
             (range-c++-like-variable)
-          (if (string-empty-p match) ;; means we matched line-beginning
-              (setq beg (point))
-            (setq beg (+ 1 (point))))
+          (setq beg (if (string-empty-p match) ;; means we matched line-beginning
+                        (point)
+                      (+ 1 (point))))
           (forward-char) ;; the match gotta be skipped
           (let ((past_end (scan-fwd-c++-like-variable)))
             (if (eq past_end nil)
