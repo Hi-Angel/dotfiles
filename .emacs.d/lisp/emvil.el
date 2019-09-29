@@ -128,8 +128,14 @@ there. Otherwise jump to definition in the next split"
   "Tries to select a variable or an expression that would result in a variable"
   (pcase-let ((`(,beg ,past_end) (range-c++-like-variable)))
     (goto-char past_end)
-    (re-search-forward "\\s-*" nil t)
-    `(,beg ,(point))))
+    (re-search-forward "\\S-" nil t)
+    (if (not (eq (point) (+ 1 past_end)))
+        `(,beg ,(- (point) 1))
+      ;; otherwise try to match whitespace backwards
+      (goto-char beg)
+      (re-search-backward "\\S-" nil t)
+      ;; here we can return (+ 1 (point)) disregarding whether search failed
+      `(,(+ 1 (point)) ,past_end))))
 
 (define-key evil-inner-text-objects-map "v" 'evil-inner-variable)
 (define-key evil-outer-text-objects-map "v" 'evil-a-variable)
