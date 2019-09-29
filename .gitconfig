@@ -2,10 +2,14 @@
     editor = "vim -c 'set spell spelllang=en_us'"
     hooksPath = "~/.git_hooks"
 [pager]
-    # diff-highlight is script provided by git that shows word-by-word diff
-	log  = /usr/share/git/diff-highlight/diff-highlight | less
-	show = /usr/share/git/diff-highlight/diff-highlight | less
-	diff = /usr/share/git/diff-highlight/diff-highlight | less
+    # Use `diffr` to improve diff highlighting. Its algo is betterr than that of
+    # diff-highlight
+    # Note: the diffr by default seems to be using black letters on dark background,
+    # see https://github.com/mookid/diffr/issues/31 Override the color with
+    # `--colors` option to white instead
+	log  = diffr --colors refine-added:foreground:white --colors refine-removed:foreground:white | less
+	show = diffr --colors refine-added:foreground:white --colors refine-removed:foreground:white | less
+	diff = diffr --colors refine-added:foreground:white --colors refine-removed:foreground:white | less
 [user]
 	email = Hi-Angel@yandex.ru
 	name = Konstantin Kharlamov
