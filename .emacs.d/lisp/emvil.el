@@ -126,10 +126,10 @@ there. Otherwise jump to definition in the next split"
 
 (evil-define-text-object evil-a-variable (count &optional beg past_end type)
   "Tries to select a variable or an expression that would result in a variable"
-  (let ((beg-past_end (range-c++-like-variable)))
-    (goto-char (nth 1 beg-past_end))
+  (pcase-let ((`(,beg ,past_end) (range-c++-like-variable)))
+    (goto-char past_end)
     (re-search-forward "\\s-*" nil t)
-    `(,(nth 0 beg-past_end) ,(point))))
+    `(,beg ,(point))))
 
 (define-key evil-inner-text-objects-map "v" 'evil-inner-variable)
 (define-key evil-outer-text-objects-map "v" 'evil-a-variable)
