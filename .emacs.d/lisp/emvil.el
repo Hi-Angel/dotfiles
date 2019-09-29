@@ -54,7 +54,14 @@ there. Otherwise jump to definition in the next split"
 ;; add a "function" text object
 (evil-define-text-object evil-a-defun (count &optional beg end type)
   "Select a defun."
-  (evil-select-an-object 'evil-defun beg end type count))
+  ;; (evil-select-an-object …) for me often results in errors, so reimplement it with
+  ;; inner-object instead
+  (pcase-let ((`(,beg ,past_end) (evil-select-inner-object 'evil-defun beg end type count)))
+    (goto-char past_end)
+    (let ((lst-space-addr (re-search-forward "[^[:space:]\n]" nil t)))
+      (if lst-space-addr
+          `(,beg ,(- lst-space-addr 1))
+        `(,beg ,(point-max))))))
 
 (evil-define-text-object evil-inner-defun (count &optional beg end type)
   "Select inner defun."
