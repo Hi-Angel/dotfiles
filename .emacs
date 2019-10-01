@@ -87,7 +87,7 @@
  '(inhibit-startup-screen t)
  '(omnisharp-imenu-support t)
  '(package-selected-packages
-   '(irony-eldoc go-mode winum company company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode rust-mode flycheck surround ess minizinc-mode rainbow-delimiters atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode yasnippet wrap-region smartparens slime pretty-symbols paredit omnisharp lua-mode indent-guide idomenu highlight-parentheses helm-company flycheck-irony flycheck-haskell evil emms ctypes company-irony company-c-headers cmake-mode autopair))
+   '(xr aggressive-fill-paragraph lsp-mode symbol-overlay evil evil-magit magit racer ## smex async irony-eldoc go-mode winum company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode surround ess minizinc-mode rainbow-delimiters atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode yasnippet smartparens slime pretty-symbols paredit lua-mode indent-guide idomenu highlight-parentheses helm-company flycheck-irony emms ctypes company-irony company-c-headers cmake-mode autopair))
  '(semantic-imenu-bucketize-file nil)
  '(semantic-imenu-bucketize-type-members nil)
  '(semantic-imenu-buckets-to-submenu nil)
