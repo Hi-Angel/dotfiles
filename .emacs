@@ -1141,3 +1141,7 @@ The first arg is the one with point in it."
 (setq-default require-final-newline nil)
 
 (defalias 'ss 'server-start)
+
+;; By default keyboard-quit is giltchy, it randomly fails to work until you press it
+;; second time. Let's just bind C-g to press it twice always
+(global-set-key (kbd "C-g") '(lambda () (interactive) (keyboard-quit) (keyboard-quit)))
