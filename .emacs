@@ -670,6 +670,8 @@ languages with similar syntax"
 (add-hook 'before-save-hook 'myfunc-before-save-hook)
 
 (defun myfunc-rust-mode-hook ()
+  ;; note: if racer-mode breaks in some way (e.g. no more completions), do:
+  ;; 1. `rustup component add rust-src` 2. `cargo +nightly install racer --force'
   (racer-mode)
   (cl-assert (boundp 'company-backends)) ;; I always use company-mode
   (set (make-local-variable 'company-backends)
