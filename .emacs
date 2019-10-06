@@ -677,27 +677,6 @@ languages with similar syntax"
        )
 (add-hook 'rust-mode-hook 'myfunc-rust-mode-hook)
 
-;; ;;CEDET loading
-;; (load-file "~/Projects/cedet-1.1/common/cedet.el")
-;; (global-ede-mode 1)
-;; ;(semantic-load-enable-code-helpers) commented out due to the line below
-;; (semantic-load-enable-excessive-code-helpers)
-;; (global-srecode-minor-mode 1)
-;; (defun my-semantic-hook ()
-;;   (imenu-add-to-menubar "TAGS"))
-;; (add-hook 'semantic-init-hooks 'my-semantic-hook)
-;; (setq-default imenu-create-index-function 'imenu-default-create-index-function)
-
-;;enable and configure wrap-mode
-;; (require 'wrap-region) → don't need beacuase of smart-parens, but I still leaved it for a safe case
-;; (wrap-region-mode t)
-;; (wrap-region-add-wrapper "«" "»")
-
-;; ;;vertical guides
-;; (require 'indent-guide)
-;; (set 'indent-guide-char "¦") ;;character to show an indentation
-;; (indent-guide-global-mode t)
-
 (require 'symbol-overlay)
 (defun enable-symbol-overlay-mode ()
   (unless (or (minibufferp)
