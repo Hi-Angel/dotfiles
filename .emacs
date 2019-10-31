@@ -883,6 +883,9 @@ Version 2015-04-12"
 (split-window-right) ;; something I always do, let's automatize that
 (load-file "~/.emacs.d/elpa/markdown-mode-20170712.1703/markdown-mode.elc")
 
+(defun replace-in-string (what with in)
+  (replace-regexp-in-string (regexp-quote what) with in nil 'literal))
+
 ;; heaader guards, source https://www.emacswiki.org/emacs/AutoInsertHeaderGuards
 (defun maybe-add-newline-at-buf-start ()
   (if (and (char-equal (char-after (point-min)) ?\n)
@@ -899,7 +902,7 @@ Version 2015-04-12"
                    (interactive)
                    (if (buffer-file-name)
                        (let*
-                           ((fName (upcase (file-name-nondirectory (file-name-sans-extension buffer-file-name))))
+                           ((fName (upcase (replace-in-string "-" "_" (file-name-nondirectory (file-name-sans-extension buffer-file-name)))))
                             (ifDef (concat "#ifndef " fName "_H" "\n#define " fName "_H"
                                            (maybe-add-newline-at-buf-start)))
                             (begin (point-marker))
