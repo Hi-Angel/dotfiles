@@ -1138,7 +1138,7 @@ The first arg is the one with point in it."
 (defun get-file:line (&optional is-interactive)
   "returns a string \"buffer_name:line_at_point\""
   (interactive "p")
-  (let ((ret (concat (buffer-name) ":" (number-to-string (line-number-at-pos)))))
+  (let ((ret (concat (file-name-nondirectory buffer-file-truename) ":" (number-to-string (line-number-at-pos)))))
     (if is-interactive
         (copy-text-to-clipboard ret)
       ret)))
