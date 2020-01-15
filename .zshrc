@@ -2,6 +2,11 @@
 #    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 #    git clone https://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh
 #    chsh -s $(which zsh)
+#
+# optionally: to migrate bash_history use command below. The grep is to skip
+# timestamps in bash format (the command below does not retain them for
+# simplicity)
+#    cat ~/.bash_history | grep -v -E "^#" | sed 's/^/: 0:0;/' > ~/.zsh_history
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
