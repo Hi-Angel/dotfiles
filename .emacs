@@ -789,6 +789,7 @@ Version 2015-04-12"
   (setq dabbrev-upcase-means-case-search nil) ;;ignore case
   (flyspell-mode)
   (ispell-change-dictionary "english")
+  (setq markdown-enable-math t) ;; enable latex delimiters
   )
 (add-hook 'markdown-mode-hook 'myfunc-markdown-mode)
 
