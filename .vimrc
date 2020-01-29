@@ -143,3 +143,6 @@ function Inc(...)
   let g:i += 1
   return g:i
 endfunction
+
+" copy selected
+vmap <C-c> "+y
