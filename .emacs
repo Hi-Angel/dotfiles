@@ -690,7 +690,7 @@ languages with similar syntax"
   enable-symbol-overlay-mode)
 (global-symbol-overlay-mode);;enable it
 (global-set-key (kbd "s-`") 'symbol-overlay-put)
-(setq symbol-overlay-ignore-functions ()) ;; don't ignore keywords in various languages
+(setq symbol-overlay-ignore-functions nil) ;; don't ignore keywords in various languages
 (setq symbol-overlay-map (make-sparse-keymap)) ;; disable special cmds on overlays
 
 (eval-after-load 'irony-mode
