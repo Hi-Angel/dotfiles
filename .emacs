@@ -706,8 +706,8 @@ languages with similar syntax"
 (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 
 (defun myfunc-text-mode ()
-  (set (make-local-variable 'company-idle-delay) 0)
-  (set (make-local-variable 'company-minimum-prefix-length) 1)
+  (set (make-local-variable 'company-idle-delay) 0.3)
+  (set (make-local-variable 'company-minimum-prefix-length) 3)
   )
 (add-hook 'text-mode-hook 'myfunc-text-mode)
 
