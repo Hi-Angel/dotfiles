@@ -1156,9 +1156,12 @@ The first arg is the one with point in it."
 (global-set-key (kbd "C-g") '(lambda () (interactive) (keyboard-quit) (keyboard-quit)))
 
 (defun insert-print-for-the-word()
-  "Inserts a print above current line for the word a cursor is upon"
+  "Inserts a print above current line for the word a cursor is
+upon or for the selected text if it's active"
   (interactive)
-  (let ((word (thing-at-point 'word 'no-properties))
+  (let ((word (if mark-active
+                  (buffer-substring-no-properties (region-beginning) (region-end))
+                (thing-at-point 'word 'no-properties)))
         (print-str (pcase major-mode
                      ('c++mode '("printf(\"%s\", " ");"))
                      ('rust-mode '("println!(\"{}\", " ");"))
