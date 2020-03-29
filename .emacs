@@ -1154,3 +1154,21 @@ The first arg is the one with point in it."
 ;; By default keyboard-quit is giltchy, it randomly fails to work until you press it
 ;; second time. Let's just bind C-g to press it twice always
 (global-set-key (kbd "C-g") '(lambda () (interactive) (keyboard-quit) (keyboard-quit)))
+
+(defun insert-print-for-the-word()
+  "Inserts a print above current line for the word a cursor is upon"
+  (interactive)
+  (let ((word (thing-at-point 'word 'no-properties))
+        (print-str (pcase major-mode
+                     ('c++mode '("printf(\"%s\", " ");"))
+                     ('rust-mode '("println!(\"{}\", " ");"))
+                     )))
+    (if (not word)
+        (print "no word at point")
+      (if (not print-str)
+        (print "unknown mode")
+      (evil-open-above 0)
+      (insert (concat (nth 0 print-str)
+                      word
+                      (nth 1 print-str)))
+          ))))
