@@ -1175,3 +1175,14 @@ upon or for the selected text if it's active"
                       word
                       (nth 1 print-str)))
           ))))
+
+(defun csv-to-tabs()
+  (let ((text (if mark-active
+                  (buffer-substring-no-properties (region-beginning) (region-end))
+                (buffer-substring-no-properties (point-min) (point-max)))
+              ))
+    (replace-regexp-in-string "[[:blank:]]*|[[:blank:]]*" "\t" text)))
+
+(defun csv-to-tabs-copy ()
+  (interactive)
+  (copy-text-to-clipboard (csv-to-tabs)))
