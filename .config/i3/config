@@ -14,8 +14,8 @@ set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:Hack, FontAwesome 9
-#font pango:Monospace, FontAwesome5Brands, FontAwesome5Free 9 
-#font pango:Monospace, Font Awesome 5 Free Solid 9 
+#font pango:Monospace, FontAwesome5Brands, FontAwesome5Free 9
+#font pango:Monospace, Font Awesome 5 Free Solid 9
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -111,7 +111,7 @@ set $tag6 "6 &#xf001;"
 set $tag7 "7"
 
 # tag workspaces
-workspace $tag1 output eDP-1 
+workspace $tag1 output eDP-1
 workspace $tag2 output HDMI-1 #LVDS
 workspace $tag3 output eDP-1
 workspace $tag4 output eDP-1
@@ -233,7 +233,7 @@ for_window [class="Klipper"] floating enable; border none
 for_window [class="Plasmoidviewer"] floating enable; border none
 for_window [class="(?i)*nextcloud*"] floating disable
 for_window [class="plasmashell" window_type="notification"] border none, move right 700px, move down 450px
-no_focus [class="plasmashell" window_type="notification"]
+no_focus [window_type="notification"]
 
 # kill the giant window that covers everything up
 for_window [title="Desktop — Plasma"] kill; floating enable; border none
