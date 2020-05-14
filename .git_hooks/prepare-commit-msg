@@ -5,7 +5,7 @@
 from sys import argv, exit
 import subprocess
 
-commit_msg_file = open(argv[1], 'r+')
+commit_msg_file = open(argv[1], 'r+', encoding="utf8", errors='ignore')
 
 commit_msg_split = commit_msg_file.read().split('\n')
 if commit_msg_split[0] != "": # don't change anything for git commit --amend
