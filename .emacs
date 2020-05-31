@@ -274,8 +274,8 @@ opening symbol, thus the function seeks only the closing"
   '(modify-syntax-entry ?_ "w" php-mode-syntax-table)) ;; make underscore part of a word
 (eval-after-load 'haskell-mode
   '(modify-syntax-entry ?_ "w" haskell-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'shell-mode
-  '(modify-syntax-entry ?_ "w")) ;; make underscore part of a word
+(eval-after-load 'sh-mode
+  '(modify-syntax-entry ?_ "w" sh-mode-syntax-table)) ;; make underscore part of a word
 (eval-after-load 'markdown-mode
   '(modify-syntax-entry ?_ "w" markdown-mode-syntax-table)) ;; make underscore part of a word
 (eval-after-load 'diff-mode
@@ -298,6 +298,10 @@ opening symbol, thus the function seeks only the closing"
   '(modify-syntax-entry ?_ "w" makefile-mode-syntax-table)) ;; make underscore part of a word
 (eval-after-load 'conf-mode
   '(modify-syntax-entry ?_ "w" conf-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'makefile-gmake-mode
+  '(modify-syntax-entry ?_ "w" makefile-mode-syntax-table)) ;; make underscore part of a word
+(eval-after-load 'js-mode
+  '(modify-syntax-entry ?_ "w" js-mode-syntax-table))
 ;; END: make underscore part of a word
 
 (defun myactionsfor-c-mode-common-hook ()
