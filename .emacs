@@ -332,7 +332,7 @@ backward, so you can mutate text forward"
 
 (defun expand-c-args-in-region ()
   (interactive)
-  (exec-cmd-foreach-backward ",\\( \\)" 'improved-newline-and-indent
+  (exec-cmd-foreach-backward ",\\( \\)" 'newline-and-indent
                              (region-beginning) (region-end)))
 
 (defun myactionsfor-csharp-mode-common-hook ()
