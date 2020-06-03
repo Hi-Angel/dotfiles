@@ -363,8 +363,8 @@ backward, so you can mutate text forward"
 
 ;; newer Evil versions seem to handle this by default, however the older one was
 ;; removing trailing space when you press Escape. This however can be worked around
-;; by overriding the function below to do nothing.
-(defun evil-maybe-remove-spaces (&optional do-remove))
+;; by overriding the function below to a noop.
+(defun evil-maybe-remove-spaces (&optional _))
 
 (require 'ido)
 (setq-default ido-case-fold t) ;; case insensistivity
@@ -999,7 +999,7 @@ Version 2015-04-12"
 
 (defun smerge-next-safe ()
     "returns t on success, nil otherwise"
-  (condition-case err
+  (condition-case nil
       (not (smerge-next))
     ('error
      nil)))
