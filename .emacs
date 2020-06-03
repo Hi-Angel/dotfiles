@@ -254,51 +254,51 @@ opening symbol, thus the function seeks only the closing"
 								)))
 
 ;; START: make underscore part of a word
-(eval-after-load 'text-mode
+(with-eval-after-load 'text-mode
   '(modify-syntax-entry ?_ "w" text-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'rust-mode
+(with-eval-after-load 'rust-mode
   '(modify-syntax-entry ?_ "w" rust-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'cc-mode
+(with-eval-after-load 'cc-mode
   '(modify-syntax-entry ?_ "w" c++-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'cc-mode
+(with-eval-after-load 'cc-mode
   '(modify-syntax-entry ?_ "w" c-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'python
+(with-eval-after-load 'python
   '(modify-syntax-entry ?_ "w" python-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'lisp-mode
+(with-eval-after-load 'lisp-mode
   '(modify-syntax-entry ?_ "w" lisp-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'elisp-mode
+(with-eval-after-load 'elisp-mode
   '(modify-syntax-entry ?_ "w" emacs-lisp-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'gud
+(with-eval-after-load 'gud
   '(modify-syntax-entry ?_ "w" gud-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'php-mode
+(with-eval-after-load 'php-mode
   '(modify-syntax-entry ?_ "w" php-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'haskell-mode
+(with-eval-after-load 'haskell-mode
   '(modify-syntax-entry ?_ "w" haskell-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'sh-mode
+(with-eval-after-load 'sh-mode
   '(modify-syntax-entry ?_ "w" sh-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'markdown-mode
+(with-eval-after-load 'markdown-mode
   '(modify-syntax-entry ?_ "w" markdown-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'diff-mode
+(with-eval-after-load 'diff-mode
   '(modify-syntax-entry ?_ "w" diff-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'meson-mode
+(with-eval-after-load 'meson-mode
   '(modify-syntax-entry ?_ "w" meson-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'vala-mode
+(with-eval-after-load 'vala-mode
   '(modify-syntax-entry ?_ "w" vala-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'sh-mode
+(with-eval-after-load 'sh-mode
   '(modify-syntax-entry ?_ "w" sh-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'shell-script-mode
+(with-eval-after-load 'shell-script-mode
   '(modify-syntax-entry ?_ "w" sh-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'perl-mode
+(with-eval-after-load 'perl-mode
   '(modify-syntax-entry ?_ "w" perl-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'cmake-mode
+(with-eval-after-load 'cmake-mode
   '(modify-syntax-entry ?_ "w" cmake-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'js-mode
+(with-eval-after-load 'js-mode
   '(modify-syntax-entry ?_ "w" js-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'conf-mode
+(with-eval-after-load 'conf-mode
   '(modify-syntax-entry ?_ "w" conf-mode-syntax-table)) ;; make underscore part of a word
 (with-eval-after-load 'make-mode
   '(modify-syntax-entry ?_ "w" makefile-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'js-mode
+(with-eval-after-load 'js-mode
   '(modify-syntax-entry ?_ "w" js-mode-syntax-table))
 ;; END: make underscore part of a word
 
