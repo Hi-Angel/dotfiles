@@ -294,11 +294,9 @@ opening symbol, thus the function seeks only the closing"
   '(modify-syntax-entry ?_ "w" cmake-mode-syntax-table)) ;; make underscore part of a word
 (eval-after-load 'js-mode
   '(modify-syntax-entry ?_ "w" js-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'makefile-mode
-  '(modify-syntax-entry ?_ "w" makefile-mode-syntax-table)) ;; make underscore part of a word
 (eval-after-load 'conf-mode
   '(modify-syntax-entry ?_ "w" conf-mode-syntax-table)) ;; make underscore part of a word
-(eval-after-load 'makefile-gmake-mode
+(with-eval-after-load 'make-mode
   '(modify-syntax-entry ?_ "w" makefile-mode-syntax-table)) ;; make underscore part of a word
 (eval-after-load 'js-mode
   '(modify-syntax-entry ?_ "w" js-mode-syntax-table))
