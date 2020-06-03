@@ -500,7 +500,12 @@ called insede of '{}' braces. In this case it throws the braces
 in a few lines, and puts the cursor at the middle line"
   (interactive "*")
   (if (and (eq (char-before) ?{);;if inside "{|}"
-		   (eq (char-after) ?}))
+		   (eq (char-after) ?})
+           ;; smartparens tries to do the same thing as I do here, but fails at
+           ;; it. It only really works when I just typed the pair. Otherwise it
+           ;; does nothing. Oh well, let's add a test for when it does nothing,
+           ;; and only "do something" then
+           (not (string= sp-last-inserted-pair "{")))
 	  (progn
 		(indent-according-to-mode);;indent the line
 		(newline 2);;2 newlines
