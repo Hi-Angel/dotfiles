@@ -1019,12 +1019,6 @@ Version 2015-04-12"
 ;;; as of today out of nowhere appeared problems that turned out to be bugs reported
 ;;; somewhere. Idk why I've never met these before. *sigh* I hate Emacs for this.
 
-;; Smartparens is broken in `cc-mode' as of Emacs 27. See
-;; <https://github.com/Fuco1/smartparens/issues/963>.
-(when (version< "27" emacs-version)
-  (dolist (fun '(c-electric-paren c-electric-brace))
-    (add-to-list 'sp--special-self-insert-commands fun)))
-
 ;; removes warning: backend company-capf error "Nothing to complete" with args (prefix)
 (defun et/semantic-remove-hooks ()
   (remove-hook 'completion-at-point-functions
