@@ -292,14 +292,12 @@ opening symbol, thus the function seeks only the closing"
   (modify-syntax-entry ?_ "w" perl-mode-syntax-table)) ;; make underscore part of a word
 (with-eval-after-load 'cmake-mode
   (modify-syntax-entry ?_ "w" cmake-mode-syntax-table)) ;; make underscore part of a word
-(with-eval-after-load 'js-mode
+(with-eval-after-load 'js
   (modify-syntax-entry ?_ "w" js-mode-syntax-table)) ;; make underscore part of a word
 (with-eval-after-load 'conf-mode
   (modify-syntax-entry ?_ "w" conf-mode-syntax-table)) ;; make underscore part of a word
 (with-eval-after-load 'make-mode
   (modify-syntax-entry ?_ "w" makefile-mode-syntax-table)) ;; make underscore part of a word
-(with-eval-after-load 'js-mode
-  (modify-syntax-entry ?_ "w" js-mode-syntax-table))
 ;; END: make underscore part of a word
 
 (defun myactionsfor-c-mode-common-hook ()
