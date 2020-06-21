@@ -274,8 +274,6 @@ opening symbol, thus the function seeks only the closing"
   (modify-syntax-entry ?_ "w" php-mode-syntax-table)) ;; make underscore part of a word
 (with-eval-after-load 'haskell-mode
   (modify-syntax-entry ?_ "w" haskell-mode-syntax-table)) ;; make underscore part of a word
-(with-eval-after-load 'sh-mode
-  (modify-syntax-entry ?_ "w" sh-mode-syntax-table)) ;; make underscore part of a word
 (with-eval-after-load 'markdown-mode
   (modify-syntax-entry ?_ "w" markdown-mode-syntax-table)) ;; make underscore part of a word
 (with-eval-after-load 'diff-mode
@@ -284,9 +282,7 @@ opening symbol, thus the function seeks only the closing"
   (modify-syntax-entry ?_ "w" meson-mode-syntax-table)) ;; make underscore part of a word
 (with-eval-after-load 'vala-mode
   (modify-syntax-entry ?_ "w" vala-mode-syntax-table)) ;; make underscore part of a word
-(with-eval-after-load 'sh-mode
-  (modify-syntax-entry ?_ "w" sh-mode-syntax-table)) ;; make underscore part of a word
-(with-eval-after-load 'shell-script-mode
+(with-eval-after-load 'sh-script
   (modify-syntax-entry ?_ "w" sh-mode-syntax-table)) ;; make underscore part of a word
 (with-eval-after-load 'perl-mode
   (modify-syntax-entry ?_ "w" perl-mode-syntax-table)) ;; make underscore part of a word
