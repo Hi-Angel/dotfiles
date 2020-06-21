@@ -149,7 +149,7 @@ function cs() {
     if [[ $# == 0 ]]; then
         git add -u && git commit -sv
     elif [[ $# == 1 ]]; then
-        git add -u && git commit -sm "$1"
+        git add "$1" && git commit -sv
     else
         echo "Wrong params number!"
     fi
