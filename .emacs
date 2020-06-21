@@ -349,11 +349,19 @@ backward, so you can mutate text forward"
 ;; (setq flycheck-checker-error-threshold 2000)
 (setq flycheck-clang-language-standard "C++17")
 
-;;Enable Evil, and disable it's keybinds except for «ESC» in an insert mode
+;; Enable Evil, and disable it's keybinds except for «ESC» in an insert mode
 (require 'emvil)
-(global-set-key (kbd "C-S-z") 'undo-tree-redo)
 (setq evil-jumps-cross-buffers nil)
 (setq-default evil-shift-round nil) ;; make '>' not to round the indentation
+
+;; disable undo-tree-mode mandated by Evil as it's broken (see "unrecognized
+;; entry in undo list" on the internet), and use undo-fu instead.
+(global-undo-tree-mode -1)
+(define-key evil-normal-state-map "u" 'undo-fu-only-undo)
+(define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
+(global-unset-key (kbd "C-z"))
+(global-set-key (kbd "C-z")   'undo-fu-only-undo)
+(global-set-key (kbd "C-S-z") 'undo-fu-only-redo)
 
 ;; newer Evil versions seem to handle this by default, however the older one was
 ;; removing trailing space when you press Escape. This however can be worked around
@@ -518,7 +526,6 @@ in a few lines, and puts the cursor at the middle line"
 (global-set-key (kbd "s-y") 'yank)
 (require 'idomenu)
 (global-set-key (kbd "s-i") 'idomenu)
-(global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "<RET>") 'improved-newline-and-indent)
 (global-set-key (kbd "<f11>") (lambda () (interactive) (ff-find-other-file nil t))) ;switch between a corresponding c/c++ header and a file
 (global-set-key (kbd "s-o") 'newline-without-break-of-line)
@@ -987,9 +994,6 @@ Version 2015-04-12"
 
 ;; C++ regex to conver constructor args to initialization (assumes no types with spaces & commas)
 ;; \b[^,]+? \b\(.+?\)\b → \1(\1)
-
-;; allegedly it should help with "unrecognized entry in undo list" https://emacs.stackexchange.com/questions/31438/possible-not-to-use-undo-tree-in-evil-mode
-(setq undo-tree-enable-undo-in-region nil)
 
 (defun smerge-next-safe ()
     "returns t on success, nil otherwise"
