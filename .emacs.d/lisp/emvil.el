@@ -5,8 +5,6 @@
 ;; but [escape] should switch back to normal state
 (define-key evil-insert-state-map [escape] 'evil-normal-state)
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-(define-key evil-normal-state-map (kbd "[ m") 'beginning-of-defun)
-(define-key evil-normal-state-map (kbd "] m") 'end-of-defun)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
@@ -211,5 +209,20 @@ there. Otherwise jump to definition in the next split"
 (define-key evil-normal-state-map "%" 'my-evil-jump-item-enhanced-for-html)
 ;; }}
 ;;; END html navigation
+
+(defun beginning-of-defun-mark (&optional ARG)
+  "Wrapper around beginning-of-defun that saves jump position"
+  (interactive)
+  (evil--jumps-push)
+  (beginning-of-defun ARG))
+
+(defun end-of-defun-mark (&optional ARG)
+  "Wrapper around end-of-defun that saves jump position"
+  (interactive)
+  (evil--jumps-push)
+  (end-of-defun ARG))
+
+(define-key evil-normal-state-map (kbd "[ m") 'beginning-of-defun-mark)
+(define-key evil-normal-state-map (kbd "] m") 'end-of-defun-mark)
 
 (provide 'emvil)
