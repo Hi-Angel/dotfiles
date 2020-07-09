@@ -1188,3 +1188,25 @@ upon or for the selected text if it's active"
 (defun csv-to-tabs-copy ()
   (interactive)
   (copy-text-to-clipboard (csv-to-tabs)))
+
+(defun insert-and-indent-align (str)
+  "Inserts a text and indents acc. to mode"
+    (push-mark)
+    (insert str)
+    (indent-region (region-beginning) (region-end))
+    (align (region-beginning) (region-end)))
+
+(defun python-insert__init__ (params-w-comma)
+  "Creates a python __init__() based on arguments"
+  (let ((params-list (split-string params-w-comma "," t "\s-*")))
+    (let ((init-header "def __init__(self")
+          (init-body "")
+          (init ""))
+      (dolist (param params-list)
+        (setq init-header (concat init-header ", " param))
+        (let ((param-no-type (car (split-string param ":" t "\s-*"))))
+          (setq init-body (concat init-body "\nself." param-no-type " = " param-no-type)))
+        )
+      (setq init (concat init-header "):" init-body))
+      (insert-and-indent-align init)
+      )))
