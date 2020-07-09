@@ -507,7 +507,9 @@ in a few lines, and puts the cursor at the middle line"
            ;; it. It only really works when I just typed the pair. Otherwise it
            ;; does nothing. Oh well, let's add a test for when it does nothing,
            ;; and only "do something" then
-           (not (string= sp-last-inserted-pair "{")))
+           (not (and (string= sp-last-inserted-pair "{")
+                     ;; …but for some reason it only acts in c++-mode. Wtf!
+                     (string= major-mode "c++-mode"))))
 	  (progn
 		(indent-according-to-mode);;indent the line
 		(newline 2);;2 newlines
