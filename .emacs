@@ -508,8 +508,10 @@ in a few lines, and puts the cursor at the middle line"
            ;; does nothing. Oh well, let's add a test for when it does nothing,
            ;; and only "do something" then
            (not (and (string= sp-last-inserted-pair "{")
-                     ;; …but for some reason it only acts in c++-mode. Wtf!
-                     (string= major-mode "c++-mode"))))
+                     ;; …but for some reason it only acts in c modes. Wtf!
+                     (cl-member major-mode
+                      '("c++-mode" "c-mode")
+                      :test 'string=))))
 	  (progn
 		(indent-according-to-mode);;indent the line
 		(newline 2);;2 newlines
