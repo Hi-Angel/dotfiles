@@ -18,9 +18,9 @@ def run_cmd(cmd):
 def last_dir_or_filename(filepath):
     path_units = filepath.split('/')
     list_to_prefer_filename = ['src', 'scripts']
-    last_dir = lambda: path_units[len(path_units)-2]
-    return (last_dir() if (len(path_units) > 1 and last_dir() not in list_to_prefer_filename) \
-                       else path_units[len(path_units)-1])
+    last_dir = path_units[-2] if len(path_units) > 2 else None
+    return (last_dir if (last_dir and last_dir not in list_to_prefer_filename) \
+                     else path_units[-1])
 
 files_changed = run_cmd("git diff --name-only --cached")
 
