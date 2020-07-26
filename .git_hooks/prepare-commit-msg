@@ -7,7 +7,8 @@ import subprocess
 
 commit_msg_file = open(argv[1], 'r+', encoding="utf8", errors='ignore')
 
-commit_msg_split = commit_msg_file.read().split('\n')
+# don't use readlines(), it inserts newline characters
+commit_msg_split = commit_msg_file.read().splitlines()
 if commit_msg_split[0] != "": # don't change anything for git commit --amend
     exit(0)
 
