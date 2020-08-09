@@ -294,6 +294,8 @@ opening symbol, thus the function seeks only the closing"
   (modify-syntax-entry ?_ "w" conf-mode-syntax-table)) ;; make underscore part of a word
 (with-eval-after-load 'make-mode
   (modify-syntax-entry ?_ "w" makefile-mode-syntax-table)) ;; make underscore part of a word
+(with-eval-after-load 'ruby-mode
+  (modify-syntax-entry ?_ "w" ruby-mode-syntax-table)) ;; ruby underscore part of a word
 ;; END: make underscore part of a word
 
 (defun myactionsfor-c-mode-common-hook ()
