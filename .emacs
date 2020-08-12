@@ -101,6 +101,7 @@
 (setq-default tab-width 4) ;;set tab width
 
 (require 'flycheck) ;; I always use it anyway
+(setq flycheck-check-syntax-automatically '(save)) ;; I only want it on save
 
 (require 'evil-surround)
 (global-evil-surround-mode 1)
