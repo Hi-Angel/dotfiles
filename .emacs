@@ -673,7 +673,7 @@ languages with similar syntax"
 (require 'package)
 ;; (push '("marmalade" . "http://marmalade-repo.org/packages/")
 ;; 	  package-archives )
-(push '("melpa" . "http://melpa.milkbox.net/packages/")
+(push '("melpa" . "https://melpa.org/packages/")
 	  package-archives)
 
 ;deletes trailing whitespaces before saving the file and sort includes
