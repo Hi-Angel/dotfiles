@@ -87,7 +87,7 @@
    '("e9460a84d876da407d9e6accf9ceba453e2f86f8b86076f37c08ad155de8223c" "a1289424bbc0e9f9877aa2c9a03c7dfd2835ea51d8781a0bf9e2415101f70a7e" "54a63c60d03a025672ad021381a8bf96788c045908593d535fadb3695fd852c6" default))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(xr aggressive-fill-paragraph lsp-mode symbol-overlay evil evil-magit magit racer ## smex async irony-eldoc go-mode winum company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode surround ess minizinc-mode rainbow-delimiters atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode yasnippet smartparens slime pretty-symbols paredit lua-mode indent-guide idomenu highlight-parentheses helm-company flycheck-irony emms ctypes company-irony company-c-headers cmake-mode autopair))
+   '(lsp-mode undo-fu yaml-mode undo-tree xr symbol-overlay evil-magit smex irony winum company company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode rust-mode flycheck surround ess minizinc-mode rainbow-delimiters atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode wrap-region smartparens slime pretty-symbols paredit lua-mode indent-guide idomenu highlight-parentheses helm-company ggtags flycheck-irony flycheck-haskell evil emms ctypes company-irony company-c-headers cmake-mode autopair))
  '(semantic-imenu-bucketize-file nil)
  '(semantic-imenu-bucketize-type-members nil)
  '(semantic-imenu-buckets-to-submenu nil)
@@ -1261,3 +1261,18 @@ indentation is implemented there"
           (delete-file filename)
           (message "Deleted file %s" filename)
           (kill-buffer))))))
+
+;;
+;;;;;; START: lsp-mode setup
+(require 'lsp-mode)
+
+;; I prefer default indentation functional
+(setq lsp-enable-indentation nil)
+(defun myactionsfor-lsp-mode-hook ()
+  (set (make-local-variable 'company-backends)
+       ;; lsp-mode provides company-capf. company-lsp they say not supported, Idk
+       ;; why. Perhaps because last commit was at 2019, so it may be unmaintainted
+       '(company-capf company-etags company-dabbrev))
+  )
+(add-hook 'lsp-mode-hook 'myactionsfor-lsp-mode-hook)
+;;;;;;; END: lsp-mode setup
