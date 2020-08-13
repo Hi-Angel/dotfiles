@@ -903,7 +903,6 @@ Version 2015-04-12"
 ;; ---------- end of color-identifiers specific setup
 
 (split-window-right) ;; something I always do, let's automatize that
-(load-file "~/.emacs.d/elpa/markdown-mode-20170712.1703/markdown-mode.elc")
 
 (defun replace-in-string (what with in)
   (replace-regexp-in-string (regexp-quote what) with in nil 'literal))
