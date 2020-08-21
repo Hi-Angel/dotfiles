@@ -107,7 +107,6 @@
 (global-evil-surround-mode 1)
 (define-key evil-normal-state-map "S" 'evil-surround-region)
 (require 'evil-magit) ;; without this Evil keys are broken in magit
-(semantic-mode 1)
 (global-company-mode 1)
 (add-to-list 'company-dabbrev-code-modes 'c++-mode)
 (add-to-list 'company-dabbrev-code-modes 'c-mode)
@@ -308,7 +307,6 @@ opening symbol, thus the function seeks only the closing"
   (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'csharp-mode 'lua-mode)
     (init-prettify-table-c-like)
     (prettify-symbols-mode 1)
-    (semantic-mode)
     (if (derived-mode-p 'c-mode)
         (setq flycheck-clang-language-standard "c11")
       (setq flycheck-clang-language-standard "c++17"))
