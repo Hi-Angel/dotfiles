@@ -1277,3 +1277,6 @@ indentation is implemented there"
   )
 (add-hook 'lsp-mode-hook 'myactionsfor-lsp-mode-hook)
 ;;;;;;; END: lsp-mode setup
+
+;; make `rgrep' function skip binary files
+(setq grep-find-template "find <D> <X> -type f <F> -exec grep <C> -nHI --null -e <R> \{\} +")
