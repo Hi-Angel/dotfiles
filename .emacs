@@ -349,10 +349,6 @@ backward, so you can mutate text forward"
 							))
 
 
-;; (global-flycheck-mode)
-;; (setq flycheck-checker-error-threshold 2000)
-(setq flycheck-clang-language-standard "C++17")
-
 ;; Enable Evil, and disable it's keybinds except for «ESC» in an insert mode
 (require 'emvil)
 (setq evil-jumps-cross-buffers nil)
