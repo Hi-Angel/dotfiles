@@ -1280,3 +1280,9 @@ indentation is implemented there"
 
 ;; make `rgrep' function skip binary files
 (setq grep-find-template "find <D> <X> -type f <F> -exec grep <C> -nHI --null -e <R> \{\} +")
+
+(defun window-swap-states-rev ()
+  "window-swap-states that works in the reverse direction"
+  (interactive)
+  (window-swap-states (window-normalize-window nil t) (previous-window))
+  )
