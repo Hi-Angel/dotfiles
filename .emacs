@@ -649,7 +649,7 @@ languages with similar syntax"
                  (string-match-p "\\s-*def.*" (current-line-string)))
         (insert ":")))))
 
-(let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode)))
+(let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode js-mode)))
   (sp-local-pair c-like-modes-list "(" nil :post-handlers '(:add maybe-add-semicolon-paren))
   (sp-local-pair c-like-modes-list "{" nil :post-handlers '(:add maybe-add-semicolon-bracket)))
 (sp-local-pair 'c++-mode "[" nil :post-handlers '(:add maybe-complete-lambda))
