@@ -502,26 +502,28 @@ called insede of '{}' braces. In this case it throws the braces
 in a few lines, and puts the cursor at the middle line"
   (interactive "*")
   (if (and (eq (char-before) ?{);;if inside "{|}"
-		   (eq (char-after) ?})
-           ;; smartparens tries to do the same thing as I do here, but fails at
-           ;; it. It only really works when I just typed the pair. Otherwise it
-           ;; does nothing. Oh well, let's add a test for when it does nothing,
-           ;; and only "do something" then
-           (not (and (string= sp-last-inserted-pair "{")
-                     ;; …but for some reason it only acts in c modes. Wtf!
-                     (cl-member major-mode
-                      '("c++-mode" "c-mode")
-                      :test 'string=))))
-	  (progn
-		(indent-according-to-mode);;indent the line
-		(newline 2);;2 newlines
-		(indent-according-to-mode);;indent the line
-		(while (not (eq (char-after) ?\n))
-		  (backward-char));;go back till newline «after»
-		(indent-according-to-mode);;indent the line
-		)
-	(newline-and-indent);;else
-	))
+		   (eq (char-after) ?}))
+      (progn
+        (when (bound-and-true-p smartparens-mode)
+          ;; smartparens tries to do the same thing as me, but fails at that,
+          ;; because it only works when I just typed the pair. Otherwise it does
+          ;; nothing.
+          ;;
+          ;; So I tried detecting the situation, but it gets worse: sometimes the
+          ;; sp-last-inserted-pair is set, other times it isn't. All in all, the
+          ;; only way to work around this problem seems to be to restart the
+          ;; mode.
+          (smartparens-mode 0)
+          (smartparens-mode 1))
+        (indent-according-to-mode);;indent the line
+        (newline 2);;2 newlines
+        (indent-according-to-mode);;indent the line
+        (while (not (eq (char-after) ?\n))
+          (backward-char));;go back till newline «after»
+        (indent-according-to-mode);;indent the line
+        )
+    (newline-and-indent)
+    ))
 
 ;;set copy/paste work as usual, i.e. not overwrite when delete a characters
 ;;(and a few another useful keybindings)
