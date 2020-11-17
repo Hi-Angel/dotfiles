@@ -23,11 +23,6 @@
 (add-to-list 'load-path "/home/constantine/.emacs.d/lisp")
 (load-file "/home/constantine/.emacs.d/lisp/loc-additions.elc") ;;a local features
 
-;;faces
-(font-lock-add-keywords
- 'c-mode
- '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
