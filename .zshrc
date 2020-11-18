@@ -164,3 +164,6 @@ alias pu="git push upstream HEAD"
 alias or="git pull origin   HEAD --rebase"
 alias ur="git pull upstream HEAD --rebase"
 alias co="git checkout"
+
+# I often find useful being able to peek at command timestamps in the scrollback
+PROMPT='%{$fg[yellow]%}[%D{%d.%m.%Y-%H:%M:%S}] '$PROMPT
