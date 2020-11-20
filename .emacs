@@ -1260,6 +1260,7 @@ indentation is implemented there"
 
 ;; I prefer default indentation functional
 (setq lsp-enable-indentation nil)
+
 (defun myactionsfor-lsp-mode-hook ()
   (set (make-local-variable 'company-backends)
        ;; lsp-mode provides company-capf. company-lsp they say not supported, Idk
@@ -1267,6 +1268,11 @@ indentation is implemented there"
        '(company-capf company-etags company-dabbrev))
   )
 (add-hook 'lsp-mode-hook 'myactionsfor-lsp-mode-hook)
+
+;; even if given python project has types utterly broken, the mypy still also
+;; gives immensely useful syntax checking that is lacking otherwise with pyls.
+(add-to-list 'lsp-client-settings '("pyls.plugins.pyls_mypy.enabled" t))
+(add-to-list 'lsp-client-settings '("pyls.plugins.pyls_mypy.live_mode" nil))
 ;;;;;;; END: lsp-mode setup
 
 ;; make `rgrep' function skip binary files
