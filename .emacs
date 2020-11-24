@@ -1283,3 +1283,9 @@ indentation is implemented there"
   (interactive)
   (window-swap-states (window-normalize-window nil t) (previous-window))
   )
+
+;; highlight yanked regions in evil mode. Credits to: https://blog.meain.io/2020/emacs-highlight-yanked/
+(defun meain/evil-yank-advice (orig-fn beg end &rest args)
+  (pulse-momentary-highlight-region beg end)
+  (apply orig-fn beg end args))
+(advice-add 'evil-yank :around 'meain/evil-yank-advice)
