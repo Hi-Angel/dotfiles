@@ -1271,8 +1271,8 @@ indentation is implemented there"
 
 ;; even if given python project has types utterly broken, the mypy still also
 ;; gives immensely useful syntax checking that is lacking otherwise with pyls.
-(add-to-list 'lsp-client-settings '("pyls.plugins.pyls_mypy.enabled" t))
-(add-to-list 'lsp-client-settings '("pyls.plugins.pyls_mypy.live_mode" nil))
+(lsp-register-custom-settings '(("pyls.plugins.pyls_mypy.enabled" t t)
+                                ("pyls.plugins.pyls_mypy.live_mode" nil t)))
 ;;;;;;; END: lsp-mode setup
 
 ;; make `rgrep' function skip binary files
