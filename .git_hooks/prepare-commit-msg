@@ -12,9 +12,9 @@ commit_msg_split = commit_msg_file.read().splitlines()
 if commit_msg_split[0] != "": # don't change anything for git commit --amend
     exit(0)
 
-# String → [String]
-def run_cmd(cmd):
-    return subprocess.run(cmd.split(), stdout=subprocess.PIPE).stdout.decode('utf-8').split('\n')
+def run_cmd(cmd: str):
+    ret = subprocess.run(cmd.split(), stdout=subprocess.PIPE)
+    return (ret.stdout.decode('utf-8').split('\n'), ret.returncode)
 
 def last_dir_or_filename(filepath):
     path_units = filepath.split('/')
@@ -27,10 +27,30 @@ def last_dir_or_filename(filepath):
     return (last_dir if (last_dir and last_dir not in list_to_prefer_filename) \
                      else path_units[-1])
 
-files_changed = run_cmd("git diff --name-only --cached")
+# find an element with comparator provided, return index
+def find(iterable_object, comparator):
+    for i, obj in enumerate(iterable_object):
+        if comparator(obj):
+            return i
+    return None
+
+def insert_comment_w_prev_commit_title(commit_msg_split, prev_commit_title):
+    if not prev_commit_title:
+        return
+    i_fst_comment = find(commit_msg_split, lambda line: line.startswith('#'))
+    if i_fst_comment is None:
+        commit_msg_split[-1] = f'\n# {prev_commit_title}'
+    else:
+        commit_msg_split.insert(i_fst_comment, f'# {prev_commit_title}')
+
+(prev_commit_stdout, exitcode) = run_cmd('git log -1 --format=%s') # exitcode != 0 means repo that has no commits yet
+prev_commit_title = '' if exitcode != 0 else prev_commit_stdout[0]
+
+files_changed = run_cmd("git diff --name-only --cached")[0]
 
 # more fine-grained logic (such as per project, and different conditions) can
 # be added
 commit_msg_split[0] = last_dir_or_filename(files_changed[0]) + ": "
+insert_comment_w_prev_commit_title(commit_msg_split, prev_commit_title)
 commit_msg_file.seek(0)
 commit_msg_file.write('\n'.join(commit_msg_split))
