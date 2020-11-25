@@ -1284,6 +1284,15 @@ indentation is implemented there"
   (window-swap-states (window-normalize-window nil t) (previous-window))
   )
 
-;; highlight regions I work with in evil mode. Just fancies.
+;;;; highlight regions I work with in evil mode. Just fancies.
 (evil-goggles-mode 1)
 (setq evil-goggles-blocking-duration 0.05)
+;; make some evil-goggle colors to look fancier than the default boring gray
+(custom-set-faces
+ '(evil-goggles-delete-face           ((t (:inherit diff-refine-removed))))
+ '(evil-goggles-change-face           ((t (:inherit diff-refine-removed))))
+ '(evil-goggles-paste-face            ((t (:inherit diff-refine-added))))
+ '(evil-goggles-yank-face             ((t (:inherit diff-refine-changed))))
+ '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-refine-removed))))
+ '(evil-goggles-undo-redo-add-face    ((t (:inherit diff-refine-added))))
+ '(evil-goggles-undo-redo-change-face ((t (:inherit diff-refine-changed)))))
