@@ -157,10 +157,19 @@ function cs() {
     fi
 }
 
+function c() {
+    if [[ $# == 0 ]]; then
+        git add -u && git commit -v
+    elif [[ $# == 1 ]]; then
+        git add "$1" && git commit -v
+    else
+        echo "Wrong params number!"
+    fi
+}
+
 alias rc="git add -u && git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
 alias cax="git add -u && git commit --amend -v --no-edit"
-alias c="git add -u && git commit -v"
 alias po="git push origin HEAD"
 alias pu="git push upstream HEAD"
 alias or="git pull origin   HEAD --rebase"
