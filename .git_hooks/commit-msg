@@ -1,0 +1,35 @@
+#!/bin/python3
+
+import re
+import utils
+from sys import argv, exit
+from typing import List
+from utils import *
+
+commit_msg_file = open(argv[1], 'r', encoding="utf8", errors='ignore')
+commit_msg_split = readlines(commit_msg_file)
+
+# Aborting a commit by leaving an empty commit-msg doesn't stop `commit-msg` hook
+# from being triggered. Detect that explicitly and ignore.
+if len(commit_msg_split) == 0:
+    exit(0)
+
+def get_diff() -> List[str]:
+    cached_diff = run_cmd('git diff --cached')
+    if len(cached_diff) == 0: # means we're in "amend"
+        return run_cmd('git diff HEAD^')
+    else:
+        return cached_diff
+
+def abort_if_wip(changes):
+    """I leave TBMs as marks about stuff that needs to be fixed before sending that
+up upstream. This function checks whether these are present and abort if commit
+is not marked as WIP
+    """
+    line = find(changes, lambda line: re.search(r'\bTBM\b', line))
+    if line is not None and not commit_msg_split[0].lower().startswith('wip:'):
+        print(f'ERR: A line that contains aTBM was found, mark your commit as WIP. Line: {line}')
+        exit(1)
+
+diff = get_diff()
+abort_if_wip(diff)
