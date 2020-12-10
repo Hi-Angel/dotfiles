@@ -7,29 +7,51 @@ from typing import List
 from utils import *
 
 commit_msg_file = open(argv[1], 'r', encoding="utf8", errors='ignore')
-commit_msg_split = readlines(commit_msg_file)
+commit_msg = commit_msg_file.read()
+commit_msg_split = commit_msg.splitlines()
 
 # Aborting a commit by leaving an empty commit-msg doesn't stop `commit-msg` hook
 # from being triggered. Detect that explicitly and ignore.
 if len(commit_msg_split) == 0:
     exit(0)
 
-def get_diff() -> List[str]:
-    cached_diff = run_cmd('git diff --cached')
-    if len(cached_diff) == 0: # means we're in "amend"
-        return run_cmd('git diff HEAD^')
-    else:
-        return cached_diff
 
-def abort_if_wip(changes):
+def is_amend():
+    # credits to https://stackoverflow.com/questions/19387073/how-to-detect-commit-amend-by-pre-commit-hook
+    is_amend_script = """
+    parent=$(/bin/ps -o ppid -p $PPID | tail -1)
+    if [ -n "$parent" ]; then
+        amended=$(/bin/ps -o command -p $parent | grep -- '--amend')
+        if [ -n "$amended" ]; then
+            echo "This is an 'amend'"
+        fi
+    fi
+    """
+    ret = run_cmd_shell(is_amend_script)
+    return len(ret) > 0
+
+def abort_if_wip():
     """I leave TBMs as marks about stuff that needs to be fixed before sending that
 up upstream. This function checks whether these are present and abort if commit
 is not marked as WIP
     """
-    line = find(changes, lambda line: re.search(r'\bTBM\b', line))
-    if line is not None and not commit_msg_split[0].lower().startswith('wip:'):
-        print(f'ERR: A line that contains aTBM was found, mark your commit as WIP. Line: {line}')
+    tbms_added = r'^\+.*\bTBM\b'
+    tbms_removed = r'^-.*\bTBM\b'
+    lines_w_mark = None
+    cached_diff = '\n'.join(run_cmd('git diff --cached'))
+    lines_added_cache = re.findall(tbms_added, cached_diff, flags=re.MULTILINE)
+    lines_removed_cache = re.findall(tbms_removed, cached_diff, flags=re.MULTILINE)
+    if is_amend():
+        commit_diff = '\n'.join(run_cmd('git diff HEAD^'))
+        lines_added =  lines_added_cache + re.findall(tbms_added, commit_diff, flags=re.MULTILINE)
+        lines_removed =  lines_removed_cache + re.findall(tbms_removed, commit_diff, flags=re.MULTILINE)
+        if len(lines_added) > len(lines_removed):
+            lines_w_mark = str(lines_added) + str(lines_removed)
+    else:
+        if len(lines_added_cache) != len(lines_removed_cache):
+            lines_w_mark = str(lines_added_cache) + str(lines_removed_cache)
+    if lines_w_mark is not None and not commit_msg_split[0].lower().startswith('wip:'):
+        print(f'ERR: A line that contains aTBM was found, mark your commit as WIP. Line: {lines_w_mark}')
         exit(1)
 
-diff = get_diff()
-abort_if_wip(diff)
+abort_if_wip()

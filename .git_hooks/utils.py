@@ -26,6 +26,14 @@ def run_cmd(cmd: str) -> List[str]:
         raise Exception(f'cmd {cmd} returned error. stdout was {stdout}')
     return stdout.split('\n') if len(stdout) > 0 else []
 
+def run_cmd_shell(cmd: str) -> List[str]:
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                               shell=True, encoding='utf-8', errors='ignore')
+    (output, _) = process.communicate()
+    if (process.returncode != 0):
+        raise Exception(f'Command failed, exiting. Failing cmd is: {cmd}, output is:\n{output}')
+    return output.split('\n') if len(output) > 0 else []
+
 def overwrite_file(fd, new_content):
     """Overwrites a file using a descriptor. The content may be a str or a list of strings"""
     fd.seek(0)
