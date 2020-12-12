@@ -464,7 +464,7 @@ point reaches the beginning or end of the buffer, stop there."
                   (get-char-property (point) 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
-;;A fix for align-regexp to use spaces instead of tabs to align
+;; Make align-regexp always align with spaces rather than tabs
 (defadvice align-regexp (around align-regexp-with-spaces activate)
   (let ((indent-tabs-mode nil))
     ad-do-it))
