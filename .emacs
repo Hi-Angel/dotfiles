@@ -326,12 +326,12 @@ backward, so you can mutate text forward"
   (exec-cmd-foreach-backward ",\\( \\)" 'newline-and-indent
                              (region-beginning) (region-end)))
 
-(defun myactionsfor-csharp-mode-common-hook ()
-  (when (string= major-mode "csharp-mode")
-    (flycheck-mode -1) ;; disable, it for some reason lags with C#
-    (c-set-offset 'innamespace '+)
-    ))
-(add-hook  'csharp-mode-hook 'myactionsfor-csharp-mode-common-hook)
+(use-package csharp
+  :defer t
+  :config
+  (flycheck-mode -1) ;; disable, it for some reason lags with C#
+  (c-set-offset 'innamespace '+)
+  )
 
 ;;in term-mode the «yas» have no a sense, plus causes a problem with <tab>. So disable it.
 (add-hook 'term-mode-hook (lambda()
