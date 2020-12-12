@@ -536,9 +536,9 @@ in a few lines, and puts the cursor at the middle line"
 ;;some useful minor modes
 (defun myfunc-prog-mode ()
   (highlight-numbers-mode)
+  (set-face-attribute 'highlight-numbers-number nil :weight 'bold :foreground "blue" :background "light gray")
   (column-number-mode)
   (delete-selection-mode)
-  (set-face-attribute 'highlight-numbers-number nil :weight 'bold :foreground "blue" :background "light gray")
   )
 (add-hook 'prog-mode-hook 'myfunc-prog-mode)
 
