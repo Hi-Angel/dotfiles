@@ -652,8 +652,6 @@ languages with similar syntax"
 
 ;package managment
 (require 'package)
-;; (push '("marmalade" . "http://marmalade-repo.org/packages/")
-;; 	  package-archives )
 (push '("melpa" . "https://melpa.org/packages/")
 	  package-archives)
 
