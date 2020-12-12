@@ -1242,3 +1242,12 @@ indentation is implemented there"
 ;;;; highlight regions I work with in evil mode. Just fancies.
 (evil-goggles-mode 1)
 (setq evil-goggles-blocking-duration 0.05)
+
+;;;; some perofrmance related changes, credits to https://github.com/geza-herman/emacs/tree/fast-emacs
+;; Don't care about bidirectional text. These settings make processing long lines faster.
+(setq bidi-inhibit-bpa t)
+(setq-default bidi-paragraph-direction 'left-to-right)
+
+;; I use smartparens which can highlight matching pairs, so I don't need
+;; emacs's default blink parenthesis functionality
+(setq blink-paren-function nil)
