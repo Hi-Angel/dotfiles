@@ -100,10 +100,6 @@
   (add-to-list 'flycheck-clang-args "-frelaxed-template-template-args")
   )
 
-(require 'evil-surround)
-(global-evil-surround-mode 1)
-(define-key evil-normal-state-map "S" 'evil-surround-region)
-(require 'evil-magit) ;; without this Evil keys are broken in magit
 (global-company-mode 1)
 (add-to-list 'company-dabbrev-code-modes 'c++-mode)
 (add-to-list 'company-dabbrev-code-modes 'c-mode)
@@ -368,6 +364,15 @@ backward, so you can mutate text forward"
   ;; removing trailing space when you press Escape. This however can be worked around
   ;; by overriding the function below to a noop.
   (defun evil-maybe-remove-spaces (&optional _))
+
+  (require 'evil-surround)
+  (global-evil-surround-mode 1)
+  (define-key evil-normal-state-map "S" 'evil-surround-region)
+  (require 'evil-magit) ;; without this Evil keys are broken in magit
+
+  ;; highlight regions I work with. Just fancies.
+  (evil-goggles-mode 1)
+  (setq evil-goggles-blocking-duration 0.05)
   )
 
 (use-package ido
@@ -1245,10 +1250,6 @@ indentation is implemented there"
   (interactive)
   (window-swap-states (window-normalize-window nil t) (previous-window))
   )
-
-;;;; highlight regions I work with in evil mode. Just fancies.
-(evil-goggles-mode 1)
-(setq evil-goggles-blocking-duration 0.05)
 
 ;;;; some perofrmance related changes, credits to https://github.com/geza-herman/emacs/tree/fast-emacs
 ;; Don't care about bidirectional text. These settings make processing long lines faster.
