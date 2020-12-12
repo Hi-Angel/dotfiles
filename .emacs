@@ -16,16 +16,6 @@
 
 (add-to-list 'load-path "/home/constantine/.emacs.d/lisp")
 
-;;;; START OF MAXIMA CONFIG
-(autoload 'maxima-mode "maxima" "Maxima mode" t)
-(autoload 'imaxima "imaxima" "Frontend for maxima with Image support" t)
-(autoload 'maxima "maxima" "Maxima interaction" t)
-(autoload 'imath-mode "imath" "Imath mode for math formula input" t)
-(setq imaxima-use-maxima-mode-flag t)
-
-(add-to-list 'auto-mode-alist '("\\.ma[cx]" . maxima-mode))
-;;;; END OF MAXIMA CONFIG
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
