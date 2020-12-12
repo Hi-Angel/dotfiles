@@ -82,7 +82,7 @@
    '("e9460a84d876da407d9e6accf9ceba453e2f86f8b86076f37c08ad155de8223c" "a1289424bbc0e9f9877aa2c9a03c7dfd2835ea51d8781a0bf9e2415101f70a7e" "54a63c60d03a025672ad021381a8bf96788c045908593d535fadb3695fd852c6" default))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(avy lsp-mode undo-fu yaml-mode undo-tree xr symbol-overlay evil-magit smex irony winum company company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode rust-mode flycheck ess minizinc-mode atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode smartparens slime pretty-symbols paredit lua-mode indent-guide idomenu highlight-parentheses helm-company flycheck-irony flycheck-haskell evil ctypes company-irony cmake-mode evil-surround))
+   '(avy lsp-mode undo-fu yaml-mode undo-tree xr symbol-overlay evil-magit smex winum company company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode rust-mode flycheck ess minizinc-mode atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode smartparens slime pretty-symbols paredit lua-mode indent-guide idomenu highlight-parentheses helm-company flycheck-haskell evil ctypes cmake-mode evil-surround))
  '(semantic-imenu-bucketize-file nil)
  '(semantic-imenu-bucketize-type-members nil)
  '(semantic-imenu-buckets-to-submenu nil)
@@ -692,18 +692,6 @@ languages with similar syntax"
 (setq symbol-overlay-ignore-functions nil) ;; don't ignore keywords in various languages
 (setq symbol-overlay-map (make-sparse-keymap)) ;; disable special cmds on overlays
 
-(eval-after-load 'irony-mode
-  '(progn
-	 (irony-mode t)
-	 ;;remove company-clang since company-irony the same thing but asynchronous
-	 (setq company-backends (delete 'company-clang company-backends))
-	 (add-to-list 'company-backends 'company-irony)))
-
-;; (optional) adds CC special commands to `company-begin-commands' in order to
-;; trigger completion at interesting places, such as after scope operator
-;;     std::|
-(add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
-
 (defun myfunc-text-mode ()
   (set (make-local-variable 'company-idle-delay) 0.3)
   (set (make-local-variable 'company-minimum-prefix-length) 3)
@@ -960,20 +948,6 @@ Version 2015-04-12"
   (define-key magit-mode-map (kbd "M-9") nil)
   (define-key magit-mode-map (kbd "M-0") nil))
 (add-hook 'magit-mode-hook 'myfunc-magit-mode)
-
-;; START: enable irony-mode for c++
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-
-(defun myactionsfor-irony-mode-hook ()
-  (irony-cdb-autosetup-compile-options)
-  (cl-assert (boundp 'company-backends)) ;; I always use company-mode
-  (set (make-local-variable 'company-backends)
-       '(company-irony company-etags company-dabbrev))
-  )
-(add-hook 'irony-mode-hook 'myactionsfor-irony-mode-hook)
-;; END: enable irony-mode for c++
-
 
 ;; C++ regex to conver constructor args to initialization (assumes no types with spaces & commas)
 ;; \b[^,]+? \b\(.+?\)\b → \1(\1)
