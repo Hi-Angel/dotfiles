@@ -1,20 +1,14 @@
 ;;; -*- lexical-binding: t -*-
-;; run garbage collection only when idle
-(setq gc-cons-threshold most-positive-fixnum)
-(run-with-idle-timer 2 t (lambda () (garbage-collect)))
-(setq frame-resize-pixelwise t) ;; needs to be set before a frame is created
-
 ;; this warns about replace-regexp, and I tried rewriting this function in terms of
 ;; others — the simple loop they documented is not what I get. Screw this warning, it
 ;; is not worth the hassle, really.
 (setq byte-compile-warnings '(not interactive-only))
 
-;;(package-initialize)
-
 ;; turn off the bars (I prefer to disable it in the very beginning ⇒ before Emacs
 ;; starts loading unneeded bars increasing a load time without a sense)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+
 (global-set-key (kbd "C-x C-c") nil) ;; I never use it, but do accidantally press
 (setq kill-ring-max 1) ;; I never use more than one entry anyway
 
