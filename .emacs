@@ -82,7 +82,6 @@
  '(smtpmail-smtp-service 25))
 
 (setq-default display-line-numbers 'visual) ;; show the line numbers
-(show-paren-mode 1) ;; show matching braces
 
 (setq-default tab-width 4) ;;set tab width
 
@@ -578,7 +577,13 @@ in a few lines, and puts the cursor at the middle line"
 (require 'sp-sublimelike) ;;sublime like behavior of smartparens
 (setq-default sp-autoskip-closing-pair t) ;; skip only when it's active
 (smartparens-global-mode 1)
+(show-smartparens-global-mode 1)
+(setq sp-show-pair-from-inside t)
 (setq sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
+
+;; I use smartparens which can highlight matching pairs, so I don't need
+;; emacs's default blink parenthesis functionality
+(setq blink-paren-function nil)
 
 (defun maybe-add-semicolon-paren (_id action _context)
   "A helper function that inserts semicolon after closing
@@ -1243,7 +1248,3 @@ indentation is implemented there"
 ;; Don't care about bidirectional text. These settings make processing long lines faster.
 (setq bidi-inhibit-bpa t)
 (setq-default bidi-paragraph-direction 'left-to-right)
-
-;; I use smartparens which can highlight matching pairs, so I don't need
-;; emacs's default blink parenthesis functionality
-(setq blink-paren-function nil)
