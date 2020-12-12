@@ -21,7 +21,17 @@
 (setq reb-re-syntax 'string) ;;standard syntax for re-builder
 
 (add-to-list 'load-path "/home/constantine/.emacs.d/lisp")
-(load-file "/home/constantine/.emacs.d/lisp/loc-additions.elc") ;;a local features
+
+;;;; START OF MAXIMA CONFIG
+(autoload 'maxima-mode "maxima" "Maxima mode" t)
+(autoload 'imaxima "imaxima" "Frontend for maxima with Image support" t)
+(autoload 'maxima "maxima" "Maxima interaction" t)
+(autoload 'imath-mode "imath" "Imath mode for math formula input" t)
+(setq imaxima-use-maxima-mode-flag t)
+
+(add-to-list 'auto-mode-alist '("\\.ma[cx]" . maxima-mode))
+;;;; END OF MAXIMA CONFIG
+
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
