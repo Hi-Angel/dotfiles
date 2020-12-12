@@ -595,6 +595,20 @@ languages with similar syntax"
                  (not (is-in-comment)))
         (insert ";")))))
 
+(defun maybe-add-semicolon-paren-rust (_id action _context)
+  "A helper function that inserts semicolon after closing
+parentheses when appropriate, for Rust lang"
+  (when (eq action 'insert)
+    (save-excursion
+      ;; here, caret supposed to be in between parens, i.e. (|)
+      (forward-char) ;; skip closing brace
+      (when (and (looking-at "\\s-*$")
+                 (not (string-match-p
+                       (regexp-opt '("fn" "if" "for" "while") 'words)
+                       (current-line-string)))
+                 (not (is-in-comment)))
+        (insert ";")))))
+
 (defun maybe-add-semicolon-bracket (_id action _context)
   "A helper function that inserts semicolon after closing
 parentheses when appropriate. Mainly useful in C, C++, and other
@@ -639,6 +653,7 @@ languages with similar syntax"
   (sp-local-pair c-like-modes-list "{" nil :post-handlers '(:add maybe-add-semicolon-bracket)))
 (sp-local-pair 'c++-mode "[" nil :post-handlers '(:add maybe-complete-lambda))
 (sp-local-pair 'python-mode "(" nil :post-handlers '(:add maybe-add-colon-python))
+(sp-local-pair 'rust-mode "(" nil :post-handlers '(:add maybe-add-semicolon-paren-rust))
 ;;; END: smartparens configuration
 
 ;;mode to highlight a matching parenthese for inside of a code between these
