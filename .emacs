@@ -344,38 +344,44 @@ backward, so you can mutate text forward"
 							))
 
 
-;; avy configuration
-(require 'avy)
-(setq avy-case-fold-search nil) ;; make searches case sensitive. Well, at least
-                                ;; upcase ones, that as good as avy allows.
+(use-package avy
+  :config
+  (setq avy-case-fold-search nil) ;; make searches case sensitive. Well, at least
+  ;; upcase ones, that as good as avy allows.
+  )
 
-;; Enable Evil, and disable it's keybinds except for «ESC» in an insert mode
-(require 'emvil)
-(setq evil-jumps-cross-buffers nil)
-(setq-default evil-shift-round nil) ;; make '>' not to round the indentation
+(use-package emvil ;; my Evil config, in a separate file
+  :config
+  (setq evil-jumps-cross-buffers nil)
+  (setq-default evil-shift-round nil) ;; make '>' not to round the indentation
 
-;; disable undo-tree-mode mandated by Evil as it's broken (see "unrecognized
-;; entry in undo list" on the internet), and use undo-fu instead.
-(global-undo-tree-mode -1)
-(define-key evil-normal-state-map "u" 'undo-fu-only-undo)
-(define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
-(global-unset-key (kbd "C-z"))
-(global-set-key (kbd "C-z")   'undo-fu-only-undo)
-(global-set-key (kbd "C-S-z") 'undo-fu-only-redo)
+  ;; disable undo-tree-mode mandated by Evil as it's broken (see "unrecognized
+  ;; entry in undo list" on the internet), and use undo-fu instead.
+  (global-undo-tree-mode -1)
+  (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
+  (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
+  (global-unset-key (kbd "C-z"))
+  (global-set-key (kbd "C-z")   'undo-fu-only-undo)
+  (global-set-key (kbd "C-S-z") 'undo-fu-only-redo)
 
-;; newer Evil versions seem to handle this by default, however the older one was
-;; removing trailing space when you press Escape. This however can be worked around
-;; by overriding the function below to a noop.
-(defun evil-maybe-remove-spaces (&optional _))
+  ;; newer Evil versions seem to handle this by default, however the older one was
+  ;; removing trailing space when you press Escape. This however can be worked around
+  ;; by overriding the function below to a noop.
+  (defun evil-maybe-remove-spaces (&optional _))
+  )
 
-(require 'ido)
-(setq-default ido-case-fold t) ;; case insensistivity
-(setq ido-enable-flex-matching t) ;; fuzzy match
-(ido-mode)
+(use-package ido
+  :config
+  (setq-default ido-case-fold t) ;; case insensistivity
+  (setq ido-enable-flex-matching t) ;; fuzzy match
+  (ido-mode)
+  )
 
-(require 'smex)
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
+(use-package smex
+  :config
+  (smex-initialize)
+  (global-set-key (kbd "M-x") 'smex)
+  )
 
 ;; visible whitespace config
 ;; (setq whitespace-style (list 'face 'tabs 'spaces 'space-before-tab 'empty 'space-mark 'tab-mark))
