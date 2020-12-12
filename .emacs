@@ -32,13 +32,20 @@
 (add-to-list 'auto-mode-alist '("\\.ma[cx]" . maxima-mode))
 ;;;; END OF MAXIMA CONFIG
 
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Ubuntu Mono" :foundry "unknown" :slant normal :weight normal :height 95 :width normal))))
+ ;; make some evil-goggle colors to look fancier than the default boring gray
+ '(evil-goggles-change-face ((t (:inherit diff-refine-removed))))
+ '(evil-goggles-delete-face ((t (:inherit diff-refine-removed))))
+ '(evil-goggles-paste-face ((t (:inherit diff-refine-added))))
+ '(evil-goggles-undo-redo-add-face ((t (:inherit diff-refine-added))))
+ '(evil-goggles-undo-redo-change-face ((t (:inherit diff-refine-changed))))
+ '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-refine-removed))))
+ '(evil-goggles-yank-face ((t (:inherit diff-refine-changed))))
  '(fixed-pitch ((t (:family "Ubuntu Mono"))))
  '(flycheck-error-list-warning ((t (:inherit warning :foreground "blue"))))
  '(flycheck-fringe-warning ((t (:inherit warning :foreground "blue"))))
@@ -1235,12 +1242,3 @@ indentation is implemented there"
 ;;;; highlight regions I work with in evil mode. Just fancies.
 (evil-goggles-mode 1)
 (setq evil-goggles-blocking-duration 0.05)
-;; make some evil-goggle colors to look fancier than the default boring gray
-(custom-set-faces
- '(evil-goggles-delete-face           ((t (:inherit diff-refine-removed))))
- '(evil-goggles-change-face           ((t (:inherit diff-refine-removed))))
- '(evil-goggles-paste-face            ((t (:inherit diff-refine-added))))
- '(evil-goggles-yank-face             ((t (:inherit diff-refine-changed))))
- '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-refine-removed))))
- '(evil-goggles-undo-redo-add-face    ((t (:inherit diff-refine-added))))
- '(evil-goggles-undo-redo-change-face ((t (:inherit diff-refine-changed)))))
