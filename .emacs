@@ -952,24 +952,6 @@ Version 2015-04-12"
 ;; C++ regex to conver constructor args to initialization (assumes no types with spaces & commas)
 ;; \b[^,]+? \b\(.+?\)\b → \1(\1)
 
-(defun smerge-next-safe ()
-    "returns t on success, nil otherwise"
-  (condition-case nil
-      (not (smerge-next))
-    ('error
-     nil)))
-
-(require 'vc)
-(defun next-conflict ()
-  (interactive)
-  (let ((buffer (current-buffer)))
-    (when (not (smerge-next-safe))
-      (vc-find-conflicted-file)
-      (if (eq buffer (current-buffer))
-          (message "No conflicts found")
-        (goto-char 0)
-        (smerge-next-safe)))))
-
 ;;;; BUGS workarounds START
 ;;; as of today out of nowhere appeared problems that turned out to be bugs reported
 ;;; somewhere. Idk why I've never met these before. *sigh* I hate Emacs for this.
