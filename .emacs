@@ -83,7 +83,7 @@
    '("e9460a84d876da407d9e6accf9ceba453e2f86f8b86076f37c08ad155de8223c" "a1289424bbc0e9f9877aa2c9a03c7dfd2835ea51d8781a0bf9e2415101f70a7e" "54a63c60d03a025672ad021381a8bf96788c045908593d535fadb3695fd852c6" default))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(avy lsp-mode undo-fu yaml-mode undo-tree xr symbol-overlay evil-magit smex winum company company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode rust-mode flycheck ess minizinc-mode atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode smartparens slime pretty-symbols paredit lua-mode indent-guide idomenu highlight-parentheses helm-company flycheck-haskell evil ctypes cmake-mode evil-surround))
+   '(use-package avy evil-goggles racer lsp-mode undo-fu yaml-mode undo-tree xr symbol-overlay evil-magit smex winum company company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode rust-mode flycheck ess minizinc-mode atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode smartparens pretty-symbols lua-mode idomenu highlight-parentheses helm-company flycheck-haskell evil ctypes cmake-mode))
  '(semantic-imenu-bucketize-file nil)
  '(semantic-imenu-bucketize-type-members nil)
  '(semantic-imenu-buckets-to-submenu nil)
