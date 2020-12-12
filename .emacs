@@ -62,7 +62,6 @@
 (setq-default case-fold-search nil)
 
 (defalias 'ar 'align-regexp)
-(defalias 'etags-goto-def-alias 'find-tag)
 
 ;; (custom-set-variables
 ;;  ;; custom-set-variables was added by Custom.
