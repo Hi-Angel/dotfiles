@@ -551,9 +551,6 @@ in a few lines, and puts the cursor at the middle line"
     (save-some-buffers t)
     (kill-emacs)))
 
-(add-hook 'twittering-edit-mode-hook '(lambda ()
-										(flyspell-mode 1)))
-
 ;; setup and enable flyspell mode
 (setq-default flyspell-issue-message-flag nil)
 ;; (dolist (hook '(c-mode-hook))
@@ -566,10 +563,6 @@ in a few lines, and puts the cursor at the middle line"
 ;; 				   (ispell-change-dictionary "english")
 ;; 				   (flyspell-mode 1)
 ;; 				   )));;enable for c++
-;; (dolist (hook '(twittering-edit-mode-hook)) commented out — the flycheck is a scum! It mess up with input.
-;;   (add-hook hook (lambda ()
-;; 				   (ispell-change-dictionary "ru")
-;; 				   (flyspell-mode 1))));;enable for twittering-mode
 
 (defun is-in-comment ()
   "tests if point is in comment"
