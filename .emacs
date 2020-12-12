@@ -464,16 +464,6 @@ point reaches the beginning or end of the buffer, stop there."
                   (get-char-property (point) 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
-
-;; newline-withoug-break-of-line (analog of the vim's "o" command)
-(defun newline-without-break-of-line ()
-  "1. remove to end of the line.
-  2. insert newline with index"
-  (interactive)
-  (end-of-line)
-  (newline-and-indent))
-(global-set-key (kbd "s-o") 'newline-without-break-of-line)
-
 ;;A fix for align-regexp to use spaces instead of tabs to align
 (defadvice align-regexp (around align-regexp-with-spaces activate)
   (let ((indent-tabs-mode nil))
@@ -534,7 +524,6 @@ in a few lines, and puts the cursor at the middle line"
 (global-set-key (kbd "s-i") 'idomenu)
 (global-set-key (kbd "<RET>") 'improved-newline-and-indent)
 (global-set-key (kbd "<f11>") (lambda () (interactive) (ff-find-other-file nil t))) ;switch between a corresponding c/c++ header and a file
-(global-set-key (kbd "s-o") 'newline-without-break-of-line)
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease);set in wheel font decrease
 (global-set-key (kbd "<C-mouse-5>") 'text-scale-increase);set in wheel font increase
 (global-set-key (kbd "s-/") 'company-complete)
