@@ -10,6 +10,9 @@
 (define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
 (define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
 
+;; let's have some avy integration!
+(define-key evil-normal-state-map (kbd "g a") 'evil-avy-goto-char)
+
 (evil-mode t)
 (define-key evil-normal-state-map (kbd "C-z") 'undo-tree-redo)
 
