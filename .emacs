@@ -953,9 +953,6 @@ Version 2015-04-12"
 ;; \b[^,]+? \b\(.+?\)\b → \1(\1)
 
 ;;;; BUGS workarounds START
-;;; as of today out of nowhere appeared problems that turned out to be bugs reported
-;;; somewhere. Idk why I've never met these before. *sigh* I hate Emacs for this.
-
 ;; removes warning: backend company-capf error "Nothing to complete" with args (prefix)
 (defun et/semantic-remove-hooks ()
   (remove-hook 'completion-at-point-functions
