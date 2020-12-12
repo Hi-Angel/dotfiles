@@ -97,6 +97,8 @@
   (setq flycheck-check-syntax-automatically '(save)) ;; I only want it on save
   :config
   (add-hook 'flycheck-mode-hook 'myactions-flycheck-mode-hook)
+  (add-to-list 'flycheck-clang-warnings '"-Wno-missing-braces")
+  (add-to-list 'flycheck-clang-args "-frelaxed-template-template-args")
   )
 
 (require 'evil-surround)
@@ -307,9 +309,7 @@ opening symbol, thus the function seeks only the closing"
     (if (derived-mode-p 'c-mode)
         (setq flycheck-clang-language-standard "c11")
       (setq flycheck-clang-language-standard "c++17"))
-    (add-to-list 'flycheck-clang-warnings '"-Wno-missing-braces")
-    (add-to-list 'flycheck-clang-args "-frelaxed-template-template-args")
-              ))
+    ))
 (add-hook 'c-mode-common-hook 'myactionsfor-c-mode-common-hook)
 
 (defun exec-cmd-foreach-backward (regex cmd begin end)
