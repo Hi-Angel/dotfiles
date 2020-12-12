@@ -769,12 +769,12 @@ Version 2015-04-12"
 (add-hook 'shell-mode-hook 'myfunc-shell-mode)
 
 (defun myfunc-markdown-mode ()
+  (setq markdown-enable-math t) ;; enable latex delimiters
   (set (make-local-variable 'company-idle-delay) 0.3);;delay before completition
   (setq case-fold-search t) ;; ignore case in search
   (setq dabbrev-upcase-means-case-search nil) ;;ignore case
-  (flyspell-mode)
   (ispell-change-dictionary "english")
-  (setq markdown-enable-math t) ;; enable latex delimiters
+  (flyspell-mode)
   )
 (add-hook 'markdown-mode-hook 'myfunc-markdown-mode)
 
