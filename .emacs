@@ -86,9 +86,17 @@
 
 (setq-default tab-width 4) ;;set tab width
 
+(defun myactions-flycheck-mode-hook ()
+  (when (bound-and-true-p flycheck-mode) ;; flycheck hooks is called upon disabling it
+    (when (bound-and-true-p haskell-mode)
+      (flycheck-haskell-setup))
+    ))
+
 (use-package flycheck
   :init
   (setq flycheck-check-syntax-automatically '(save)) ;; I only want it on save
+  :config
+  (add-hook 'flycheck-mode-hook 'myactions-flycheck-mode-hook)
   )
 
 (require 'evil-surround)
@@ -714,9 +722,6 @@ languages with similar syntax"
 (add-hook 'gud-mode-hook 'myfunc-gud-gdb-mode)
 (add-hook 'gdb-mode-hook '(lambda () (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)))
 (put 'erase-buffer 'disabled nil)
-
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
 (defun latin-to-gothic (φp1 φp2 φreverse-direction-p)
   "Replace English alphabets to Unicode gothic characters.
