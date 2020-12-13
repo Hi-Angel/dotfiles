@@ -87,13 +87,15 @@
   (add-to-list 'flycheck-clang-args "-frelaxed-template-template-args")
   )
 
-(global-company-mode 1)
-(add-to-list 'company-dabbrev-code-modes 'c++-mode)
-(add-to-list 'company-dabbrev-code-modes 'c-mode)
-(add-to-list 'company-dabbrev-code-modes 'php-mode)
-(setq-default company-idle-delay 0.7);;delay before completition
-
-;(add-to-list 'company-backends 'company-yasnippet) commented out due to killing company's completition
+(use-package company
+  :config
+  (global-company-mode 1)
+  (add-to-list 'company-dabbrev-code-modes 'c++-mode)
+  (add-to-list 'company-dabbrev-code-modes 'c-mode)
+  (add-to-list 'company-dabbrev-code-modes 'php-mode)
+  (setq-default company-idle-delay 0.7) ;; delay before completition
+  (global-set-key (kbd "s-/") 'company-complete)
+  )
 
 (use-package yasnippet
   :config
@@ -530,8 +532,6 @@ in a few lines, and puts the cursor at the middle line"
 (global-set-key (kbd "<f11>") (lambda () (interactive) (ff-find-other-file nil t))) ;switch between a corresponding c/c++ header and a file
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease);set in wheel font decrease
 (global-set-key (kbd "<C-mouse-5>") 'text-scale-increase);set in wheel font increase
-(global-set-key (kbd "s-/") 'company-complete)
-
 
 (setq-default fill-column 85) ;; set apropriate lenght of a line
 (setq-default cursor-type 'bar) ;set flat cursor type
@@ -800,15 +800,20 @@ Version 2015-04-12"
   )
 (add-hook 'shell-mode-hook 'myfunc-shell-mode)
 
-(defun myfunc-markdown-mode ()
-  (setq markdown-enable-math t) ;; enable latex delimiters
-  (set (make-local-variable 'company-idle-delay) 0.3);;delay before completition
-  (setq case-fold-search t) ;; ignore case in search
-  (setq dabbrev-upcase-means-case-search nil) ;;ignore case
-  (ispell-change-dictionary "english")
-  (flyspell-mode)
+(use-package markdown-mode
+  :defer t
+  :init
+    (setq-default markdown-enable-math t) ;; enable latex delimiters
+  :config
+  (defun myfunc-markdown-mode ()
+    (set (make-local-variable 'company-idle-delay) 0.3) ;; delay before completition
+    (setq case-fold-search t) ;; ignore case in search
+    (set (make-local-variable 'dabbrev-upcase-means-case-search) nil) ;; ignore case
+    (ispell-change-dictionary "english")
+    (flyspell-mode)
+    )
+  (add-hook 'markdown-mode-hook 'myfunc-markdown-mode)
   )
-(add-hook 'markdown-mode-hook 'myfunc-markdown-mode)
 
 (defun just-one-space-region ()
   "Replaces every space in active region between words to one
