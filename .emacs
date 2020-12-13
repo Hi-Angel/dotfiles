@@ -10,9 +10,6 @@
 (menu-bar-mode -1)
 
 (global-set-key (kbd "C-x C-c") nil) ;; I never use it, but do accidantally press
-(setq kill-ring-max 1) ;; I never use more than one entry anyway
-
-(setq reb-re-syntax 'string) ;;standard syntax for re-builder
 
 (add-to-list 'load-path "/home/constantine/.emacs.d/lisp")
 
@@ -54,13 +51,6 @@
 ;;      (color-theme-initialize)
 ;;      (color-theme-oswald)))
 
-(setq make-backup-files nil)
-(setq auto-save-default nil) ;;disable auto save
-
-;;case sensitive dabbrev
-(setq dabbrev-upcase-means-case-search t)
-(setq-default case-fold-search nil)
-
 (defalias 'ar 'align-regexp)
 (defalias 'ss 'server-start)
 
@@ -81,10 +71,6 @@
  '(send-mail-function 'smtpmail-send-it)
  '(smtpmail-smtp-server "smtp.yandex.com")
  '(smtpmail-smtp-service 25))
-
-(setq-default display-line-numbers 'visual) ;; show the line numbers
-
-(setq-default tab-width 4) ;;set tab width
 
 (defun myactions-flycheck-mode-hook ()
   (when (bound-and-true-p flycheck-mode) ;; flycheck hooks is called upon disabling it
