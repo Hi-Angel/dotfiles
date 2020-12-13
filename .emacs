@@ -718,6 +718,7 @@ languages with similar syntax"
 
 (use-package symbol-overlay
   :bind ("s-`" . symbol-overlay-put)
+  :defer nil ;; :bind implies `defer t', override it
   :init
   (setq symbol-overlay-ignore-functions nil)     ;; don't ignore keywords in various languages
   (setq symbol-overlay-map (make-sparse-keymap)) ;; disable special cmds on overlays
