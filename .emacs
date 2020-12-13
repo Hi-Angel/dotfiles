@@ -20,13 +20,13 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Ubuntu Mono" :foundry "unknown" :slant normal :weight normal :height 95 :width normal))))
  ;; make some evil-goggle colors to look fancier than the default boring gray
- '(evil-goggles-change-face ((t (:inherit diff-refine-removed))))
- '(evil-goggles-delete-face ((t (:inherit diff-refine-removed))))
- '(evil-goggles-paste-face ((t (:inherit diff-refine-added))))
- '(evil-goggles-undo-redo-add-face ((t (:inherit diff-refine-added))))
- '(evil-goggles-undo-redo-change-face ((t (:inherit diff-refine-changed))))
- '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-refine-removed))))
- '(evil-goggles-yank-face ((t (:inherit diff-refine-changed))))
+ '(evil-goggles-change-face ((t (:background "#ffcccc"))))
+ '(evil-goggles-delete-face ((t (:background "#ffcccc"))))
+ '(evil-goggles-paste-face ((t (:background "#bbffbb"))))
+ '(evil-goggles-undo-redo-add-face ((t (:background "#bbffbb"))))
+ '(evil-goggles-undo-redo-change-face ((t (:background "#bbffbb"))))
+ '(evil-goggles-undo-redo-remove-face ((t (:background "#bbffbb"))))
+ '(evil-goggles-yank-face ((t (:background "#ffff55"))))
  '(fixed-pitch ((t (:family "Ubuntu Mono"))))
  '(flycheck-error-list-warning ((t (:inherit warning :foreground "blue"))))
  '(flycheck-fringe-warning ((t (:inherit warning :foreground "blue"))))
@@ -363,8 +363,12 @@ backward, so you can mutate text forward"
     :after magit)
 
   ;; highlight regions I work with. Just fancies.
-  (evil-goggles-mode 1)
-  (setq evil-goggles-blocking-duration 0.05)
+  (use-package evil-goggles
+    :init
+    (setq evil-goggles-blocking-duration 0.05)
+    :config
+    (evil-goggles-mode 1)
+    )
   )
 
 (use-package ido
