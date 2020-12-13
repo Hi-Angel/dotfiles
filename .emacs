@@ -589,94 +589,95 @@ in a few lines, and puts the cursor at the middle line"
   "returns current line as a string"
   (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
 
-;;; BEGIN: smartparens configuration
-(require 'smartparens-config)
-(require 'sp-sublimelike) ;;sublime like behavior of smartparens
-(setq-default sp-autoskip-closing-pair t) ;; skip only when it's active
-(smartparens-global-mode 1)
-(show-smartparens-global-mode 1)
-(setq sp-show-pair-from-inside t)
-(setq sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
+(use-package smartparens-config
+  :init
+  (setq-default sp-autoskip-closing-pair t) ;; skip only when pair is active
+  (setq sp-show-pair-from-inside t)
+  (setq sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
+  :config
+  (use-package sp-sublimelike) ;; sublime like behavior of smartparens
+  (smartparens-global-mode 1)
+  (show-smartparens-global-mode 1)
 
-;; I use smartparens which can highlight matching pairs, so I don't need
-;; emacs's default blink parenthesis functionality
-(setq blink-paren-function nil)
+  ;; I use smartparens which can highlight matching pairs, so I don't need
+  ;; emacs's default blink parenthesis functionality
+  (setq blink-paren-function nil)
 
-(defun maybe-add-semicolon-paren (_id action _context)
-  "A helper function that inserts semicolon after closing
+  (defun maybe-add-semicolon-paren (_id action _context)
+    "A helper function that inserts semicolon after closing
 parentheses when appropriate. Mainly useful in C, C++, and other
 languages with similar syntax"
-  (when (eq action 'insert)
-    (save-excursion
-      ;; here, caret supposed to be in between parens, i.e. (|)
-      (forward-char) ;; skip closing brace
-      (when (and (looking-at "\\s-*$")
-                 (not (string-match-p
-                       (regexp-opt '("if" "else" "switch" "for" "while" "do" "define") 'words)
-                       (current-line-string)))
-                 (not (is-in-comment)))
-        (insert ";")))))
+    (when (eq action 'insert)
+      (save-excursion
+        ;; here, caret supposed to be in between parens, i.e. (|)
+        (forward-char) ;; skip closing brace
+        (when (and (looking-at "\\s-*$")
+                   (not (string-match-p
+                         (regexp-opt '("if" "else" "switch" "for" "while" "do" "define") 'words)
+                         (current-line-string)))
+                   (not (is-in-comment)))
+          (insert ";")))))
 
-(defun maybe-add-semicolon-paren-rust (_id action _context)
-  "A helper function that inserts semicolon after closing
+  (defun maybe-add-semicolon-paren-rust (_id action _context)
+    "A helper function that inserts semicolon after closing
 parentheses when appropriate, for Rust lang"
-  (when (eq action 'insert)
-    (save-excursion
-      ;; here, caret supposed to be in between parens, i.e. (|)
-      (forward-char) ;; skip closing brace
-      (when (and (looking-at "\\s-*$")
-                 (not (string-match-p
-                       (regexp-opt '("fn" "if" "for" "while") 'words)
-                       (current-line-string)))
-                 (not (is-in-comment)))
-        (insert ";")))))
+    (when (eq action 'insert)
+      (save-excursion
+        ;; here, caret supposed to be in between parens, i.e. (|)
+        (forward-char) ;; skip closing brace
+        (when (and (looking-at "\\s-*$")
+                   (not (string-match-p
+                         (regexp-opt '("fn" "if" "for" "while") 'words)
+                         (current-line-string)))
+                   (not (is-in-comment)))
+          (insert ";")))))
 
-(defun maybe-add-semicolon-bracket (_id action _context)
-  "A helper function that inserts semicolon after closing
+  (defun maybe-add-semicolon-bracket (_id action _context)
+    "A helper function that inserts semicolon after closing
 parentheses when appropriate. Mainly useful in C, C++, and other
 languages with similar syntax"
-  (when (eq action 'insert)
-    (save-excursion
-      ;; here, caret supposed to be in between parens, i.e. {|}
-      (forward-char) ;; skip closing brace
-      (when (and (looking-at "\\s-*$")
-                 (string-match-p "\\breturn\\b" (current-line-string))
-                 (not (is-in-comment)))
-        (insert ";")))))
+    (when (eq action 'insert)
+      (save-excursion
+        ;; here, caret supposed to be in between parens, i.e. {|}
+        (forward-char) ;; skip closing brace
+        (when (and (looking-at "\\s-*$")
+                   (string-match-p "\\breturn\\b" (current-line-string))
+                   (not (is-in-comment)))
+          (insert ";")))))
 
-(defun maybe-complete-lambda (_id action _context)
-  "Completes C++ lambda, given a pair of square brackets"
-  (when (eq action 'insert)
-    (let ((curr-line (current-line-string))
-          ;; try detecting "auto foo = []"
-          (lambda-assign-regex "=\\s-*\\[\\]$")
-          ;; try detecting "func([])" and "func(arg1, [])"
-          (lambda-inline-regex "[(,]\\s-*\\[\\]"))
-      (when (or (string-match-p lambda-assign-regex curr-line)
-                (string-match-p lambda-inline-regex curr-line))
-        (save-excursion
-          ;; here, caret supposed to be in between brackets, i.e. [|]
-          (forward-char) ;; skip closing brace
-          (insert "() {}")
-          (when (eolp)
-            (insert ";"))
-          )))))
+  (defun maybe-complete-lambda (_id action _context)
+    "Completes C++ lambda, given a pair of square brackets"
+    (when (eq action 'insert)
+      (let ((curr-line (current-line-string))
+            ;; try detecting "auto foo = []"
+            (lambda-assign-regex "=\\s-*\\[\\]$")
+            ;; try detecting "func([])" and "func(arg1, [])"
+            (lambda-inline-regex "[(,]\\s-*\\[\\]"))
+        (when (or (string-match-p lambda-assign-regex curr-line)
+                  (string-match-p lambda-inline-regex curr-line))
+          (save-excursion
+            ;; here, caret supposed to be in between brackets, i.e. [|]
+            (forward-char) ;; skip closing brace
+            (insert "() {}")
+            (when (eolp)
+              (insert ";"))
+            )))))
 
-(defun maybe-add-colon-python (_id action _context)
-  (when (eq action 'insert)
-    (save-excursion
-      (forward-char) ;; skip closing brace
-      (when (and (looking-at "\\s-*$")
-                 (string-match-p "\\s-*def.*" (current-line-string)))
-        (insert ":")))))
+  (defun maybe-add-colon-python (_id action _context)
+    (when (eq action 'insert)
+      (save-excursion
+        (forward-char) ;; skip closing brace
+        (when (and (looking-at "\\s-*$")
+                   (string-match-p "\\s-*def.*" (current-line-string)))
+          (insert ":")))))
 
-(let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode js-mode)))
-  (sp-local-pair c-like-modes-list "(" nil :post-handlers '(:add maybe-add-semicolon-paren))
-  (sp-local-pair c-like-modes-list "{" nil :post-handlers '(:add maybe-add-semicolon-bracket)))
-(sp-local-pair 'c++-mode "[" nil :post-handlers '(:add maybe-complete-lambda))
-(sp-local-pair 'python-mode "(" nil :post-handlers '(:add maybe-add-colon-python))
-(sp-local-pair 'rust-mode "(" nil :post-handlers '(:add maybe-add-semicolon-paren-rust))
-;;; END: smartparens configuration
+  (let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode js-mode)))
+    (sp-local-pair c-like-modes-list "(" nil :post-handlers '(:add maybe-add-semicolon-paren))
+    (sp-local-pair c-like-modes-list "{" nil :post-handlers '(:add maybe-add-semicolon-bracket)))
+  (sp-local-pair 'c++-mode "[" nil :post-handlers '(:add maybe-complete-lambda))
+  (sp-local-pair 'python-mode "(" nil :post-handlers '(:add maybe-add-colon-python))
+  (sp-local-pair 'rust-mode "(" nil :post-handlers '(:add maybe-add-semicolon-paren-rust))
+  )
 
 ;;mode to highlight a matching parenthese for inside of a code between these
 (require 'highlight-parentheses)
