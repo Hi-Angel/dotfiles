@@ -62,6 +62,7 @@
 (setq-default case-fold-search nil)
 
 (defalias 'ar 'align-regexp)
+(defalias 'ss 'server-start)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -1004,7 +1005,7 @@ Version 2015-04-12"
                'semantic-analyze-nolongprefix-completion-at-point-function))
 ;;;; BUGS workarounds END
 
-;;; START Transpose arguments in c-like mode. Credits: https://emacs.stackexchange.com/a/47934/2671
+;;; START Transpose arguments for c-like mode. Credits: https://emacs.stackexchange.com/a/47934/2671
 (defun c-forward-to-argsep ()
   "Move to the end of the current c function argument.
 Returns point."
@@ -1110,7 +1111,6 @@ The first arg is the one with point in it."
     )
   )
 
-
 (defun c-transpose-args-forward () (interactive) (c-transpose-args-direction t))
 (defun c-transpose-args-backward () (interactive) (c-transpose-args-direction nil))
 (define-key evil-normal-state-map (kbd "t f") 'c-transpose-args-forward)
@@ -1127,8 +1127,6 @@ The first arg is the one with point in it."
 
 ;; note: some modes override this. In particular, C and C++ standard requires a newline
 (setq-default require-final-newline nil)
-
-(defalias 'ss 'server-start)
 
 ;; By default keyboard-quit is giltchy, it randomly fails to work until you press it
 ;; second time. Let's just bind C-g to press it twice always
@@ -1233,26 +1231,26 @@ indentation is implemented there"
           (message "Deleted file %s" filename)
           (kill-buffer))))))
 
-;;
-;;;;;; START: lsp-mode setup
-(require 'lsp-mode)
+(use-package lsp-mode
+  :defer t
+  :init
+  ;; I prefer default indentation functional
+  (setq lsp-enable-indentation nil)
+  :config
 
-;; I prefer default indentation functional
-(setq lsp-enable-indentation nil)
+  (defun myactionsfor-lsp-mode-hook ()
+    (set (make-local-variable 'company-backends)
+         ;; lsp-mode provides company-capf. company-lsp they say not supported, Idk
+         ;; why. Perhaps because last commit was at 2019, so it may be unmaintainted
+         '(company-capf company-etags company-dabbrev))
+    )
+  (add-hook 'lsp-mode-hook 'myactionsfor-lsp-mode-hook)
 
-(defun myactionsfor-lsp-mode-hook ()
-  (set (make-local-variable 'company-backends)
-       ;; lsp-mode provides company-capf. company-lsp they say not supported, Idk
-       ;; why. Perhaps because last commit was at 2019, so it may be unmaintainted
-       '(company-capf company-etags company-dabbrev))
+  ;; even if given python project has typing utterly broken, mypy still gives
+  ;; immensely useful syntax checking that is lacking otherwise with pyls.
+  (lsp-register-custom-settings '(("pyls.plugins.pyls_mypy.enabled" t t)
+                                  ("pyls.plugins.pyls_mypy.live_mode" nil t)))
   )
-(add-hook 'lsp-mode-hook 'myactionsfor-lsp-mode-hook)
-
-;; even if given python project has types utterly broken, the mypy still also
-;; gives immensely useful syntax checking that is lacking otherwise with pyls.
-(lsp-register-custom-settings '(("pyls.plugins.pyls_mypy.enabled" t t)
-                                ("pyls.plugins.pyls_mypy.live_mode" nil t)))
-;;;;;;; END: lsp-mode setup
 
 ;; make `rgrep' function skip binary files
 (setq grep-find-template "find <D> <X> -type f <F> -exec grep <C> -nHI --null -e <R> \{\} +")
