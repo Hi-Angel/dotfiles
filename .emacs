@@ -536,10 +536,6 @@ in a few lines, and puts the cursor at the middle line"
 (bind-key "<C-mouse-4>" 'text-scale-decrease);set in wheel font decrease
 (bind-key "<C-mouse-5>" 'text-scale-increase);set in wheel font increase
 
-(setq-default fill-column 85) ;; set apropriate lenght of a line
-(setq-default cursor-type 'bar) ;set flat cursor type
-(setq-default major-mode 'text-mode) ;;why Fundamental-mode? Text-mode more aproppriate
-
 (use-package highlight-numbers
   :config
   (set-face-attribute 'highlight-numbers-number nil :weight 'bold :foreground "blue" :background "light gray")
