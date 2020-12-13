@@ -72,16 +72,15 @@
  '(smtpmail-smtp-server "smtp.yandex.com")
  '(smtpmail-smtp-service 25))
 
-(defun myactions-flycheck-mode-hook ()
-  (when (bound-and-true-p flycheck-mode) ;; flycheck hooks is called upon disabling it
-    (when (bound-and-true-p haskell-mode)
-      (flycheck-haskell-setup))
-    ))
-
 (use-package flycheck
   :init
   (setq flycheck-check-syntax-automatically '(save)) ;; I only want it on save
   :config
+  (defun myactions-flycheck-mode-hook ()
+    (when (bound-and-true-p flycheck-mode) ;; flycheck hooks is called upon disabling it
+      (when (bound-and-true-p haskell-mode)
+        (flycheck-haskell-setup))
+      ))
   (add-hook 'flycheck-mode-hook 'myactions-flycheck-mode-hook)
   (add-to-list 'flycheck-clang-warnings '"-Wno-missing-braces")
   (add-to-list 'flycheck-clang-args "-frelaxed-template-template-args")
@@ -795,10 +794,14 @@ Version 2015-04-12"
   )
 (add-hook 'haskell-mode-hook 'myactions-haskell-mode-hook)
 
-(defun myfunc-shell-mode ()
-  (flycheck-mode 1)
+(use-package shell
+  :defer t
+  :config
+  (defun myfunc-shell-mode ()
+    (flycheck-mode 1)
+    )
+  (add-hook 'shell-mode-hook 'myfunc-shell-mode)
   )
-(add-hook 'shell-mode-hook 'myfunc-shell-mode)
 
 (use-package markdown-mode
   :defer t
