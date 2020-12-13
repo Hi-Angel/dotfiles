@@ -689,8 +689,6 @@ languages with similar syntax"
   (global-highlight-parentheses-mode t)
   )
 
-;;;;######################NOTE: below is loading of the addons
-
 ;; package managment
 (use-package package
   :defer t
@@ -699,7 +697,6 @@ languages with similar syntax"
         package-archives)
   )
 
-;deletes trailing whitespaces before saving the file and sort includes
 (defun myfunc-before-save-hook () (interactive)
        (unless (derived-mode-p 'diff-mode)
          (delete-trailing-whitespace))
