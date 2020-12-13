@@ -372,9 +372,10 @@ backward, so you can mutate text forward"
   )
 
 (use-package ido
-  :config
+  :init
   (setq-default ido-case-fold t) ;; case insensistivity
   (setq ido-enable-flex-matching t) ;; fuzzy match
+  :config
   (ido-mode)
   )
 
