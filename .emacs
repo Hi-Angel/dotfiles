@@ -723,19 +723,22 @@ languages with similar syntax"
   (add-hook 'rust-mode-hook 'myfunc-rust-mode-hook)
   )
 
-(require 'symbol-overlay)
-(defun enable-symbol-overlay-mode ()
-  (unless (or (minibufferp)
-              (derived-mode-p 'magit-mode)
-              (derived-mode-p 'xref--xref-buffer-mode))
-    (symbol-overlay-mode t)))
-(define-global-minor-mode global-symbol-overlay-mode ;;the name of the new global mode
-  symbol-overlay-mode ;;the name of the minor mode
-  enable-symbol-overlay-mode)
-(global-symbol-overlay-mode);;enable it
-(global-set-key (kbd "s-`") 'symbol-overlay-put)
-(setq symbol-overlay-ignore-functions nil) ;; don't ignore keywords in various languages
-(setq symbol-overlay-map (make-sparse-keymap)) ;; disable special cmds on overlays
+(use-package symbol-overlay
+  :init
+  (setq symbol-overlay-ignore-functions nil)     ;; don't ignore keywords in various languages
+  (setq symbol-overlay-map (make-sparse-keymap)) ;; disable special cmds on overlays
+  :config
+  (defun enable-symbol-overlay-mode ()
+    (unless (or (minibufferp)
+                (derived-mode-p 'magit-mode)
+                (derived-mode-p 'xref--xref-buffer-mode))
+      (symbol-overlay-mode t)))
+  (define-global-minor-mode global-symbol-overlay-mode ;; name of the new global mode
+    symbol-overlay-mode ;; name of the minor mode
+    enable-symbol-overlay-mode)
+  (global-symbol-overlay-mode)
+  (global-set-key (kbd "s-`") 'symbol-overlay-put)
+  )
 
 (defun myfunc-text-mode ()
   (set (make-local-variable 'company-idle-delay) 0.3)
@@ -951,45 +954,47 @@ Version 2015-04-12"
 
 (setq compile-command "ninja -C build")
 
-(require 'winum)
-(winum-mode)
-(global-set-key (kbd "M-1") 'winum-select-window-1)
-(global-set-key (kbd "M-2") 'winum-select-window-2)
-(global-set-key (kbd "M-3") 'winum-select-window-3)
-(global-set-key (kbd "M-4") 'winum-select-window-4)
-(global-set-key (kbd "M-5") 'winum-select-window-5)
-(global-set-key (kbd "M-6") 'winum-select-window-6)
-(global-set-key (kbd "M-7") 'winum-select-window-7)
-(global-set-key (kbd "M-8") 'winum-select-window-8)
-(global-set-key (kbd "M-9") 'winum-select-window-9)
-(global-set-key (kbd "M-0") 'winum-select-window-0) ;; minibuf
+(use-package winum
+  :config
+  (winum-mode)
+  (global-set-key (kbd "M-1") 'winum-select-window-1)
+  (global-set-key (kbd "M-2") 'winum-select-window-2)
+  (global-set-key (kbd "M-3") 'winum-select-window-3)
+  (global-set-key (kbd "M-4") 'winum-select-window-4)
+  (global-set-key (kbd "M-5") 'winum-select-window-5)
+  (global-set-key (kbd "M-6") 'winum-select-window-6)
+  (global-set-key (kbd "M-7") 'winum-select-window-7)
+  (global-set-key (kbd "M-8") 'winum-select-window-8)
+  (global-set-key (kbd "M-9") 'winum-select-window-9)
+  (global-set-key (kbd "M-0") 'winum-select-window-0) ;; minibuf
 
-(defun myfunc-diff-mode () ;; diff mode overrides the keys, undo that
-  (define-key diff-mode-map (kbd "<M-DEL>") nil)
-  (define-key diff-mode-map (kbd "M-1") nil)
-  (define-key diff-mode-map (kbd "M-2") nil)
-  (define-key diff-mode-map (kbd "M-3") nil)
-  (define-key diff-mode-map (kbd "M-4") nil)
-  (define-key diff-mode-map (kbd "M-5") nil)
-  (define-key diff-mode-map (kbd "M-6") nil)
-  (define-key diff-mode-map (kbd "M-7") nil)
-  (define-key diff-mode-map (kbd "M-8") nil)
-  (define-key diff-mode-map (kbd "M-9") nil)
-  (define-key diff-mode-map (kbd "M-0") nil))
-(add-hook 'diff-mode-hook 'myfunc-diff-mode)
+  (defun winum-restore-diff-mode () ;; diff mode overrides the keys, undo that
+    (define-key diff-mode-map (kbd "<M-DEL>") nil)
+    (define-key diff-mode-map (kbd "M-1") nil)
+    (define-key diff-mode-map (kbd "M-2") nil)
+    (define-key diff-mode-map (kbd "M-3") nil)
+    (define-key diff-mode-map (kbd "M-4") nil)
+    (define-key diff-mode-map (kbd "M-5") nil)
+    (define-key diff-mode-map (kbd "M-6") nil)
+    (define-key diff-mode-map (kbd "M-7") nil)
+    (define-key diff-mode-map (kbd "M-8") nil)
+    (define-key diff-mode-map (kbd "M-9") nil)
+    (define-key diff-mode-map (kbd "M-0") nil))
+  (add-hook 'diff-mode-hook 'winum-restore-diff-mode)
 
-(defun myfunc-magit-mode () ;; magit overrides the keys, undo that
-  (define-key magit-mode-map (kbd "M-1") nil)
-  (define-key magit-mode-map (kbd "M-2") nil)
-  (define-key magit-mode-map (kbd "M-3") nil)
-  (define-key magit-mode-map (kbd "M-4") nil)
-  (define-key magit-mode-map (kbd "M-5") nil)
-  (define-key magit-mode-map (kbd "M-6") nil)
-  (define-key magit-mode-map (kbd "M-7") nil)
-  (define-key magit-mode-map (kbd "M-8") nil)
-  (define-key magit-mode-map (kbd "M-9") nil)
-  (define-key magit-mode-map (kbd "M-0") nil))
-(add-hook 'magit-mode-hook 'myfunc-magit-mode)
+  (defun winum-restore-magit-mode () ;; magit overrides the keys, undo that
+    (define-key magit-mode-map (kbd "M-1") nil)
+    (define-key magit-mode-map (kbd "M-2") nil)
+    (define-key magit-mode-map (kbd "M-3") nil)
+    (define-key magit-mode-map (kbd "M-4") nil)
+    (define-key magit-mode-map (kbd "M-5") nil)
+    (define-key magit-mode-map (kbd "M-6") nil)
+    (define-key magit-mode-map (kbd "M-7") nil)
+    (define-key magit-mode-map (kbd "M-8") nil)
+    (define-key magit-mode-map (kbd "M-9") nil)
+    (define-key magit-mode-map (kbd "M-0") nil))
+  (add-hook 'magit-mode-hook 'winum-restore-magit-mode)
+  )
 
 ;; C++ regex to conver constructor args to initialization (assumes no types with spaces & commas)
 ;; \b[^,]+? \b\(.+?\)\b → \1(\1)
