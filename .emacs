@@ -9,7 +9,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
-(global-set-key (kbd "C-x C-c") nil) ;; I never use it, but do accidantally press
+(bind-key "C-x C-c" nil) ;; I never use it, but do accidantally press
 
 (add-to-list 'load-path "/home/constantine/.emacs.d/lisp")
 
@@ -346,8 +346,8 @@ backward, so you can mutate text forward"
   (global-undo-tree-mode -1)
   (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
   (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
-  (global-set-key (kbd "C-z")   'undo-fu-only-undo)
-  (global-set-key (kbd "C-S-z") 'undo-fu-only-redo)
+  (bind-key "C-z"   'undo-fu-only-undo)
+  (bind-key "C-S-z" 'undo-fu-only-redo)
 
   ;; newer Evil versions seem to handle this by default, however the older one was
   ;; removing trailing space when you press Escape. This however can be worked around
@@ -453,13 +453,13 @@ point reaches the beginning or end of the buffer, stop there."
 	  (kill-region (region-beginning) (region-end)))
   (let ((select-enable-clipboard t))
 	(x-clipboard-yank)))
-(global-set-key (kbd "C-y") 'clipboard-yank-fixed)
+(bind-key "C-y" 'clipboard-yank-fixed)
 
 (defun clipboard-copy-fixed ()
   (interactive)
   (let ((select-enable-clipboard t))
 	(clipboard-kill-ring-save (region-beginning)(region-end))))
-(global-set-key (kbd "M-w") 'clipboard-copy-fixed)
+(bind-key "M-w" 'clipboard-copy-fixed)
 
 (defun copy-text-to-clipboard (text)
   (with-temp-buffer
@@ -488,7 +488,7 @@ english. If it isn't, set the lang to english."
   (if (not current-input-method)
       (set-input-method "russian-computer")
     (deactivate-input-method)))
-(global-set-key (kbd "C-\\") 'input-switch-eng-ru)
+(bind-key "C-\\" 'input-switch-eng-ru)
 (global-set-key (kbd "s-\\") (lambda () (interactive);;sets input method to «TeX»
 							   (set-input-method "TeX")))
 (define-key isearch-mode-map "\C-g" nil) ;; I like to interrupt search immediately
@@ -525,16 +525,16 @@ in a few lines, and puts the cursor at the middle line"
 ;;set copy/paste work as usual, i.e. not overwrite when delete a characters
 ;;(and a few another useful keybindings)
 (setq select-enable-clipboard nil)
-(global-set-key (kbd "C-w") 'clipboard-kill-region)
-(global-set-key (kbd "s-y") 'yank)
+(bind-key "C-w" 'clipboard-kill-region)
+(bind-key "s-y" 'yank)
 (use-package idomenu
   :bind ("s-i" . idomenu)
   :config
   )
-(global-set-key (kbd "<RET>") 'improved-newline-and-indent)
+(bind-key "<RET>" 'improved-newline-and-indent)
 (global-set-key (kbd "<f11>") (lambda () (interactive) (ff-find-other-file nil t))) ;switch between a corresponding c/c++ header and a file
-(global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease);set in wheel font decrease
-(global-set-key (kbd "<C-mouse-5>") 'text-scale-increase);set in wheel font increase
+(bind-key "<C-mouse-4>" 'text-scale-decrease);set in wheel font decrease
+(bind-key "<C-mouse-5>" 'text-scale-increase);set in wheel font increase
 
 (setq-default fill-column 85) ;; set apropriate lenght of a line
 (setq-default cursor-type 'bar) ;set flat cursor type
@@ -833,7 +833,7 @@ Version 2015-04-12"
 			 (replace-regexp "
 " "" nil (region-beginning) (region-end)))
 	(just-one-space)))
-(global-set-key (kbd "M-<SPC>") 'just-one-space-region)
+(bind-key "M-<SPC>" 'just-one-space-region)
 
 ;; .m is octave mode
 (setq auto-mode-alist (append '(("\\.m$" . octave-mode))
