@@ -853,63 +853,62 @@ Version 2015-04-12"
 		      (funcall orig-fun name ignore-dedicated window)
 		      (set-window-dedicated-p window nil)))
 
-;; ---------- color-identifiers specific setup
+(use-package color-identifiers-mode
+  :config
+  (global-color-identifiers-mode 1) ;; semantic highlight of variables
 
-(add-hook 'after-init-hook 'global-color-identifiers-mode) ;; semantic highlight of variables
+  (defun myfunc-color-identifiers-mode-hook ()
+    (let ((faces '(font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-builtin-face font-lock-preprocessor-face font-lock-constant-face)))
+      (dolist (face faces)
+        (face-remap-add-relative face '((:foreground "" :weight normal :slant normal)))))
+    (face-remap-add-relative 'font-lock-keyword-face '((:weight bold)))
+    (face-remap-add-relative 'font-lock-builtin-face '((:weight bold)))
+    (face-remap-add-relative 'font-lock-preprocessor-face '((:weight bold)))
+    (face-remap-add-relative 'font-lock-function-name-face '((:weight bold)))
+    (face-remap-add-relative 'font-lock-string-face '((:foreground "#b33200000000")))
+    (face-remap-add-relative 'font-lock-constant-face '((:weight bold)))
+    (face-remap-add-relative 'haskell-operator-face '((:foreground "#b33200000000")))
+    )
+  (add-hook 'color-identifiers-mode-hook 'myfunc-color-identifiers-mode-hook)
 
-(defun myfunc-color-identifiers-mode-hook ()
-  (let ((faces '(font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-builtin-face font-lock-preprocessor-face font-lock-constant-face)))
-    (dolist (face faces)
-      (face-remap-add-relative face '((:foreground "" :weight normal :slant normal)))))
-  (face-remap-add-relative 'font-lock-keyword-face '((:weight bold)))
-  (face-remap-add-relative 'font-lock-builtin-face '((:weight bold)))
-  (face-remap-add-relative 'font-lock-preprocessor-face '((:weight bold)))
-  (face-remap-add-relative 'font-lock-function-name-face '((:weight bold)))
-  (face-remap-add-relative 'font-lock-string-face '((:foreground "#b33200000000")))
-  (face-remap-add-relative 'font-lock-constant-face '((:weight bold)))
-  (face-remap-add-relative 'haskell-operator-face '((:foreground "#b33200000000")))
-  )
-(add-hook 'color-identifiers-mode-hook 'myfunc-color-identifiers-mode-hook)
-
-;; (defun test ()
-;;   (let ((faces '(font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-builtin-face font-lock-preprocessor-face font-lock-constant-face)))
-;;     (dolist (face faces)
-;;       (add-to-list 'face-remapping-alist (cons face '((:foreground nil :weight normal :slant normal))))))
-;;   (add-to-list 'face-remapping-alist (cons 'font-lock-keyword-face '((:weight bold))))
-;;   (add-to-list 'face-remapping-alist (cons 'font-lock-builtin-face '((:weight bold))))
-;;   (add-to-list 'face-remapping-alist (cons 'font-lock-preprocessor-face '((:weight bold))))
-;;   (add-to-list 'face-remapping-alist (cons 'font-lock-function-name-face '((:weight bold))))
-;;   (add-to-list 'face-remapping-alist (cons 'font-lock-constant-face '((:weight bold))))
-;;   (add-to-list 'face-remapping-alist (cons 'font-lock-string-face '((:foreground "#b33200000000"))))
-;;   (add-to-list 'face-remapping-alist (cons 'haskell-operator-face '((:foreground "#b33200000000"))))
-;;   )
-;; (add-hook 'color-identifiers-mode-hook 'test)
+  ;; (defun test ()
+  ;;   (let ((faces '(font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-builtin-face font-lock-preprocessor-face font-lock-constant-face)))
+  ;;     (dolist (face faces)
+  ;;       (add-to-list 'face-remapping-alist (cons face '((:foreground nil :weight normal :slant normal))))))
+  ;;   (add-to-list 'face-remapping-alist (cons 'font-lock-keyword-face '((:weight bold))))
+  ;;   (add-to-list 'face-remapping-alist (cons 'font-lock-builtin-face '((:weight bold))))
+  ;;   (add-to-list 'face-remapping-alist (cons 'font-lock-preprocessor-face '((:weight bold))))
+  ;;   (add-to-list 'face-remapping-alist (cons 'font-lock-function-name-face '((:weight bold))))
+  ;;   (add-to-list 'face-remapping-alist (cons 'font-lock-constant-face '((:weight bold))))
+  ;;   (add-to-list 'face-remapping-alist (cons 'font-lock-string-face '((:foreground "#b33200000000"))))
+  ;;   (add-to-list 'face-remapping-alist (cons 'haskell-operator-face '((:foreground "#b33200000000"))))
+  ;;   )
+  ;; (add-hook 'color-identifiers-mode-hook 'test)
 
 
-;; (let ((faces '(font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-builtin-face font-lock-preprocessor-face)))
-;;   (dolist (face faces)
-;;     (set-face-attribute face nil :foreground nil :weight 'normal :slant 'normal)))
+  ;; (let ((faces '(font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-builtin-face font-lock-preprocessor-face)))
+  ;;   (dolist (face faces)
+  ;;     (set-face-attribute face nil :foreground nil :weight 'normal :slant 'normal)))
 
-;; (set-face-attribute 'font-lock-keyword-face nil :weight 'bold)
-;; (set-face-attribute 'font-lock-builtin-face nil :weight 'bold)
-;; (set-face-attribute 'font-lock-preprocessor-face nil :weight 'bold)
-;; (set-face-attribute 'font-lock-function-name-face nil :weight 'bold)
-;; (set-face-attribute 'font-lock-string-face nil :foreground "#b33200000000")
-;; (set-face-attribute 'font-lock-constant-face nil :weight 'bold)
-;; (set-face-attribute 'haskell-operator-face nil :foreground "#b33200000000")
+  ;; (set-face-attribute 'font-lock-keyword-face nil :weight 'bold)
+  ;; (set-face-attribute 'font-lock-builtin-face nil :weight 'bold)
+  ;; (set-face-attribute 'font-lock-preprocessor-face nil :weight 'bold)
+  ;; (set-face-attribute 'font-lock-function-name-face nil :weight 'bold)
+  ;; (set-face-attribute 'font-lock-string-face nil :foreground "#b33200000000")
+  ;; (set-face-attribute 'font-lock-constant-face nil :weight 'bold)
+  ;; (set-face-attribute 'haskell-operator-face nil :foreground "#b33200000000")
 
-;; (defun color-identifiers:colorize (limit) — the function changed to make vars "bold". FTR.
-;;   (color-identifiers:scan-identifiers
-;;    (lambda (start end)
-;;      (let* ((identifier (buffer-substring-no-properties start end))
-;;             (hex (color-identifiers:color-identifier identifier)))
-;;        (when hex
-;;          (put-text-property start end 'face `(:foreground ,hex :weight ,'bold))
-;;          ;; (put-text-property start end 'face `(:weight ,'bold))
-;;          (put-text-property start end 'color-identifiers:fontified t))))
-;;    limit))
-
-;; ---------- end of color-identifiers specific setup
+  ;; (defun color-identifiers:colorize (limit) — the function changed to make vars "bold". FTR.
+  ;;   (color-identifiers:scan-identifiers
+  ;;    (lambda (start end)
+  ;;      (let* ((identifier (buffer-substring-no-properties start end))
+  ;;             (hex (color-identifiers:color-identifier identifier)))
+  ;;        (when hex
+  ;;          (put-text-property start end 'face `(:foreground ,hex :weight ,'bold))
+  ;;          ;; (put-text-property start end 'face `(:weight ,'bold))
+  ;;          (put-text-property start end 'color-identifiers:fontified t))))
+  ;;    limit))
+)
 
 (split-window-right) ;; something I always do, let's automatize that
 
