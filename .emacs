@@ -359,7 +359,8 @@ backward, so you can mutate text forward"
     (global-evil-surround-mode 1)
     (define-key evil-normal-state-map "S" 'evil-surround-region)
     )
-  (use-package evil-magit) ;; without this package Evil keys are broken in magit
+  (use-package evil-magit ;; without this package Evil keys are broken in magit
+    :after magit)
 
   ;; highlight regions I work with. Just fancies.
   (evil-goggles-mode 1)
