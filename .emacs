@@ -679,20 +679,25 @@ languages with similar syntax"
   (sp-local-pair 'rust-mode "(" nil :post-handlers '(:add maybe-add-semicolon-paren-rust))
   )
 
-;;mode to highlight a matching parenthese for inside of a code between these
-(require 'highlight-parentheses)
-(define-globalized-minor-mode global-highlight-parentheses-mode
-  highlight-parentheses-mode
-  (lambda ()
-    (highlight-parentheses-mode t)))
-(global-highlight-parentheses-mode t)
+;; mode to highlight a matching parentheses from the inside
+(use-package highlight-parentheses
+  :config
+  (define-globalized-minor-mode global-highlight-parentheses-mode
+    highlight-parentheses-mode
+    (lambda ()
+      (highlight-parentheses-mode t)))
+  (global-highlight-parentheses-mode t)
+  )
 
 ;;;;######################NOTE: below is loading of the addons
 
-;package managment
-(require 'package)
-(push '("melpa" . "https://melpa.org/packages/")
-	  package-archives)
+;; package managment
+(use-package package
+  :defer t
+  :config
+  (push '("melpa" . "https://melpa.org/packages/")
+        package-archives)
+  )
 
 ;deletes trailing whitespaces before saving the file and sort includes
 (defun myfunc-before-save-hook () (interactive)
