@@ -73,6 +73,7 @@
  '(smtpmail-smtp-service 25))
 
 (use-package flycheck
+  :defer t
   :init
   (setq flycheck-check-syntax-automatically '(save)) ;; I only want it on save
   :config
@@ -97,6 +98,7 @@
   )
 
 (use-package yasnippet
+  :defer 2 ;; lazy-load after 2 seconds of being idle
   :config
   (yas-global-mode)
   )
@@ -855,6 +857,7 @@ Version 2015-04-12"
 		      (set-window-dedicated-p window nil)))
 
 (use-package color-identifiers-mode
+  :defer 2 ;; lazy-load after 2 seconds of being idle
   :config
   (global-color-identifiers-mode 1) ;; semantic highlight of variables
 
