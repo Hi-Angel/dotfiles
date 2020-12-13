@@ -108,8 +108,10 @@
 
 ;(add-to-list 'company-backends 'company-yasnippet) commented out due to killing company's completition
 
-(require 'yasnippet)
-(yas-global-mode)
+(use-package yasnippet
+  :config
+  (yas-global-mode)
+  )
 
 (add-to-list 'auto-mode-alist '("\\.mzn\\'" . minizinc-mode))
 (add-to-list 'auto-mode-alist '("\\.glade$\\'" . xml-mode))
@@ -365,10 +367,12 @@ backward, so you can mutate text forward"
   ;; by overriding the function below to a noop.
   (defun evil-maybe-remove-spaces (&optional _))
 
-  (require 'evil-surround)
-  (global-evil-surround-mode 1)
-  (define-key evil-normal-state-map "S" 'evil-surround-region)
-  (require 'evil-magit) ;; without this Evil keys are broken in magit
+  (use-package evil-surround
+    :config
+    (global-evil-surround-mode 1)
+    (define-key evil-normal-state-map "S" 'evil-surround-region)
+    )
+  (use-package evil-magit) ;; without this package Evil keys are broken in magit
 
   ;; highlight regions I work with. Just fancies.
   (evil-goggles-mode 1)
@@ -531,8 +535,10 @@ in a few lines, and puts the cursor at the middle line"
 (setq select-enable-clipboard nil)
 (global-set-key (kbd "C-w") 'clipboard-kill-region)
 (global-set-key (kbd "s-y") 'yank)
-(require 'idomenu)
-(global-set-key (kbd "s-i") 'idomenu)
+(use-package idomenu
+  :config
+  (global-set-key (kbd "s-i") 'idomenu)
+  )
 (global-set-key (kbd "<RET>") 'improved-newline-and-indent)
 (global-set-key (kbd "<f11>") (lambda () (interactive) (ff-find-other-file nil t))) ;switch between a corresponding c/c++ header and a file
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease);set in wheel font decrease
