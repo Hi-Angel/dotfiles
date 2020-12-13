@@ -14,7 +14,6 @@
 (define-key evil-normal-state-map (kbd "g a") 'evil-avy-goto-char)
 
 (evil-mode t)
-(define-key evil-normal-state-map (kbd "C-z") 'undo-tree-redo)
 
 (defun find-window (f)
   "loops over subwindows in current window until they're finished

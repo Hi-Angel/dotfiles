@@ -87,13 +87,13 @@
   )
 
 (use-package company
+  :bind ("s-/" . company-complete)
   :config
   (global-company-mode 1)
   (add-to-list 'company-dabbrev-code-modes 'c++-mode)
   (add-to-list 'company-dabbrev-code-modes 'c-mode)
   (add-to-list 'company-dabbrev-code-modes 'php-mode)
   (setq-default company-idle-delay 0.7) ;; delay before completition
-  (global-set-key (kbd "s-/") 'company-complete)
   )
 
 (use-package yasnippet
@@ -346,7 +346,6 @@ backward, so you can mutate text forward"
   (global-undo-tree-mode -1)
   (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
   (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
-  (global-unset-key (kbd "C-z"))
   (global-set-key (kbd "C-z")   'undo-fu-only-undo)
   (global-set-key (kbd "C-S-z") 'undo-fu-only-redo)
 
@@ -375,9 +374,9 @@ backward, so you can mutate text forward"
   )
 
 (use-package smex
+  :bind ("M-x" . smex)
   :config
   (smex-initialize)
-  (global-set-key (kbd "M-x") 'smex)
   )
 
 ;; visible whitespace config
@@ -524,8 +523,8 @@ in a few lines, and puts the cursor at the middle line"
 (global-set-key (kbd "C-w") 'clipboard-kill-region)
 (global-set-key (kbd "s-y") 'yank)
 (use-package idomenu
+  :bind ("s-i" . idomenu)
   :config
-  (global-set-key (kbd "s-i") 'idomenu)
   )
 (global-set-key (kbd "<RET>") 'improved-newline-and-indent)
 (global-set-key (kbd "<f11>") (lambda () (interactive) (ff-find-other-file nil t))) ;switch between a corresponding c/c++ header and a file
@@ -710,6 +709,7 @@ languages with similar syntax"
   )
 
 (use-package symbol-overlay
+  :bind ("s-`" . symbol-overlay-put)
   :init
   (setq symbol-overlay-ignore-functions nil)     ;; don't ignore keywords in various languages
   (setq symbol-overlay-map (make-sparse-keymap)) ;; disable special cmds on overlays
@@ -723,7 +723,6 @@ languages with similar syntax"
     symbol-overlay-mode ;; name of the minor mode
     enable-symbol-overlay-mode)
   (global-symbol-overlay-mode)
-  (global-set-key (kbd "s-`") 'symbol-overlay-put)
   )
 
 (defun myfunc-text-mode ()
@@ -950,18 +949,19 @@ Version 2015-04-12"
 (setq compile-command "ninja -C build")
 
 (use-package winum
+  :bind (("M-1" . winum-select-window-1)
+         ("M-2" . winum-select-window-2)
+         ("M-3" . winum-select-window-3)
+         ("M-4" . winum-select-window-4)
+         ("M-5" . winum-select-window-5)
+         ("M-6" . winum-select-window-6)
+         ("M-7" . winum-select-window-7)
+         ("M-8" . winum-select-window-8)
+         ("M-9" . winum-select-window-9)
+         ("M-0" . winum-select-window-0) ;; minibuf
+         )
   :config
   (winum-mode)
-  (global-set-key (kbd "M-1") 'winum-select-window-1)
-  (global-set-key (kbd "M-2") 'winum-select-window-2)
-  (global-set-key (kbd "M-3") 'winum-select-window-3)
-  (global-set-key (kbd "M-4") 'winum-select-window-4)
-  (global-set-key (kbd "M-5") 'winum-select-window-5)
-  (global-set-key (kbd "M-6") 'winum-select-window-6)
-  (global-set-key (kbd "M-7") 'winum-select-window-7)
-  (global-set-key (kbd "M-8") 'winum-select-window-8)
-  (global-set-key (kbd "M-9") 'winum-select-window-9)
-  (global-set-key (kbd "M-0") 'winum-select-window-0) ;; minibuf
 
   (defun restore-winum-mode-map (mode-map)
     (define-key mode-map (kbd "<M-DEL>") nil)
