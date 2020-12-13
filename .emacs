@@ -540,10 +540,14 @@ in a few lines, and puts the cursor at the middle line"
 (setq-default cursor-type 'bar) ;set flat cursor type
 (setq-default major-mode 'text-mode) ;;why Fundamental-mode? Text-mode more aproppriate
 
+(use-package highlight-numbers
+  :config
+  (set-face-attribute 'highlight-numbers-number nil :weight 'bold :foreground "blue" :background "light gray")
+  )
+
 ;;some useful minor modes
 (defun myfunc-prog-mode ()
   (highlight-numbers-mode)
-  (set-face-attribute 'highlight-numbers-number nil :weight 'bold :foreground "blue" :background "light gray")
   (column-number-mode)
   (delete-selection-mode)
   )
