@@ -709,15 +709,19 @@ languages with similar syntax"
        )
 (add-hook 'before-save-hook 'myfunc-before-save-hook)
 
-(defun myfunc-rust-mode-hook ()
-  ;; note: if racer-mode breaks in some way (e.g. no more completions), do:
-  ;; 1. `rustup component add rust-src` 2. `cargo +nightly install racer --force'
-  (racer-mode)
-  (cl-assert (boundp 'company-backends)) ;; I always use company-mode
-  (set (make-local-variable 'company-backends)
-       '(company-capf company-etags company-dabbrev))
-       )
-(add-hook 'rust-mode-hook 'myfunc-rust-mode-hook)
+(use-package rust-mode
+  :defer t
+  :config
+  (defun myfunc-rust-mode-hook ()
+    ;; note: if racer-mode breaks in some way (e.g. no more completions), do:
+    ;; 1. `rustup component add rust-src` 2. `cargo +nightly install racer --force'
+    (racer-mode)
+    (cl-assert (boundp 'company-backends)) ;; I always use company-mode
+    (set (make-local-variable 'company-backends)
+         '(company-capf company-etags company-dabbrev))
+    )
+  (add-hook 'rust-mode-hook 'myfunc-rust-mode-hook)
+  )
 
 (require 'symbol-overlay)
 (defun enable-symbol-overlay-mode ()
