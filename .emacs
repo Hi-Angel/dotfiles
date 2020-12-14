@@ -88,6 +88,7 @@
   )
 
 (use-package company
+  :defer nil ;; :bind implies `defer t', override it
   :bind ("s-/" . company-complete)
   :config
   (global-company-mode 1)
@@ -958,6 +959,7 @@ Version 2015-04-12"
 (setq compile-command "ninja -C build")
 
 (use-package winum
+  :defer nil ;; :bind implies `defer t', override it
   :bind (("M-1" . winum-select-window-1)
          ("M-2" . winum-select-window-2)
          ("M-3" . winum-select-window-3)
