@@ -3,7 +3,7 @@
 (defun sp-point-not-before-word (id action context)
   "In insert and autoskip actions returns t when next symbol is
 not a word constituent."
-  (if (or (eq action 'insert) (eq action 'autoskip))
+  (if (memq action '(insert autoskip))
       (looking-at "\\(\\Sw\\|$\\)")
     t))
 
