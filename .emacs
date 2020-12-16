@@ -346,10 +346,11 @@ backward, so you can mutate text forward"
   )
 
 (use-package emvil ;; my Evil config, in a separate file
-  :config
+  :init
   (setq evil-jumps-cross-buffers nil)
   (setq-default evil-shift-round nil) ;; make '>' not to round the indentation
 
+  :config
   ;; disable undo-tree-mode mandated by Evil as it's broken (see "unrecognized
   ;; entry in undo list" on the internet), and use undo-fu instead.
   (global-undo-tree-mode -1)
