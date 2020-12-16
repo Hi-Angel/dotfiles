@@ -575,10 +575,6 @@ in a few lines, and puts the cursor at the middle line"
 ;; 				   (flyspell-mode 1)
 ;; 				   )));;enable for c++
 
-(defun is-in-comment ()
-  "tests if point is in comment"
-  (nth 4 (syntax-ppss)))
-
 (defun current-line-string ()
   "returns current line as a string"
   (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
@@ -589,7 +585,7 @@ in a few lines, and puts the cursor at the middle line"
   (setq sp-show-pair-from-inside t)
   (setq sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
   :config
-  (use-package sp-sublimelike) ;; sublime like behavior of smartparens
+  (use-package sp-sublimetext-like) ;; sublime-like behavior of smartparens
   (smartparens-global-mode 1)
   (show-smartparens-global-mode 1)
 
@@ -608,8 +604,7 @@ languages with similar syntax"
         (when (and (looking-at "\\s-*$")
                    (not (string-match-p
                          (regexp-opt '("if" "else" "switch" "for" "while" "do" "define") 'words)
-                         (current-line-string)))
-                   (not (is-in-comment)))
+                         (current-line-string))))
           (insert ";")))))
 
   (defun maybe-add-semicolon-paren-rust (_id action _context)
@@ -622,8 +617,7 @@ parentheses when appropriate, for Rust lang"
         (when (and (looking-at "\\s-*$")
                    (not (string-match-p
                          (regexp-opt '("fn" "if" "for" "while") 'words)
-                         (current-line-string)))
-                   (not (is-in-comment)))
+                         (current-line-string))))
           (insert ";")))))
 
   (defun maybe-add-semicolon-bracket (_id action _context)
@@ -635,8 +629,7 @@ languages with similar syntax"
         ;; here, caret supposed to be in between parens, i.e. {|}
         (forward-char) ;; skip closing brace
         (when (and (looking-at "\\s-*$")
-                   (string-match-p "\\breturn\\b" (current-line-string))
-                   (not (is-in-comment)))
+                   (string-match-p "\\breturn\\b" (current-line-string)))
           (insert ";")))))
 
   (defun maybe-complete-lambda (_id action _context)
@@ -666,11 +659,11 @@ languages with similar syntax"
           (insert ":")))))
 
   (let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode js-mode)))
-    (sp-local-pair c-like-modes-list "(" nil :post-handlers '(:add maybe-add-semicolon-paren))
-    (sp-local-pair c-like-modes-list "{" nil :post-handlers '(:add maybe-add-semicolon-bracket)))
-  (sp-local-pair 'c++-mode "[" nil :post-handlers '(:add maybe-complete-lambda))
-  (sp-local-pair 'python-mode "(" nil :post-handlers '(:add maybe-add-colon-python))
-  (sp-local-pair 'rust-mode "(" nil :post-handlers '(:add maybe-add-semicolon-paren-rust))
+    (sp-local-pair c-like-modes-list "(" nil :unless '(sp-in-comment-p sp-in-string-quotes-p) :post-handlers '(:add maybe-add-semicolon-paren))
+    (sp-local-pair c-like-modes-list "{" nil :unless '(sp-in-comment-p sp-in-string-quotes-p) :post-handlers '(:add maybe-add-semicolon-bracket)))
+  (sp-local-pair 'c++-mode "[" nil :unless '(sp-in-comment-p sp-in-string-quotes-p) :post-handlers '(:add maybe-complete-lambda))
+  (sp-local-pair 'python-mode "(" nil :unless '(sp-in-comment-p sp-in-string-quotes-p) :post-handlers '(:add maybe-add-colon-python))
+  (sp-local-pair 'rust-mode "(" nil :unless '(sp-in-comment-p sp-in-string-quotes-p) :post-handlers '(:add maybe-add-semicolon-paren-rust))
   )
 
 ;; mode to highlight a matching parentheses from the inside
