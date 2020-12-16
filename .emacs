@@ -860,7 +860,6 @@ Version 2015-04-12"
 (use-package color-identifiers-mode
   :defer 2 ;; lazy-load after 2 seconds of being idle
   :config
-  (global-color-identifiers-mode 1) ;; semantic highlight of variables
 
   (defun myfunc-color-identifiers-mode-hook ()
     (let ((faces '(font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-builtin-face font-lock-preprocessor-face font-lock-constant-face)))
@@ -913,6 +912,7 @@ Version 2015-04-12"
   ;;          ;; (put-text-property start end 'face `(:weight ,'bold))
   ;;          (put-text-property start end 'color-identifiers:fontified t))))
   ;;    limit))
+  (global-color-identifiers-mode 1) ;; semantic highlight of variables
 )
 
 (split-window-right) ;; something I always do, let's automatize that
