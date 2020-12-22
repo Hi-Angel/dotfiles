@@ -665,11 +665,14 @@ languages with similar syntax"
             )))))
 
   (defun maybe-add-colon-python (_id action _context)
+    "Adds a colon after python function definition"
     (when (eq action 'insert)
       (save-excursion
         (forward-char) ;; skip closing brace
         (when (and (looking-at "\\s-*$")
-                   (string-match-p "^\\s-*def\\b" (current-line-string)))
+                   (save-excursion
+                     (goto-char (line-beginning-position))
+                     (re-search-forward "^\\s-*def\\b" (line-end-position))))
           (insert ":")))))
 
   (let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode js-mode)))
