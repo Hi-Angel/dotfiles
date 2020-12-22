@@ -1241,6 +1241,8 @@ indentation is implemented there"
   :init
   ;; I prefer default indentation functional
   (setq lsp-enable-indentation nil)
+   ;; disable "path in project + in class hierarchy" header
+  (setq lsp-headerline-breadcrumb-enable nil)
   :config
 
   (defun myactionsfor-lsp-mode-hook ()
