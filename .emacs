@@ -426,7 +426,7 @@ backward, so you can mutate text forward"
 							))
 
 ;;force inserting tabs instead of spaces
-;; (setq indent-line-function 'insert-tab)
+;; (setq indent-tabs-mode t)
 
 ;;Make c-a key to work as the home key in a most code editors
 (defun smarter-move-beginning-of-line (arg)
