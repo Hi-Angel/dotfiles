@@ -11,6 +11,7 @@
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+(setq create-lockfiles nil)
 
 ;; case sensitive dabbrev
 (setq dabbrev-upcase-means-case-search t)
