@@ -669,14 +669,14 @@ languages with similar syntax"
       (save-excursion
         (forward-char) ;; skip closing brace
         (when (and (looking-at "\\s-*$")
-                   (string-match-p "\\s-*def.*" (current-line-string)))
+                   (string-match-p "^\\s-*def\\b" (current-line-string)))
           (insert ":")))))
 
   (let ((c-like-modes-list '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode js-mode)))
     (sp-local-pair c-like-modes-list "(" nil :post-handlers '(:add maybe-add-semicolon-paren))
     (sp-local-pair c-like-modes-list "{" nil :post-handlers '(:add maybe-add-semicolon-bracket)))
   (sp-local-pair 'c++-mode "[" nil :post-handlers '(:add maybe-complete-lambda))
-  (sp-local-pair 'python-mode "(" nil :post-handlers '(:add maybe-add-colon-python))
+  (sp-local-pair 'python-mode "(" ")" :post-handlers '(:add maybe-add-colon-python))
   (sp-local-pair 'rust-mode "(" nil :post-handlers '(:add maybe-add-semicolon-paren-rust))
   )
 
