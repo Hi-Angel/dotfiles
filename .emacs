@@ -596,7 +596,7 @@ in a few lines, and puts the cursor at the middle line"
   (setq sp-show-pair-from-inside t)
   (setq sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
   :config
-  (use-package sp-sublimelike) ;; sublime like behavior of smartparens
+  (use-package sp-sublimetext-like) ;; sublime-like behavior of smartparens
   (smartparens-global-mode 1)
   (show-smartparens-global-mode 1)
 
