@@ -27,6 +27,7 @@
  '(evil-goggles-undo-redo-change-face ((t (:background "#bbffbb"))))
  '(evil-goggles-undo-redo-remove-face ((t (:background "#bbffbb"))))
  '(evil-goggles-yank-face ((t (:background "#ffff55"))))
+ '(evil-goggles-indent-face ((t (:background "light blue"))))
  '(fixed-pitch ((t (:family "Ubuntu Mono"))))
  '(flycheck-error-list-warning ((t (:inherit warning :foreground "blue"))))
  '(flycheck-fringe-warning ((t (:inherit warning :foreground "blue"))))
