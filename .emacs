@@ -609,43 +609,43 @@ in a few lines, and puts the cursor at the middle line"
     "A helper function that inserts semicolon after closing
 parentheses when appropriate. Mainly useful in C, C++, and other
 languages with similar syntax"
-    (when (eq action 'insert)
+    ;; here, caret supposed to be in between parens, i.e. (|)
+    (when (and (eq action 'insert)
+               (looking-at ")\\s-*$")
+               (not (is-in-comment))
+               (not (string-match-p
+                     (regexp-opt '("if" "else" "switch" "for" "while" "do" "define") 'words)
+                     (current-line-string))))
       (save-excursion
-        ;; here, caret supposed to be in between parens, i.e. (|)
         (forward-char) ;; skip closing brace
-        (when (and (looking-at "\\s-*$")
-                   (not (string-match-p
-                         (regexp-opt '("if" "else" "switch" "for" "while" "do" "define") 'words)
-                         (current-line-string)))
-                   (not (is-in-comment)))
-          (insert ";")))))
+        (insert ";"))))
 
   (defun maybe-add-semicolon-paren-rust (_id action _context)
     "A helper function that inserts semicolon after closing
 parentheses when appropriate, for Rust lang"
-    (when (eq action 'insert)
+    ;; here, caret supposed to be in between parens, i.e. (|)
+    (when (and (eq action 'insert)
+               (looking-at ")\\s-*$")
+               (not (is-in-comment))
+               (not (string-match-p
+                     (regexp-opt '("fn" "if" "for" "while") 'words)
+                     (current-line-string))))
       (save-excursion
-        ;; here, caret supposed to be in between parens, i.e. (|)
         (forward-char) ;; skip closing brace
-        (when (and (looking-at "\\s-*$")
-                   (not (string-match-p
-                         (regexp-opt '("fn" "if" "for" "while") 'words)
-                         (current-line-string)))
-                   (not (is-in-comment)))
-          (insert ";")))))
+        (insert ";"))))
 
   (defun maybe-add-semicolon-bracket (_id action _context)
     "A helper function that inserts semicolon after closing
 parentheses when appropriate. Mainly useful in C, C++, and other
 languages with similar syntax"
-    (when (eq action 'insert)
+    ;; here, caret supposed to be in between braces, i.e. {|}
+    (when (and (eq action 'insert)
+               (looking-at "}\\s-*$")
+               (not (is-in-comment))
+               (string-match-p "\\breturn\\b" (current-line-string)))
       (save-excursion
-        ;; here, caret supposed to be in between parens, i.e. {|}
         (forward-char) ;; skip closing brace
-        (when (and (looking-at "\\s-*$")
-                   (string-match-p "\\breturn\\b" (current-line-string))
-                   (not (is-in-comment)))
-          (insert ";")))))
+        (insert ";"))))
 
   (defun maybe-complete-lambda (_id action _context)
     "Completes C++ lambda, given a pair of square brackets"
