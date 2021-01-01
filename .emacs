@@ -665,22 +665,10 @@ languages with similar syntax"
               (insert ";"))
             )))))
 
-  (defun maybe-add-colon-python (_id action _context)
-    "Adds a colon after python function definition"
-    (when (eq action 'insert)
-      (save-excursion
-        (forward-char) ;; skip closing brace
-        (when (and (looking-at "\\s-*$")
-                   (save-excursion
-                     (goto-char (line-beginning-position))
-                     (re-search-forward "^\\s-*def\\b" (line-end-position))))
-          (insert ":")))))
-
   (sp-with-modes '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode js-mode)
     (sp-local-pair "(" nil :post-handlers '(:add maybe-add-semicolon-paren))
     (sp-local-pair "{" nil :post-handlers '(:add maybe-add-semicolon-bracket)))
   (sp-local-pair 'c++-mode "[" nil :post-handlers '(:add maybe-complete-lambda))
-  (sp-local-pair 'python-mode "(" ")" :post-handlers '(:add maybe-add-colon-python))
   (sp-local-pair 'rust-mode "(" nil :post-handlers '(:add maybe-add-semicolon-paren-rust))
   )
 
