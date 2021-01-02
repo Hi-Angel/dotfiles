@@ -683,7 +683,7 @@ languages with similar syntax"
         package-archives)
   )
 
-(defun myfunc-before-save-hook () (interactive)
+(defun myfunc-before-save-hook ()
        (unless (derived-mode-p 'diff-mode)
          (delete-trailing-whitespace))
        ;; (when (derived-mode-p 'c-mode 'c++-mode)
