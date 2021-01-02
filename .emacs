@@ -713,7 +713,6 @@ languages with similar syntax"
   :init
   (setq symbol-overlay-ignore-functions nil)     ;; don't ignore keywords in various languages
   (setq symbol-overlay-map (make-sparse-keymap)) ;; disable special cmds on overlays
-  :config
   (defun enable-symbol-overlay-mode ()
     (unless (or (minibufferp)
                 (derived-mode-p 'magit-mode)
@@ -722,6 +721,7 @@ languages with similar syntax"
   (define-global-minor-mode global-symbol-overlay-mode ;; name of the new global mode
     symbol-overlay-mode ;; name of the minor mode
     enable-symbol-overlay-mode)
+  :config
   (global-symbol-overlay-mode)
   )
 
