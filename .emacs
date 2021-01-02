@@ -226,16 +226,6 @@ opening symbol, thus the function seeks only the closing"
 	  (setq end (point))
 	  (sort-lines-nocase beg end))))
 
-(defun haskell-sort-n-align-imports ()
-  "Sorts and aligns Haskell imports"
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (while (and (not (looking-at "import "));;look for usings, if no then
-                (eq (forward-line 1) 0) ;;go one line down (if not EOF).
-                ))
-    (haskell-sort-imports)))
-
 ;;Ponification syntax table for c=like lamguages
 (defun init-prettify-table-c-like ()
   (setq prettify-symbols-alist (list
@@ -700,8 +690,6 @@ languages with similar syntax"
        ;; 	 (c-sort-includes))
        (when (derived-mode-p 'csharp-mode)
          (csharp-sort-usings))
-       (when (derived-mode-p 'haskell-mode)
-         (haskell-sort-n-align-imports))
        )
 (add-hook 'before-save-hook 'myfunc-before-save-hook)
 
@@ -801,10 +789,31 @@ Version 2015-04-12"
     (sgml-quote start end)
     (replace-regexp "^\\(.*\\)$" "\\1<br>" nil start end)))
 
-(defun myactions-haskell-mode-hook ()
-  (haskell-indent-mode)
+(use-package haskell-mode
+  :defer t
+  :init
+  (defun haskell-sort-n-align-imports ()
+    "Sorts and aligns Haskell imports"
+    (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      (while (and (not (looking-at "import "));;look for usings, if no then
+                  (eq (forward-line 1) 0) ;;go one line down (if not EOF).
+                  ))
+      (haskell-sort-imports)))
+
+  (defun haskell-before-save-hook ()
+    (when (derived-mode-p 'haskell-mode)
+      (haskell-sort-n-align-imports))
+    )
+  (add-hook 'before-save-hook 'haskell-before-save-hook)
+
+  :config
+  (defun myactions-haskell-mode-hook ()
+    (haskell-indent-mode)
+    )
+  (add-hook 'haskell-mode-hook 'myactions-haskell-mode-hook)
   )
-(add-hook 'haskell-mode-hook 'myactions-haskell-mode-hook)
 
 (use-package shell
   :defer t
