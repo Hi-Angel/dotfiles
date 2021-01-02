@@ -797,8 +797,9 @@ Version 2015-04-12"
   (interactive)
   (let ((start (region-beginning))
 		(end (region-end)))
-	(sgml-quote start end)
-	(replace-regexp "^\\(.*\\)$" "\\1<br>" nil start end)))
+    (use-package sgml-mode)
+    (sgml-quote start end)
+    (replace-regexp "^\\(.*\\)$" "\\1<br>" nil start end)))
 
 (defun myactions-haskell-mode-hook ()
   (haskell-indent-mode)
