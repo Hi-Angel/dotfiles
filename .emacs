@@ -983,9 +983,7 @@ Version 2015-04-12"
          ("M-9" . winum-select-window-9)
          ("M-0" . winum-select-window-0) ;; minibuf
          )
-  :config
-  (winum-mode)
-
+  :init
   (defun restore-winum-mode-map (mode-map)
     (define-key mode-map (kbd "<M-DEL>") nil)
     (define-key mode-map (kbd "M-1") nil)
@@ -998,7 +996,6 @@ Version 2015-04-12"
     (define-key mode-map (kbd "M-8") nil)
     (define-key mode-map (kbd "M-9") nil)
     (define-key mode-map (kbd "M-0") nil))
-
   (defun winum-restore-diff-mode () ;; diff mode overrides the keys, undo that
     (restore-winum-mode-map diff-mode-map))
   (add-hook 'diff-mode-hook 'winum-restore-diff-mode)
@@ -1006,6 +1003,8 @@ Version 2015-04-12"
   (defun winum-restore-magit-mode () ;; magit overrides the keys, undo that
     (restore-winum-mode-map magit-mode-map))
   (add-hook 'magit-mode-hook 'winum-restore-magit-mode)
+  :config
+  (winum-mode)
   )
 
 ;; C++ regex to conver constructor args to initialization (assumes no types with spaces & commas)
