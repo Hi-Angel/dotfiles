@@ -715,8 +715,8 @@ c.content.user_stylesheets = ['my_custom_css.css']
 ## gets replaced by the filename of the file to be edited.
 ## Type: ShellCommand
 # c.editor.command = ['gvim', '-f', '{}']
-# c.editor.command = ['gvim', '-c', 'set spell spelllang=en_us', '-f', '{}']
-c.editor.command = ['emacsclient', '--eval', '(progn (find-file "{}") (aggressive-fill-paragraph-mode) (select-frame-set-input-focus (selected-frame)))', '-c']
+#c.editor.command = ['gvim', '-c', 'set spell spelllang=en_us', '-f', '{}']
+c.editor.command = ['emacsclient', '-c', '{}']
 
 ## Encoding to use for the editor.
 ## Type: Encoding
