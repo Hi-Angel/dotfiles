@@ -999,7 +999,7 @@ c.editor.command = ['emacsclient', '-c', '{}']
 ## Type: List of String
 # c.qt.args = []
 # c.qt.args = ["enable-native-gpu-memory-buffers", "enable-gpu-rasterization", "use-gl=egl", "disable-gpu-driver-bug-workarounds"]
-c.qt.args = ["enable-native-gpu-memory-buffers", "enable-gpu-rasterization", "use-gl=egl"]
+c.qt.args = ["enable-native-gpu-memory-buffers", "enable-gpu-rasterization", "use-gl=egl", "ignore-gpu-blacklist"]
 
 ## Force a Qt platform to use. This sets the `QT_QPA_PLATFORM`
 ## environment variable and is useful to force using the XCB plugin when
