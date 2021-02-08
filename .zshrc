@@ -93,6 +93,9 @@ alias ghciMath="stack ghci --ghci-options '-ghci-script /home/constantine/.ghciM
 # alias ghciMath512="stack ghci --ghci-options '+RTS -M512m -RTS -ghci-script /home/constantine/.ghciMath'"
 alias git-head='git checkout $(git log --branches -1 --pretty=format:"%D" | sed "s/.*, //g")'
 
+# colorizing "cat"
+alias ccat='pygmentize -g'
+
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
