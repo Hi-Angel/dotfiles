@@ -1568,3 +1568,6 @@ config.bind('<Ctrl-i>', 'open-editor', mode='insert')
 
 ## Bindings for register mode
 # config.bind('<Escape>', 'leave-mode', mode='register')
+
+# don't quit hints when pages continues loading
+c.hints.leave_on_load = False
