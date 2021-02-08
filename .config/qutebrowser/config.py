@@ -534,7 +534,7 @@ c.colors.tabs.selected.odd.fg = 'black'
 ## required to exactly match the requested domain. Local domains are
 ## always exempt from hostblocking.
 ## Type: List of String
-c.content.host_blocking.whitelist = ['www.phoronix.com', 'lwn.net', 'cpu-world.com']
+c.content.blocking.whitelist = ['www.phoronix.com', 'lwn.net', 'cpu-world.com']
 
 ## Enable or disable hyperlink auditing (`<a ping>`).
 ## Type: Bool
@@ -613,7 +613,7 @@ c.content.host_blocking.whitelist = ['www.phoronix.com', 'lwn.net', 'cpu-world.c
 ##   - true
 ##   - false
 ##   - ask
-c.content.notifications = True
+#c.content.notifications = True
 
 ## Enable pdf.js to view PDF files in the browser. Note that the files
 ## can still be downloaded by clicking the download button in the pdf.js
@@ -1534,7 +1534,7 @@ config.bind('<Ctrl-Shift-n>', 'tab-move +')
 
 ## Bindings for insert mode
 # config.bind('<Ctrl-E>', 'open-editor', mode='insert')
-config.bind('<Ctrl-i>', 'open-editor', mode='insert')
+config.bind('<Ctrl-i>', 'edit-text', mode='insert')
 # config.bind('<Escape>', 'leave-mode', mode='insert')
 config.bind('<Escape>', 'mode-leave ;; jseval -q document.activeElement.blur()', mode='insert')
 # config.bind('<Shift-Ins>', 'insert-text {primary}', mode='insert')
