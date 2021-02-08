@@ -658,6 +658,7 @@ c.content.ssl_strict = False
 ## A list of user stylesheet filenames to use.
 ## Type: List of File, or File
 # c.content.user_stylesheets = None
+c.content.user_stylesheets = ['my_custom_css.css']
 
 ## Enables or disables WebGL.
 ## Type: Bool
