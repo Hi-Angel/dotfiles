@@ -1536,6 +1536,7 @@ config.bind('<Ctrl-Shift-n>', 'tab-move +')
 # config.bind('<Ctrl-E>', 'open-editor', mode='insert')
 config.bind('<Ctrl-i>', 'open-editor', mode='insert')
 # config.bind('<Escape>', 'leave-mode', mode='insert')
+config.bind('<Escape>', 'mode-leave ;; jseval -q document.activeElement.blur()', mode='insert')
 # config.bind('<Shift-Ins>', 'insert-text {primary}', mode='insert')
 
 ## Bindings for passthrough mode
