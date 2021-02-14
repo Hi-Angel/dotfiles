@@ -1,5 +1,5 @@
 ;; only run garbage collection on idle
-(setq gc-cons-threshold most-positive-fixnum)
+(setq gc-cons-threshold (* 1024 1024 1024))
 (run-with-idle-timer 2 t (lambda () (garbage-collect)))
 
 ;;;; I set defaults in early-init rather than in .emacs to not waste CPU cycles
