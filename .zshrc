@@ -127,6 +127,16 @@ function del_lines() {
 	$ack_binary -l --print0 "$pattern" $@ | xargs -r0 perl -i -ne 'BEGIN { $re = shift } print if not m/$re/' ${pattern}
 }
 
+# Logs while a command is running. Usage example `log_with 'journalctl -f > 1' 'ping localhost'`.
+function log_with() (
+	local log_cmd=$1
+	local exec_cmd=$2
+    sh -c "$log_cmd" &
+    local log_pid=$!
+    trap 'kill "$log_pid"' EXIT
+    eval "$exec_cmd"
+)
+
 # adds reviwed-by to n commits
 function git_rb() {
     # export arguments, otherwise they're not visible to inline shell executions
