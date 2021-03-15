@@ -116,7 +116,7 @@ function sed_perl() {
 	local from=$1
 	local to=$2
 	shift 2
-	$ack_binary -l --print0 "$from" $@ | xargs -r0 perl -Mutf8 -i -CS -pe "s α${from}α${to}αg"
+	$ack_binary -l --print0 "$from" "$@" | xargs -r0 perl -Mutf8 -i -CS -pe "s α${from}α${to}αg"
 }
 alias sp=sed_perl
 
@@ -124,7 +124,7 @@ alias sp=sed_perl
 function del_lines() {
 	local pattern=$1
 	shift 1
-	$ack_binary -l --print0 "$pattern" $@ | xargs -r0 perl -i -ne 'BEGIN { $re = shift } print if not m/$re/' ${pattern}
+	$ack_binary -l --print0 "$pattern" "$@" | xargs -r0 perl -i -ne 'BEGIN { $re = shift } print if not m/$re/' ${pattern}
 }
 
 # Logs while a command is running. Usage example `log_with 'journalctl -f > 1' 'ping localhost'`.
@@ -157,7 +157,7 @@ function rebase-at() {
        return -1
     fi
     shift 1
-    GIT_EDITOR="sed -i -E \"1s/\w+/$action/\"" git rebase -i $@
+    GIT_EDITOR="sed -i -E \"1s/\w+/$action/\"" git rebase -i "$@"
 }
 
 function cs() {
