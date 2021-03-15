@@ -7,9 +7,9 @@
     # Note: the diffr by default seems to be using black letters on dark background,
     # see https://github.com/mookid/diffr/issues/31 Override the color with
     # `--colors` option to white instead
-	log  = diffr --colors refine-added:foreground:white --colors refine-removed:foreground:white | less
-	show = diffr --colors refine-added:foreground:white --colors refine-removed:foreground:white | less
-	diff = diffr --colors refine-added:foreground:white --colors refine-removed:foreground:white | less
+	log  = diffr --line-numbers --colors refine-added:foreground:white --colors refine-removed:foreground:white | less
+	show = diffr --line-numbers --colors refine-added:foreground:white --colors refine-removed:foreground:white | less
+	diff = diffr --line-numbers --colors refine-added:foreground:white --colors refine-removed:foreground:white | less
 [user]
 	email = Hi-Angel@yandex.ru
 	name = Konstantin Kharlamov
