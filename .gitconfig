@@ -31,5 +31,8 @@
 	ret = checkout @{-1}
     lastbranches = "!git for-each-ref --sort='-committerdate:iso8601' --format=' %(committerdate:relative)%09%(refname:short)' refs/heads | less"
     newbranch = "!f() { git checkout -b $1 upstream/master; }; f"
+    # find duplicate files from the current folder (credits to: https://stackoverflow.com/a/8408640/2388257)
+    dups = !"cd `pwd`/$GIT_PREFIX && git ls-tree -r HEAD | cut -c 13- | sort | uniq -D -w 40"
+
 [rebase]
 	stat = true
