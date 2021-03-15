@@ -149,12 +149,12 @@ function git_rb() {
 # rebase-at <action> <comit-ids-and-co>
 function rebase-at() {
     local action=$1
-    if [[ $(expr substr $action 1 1) == "r" ]] then
+    if [[ $(expr substr $action 1 1) == "r" ]]; then
        # BUG: when you call "reword", git calls GIT_EDITOR twice, the second one to
        # allow you to edit the commit. But since we set GIT_EDITOR to sed, it simply
        # messes up the text and exits. It's not yet clear how to work around that.
        echo 'reword action is not yet supported, please use "git rebase -i" manually'
-       return -1
+       return 1
     fi
     shift 1
     GIT_EDITOR="sed -i -E \"1s/\w+/$action/\"" git rebase -i "$@"
