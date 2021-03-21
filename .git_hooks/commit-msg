@@ -42,7 +42,8 @@ is not marked as WIP
     lines_added_cache = re.findall(tbms_added, cached_diff, flags=re.MULTILINE)
     lines_removed_cache = re.findall(tbms_removed, cached_diff, flags=re.MULTILINE)
     if is_amend():
-        commit_diff = '\n'.join(run_cmd('git diff HEAD^'))
+        # initialize `--pretty=` with nothingness to make sure only diff is printed
+        commit_diff = '\n'.join(run_cmd('git log -1 -p --pretty='))
         lines_added =  lines_added_cache + re.findall(tbms_added, commit_diff, flags=re.MULTILINE)
         lines_removed =  lines_removed_cache + re.findall(tbms_removed, commit_diff, flags=re.MULTILINE)
         if len(lines_added) > len(lines_removed):
