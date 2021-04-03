@@ -20,10 +20,11 @@ def run_cmd_no_fail(cmd: str):
     return (ret.stdout.decode('utf-8').split('\n'), ret.returncode)
 
 def run_cmd(cmd: str) -> List[str]:
-    ret = subprocess.run(cmd.split(), stdout=subprocess.PIPE)
+    ret = subprocess.run(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout = ret.stdout.decode('utf-8')
+    stderr = ret.stderr.decode('utf-8')
     if ret.returncode != 0:
-        raise Exception(f'cmd {cmd} returned error. stdout was {stdout}')
+        raise Exception(f'cmd {cmd} returned error. stdout was {stdout}\n. stderr was: {stderr}')
     return stdout.split('\n') if len(stdout) > 0 else []
 
 def run_cmd_shell(cmd: str) -> List[str]:
