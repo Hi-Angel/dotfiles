@@ -180,7 +180,7 @@ function c() {
     fi
 }
 
-alias rc="git add -u && git rebase --continue"
+alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
 alias cax="git add -u && git commit --amend -v --no-edit"
 alias po="git push origin HEAD"
