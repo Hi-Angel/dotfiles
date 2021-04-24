@@ -716,7 +716,7 @@ c.content.user_stylesheets = ['my_custom_css.css']
 ## Type: ShellCommand
 # c.editor.command = ['gvim', '-f', '{}']
 #c.editor.command = ['gvim', '-c', 'set spell spelllang=en_us', '-f', '{}']
-c.editor.command = ['emacsclient', '-c', '{}']
+c.editor.command = ['emacsclient', '--eval', '(progn (find-file "{}") (markdown-mode) (select-frame-set-input-focus (selected-frame)))', '-c']
 
 ## Encoding to use for the editor.
 ## Type: Encoding
