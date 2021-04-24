@@ -653,7 +653,7 @@ c.content.pdfjs = True
 ##   - true
 ##   - false
 ##   - ask
-c.content.ssl_strict = False
+c.content.tls.certificate_errors = 'load-insecurely'
 
 ## A list of user stylesheet filenames to use.
 ## Type: List of File, or File
