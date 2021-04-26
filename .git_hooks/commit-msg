@@ -49,7 +49,7 @@ is not marked as WIP
         if len(lines_added) > len(lines_removed):
             lines_w_mark = str(lines_added) + str(lines_removed)
     else:
-        if len(lines_added_cache) != len(lines_removed_cache):
+        if len(lines_added_cache) > len(lines_removed_cache):
             lines_w_mark = str(lines_added_cache) + str(lines_removed_cache)
     if lines_w_mark is not None and not commit_msg_split[0].lower().startswith('wip:'):
         print(f'ERR: A line that contains aTBM was found, mark your commit as WIP. Line: {lines_w_mark}')
