@@ -925,6 +925,7 @@ Version 2015-04-12"
   ;;          ;; (put-text-property start end 'face `(:weight ,'bold))
   ;;          (put-text-property start end 'color-identifiers:fontified t))))
   ;;    limit))
+  (setq-default color-identifiers:timer 2)
   (global-color-identifiers-mode 1) ;; semantic highlight of variables
 )
 
