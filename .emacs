@@ -339,10 +339,20 @@ backward, so you can mutate text forward"
   ;; upcase ones, that as good as avy allows.
   )
 
+(defun evil-lsp-find-definition (_string _position)
+  (condition-case nil
+      (lsp-find-definition)
+    ('error nil)
+    (:success t)))
+
 (use-package emvil ;; my Evil config, in a separate file
   :init
   (setq evil-jumps-cross-buffers nil)
   (setq-default evil-shift-round nil) ;; make '>' not to round the indentation
+  (setq-default evil-goto-definition-functions '(evil-lsp-find-definition
+                                                 evil-goto-definition-imenu
+                                                 evil-goto-definition-xref
+                                                 evil-goto-definition-search))
 
   :config
   ;; disable undo-tree-mode mandated by Evil as it's broken (see "unrecognized
