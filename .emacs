@@ -120,6 +120,7 @@
 (add-to-list 'auto-mode-alist '("\\.service\\'" . conf-mode))
 
 (defun sort-lines-nocase (beg end)
+  (defvar sort-fold-case nil)
   (let ((sort-fold-case t))
     (sort-lines nil beg end)))
 
