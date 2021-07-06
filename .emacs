@@ -1303,6 +1303,15 @@ indentation is implemented there"
 (setq bidi-inhibit-bpa t)
 (setq-default bidi-paragraph-direction 'left-to-right)
 
+(defun insert-markdown-spoiler ()
+  (interactive)
+  (insert "
+<details>
+    <summary>Details</summary>
+
+    Text here. A mandatory empty line above, otherwise markdown misrenders it.
+</details>"))
+
 (defun insert-markdown-issue-template ()
   (interactive)
   (insert "
