@@ -1302,3 +1302,21 @@ indentation is implemented there"
 ;; Don't care about bidirectional text. These settings make processing long lines faster.
 (setq bidi-inhibit-bpa t)
 (setq-default bidi-paragraph-direction 'left-to-right)
+
+(defun insert-markdown-issue-template ()
+  (interactive)
+  (insert "
+# Steps to reproduce
+
+
+
+## Expected
+
+
+
+## Actual
+
+
+
+# Additional information
+"))
