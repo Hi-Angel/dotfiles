@@ -1267,8 +1267,11 @@ indentation is implemented there"
   :init
   ;; I prefer default indentation functional
   (setq lsp-enable-indentation nil)
-   ;; disable "path in project + in class hierarchy" header
+   ;; disable "path in project + in class hierarchy" header. Not useful to me.
   (setq lsp-headerline-breadcrumb-enable nil)
+  ;; don't show signature/docs in the minibuffer. For me it's almost never useful; at
+  ;; the same time, I find annoying that it overrides flycheck messages.
+  (setq lsp-eldoc-enable-hover nil)
   :config
 
   (defun myactionsfor-lsp-mode-hook ()
