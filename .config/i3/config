@@ -277,3 +277,5 @@ for_window [instance="s3browser-win32.exe" class="Wine"] floating enable
 # do not tile/resize tile `apitrace replay`
 for_window [title="glretrace"] floating enable; border none
 
+# I use it to suspend PC and make sure it wakes up at the given time
+bindsym $mod+Pause exec --no-startup-id rtcwake -m mem --date 08:55
