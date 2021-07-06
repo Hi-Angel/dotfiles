@@ -240,6 +240,10 @@ for_window [title="Desktop — Plasma"] kill; floating enable; border none
 
 ### END of  KDE/Plasma compatibility improvements
 
+# skype has various windows it automatically switches in between during the
+# call, and it annoys to make them floating
+for_window [class="Skype"] floating enable; border none
+
 # my additions
 new_window none # remove title and border
 bindsym Pause exec --no-startup-id dbus-send --print-reply --system --dest=org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager.Suspend boolean:true
