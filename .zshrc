@@ -180,6 +180,7 @@ function c() {
     fi
 }
 
+alias gd="git diff -p --stat"
 alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
 alias cax="git add -u && git commit --amend -v --no-edit"
@@ -189,7 +190,7 @@ alias or="git pull origin   HEAD --rebase"
 alias ur="git pull upstream HEAD --rebase"
 alias co="git checkout"
 alias l="git l"
-alias lp="git log -p"
+alias lp="git log -p --stat"
 
 # I often find useful being able to peek at command timestamps in the scrollback
 PROMPT='%{$fg[yellow]%}[%D{%d.%m.%Y-%H:%M:%S}] '$PROMPT
