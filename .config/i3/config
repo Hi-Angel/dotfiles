@@ -269,3 +269,7 @@ exec --no-startup-id setxkbmap -option compose:menu
 #exec hexchat
 #exec XDG_CURRENT_DESKTOP=gnome QT_QPA_PLATFORMTHEME=qt5ct kmail
 for_window [instance="s3browser-win32.exe" class="Wine"] floating enable
+
+# do not tile/resize tile `apitrace replay`
+for_window [title="glretrace"] floating enable; border none
+
