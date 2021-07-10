@@ -1329,3 +1329,11 @@ indentation is implemented there"
 
 # Additional information
 "))
+
+(defun fill-paragraph-or-region ()
+  (interactive)
+  (if (region-active-p)
+      (fill-region (region-beginning) (region-end))
+    (fill-paragraph))
+  )
+(global-set-key (kbd "M-q") 'fill-paragraph-or-region)
