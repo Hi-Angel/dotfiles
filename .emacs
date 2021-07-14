@@ -358,7 +358,9 @@ backward, so you can mutate text forward"
   :config
   ;; disable undo-tree-mode mandated by Evil as it's broken (see "unrecognized
   ;; entry in undo list" on the internet), and use undo-fu instead.
-  (global-undo-tree-mode -1)
+  ;; UPD: apparently in newer release it's no longer mandatory, so check if it's even defined.
+  (when (boundp 'global-undo-tree-mode)
+    (global-undo-tree-mode -1))
   (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
   (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
   (bind-key "C-z"   'undo-fu-only-undo)
