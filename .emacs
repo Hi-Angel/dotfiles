@@ -105,14 +105,8 @@
   (yas-global-mode)
   )
 
-(use-package magit
-  ;; The sole reason I use magit is the auto-revert mode. But possibility the
-  ;; mode need will be needed right away is very small, so let's better lazy-load
-  ;; it after being idle for a little while.
-  :defer 10 ;; lazy-load after 2 seconds of being idle
-  :config
-  (magit-auto-revert-mode 1)
-  )
+;; automatically revert any buffeers, whose files changed on disk
+(global-auto-revert-mode 1)
 
 (add-to-list 'auto-mode-alist '("\\.mzn\\'" . minizinc-mode))
 (add-to-list 'auto-mode-alist '("\\.glade$\\'" . xml-mode))
