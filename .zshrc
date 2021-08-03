@@ -180,6 +180,10 @@ function c() {
     fi
 }
 
+function co_prev() {
+    git checkout HEAD^ "$@" && git reset
+}
+
 alias gd="git diff -p --stat"
 alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
