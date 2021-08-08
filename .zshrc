@@ -103,7 +103,6 @@ export EDITOR='vim'
 
 setopt HIST_IGNORE_ALL_DUPS
 setopt hist_reduce_blanks
-unsetopt share_history
 
 # completion for ninja command
 fpath=(~/.zsh/ninja-completion.zsh $fpath)
