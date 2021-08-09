@@ -105,15 +105,17 @@
   (yas-global-mode)
   )
 
-;; automatically revert any buffeers, whose files changed on disk
-(global-auto-revert-mode 1)
-
-;; Do not break markers in a buffer upon reverting a buffer. Details:
-;; https://github.com/magit/magit/issues/4442
-(setq revert-buffer-insert-file-contents-function 'revert-buffer-insert-file-contents-delicately)
-;; For some undocumented reason Emacs uses both inotify and polls on files. That's
-;; stupid, just a waste of resoureces, sure let's avoid that.
-(setq auto-revert-avoid-polling t)
+(use-package autorevert
+  :init
+  ;; Do not break markers in a buffer upon reverting a buffer. Details:
+  ;; https://github.com/magit/magit/issues/4442
+  (setq revert-buffer-insert-file-contents-function 'revert-buffer-insert-file-contents-delicately)
+  ;; For some undocumented reason Emacs uses both inotify and polls on files. That's
+  ;; stupid, just a waste of resoureces, sure let's avoid that.
+  (setq auto-revert-avoid-polling t)
+  :config
+  (global-auto-revert-mode 1) ;; automatically revert any buffeers, whose files changed on disk
+  )
 
 (add-to-list 'auto-mode-alist '("\\.mzn\\'" . minizinc-mode))
 (add-to-list 'auto-mode-alist '("\\.glade$\\'" . xml-mode))
