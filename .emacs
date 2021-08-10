@@ -1281,6 +1281,10 @@ indentation is implemented there"
   ;; don't show signature/docs in the minibuffer. For me it's almost never useful; at
   ;; the same time, I find annoying that it overrides flycheck messages.
   (setq lsp-eldoc-enable-hover nil)
+  ;; For these purposes I use symbol-overlay mode instead. Not that am against having
+  ;; the two at the same time, but due to some bug in either clangd or lsp-mode, on
+  ;; rare occasions I get the wrong symbol highlighted. So let's just disable that.
+  (setq lsp-enable-symbol-highlighting nil)
   :config
 
   (defun myactionsfor-lsp-mode-hook ()
