@@ -122,11 +122,11 @@
   )
 
 (add-list-to-list 'auto-mode-alist
-                  '(("\\.m$" . octave-mode)
-                    ("\\.service\\'" . conf-mode)
-                    ("\\PKGBUILD\\'" . sh-mode)
-                    ("\\.glade$\\'" . xml-mode)
-                    ("\\.mzn\\'" . minizinc-mode)
+                  '(("\\.m$"          . octave-mode)
+                    ("\\.service\\'"  . conf-mode)
+                    ("\\PKGBUILD\\'"  . sh-mode)
+                    ("\\.glade$\\'"   . xml-mode)
+                    ("\\.mzn\\'"      . minizinc-mode)
                     ))
 
 (defun sort-lines-nocase (beg end)
