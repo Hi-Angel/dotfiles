@@ -73,6 +73,11 @@
  '(smtpmail-smtp-server "smtp.yandex.com")
  '(smtpmail-smtp-service 25))
 
+(defun add-list-to-list (dst src)
+  "Similar to `add-to-list', but accepts a list as 2nd argument"
+  (set dst
+       (append (eval dst) src)))
+
 (use-package flycheck
   :defer t
   :init
@@ -93,9 +98,8 @@
   :bind ("s-/" . company-complete)
   :config
   (global-company-mode 1)
-  (add-to-list 'company-dabbrev-code-modes 'c++-mode)
-  (add-to-list 'company-dabbrev-code-modes 'c-mode)
-  (add-to-list 'company-dabbrev-code-modes 'php-mode)
+  (add-list-to-list 'company-dabbrev-code-modes
+                    '(c++-mode c-mode php-mode))
   (setq-default company-idle-delay 0.7) ;; delay before completition
   )
 
@@ -117,10 +121,13 @@
   (global-auto-revert-mode 1) ;; automatically revert any buffeers, whose files changed on disk
   )
 
-(add-to-list 'auto-mode-alist '("\\.mzn\\'" . minizinc-mode))
-(add-to-list 'auto-mode-alist '("\\.glade$\\'" . xml-mode))
-(add-to-list 'auto-mode-alist '("\\PKGBUILD\\'" . sh-mode))
-(add-to-list 'auto-mode-alist '("\\.service\\'" . conf-mode))
+(add-list-to-list 'auto-mode-alist
+                  '(("\\.m$" . octave-mode)
+                    ("\\.service\\'" . conf-mode)
+                    ("\\PKGBUILD\\'" . sh-mode)
+                    ("\\.glade$\\'" . xml-mode)
+                    ("\\.mzn\\'" . minizinc-mode)
+                    ))
 
 (defun sort-lines-nocase (beg end)
   (defvar sort-fold-case nil)
@@ -867,10 +874,6 @@ Version 2015-04-12"
 " "" nil (region-beginning) (region-end)))
 	(just-one-space)))
 (bind-key "M-<SPC>" 'just-one-space-region)
-
-;; .m is octave mode
-(setq auto-mode-alist (append '(("\\.m$" . octave-mode))
-      auto-mode-alist))
 
 (setq-default enable-local-variables :all)
 
