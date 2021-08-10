@@ -111,12 +111,13 @@
 
 (use-package autorevert
   :init
-  ;; Do not break markers in a buffer upon reverting a buffer. Details:
-  ;; https://github.com/magit/magit/issues/4442
-  (setq revert-buffer-insert-file-contents-function 'revert-buffer-insert-file-contents-delicately)
-  ;; For some undocumented reason Emacs uses both inotify and polls on files. That's
-  ;; stupid, just a waste of resoureces, sure let's avoid that.
-  (setq auto-revert-avoid-polling t)
+  (setq
+   ;; Do not break markers in a buffer upon reverting a buffer. Details:
+   ;; https://github.com/magit/magit/issues/4442
+   revert-buffer-insert-file-contents-function 'revert-buffer-insert-file-contents-delicately
+   ;; For some undocumented reason Emacs uses both inotify and polls on
+   ;; files. That's stupid, just a waste of resoureces, sure let's avoid that.
+   auto-revert-avoid-polling t)
   :config
   (global-auto-revert-mode 1) ;; automatically revert any buffeers, whose files changed on disk
   )
@@ -610,8 +611,8 @@ in a few lines, and puts the cursor at the middle line"
 (use-package smartparens-config
   :init
   (setq-default sp-autoskip-closing-pair t) ;; skip only when pair is active
-  (setq sp-show-pair-from-inside t)
-  (setq sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
+  (setq sp-show-pair-from-inside t
+        sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
   :config
   (use-package sp-sublimetext-like) ;; sublime-like behavior of smartparens
   (smartparens-global-mode 1)
@@ -734,8 +735,8 @@ languages with similar syntax"
   :bind ("s-`" . symbol-overlay-put)
   :defer nil ;; :bind implies `defer t', override it
   :init
-  (setq symbol-overlay-ignore-functions nil)     ;; don't ignore keywords in various languages
-  (setq symbol-overlay-map (make-sparse-keymap)) ;; disable special cmds on overlays
+  (setq symbol-overlay-ignore-functions nil      ;; don't ignore keywords in various languages
+        symbol-overlay-map (make-sparse-keymap)) ;; disable special cmds on overlays
   (defun enable-symbol-overlay-mode ()
     (unless (or (minibufferp)
                 (derived-mode-p 'magit-mode)
@@ -1274,17 +1275,19 @@ indentation is implemented there"
 (use-package lsp-mode
   :defer t
   :init
-  ;; I prefer default indentation functional
-  (setq lsp-enable-indentation nil)
-   ;; disable "path in project + in class hierarchy" header. Not useful to me.
-  (setq lsp-headerline-breadcrumb-enable nil)
-  ;; don't show signature/docs in the minibuffer. For me it's almost never useful; at
-  ;; the same time, I find annoying that it overrides flycheck messages.
-  (setq lsp-eldoc-enable-hover nil)
-  ;; For these purposes I use symbol-overlay mode instead. Not that am against having
-  ;; the two at the same time, but due to some bug in either clangd or lsp-mode, on
-  ;; rare occasions I get the wrong symbol highlighted. So let's just disable that.
-  (setq lsp-enable-symbol-highlighting nil)
+  (setq lsp-enable-indentation nil ;; I prefer default indentation functional
+
+        ;; disable "path in project + in class hierarchy" header. Not useful to me.
+        lsp-headerline-breadcrumb-enable nil
+
+        ;; don't show signature/docs in the minibuffer. For me it's almost never useful; at
+        ;; the same time, I find annoying that it overrides flycheck messages.
+        lsp-eldoc-enable-hover nil
+
+        ;; For these purposes I use symbol-overlay mode instead. Not that am against having
+        ;; the two at the same time, but due to some bug in either clangd or lsp-mode, on
+        ;; rare occasions I get the wrong symbol highlighted. So let's just disable that.
+        lsp-enable-symbol-highlighting nil)
   :config
 
   (defun myactionsfor-lsp-mode-hook ()
