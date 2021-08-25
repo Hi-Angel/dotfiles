@@ -314,7 +314,11 @@ opening symbol, thus the function seeks only the closing"
         (setq flycheck-clang-language-standard "c11")
       (setq flycheck-clang-language-standard "c++17"))
     ))
-(add-hook 'c-mode-common-hook 'myactionsfor-c-mode-common-hook)
+
+(use-package cc-mode
+  :defer t
+  :hook (c-mode-common . myactionsfor-c-mode-common-hook)
+  )
 
 (defun exec-cmd-foreach-backward (regex cmd begin end)
   "Executes a command for every match of group #1. Searches
