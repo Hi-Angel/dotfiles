@@ -338,16 +338,16 @@ backward, so you can mutate text forward"
   (c-set-offset 'innamespace '+)
   )
 
-;;in term-mode the «yas» have no a sense, plus causes a problem with <tab>. So disable it.
-(add-hook 'term-mode-hook (lambda()
-							(yas-minor-mode -1)
-							;; (global-set-key (kbd "<RET>")
-							;; 				'(lambda ()
-							;; 				   (comint-truncate-buffer)
-							;; 				   (term-send-input)
-							;; 				   ))
-							))
-
+(use-package term
+  :defer t
+  :config
+  (yas-minor-mode -1) ;; useless in term-mode, and causes troubles with <tab>
+  ;; (global-set-key (kbd "<RET>")
+  ;; 				'(lambda ()
+  ;; 				   (comint-truncate-buffer)
+  ;; 				   (term-send-input)
+  ;; 				   ))
+  )
 
 (use-package avy
   :config
