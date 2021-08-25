@@ -96,12 +96,13 @@
 (use-package company
   :defer nil ;; :bind implies `defer t', override it
   :bind ("s-/" . company-complete)
+  :init
+  (setq company-minimum-prefix-length 3
+        company-idle-delay 0.2) ;; delay before completition
   :config
   (global-company-mode 1)
   (add-list-to-list 'company-dabbrev-code-modes
                     '(c++-mode c-mode php-mode))
-  (setq company-minimum-prefix-length 3)
-  (setq-default company-idle-delay 0.7) ;; delay before completition
   )
 
 (use-package yasnippet
