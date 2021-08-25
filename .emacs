@@ -100,6 +100,7 @@
   (global-company-mode 1)
   (add-list-to-list 'company-dabbrev-code-modes
                     '(c++-mode c-mode php-mode))
+  (setq company-minimum-prefix-length 3)
   (setq-default company-idle-delay 0.7) ;; delay before completition
   )
 
@@ -753,7 +754,6 @@ languages with similar syntax"
 
 (defun myfunc-text-mode ()
   (set (make-local-variable 'company-idle-delay) 0.3)
-  (set (make-local-variable 'company-minimum-prefix-length) 3)
   )
 (add-hook 'text-mode-hook 'myfunc-text-mode)
 
