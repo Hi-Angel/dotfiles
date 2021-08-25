@@ -1354,3 +1354,17 @@ indentation is implemented there"
     (fill-paragraph))
   )
 (global-set-key (kbd "M-q") 'fill-paragraph-or-region)
+
+;;;; notify-if-file-modified BEGIN
+(defun notify-if-file-modified (_ _)
+  "Check if a file on disk changed before changing the buffer"
+  (unless (buffer-modified-p)
+    (let ((file-name (buffer-file-name)))
+      (when file-name
+        (find-file file-name)))))
+(defun enable-notify-if-file-modified ()
+  ;; before-change-functions is a buffer local var, so hook it up when a file is opened
+  (add-to-list 'before-change-functions 'notify-if-file-modified)
+  )
+(add-to-list 'find-file-hook 'enable-notify-if-file-modified)
+;;;; notify-if-file-modified END
