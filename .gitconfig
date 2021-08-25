@@ -26,7 +26,7 @@
 [difftool]
 	prompt = false
 [alias]
-	grep1 = "!git --no-pager grep"
+	grep1 = "!git --no-pager grep -In"
 	d = difftool
 	l = "log --format=\"%cd %an, %h:\t[34m%s[0m\""
 	ret = checkout @{-1}
