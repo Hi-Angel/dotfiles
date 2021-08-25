@@ -103,6 +103,8 @@ export EDITOR='vim'
 
 setopt HIST_IGNORE_ALL_DUPS
 setopt hist_reduce_blanks
+setopt INC_APPEND_HISTORY # append history during the session, but do not load the file
+unsetopt sharehistory # it's set elsewhere (perhaps oh-my-zsh?), disable it.
 
 # completion for ninja command
 fpath=(~/.zsh/ninja-completion.zsh $fpath)
