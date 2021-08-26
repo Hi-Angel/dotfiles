@@ -338,8 +338,10 @@ backward, so you can mutate text forward"
 (use-package csharp
   :defer t
   :config
-  (flycheck-mode -1) ;; disable, it for some reason lags with C#
-  (c-set-offset 'innamespace '+)
+  (defun myhook-csharp-mode ()
+    (flycheck-mode -1) ;; for some reason it lags with C#
+    (c-set-offset 'innamespace '+))
+  :hook (csharp-mode . myhook-csharp-mode)
   )
 
 (use-package term
