@@ -334,12 +334,14 @@ backward, so you can mutate text forward"
   (exec-cmd-foreach-backward ",\\( \\)" 'newline-and-indent
                              (region-beginning) (region-end)))
 
-(use-package csharp
+(use-package csharp-mode
   :defer t
   :config
   (defun myhook-csharp-mode ()
     (flycheck-mode -1) ;; for some reason it lags with C#
-    (c-set-offset 'innamespace '+))
+    (c-set-offset 'innamespace '+)
+    (make-local-variable 'before-save-hook)
+    (add-hook 'before-save-hook 'csharp-sort-usings))
   :hook (csharp-mode . myhook-csharp-mode)
   )
 
@@ -722,8 +724,6 @@ languages with similar syntax"
          (delete-trailing-whitespace))
        ;; (when (derived-mode-p 'c-mode 'c++-mode)
        ;; 	 (c-sort-includes))
-       (when (derived-mode-p 'csharp-mode)
-         (csharp-sort-usings))
        )
 (add-hook 'before-save-hook 'myfunc-before-save-hook)
 
