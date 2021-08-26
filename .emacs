@@ -304,7 +304,6 @@ opening symbol, thus the function seeks only the closing"
 ;; END: make underscore part of a word
 
 (defun myactionsfor-c-mode-common-hook ()
-  (c-set-offset 'case-label '+)
   (fix-c-style-indentation)
   (turn-on-auto-fill) ;;auto fill mode for c modes.
   (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'csharp-mode 'lua-mode)
@@ -439,6 +438,7 @@ backward, so you can mutate text forward"
 	  c-basic-offset 4)
 (defun fix-c-style-indentation ()
   "Fixes indentation for c-like langs"
+  (c-set-offset 'case-label '+)
   (c-set-offset 'innamespace 0);;don't indent namespaces
   (c-set-offset 'func-decl-cont 0)
   (c-set-offset 'cpp-macro 0 nil)
