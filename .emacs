@@ -757,10 +757,13 @@ languages with similar syntax"
   (global-symbol-overlay-mode)
   )
 
-(defun myfunc-text-mode ()
-  (set (make-local-variable 'company-idle-delay) 0.3)
+(use-package text-mode
+  :defer t
+  :init
+  (defun myfunc-text-mode ()
+    (set (make-local-variable 'company-minimum-prefix-length) 2))
+  :hook (text-mode . myfunc-text-mode)
   )
-(add-hook 'text-mode-hook 'myfunc-text-mode)
 
 (defun myfunc-gud-gdb-mode ()
   (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)
