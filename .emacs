@@ -827,7 +827,7 @@ Version 2015-04-12"
 
 (use-package haskell-mode
   :defer t
-  :init
+  :config
   (defun haskell-sort-n-align-imports ()
     "Sorts and aligns Haskell imports"
     (interactive)
@@ -838,17 +838,12 @@ Version 2015-04-12"
                   ))
       (haskell-sort-imports)))
 
-  (defun haskell-before-save-hook ()
-    (when (derived-mode-p 'haskell-mode)
-      (haskell-sort-n-align-imports))
-    )
-  (add-hook 'before-save-hook 'haskell-before-save-hook)
-
-  :config
-  (defun myactions-haskell-mode-hook ()
+  (defun myhook-haskell-mode ()
     (haskell-indent-mode)
-    )
+    (make-local-variable 'before-save-hook)
+    (add-hook 'before-save-hook 'haskell-sort-n-align-imports))
   (add-hook 'haskell-mode-hook 'myactions-haskell-mode-hook)
+  :hook (haskell-mode . myhook-haskell-mode)
   )
 
 (use-package shell
