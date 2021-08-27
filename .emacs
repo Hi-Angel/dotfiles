@@ -852,7 +852,7 @@ Version 2015-04-12"
   (defun myfunc-shell-mode ()
     (flycheck-mode 1)
     )
-  (add-hook 'shell-mode-hook 'myfunc-shell-mode)
+  :hook (shell-mode . myfunc-shell-mode)
   )
 
 (use-package markdown-mode
