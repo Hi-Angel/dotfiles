@@ -84,8 +84,8 @@
   (setq flycheck-check-syntax-automatically '(save)) ;; I only want it on save
   :config
   (defun myactions-flycheck-mode-hook ()
-    (when (bound-and-true-p flycheck-mode) ;; flycheck hooks is called upon disabling it
-      (when (bound-and-true-p haskell-mode)
+    (when (and (bound-and-true-p flycheck-mode) ;; flycheck hooks is called upon disabling it
+               (bound-and-true-p haskell-mode)
         (flycheck-haskell-setup))
       ))
   (add-hook 'flycheck-mode-hook 'myactions-flycheck-mode-hook)
