@@ -856,6 +856,14 @@ Version 2015-04-12"
   :hook (shell-mode . myfunc-shell-mode)
   )
 
+(use-package ispell
+  :defer t
+  :init
+  ;; It's unclear if the default aspell supports multiple langs at once, but Emacs
+  ;; with aspel backend doesn't. Let's use hunspell instead.
+  (setq ispell-program-name "hunspell")
+  )
+
 (use-package markdown-mode
   :defer t
   :init
@@ -864,7 +872,9 @@ Version 2015-04-12"
   (defun myfunc-markdown-mode ()
     (setq case-fold-search t) ;; ignore case in search
     (set (make-local-variable 'dabbrev-upcase-means-case-search) nil) ;; ignore case
-    (ispell-change-dictionary "english")
+    (ispell-set-spellchecker-params) ;; ispell initialization, a mandatory call
+    (ispell-hunspell-add-multi-dic "en_US,ru_RU")
+    (ispell-change-dictionary "en_US,ru_RU")
     (flyspell-mode)
     )
   (add-hook 'markdown-mode-hook 'myfunc-markdown-mode)
