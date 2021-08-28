@@ -1326,6 +1326,24 @@ indentation is implemented there"
 (setq bidi-inhibit-bpa t)
 (setq-default bidi-paragraph-direction 'left-to-right)
 
+(defun insert-redmine-issue-template ()
+  (interactive)
+  (insert "
+h1. Шаги к воспроизведению
+
+
+
+h2. Ожидается
+
+
+
+h2. На самом деле
+
+
+
+h1. Доп. информация
+"))
+
 (defun insert-markdown-spoiler ()
   (interactive)
   (insert "
