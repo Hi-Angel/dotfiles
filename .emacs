@@ -721,11 +721,11 @@ languages with similar syntax"
   )
 
 (defun myfunc-before-save-hook ()
-       (unless (derived-mode-p 'diff-mode)
-         (delete-trailing-whitespace))
-       ;; (when (derived-mode-p 'c-mode 'c++-mode)
-       ;; 	 (c-sort-includes))
-       )
+  (unless (derived-mode-p 'diff-mode)
+    (delete-trailing-whitespace))
+  ;; (when (derived-mode-p 'c-mode 'c++-mode)
+  ;; 	 (c-sort-includes))
+  )
 (add-hook 'before-save-hook 'myfunc-before-save-hook)
 
 (use-package rust-mode
