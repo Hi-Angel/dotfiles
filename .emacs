@@ -862,7 +862,6 @@ Version 2015-04-12"
     (setq-default markdown-enable-math t) ;; enable latex delimiters
   :config
   (defun myfunc-markdown-mode ()
-    (set (make-local-variable 'company-idle-delay) 0.3) ;; delay before completition
     (setq case-fold-search t) ;; ignore case in search
     (set (make-local-variable 'dabbrev-upcase-means-case-search) nil) ;; ignore case
     (ispell-change-dictionary "english")
