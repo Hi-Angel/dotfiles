@@ -1382,9 +1382,9 @@ h1. Доп. информация
 ;;;; notify-if-file-modified BEGIN
 (defun notify-if-file-modified (_ _)
   "Check if a file on disk changed before changing the buffer"
-  (unless (or (buffer-modified-p)
+  (unless (or (verify-visited-file-modtime)
               (not (buffer-file-name)))
-    (revert-buffer t)))
+    (revert-buffer t t)))
 (defun enable-notify-if-file-modified ()
   ;; before-change-functions is a buffer local var, so hook it up when a file is opened
   (add-to-list 'before-change-functions 'notify-if-file-modified)
