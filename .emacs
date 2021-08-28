@@ -1364,10 +1364,9 @@ indentation is implemented there"
 ;;;; notify-if-file-modified BEGIN
 (defun notify-if-file-modified (_ _)
   "Check if a file on disk changed before changing the buffer"
-  (unless (buffer-modified-p)
-    (let ((file-name (buffer-file-name)))
-      (when file-name
-        (find-file file-name)))))
+  (unless (or (buffer-modified-p)
+              (not (buffer-file-name)))
+    (revert-buffer t)))
 (defun enable-notify-if-file-modified ()
   ;; before-change-functions is a buffer local var, so hook it up when a file is opened
   (add-to-list 'before-change-functions 'notify-if-file-modified)
