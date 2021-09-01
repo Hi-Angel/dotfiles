@@ -1402,3 +1402,14 @@ h1. Доп. информация
   )
 (add-to-list 'find-file-hook 'enable-notify-if-file-modified)
 ;;;; notify-if-file-modified END
+
+(use-package meson-mode
+  :defer t
+  :config
+  (defun myfunc-meson-mode-hook ()
+    (cl-assert (boundp 'company-backends)) ;; I always use company-mode
+    (set (make-local-variable 'company-backends) '(company-dabbrev))
+    (setq-local company-dabbrev-downcase t)
+    )
+  (add-hook 'meson-mode-hook 'myfunc-meson-mode-hook)
+  )
