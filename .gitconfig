@@ -38,3 +38,7 @@
 	writeReverseIndex = true
 [interactive]
     diffFilter = diffr --line-numbers aligned --colors refine-added:foreground:white --colors refine-removed:foreground:white
+[color "grep"]
+    linenumber = bold
+    match = bold brightred
+    filename = magenta
