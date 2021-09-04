@@ -731,11 +731,11 @@ languages with similar syntax"
 (use-package rust-mode
   :defer t
   :config
+  (cl-assert (boundp 'company-backends)) ;; I always use company-mode
   (defun myfunc-rust-mode-hook ()
     ;; note: if racer-mode breaks in some way (e.g. no more completions), do:
     ;; 1. `rustup component add rust-src` 2. `cargo +nightly install racer --force'
     (racer-mode)
-    (cl-assert (boundp 'company-backends)) ;; I always use company-mode
     (set (make-local-variable 'company-backends)
          '(company-capf company-etags company-dabbrev))
     )
@@ -1406,8 +1406,8 @@ h1. Доп. информация
 (use-package meson-mode
   :defer t
   :config
+  (cl-assert (boundp 'company-backends)) ;; I always use company-mode
   (defun myfunc-meson-mode-hook ()
-    (cl-assert (boundp 'company-backends)) ;; I always use company-mode
     (set (make-local-variable 'company-backends) '(company-dabbrev))
     (setq-local company-dabbrev-downcase t)
     )
