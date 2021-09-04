@@ -189,6 +189,7 @@ alias ur="git pull upstream HEAD --rebase"
 alias co="git checkout"
 alias l="git l"
 alias lp="git log -p --stat"
+alias gg="git --no-pager grep -In"
 
 # I often find useful being able to peek at command timestamps in the scrollback
 PROMPT='%{$fg[yellow]%}[%D{%d.%m.%Y-%H:%M:%S}] '$PROMPT
