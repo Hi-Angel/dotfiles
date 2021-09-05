@@ -12,6 +12,16 @@ if commit_msg_split[0] != "": # don't change anything for git commit --amend
 
 def last_dir_or_filename(filepath):
     path_units = filepath.split('/')
+    #### job addition ↓
+    if filepath.startswith('api/python/core/') or filepath.startswith('api/python/cli/'):
+        return 'baum-manager'
+    elif 'tests/tests/' in filepath:
+        return f'tests/{path_units[-1].split(".")[0]}'
+    elif 'gitlab-ci/' in filepath:
+        return 'gitlab-ci'
+    elif 'image/' in filepath:
+        return 'image'
+    #### job addition ↑
     list_to_prefer_filename = ['src', 'scripts']
     last_dir = path_units[-2] if len(path_units) > 2 else None
     # heuristics: if we have a path dir/src/file.x, then it's likely that
@@ -55,10 +65,14 @@ def maybe_repeat_title(fst_changed_file: str,
 (prev_commit_title, prev_commit_fst_changed_file) = get_prev_commit_stats()
 fst_changed_file = run_cmd("git diff --name-only --cached")[0]
 
+# this one is a switch for my current job workflow
+bug_number = (lambda: [maybe_bug := prev_commit_title.split(),
+                       f' {maybe_bug[-1]}' if maybe_bug and maybe_bug[-1].startswith('#') else ''])()[-1]
+
 prefix = maybe_repeat_title(fst_changed_file,
                             prev_commit_fst_changed_file,
                             prev_commit_title)
-commit_msg_split[0] = prefix
+commit_msg_split[0] = prefix + f': {bug_number}'
 
 insert_comment_w_prev_commit_title(commit_msg_split, prev_commit_title)
 
