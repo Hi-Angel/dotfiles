@@ -30,14 +30,35 @@ def insert_comment_w_prev_commit_title(commit_msg_split, prev_commit_title):
     else:
         commit_msg_split.insert(i_fst_comment, f'# {prev_commit_title}')
 
-(prev_commit_stdout, exitcode) = run_cmd_no_fail('git log -1 --format=%s') # exitcode != 0 means repo that has no commits yet
-prev_commit_title = '' if exitcode != 0 else prev_commit_stdout[0]
+def get_prev_commit_stats():
+    (prev_commit_stdout, exitcode) = run_cmd_no_fail('git log -1 --format=%s') # exitcode != 0 means repo that has no commits yet
+    prev_commit_title = '' if exitcode != 0 else prev_commit_stdout[0]
+    if exitcode == 0:
+        (prev_commit_fst_changed_file, exitcode) = run_cmd_no_fail('git log -1 --name-only --pretty=format:')
+        if exitcode != 0:
+            raise Exception('git log failed!')
+        return (prev_commit_title, prev_commit_fst_changed_file[0])
+    return ('', '')
 
+def maybe_repeat_title(fst_changed_file: str,
+                       prev_commit_fst_changed_file: str,
+                       prev_commit_title: str) -> str:
+    prefix_curr = last_dir_or_filename(fst_changed_file)
+    prefix_prev = prev_commit_title.split(':')[0]
+    if fst_changed_file == prev_commit_fst_changed_file \
+       and prefix_curr != prefix_prev:
+        # this means we didn't guess the prefix correctly, and user had to choose a
+        # different one. So take what user wrote back then
+        return prefix_prev
+    return prefix_curr
+
+(prev_commit_title, prev_commit_fst_changed_file) = get_prev_commit_stats()
 fst_changed_file = run_cmd("git diff --name-only --cached")[0]
 
-# more fine-grained logic (such as per project, and different conditions) can
-# be added
-commit_msg_split[0] = last_dir_or_filename(fst_changed_file) + ': '
+prefix = maybe_repeat_title(fst_changed_file,
+                            prev_commit_fst_changed_file,
+                            prev_commit_title)
+commit_msg_split[0] = prefix
 
 insert_comment_w_prev_commit_title(commit_msg_split, prev_commit_title)
 
