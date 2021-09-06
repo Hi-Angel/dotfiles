@@ -1413,3 +1413,5 @@ h1. Доп. информация
     )
   (add-hook 'meson-mode-hook 'myfunc-meson-mode-hook)
   )
+
+(use-package smerge-mode) ;; make smerge-vc-next-conflict always available
