@@ -918,7 +918,7 @@ Version 2015-04-12"
   (defun myfunc-color-identifiers-mode-hook ()
     (let ((faces '(font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-builtin-face font-lock-preprocessor-face font-lock-constant-face)))
       (dolist (face faces)
-        (face-remap-add-relative face '((:foreground "" :weight normal :slant normal)))))
+        (face-remap-add-relative face '(:inherit default))))
     (face-remap-add-relative 'font-lock-keyword-face '((:weight bold)))
     (face-remap-add-relative 'font-lock-builtin-face '((:weight bold)))
     (face-remap-add-relative 'font-lock-preprocessor-face '((:weight bold)))
