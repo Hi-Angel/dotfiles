@@ -388,6 +388,7 @@ backward, so you can mutate text forward"
     (global-undo-tree-mode -1))
   (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
   (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
+  (define-key evil-normal-state-map "\C-]" 'find-tag) ;; same as in insert mode
   (bind-key "C-z"   'undo-fu-only-undo)
   (bind-key "C-S-z" 'undo-fu-only-redo)
 
