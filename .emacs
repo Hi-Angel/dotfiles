@@ -412,6 +412,14 @@ backward, so you can mutate text forward"
     :config
     (evil-goggles-mode 1)
     )
+
+  (defun fill-paragraph-or-region ()
+    (interactive)
+    (if (region-active-p)
+        (fill-region (region-beginning) (region-end))
+      (fill-paragraph))
+    )
+  (define-key evil-normal-state-map (kbd "M-q") 'fill-paragraph-or-region)
   )
 
 (use-package ido
@@ -1384,14 +1392,6 @@ h1. Доп. информация
 
 # Additional information
 "))
-
-(defun fill-paragraph-or-region ()
-  (interactive)
-  (if (region-active-p)
-      (fill-region (region-beginning) (region-end))
-    (fill-paragraph))
-  )
-(global-set-key (kbd "M-q") 'fill-paragraph-or-region)
 
 ;;;; notify-if-file-modified BEGIN
 (defun notify-if-file-modified (_ _)
