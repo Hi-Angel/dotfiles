@@ -1418,3 +1418,11 @@ h1. Доп. информация
   )
 
 (use-package smerge-mode) ;; make smerge-vc-next-conflict always available
+
+(use-package diff-mode
+  :defer t
+  :init
+  ;; update-on-the-fly is broken https://debbugs.gnu.org/cgi/bugreport.cgi?bug=50762
+  ;; use old good recalculation upon saving the buffer
+  (setq diff-update-on-the-fly nil)
+  )
