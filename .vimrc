@@ -125,7 +125,6 @@ endfunction
 " tcpdump highlight
 call pathogen#infect()
 
-
 :set relativenumber  " turn relative line numbers on
 :set numberwidth=1 " to make vim to not align number to right very often
 
@@ -145,3 +144,6 @@ endfunction
 
 " copy selected
 vmap <C-c> "+y
+
+" highlight log files
+autocmd BufNewFile,BufRead *.log set syntax=messages
