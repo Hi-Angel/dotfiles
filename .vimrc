@@ -125,15 +125,15 @@ endfunction
 " tcpdump highlight
 call pathogen#infect()
 
-:set relativenumber  " turn relative line numbers on
-:set numberwidth=1 " to make vim to not align number to right very often
+set relativenumber  " turn relative line numbers on
+set numberwidth=1 " to make vim to not align number to right very often
 
-:set hlsearch " highlighting all search occurences
+set hlsearch " highlighting all search occurences
 
 " ---------
 " by default vim has bad aliasing functional, so use this instead
-:source ~/.vim/cmdalias.vim
-:Alias ack Ack
+source ~/.vim/cmdalias.vim
+Alias ack Ack
 noremap gs "jyiw:Ack <C-r>j .<CR>
 
 " Increment global variable i, and return it. Can be used in regexps
