@@ -14,6 +14,7 @@ seat * keep_keyboard_layout per_window
 #keep_keyboard_layout per_window
 
 input 2:7:SynPS/2_Synaptics_TouchPad {
+    natural_scroll enabled
 	tap enabled
 }
 
@@ -21,7 +22,8 @@ input 2:7:SynPS/2_Synaptics_TouchPad {
 # note: keyboard switch doesn't work for me in X11 :(
 input * {
 	xkb_layout "us,ru",
-	xkb_options "grp:alt_shift_toggle,compose:rwin,compose:menu"
+	#xkb_options "grp:alt_shift_toggle"
+	xkb_options "grp:alt_shift_toggle,grp_led:scroll,compose:menu"
 }
 
 output "*" background ~/Pictures/ANIME-PICTURES.NET_-_130164-1600x989-original-sakimichan-long+hair-wide+image-grey+hair-horn+%28horns%29.jpg fill
