@@ -372,6 +372,7 @@ backward, so you can mutate text forward"
     (:success t)))
 
 (use-package emvil ;; my Evil config, in a separate file
+  :ensure nil
   :init
   (setq evil-jumps-cross-buffers nil)
   (setq-default evil-shift-round nil) ;; make '>' not to round the indentation
@@ -633,12 +634,13 @@ in a few lines, and puts the cursor at the middle line"
   (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
 
 (use-package smartparens-config
+  :ensure nil
   :init
   (setq-default sp-autoskip-closing-pair t) ;; skip only when pair is active
   (setq sp-show-pair-from-inside t
         sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
   :config
-  (use-package sp-sublimetext-like) ;; sublime-like behavior of smartparens
+  (use-package sp-sublimetext-like :ensure nil) ;; sublime-like behavior of smartparens
   (smartparens-global-mode 1)
   (show-smartparens-global-mode 1)
 
@@ -773,6 +775,7 @@ languages with similar syntax"
 
 (use-package text-mode
   :defer t
+  :ensure nil
   :init
   (defun myfunc-text-mode ()
     (set (make-local-variable 'company-minimum-prefix-length) 2))
