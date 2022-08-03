@@ -276,7 +276,7 @@ bindsym Print exec spectacle
 #assign [class="Thunderbird"] $tag7
 #assign [class="qutebrowser"] $tag3
 
-exec --no-startup-id python ~/Projects/sway-scripts/inactive-window-transparency.py
+exec --no-startup-id python ~/.config/sway/inactive-windows-transparency.py
 
 # disable screen on inactivity
 exec --no-startup-id swayidle timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
