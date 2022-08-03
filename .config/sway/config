@@ -196,28 +196,19 @@ bindsym $mod+p mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        font pango: Monospace, FontAwesome 9
-		#font pango:Monospace, Font Awesome 5 Free Solid 9
-		#font pango:Monospace, Font Awesome 5 Brands, "Font Awesome 5 Free" 9
-        colors {
-	    background $transparent
-	    statusline $darkwhite
-	    separator $transparent
+    position top
 
-#                              Border           Background       Text
-	    focused_workspace  $transparent     $transparent     $darkwhite
-	    active_workspace   $transparent     $transparent     $darkgray
-	    inactive_workspace $transparent     $transparent     $darkgray
-	    urgent_workspace   $darkred         $darkred         $green
-        binding_mode       $darkred         $darkred         $darkwhite
-        }
-        position top
-        strip_workspace_numbers yes
+    # Keep in mind that the current directory of this config file is $HOME
+    status_command while ~/.config/sway/status.sh; do sleep 1; done
 
-	#i3bar_command i3bar
-        # status_command i3status -c ~/.i3/i3status.conf
-        status_command SCRIPT_DIR=/usr/lib/i3blocks i3blocks -c ~/.i3/i3blocks.conf
-		# status_command echo '{"version":1}[[],'; xtitle -s -f '[{"full_text": "%s"}],'
+    # https://i3wm.org/docs/userguide.html#_colors
+    colors {
+        # Text color of status bar
+        statusline #f8b500
+
+        # Background color of status bar
+        background #5e227f
+    }
 }
 
 # Colors          Border       Background Text
