@@ -1064,6 +1064,85 @@ Version 2015-04-12"
 ;; C++ regex to conver constructor args to initialization (assumes no types with spaces & commas)
 ;; \b[^,]+? \b\(.+?\)\b → \1(\1)
 
+;;;; VALA stuff
+;; I hack on vala stuff, and existing vala modes are so bad that it's better to
+;; derive some other mode
+(define-derived-mode vala-mode csharp-mode "Quick'n'dirty vala mode")
+(add-to-list 'auto-mode-alist '("\\.vala$" . vala-mode))
+
+;; the vanilla etags-goto-tag-location, but trims the pattern before match
+(defun etags-goto-tag-location (tag-info)
+  "Go to location of tag specified by TAG-INFO.
+TAG-INFO is a cons (TEXT LINE . POSITION).
+TEXT is the initial part of a line containing the tag.
+LINE is the line number.
+POSITION is the (one-based) char position of TEXT within the file.
+
+If TEXT is t, it means the tag refers to exactly LINE or POSITION,
+whichever is present, LINE having preference, no searching.
+Either LINE or POSITION can be nil.  POSITION is used if present.
+
+If the tag isn't exactly at the given position, then look near that
+position using a search window that expands progressively until it
+hits the start of file."
+  (let ((startpos (cdr (cdr tag-info)))
+	(line (car (cdr tag-info)))
+	offset pat)
+    (if (eq (car tag-info) t)
+	;; Direct file tag.
+	(cond (line (progn (goto-char (point-min))
+			   (forward-line (1- line))))
+	      (startpos (goto-char startpos))
+	      (t (error "etags.el BUG: bogus direct file tag")))
+      ;; This constant is 1/2 the initial search window.
+      ;; There is no sense in making it too small,
+      ;; since just going around the loop once probably
+      ;; costs about as much as searching 2000 chars.
+      (setq offset 1000
+            ;; Improve the match by trimming the pattern. It's
+            ;; impossible anyway that 2 tags would only differ by
+            ;; trailing whitespace.
+	    pat (regexp-quote (string-trim (car tag-info))))
+      ;; The character position in the tags table is 0-origin and counts CRs.
+      ;; Convert it to a 1-origin Emacs character position.
+      (when startpos
+        (setq startpos (1+ startpos))
+        (when (and line
+                   (eq 1 (coding-system-eol-type buffer-file-coding-system)))
+          ;; Act as if CRs were elided from all preceding lines.
+          ;; Although this doesn't always give exactly the correct position,
+          ;; it does typically improve the guess.
+          (setq startpos (- startpos (1- line)))))
+      ;; If no char pos was given, try the given line number.
+      (or startpos
+	  (if line
+	      (setq startpos (progn (goto-char (point-min))
+				    (forward-line (1- line))
+				    (point)))))
+      (or startpos
+	  (setq startpos (point-min)))
+      ;; First see if the tag is right at the specified location.
+      (goto-char startpos)
+      (setq found (looking-at pat))
+      (while (and (not found)
+		  (progn
+		    (goto-char (- startpos offset))
+		    (not (bobp))))
+	(setq found
+	      (re-search-forward pat (+ startpos offset) t)
+	      offset (* 3 offset)))	; expand search window
+      (or found
+	  (re-search-forward pat nil t)
+	  (user-error "Rerun etags: `%s' not found in %s"
+                      pat buffer-file-name)))
+    ;; Position point at the right place
+    ;; if the search string matched an extra Ctrl-m at the beginning.
+    (and (eq selective-display t)
+	 (looking-at "\^m")
+	 (forward-char 1))
+    (beginning-of-line)))
+;;;; END of VALA stuff
+
 ;;;; BUGS workarounds START
 ;; removes warning: backend company-capf error "Nothing to complete" with args (prefix)
 (defun et/semantic-remove-hooks ()
