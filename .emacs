@@ -65,7 +65,7 @@
    '("e9460a84d876da407d9e6accf9ceba453e2f86f8b86076f37c08ad155de8223c" "a1289424bbc0e9f9877aa2c9a03c7dfd2835ea51d8781a0bf9e2415101f70a7e" "54a63c60d03a025672ad021381a8bf96788c045908593d535fadb3695fd852c6" default))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(lsp-mode use-package avy evil-goggles racer undo-fu yaml-mode undo-tree xr symbol-overlay evil-magit smex winum company company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode rust-mode flycheck ess minizinc-mode atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode smartparens pretty-symbols lua-mode idomenu highlight-parentheses helm-company flycheck-haskell evil ctypes cmake-mode))
+   '(text-mode sp-sublimetext-like smartparens-config emvil autorevert avy evil-goggles undo-fu xr aggressive-fill-paragraph lsp-mode symbol-overlay evil evil-magit magit racer ## smex async go-mode winum company-ngram flycheck-rust php-mode htmlize csharp-mode meson-mode surround ess minizinc-mode rainbow-delimiters atom-dark-theme highlight-numbers color-identifiers-mode company-anaconda anaconda-mode markdown-mode yasnippet smartparens slime pretty-symbols paredit lua-mode idomenu highlight-parentheses helm-company emms ctypes company-c-headers cmake-mode autopair))
  '(semantic-imenu-bucketize-file nil)
  '(semantic-imenu-bucketize-type-members nil)
  '(semantic-imenu-buckets-to-submenu nil)
@@ -380,6 +380,7 @@ backward, so you can mutate text forward"
                                                  evil-goto-definition-imenu
                                                  evil-goto-definition-xref
                                                  evil-goto-definition-search))
+  (setq evil-undo-system 'undo-fu)
 
   :config
   ;; disable undo-tree-mode mandated by Evil as it's broken (see "unrecognized
@@ -422,6 +423,8 @@ backward, so you can mutate text forward"
     )
   (define-key evil-normal-state-map (kbd "M-q") 'fill-paragraph-or-region)
   )
+
+(use-package undo-fu)
 
 (use-package ido
   :init
