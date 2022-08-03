@@ -9,10 +9,6 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-#exec swaymsg "seat * keep_keyboard_layout per_window"
-seat * keep_keyboard_layout per_window
-#keep_keyboard_layout per_window
-
 input 2:7:SynPS/2_Synaptics_TouchPad {
     natural_scroll enabled
 	tap enabled
