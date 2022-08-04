@@ -11,7 +11,7 @@
 
 (bind-key "C-x C-c" nil) ;; I never use it, but do accidantally press
 
-(add-to-list 'load-path "/home/constantine/.emacs.d/lisp")
+(add-to-list 'load-path "~/.emacs.d/lisp")
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
