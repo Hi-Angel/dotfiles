@@ -1,5 +1,5 @@
 ;;; https://lists.ourproject.org/pipermail/implementations-list/2012-February/001513.html
-(require 'evil)
+(use-package evil)
 ;; remove all keybindings from insert-state keymap
 (setcdr evil-insert-state-map nil)
 ;; but [escape] should switch back to normal state
