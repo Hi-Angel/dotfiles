@@ -1,5 +1,22 @@
 ;;; -*- lexical-binding: t -*-
-;; this warns about replace-regexp, and I tried rewriting this function in terms of
+
+;;;; Installation of packages required by this config:
+;; It's unfortunately a bit involved, but not too much.
+;;
+;; 1. `emacs -Q', then evaluate (for older emacs (package-initialize)),
+;;   (push '("melpa" . "https://melpa.org/packages/") package-archives)
+;;   then `M-x package-list-packages', then install `use-package'
+;; 2. Insert at the top of .emacs:
+;;   (require 'use-package-ensure)
+;;   (setq use-package-always-ensure t)
+;;   then start emacs. It will start installing packages, but will fail at some of them
+;; 3. Optional: restart Emacs. At point 2 it will print lots of stuff (during
+;;   compilation etc), so restart might be useful to regenerate solely ones about
+;;   packages that use-package failed installing
+;; 4. Repeat 1, and install those packages that use-package failed to install at 3.
+;;   use-package is buggy, and can't install some modules.
+
+;; This warns about replace-regexp, and I tried rewriting this function in terms of
 ;; others — the simple loop they documented is not what I get. Screw this warning, it
 ;; is not worth the hassle, really.
 (setq byte-compile-warnings '(not interactive-only))
