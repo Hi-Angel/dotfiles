@@ -111,15 +111,15 @@ set $tag6 "6 &#xf001;"
 set $tag7 "7"
 
 # tag workspaces
-workspace $tag1 output eDP-1
-workspace $tag2 output HDMI-1 #LVDS
-workspace $tag3 output eDP-1
-workspace $tag4 output eDP-1
-workspace $tag5 output HDMI-1
-workspace $tag6 output eDP-1
-workspace 7 output HDMI-1
-workspace 8 output eDP-1
-workspace 9 output eDP-1
+workspace $tag1 output primary
+workspace $tag2 output nonprimary
+workspace $tag3 output primary
+workspace $tag4 output primary
+workspace $tag5 output nonprimary
+workspace $tag6 output primary
+workspace 7 output nonprimary
+workspace 8 output primary
+workspace 9 output primary
 
 # switch to workspace
 bindsym $mod+1 workspace $tag1
