@@ -53,8 +53,7 @@
          ("C-u"    . 'evil-scroll-up)
          ("k"      . 'evil-previous-visual-line)
          ("j"      . 'evil-next-visual-line)
-         ;; let's have some avy integration!
-         ("g a"    . 'evil-avy-goto-char)
+         ("g a"    . 'evil-avy-goto-char) ;; let's have some avy integration!
          ("u"      . 'undo-fu-only-undo)
          ("\C-r"   . 'undo-fu-only-redo)
          ("\C-]"   . 'find-tag) ;; same as in insert mode
