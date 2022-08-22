@@ -392,57 +392,7 @@ backward, so you can mutate text forward"
     (:success t)))
 
 (use-package emvil ;; my Evil config, in a separate file
-  :ensure nil
-  :init
-  (setq evil-jumps-cross-buffers nil)
-  (setq-default evil-shift-round nil) ;; make '>' not to round the indentation
-  (setq-default evil-goto-definition-functions '(evil-lsp-find-definition
-                                                 evil-goto-definition-imenu
-                                                 evil-goto-definition-xref
-                                                 evil-goto-definition-search))
-  (setq evil-undo-system 'undo-fu)
-
-  :config
-  ;; disable undo-tree-mode mandated by Evil as it's broken (see "unrecognized
-  ;; entry in undo list" on the internet), and use undo-fu instead.
-  ;; UPD: apparently in newer release it's no longer mandatory, so check if it's even defined.
-  (when (boundp 'global-undo-tree-mode)
-    (global-undo-tree-mode -1))
-  (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
-  (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
-  (define-key evil-normal-state-map "\C-]" 'find-tag) ;; same as in insert mode
-  (bind-key "C-z"   'undo-fu-only-undo)
-  (bind-key "C-S-z" 'undo-fu-only-redo)
-
-  ;; newer Evil versions seem to handle this by default, however the older one was
-  ;; removing trailing space when you press Escape. This however can be worked around
-  ;; by overriding the function below to a noop.
-  (defun evil-maybe-remove-spaces (&optional _))
-
-  (use-package evil-surround
-    :config
-    (global-evil-surround-mode 1)
-    (define-key evil-normal-state-map "S" 'evil-surround-region)
-    )
-  (use-package evil-magit ;; without this package Evil keys are broken in magit
-    :after magit)
-
-  ;; highlight regions I work with. Just fancies.
-  (use-package evil-goggles
-    :init
-    (setq evil-goggles-blocking-duration 0.05)
-    :config
-    (evil-goggles-mode 1)
-    )
-
-  (defun fill-paragraph-or-region ()
-    (interactive)
-    (if (region-active-p)
-        (fill-region (region-beginning) (region-end))
-      (fill-paragraph))
-    )
-  (define-key evil-normal-state-map (kbd "M-q") 'fill-paragraph-or-region)
-  )
+  :ensure nil)
 
 (use-package undo-fu)
 
@@ -606,7 +556,6 @@ in a few lines, and puts the cursor at the middle line"
 (bind-key "s-y" 'yank)
 (use-package idomenu
   :bind ("s-i" . idomenu)
-  :config
   )
 (bind-key "<RET>" 'improved-newline-and-indent)
 (global-set-key (kbd "<f11>") (lambda () (interactive) (ff-find-other-file nil t))) ;switch between a corresponding c/c++ header and a file

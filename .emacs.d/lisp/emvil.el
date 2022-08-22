@@ -1,9 +1,54 @@
 (use-package evil
+  :init
+  (setq evil-jumps-cross-buffers nil)
+  (setq-default evil-shift-round nil) ;; make '>' not to round the indentation
+  (setq-default evil-goto-definition-functions '(evil-lsp-find-definition
+                                                 evil-goto-definition-imenu
+                                                 evil-goto-definition-xref
+                                                 evil-goto-definition-search))
+  (setq evil-undo-system 'undo-fu)
+
   :config
   ;; remove all keybindings from insert-state keymap https://lists.ourproject.org/pipermail/implementations-list/2012-February/001513.html
   (setcdr evil-insert-state-map nil)
+  ;; disable undo-tree-mode mandated by Evil as it's broken (see "unrecognized
+  ;; entry in undo list" on the internet), and use undo-fu instead.
+  ;; UPD: apparently in newer release it's no longer mandatory, so check if it's even defined.
+  (when (boundp 'global-undo-tree-mode)
+    (global-undo-tree-mode -1))
+  (bind-key "C-z"   'undo-fu-only-undo)
+  (bind-key "C-S-z" 'undo-fu-only-redo)
+
+  ;; newer Evil versions seem to handle this by default, however the older one was
+  ;; removing trailing space when you press Escape. This however can be worked around
+  ;; by overriding the function below to a noop.
+  (defun evil-maybe-remove-spaces (&optional _))
+
+  (use-package evil-surround
+    :config
+    (global-evil-surround-mode 1))
+  (use-package evil-magit ;; without this package Evil keys are broken in magit
+    :after magit)
+
+  ;; highlight regions I work with. Just fancies.
+  (use-package evil-goggles
+    :init
+    (setq evil-goggles-blocking-duration 0.05)
+    :config
+    (evil-goggles-mode 1)
+    )
+
+  (defun fill-paragraph-or-region ()
+    (interactive)
+    (if (region-active-p)
+        (fill-region (region-beginning) (region-end))
+      (fill-paragraph))
+    )
+  (define-key evil-normal-state-map (kbd "M-q") 'fill-paragraph-or-region)
+  (evil-mode)
   :bind (:map evil-insert-state-map
-         ;; but [escape] should switch back to normal state
+         ;; after having insert-state keymap wiped out make [escape] switch back to
+         ;; normal state
          ([escape] . 'evil-normal-state)
          :map evil-normal-state-map
          ("C-u" . 'evil-scroll-up)
@@ -11,12 +56,14 @@
          ("j" . 'evil-next-visual-line)
          ;; let's have some avy integration!
          ("g a" . 'evil-avy-goto-char)
+         ("u" . 'undo-fu-only-undo)
+         ("\C-r" . 'undo-fu-only-redo)
+         ("\C-]" . 'find-tag) ;; same as in insert mode
+         ("S" . 'evil-surround-region)
          :map evil-visual-state-map
          ("k" . 'evil-previous-visual-line)
          ("j" . 'evil-next-visual-line)
          )
-  :init
-  (evil-mode)
   )
 
 (defun find-window (f)
