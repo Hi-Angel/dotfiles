@@ -44,7 +44,6 @@
         (fill-region (region-beginning) (region-end))
       (fill-paragraph))
     )
-  (define-key evil-normal-state-map (kbd "M-q") 'fill-paragraph-or-region)
   (evil-mode)
   :bind (:map evil-insert-state-map
          ;; after having insert-state keymap wiped out make [escape] switch back to
@@ -60,6 +59,7 @@
          ("\C-r"   . 'undo-fu-only-redo)
          ("\C-]"   . 'find-tag) ;; same as in insert mode
          ("S"      . 'evil-surround-region)
+         ("M-q"    . 'fill-paragraph-or-region)
          :map evil-visual-state-map
          ("k"      . 'evil-previous-visual-line)
          ("j"      . 'evil-next-visual-line)
