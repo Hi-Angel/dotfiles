@@ -1,18 +1,23 @@
-(use-package evil)
-;; remove all keybindings from insert-state keymap https://lists.ourproject.org/pipermail/implementations-list/2012-February/001513.html
-(setcdr evil-insert-state-map nil)
-;; but [escape] should switch back to normal state
-(define-key evil-insert-state-map [escape] 'evil-normal-state)
-(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-(define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
-(define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
-
-;; let's have some avy integration!
-(define-key evil-normal-state-map (kbd "g a") 'evil-avy-goto-char)
-
-(evil-mode t)
+(use-package evil
+  :config
+  ;; remove all keybindings from insert-state keymap https://lists.ourproject.org/pipermail/implementations-list/2012-February/001513.html
+  (setcdr evil-insert-state-map nil)
+  :bind (:map evil-insert-state-map
+         ;; but [escape] should switch back to normal state
+         ([escape] . 'evil-normal-state)
+         :map evil-normal-state-map
+         ("C-u" . 'evil-scroll-up)
+         ("k" . 'evil-previous-visual-line)
+         ("j" . 'evil-next-visual-line)
+         ;; let's have some avy integration!
+         ("g a" . 'evil-avy-goto-char)
+         :map evil-visual-state-map
+         ("k" . 'evil-previous-visual-line)
+         ("j" . 'evil-next-visual-line)
+         )
+  :init
+  (evil-mode)
+  )
 
 (defun find-window (f)
   "loops over subwindows in current window until they're finished
