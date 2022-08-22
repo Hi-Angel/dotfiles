@@ -1,12 +1,12 @@
 (use-package evil
   :init
-  (setq evil-jumps-cross-buffers nil)
-  (setq-default evil-shift-round nil) ;; make '>' not to round the indentation
-  (setq-default evil-goto-definition-functions '(evil-lsp-find-definition
+  (setq evil-jumps-cross-buffers nil
+        evil-undo-system 'undo-fu)
+  (setq-default evil-shift-round nil ;; make '>' not to round the indentation
+                evil-goto-definition-functions '(evil-lsp-find-definition
                                                  evil-goto-definition-imenu
                                                  evil-goto-definition-xref
                                                  evil-goto-definition-search))
-  (setq evil-undo-system 'undo-fu)
 
   :config
   ;; remove all keybindings from insert-state keymap https://lists.ourproject.org/pipermail/implementations-list/2012-February/001513.html
