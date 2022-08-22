@@ -1,6 +1,5 @@
-;;; https://lists.ourproject.org/pipermail/implementations-list/2012-February/001513.html
 (use-package evil)
-;; remove all keybindings from insert-state keymap
+;; remove all keybindings from insert-state keymap https://lists.ourproject.org/pipermail/implementations-list/2012-February/001513.html
 (setcdr evil-insert-state-map nil)
 ;; but [escape] should switch back to normal state
 (define-key evil-insert-state-map [escape] 'evil-normal-state)
