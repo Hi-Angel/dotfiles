@@ -147,3 +147,19 @@ vmap <C-c> "+y
 
 " highlight log files
 autocmd BufNewFile,BufRead *.log set syntax=messages
+
+set winaltkeys=no " disable Alt/Menu shortcuts in GVim
+" emacs-like keybinds in insert mode
+imap <C-a> <Home>
+imap <C-e> <End>
+imap <C-b> <Left>
+imap <C-f> <Right>
+if has('gui_running')
+    imap <M-BS> <C-W>
+    imap <M-b> <C-Left>
+    imap <M-f> <C-Right>
+else
+    imap <Esc><BS> <C-W>
+    imap <Esc><b> :echo hello
+    imap <Esc><f> <C-Right>
+endif
