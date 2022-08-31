@@ -163,3 +163,8 @@ else
     imap <Esc><b> :echo hello
     imap <Esc><f> <C-Right>
 endif
+
+" I wanna start on the first line when I edit a git commit msg
+if expand('%:t') =~ 'COMMIT_EDITMSG'
+   :au! fedora BufReadPost
+endif
