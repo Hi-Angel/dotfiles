@@ -149,6 +149,7 @@
 (add-list-to-list 'auto-mode-alist
                   '(("\\.m$"               . octave-mode)
                     ("\\.service\\'"       . conf-mode)
+                    ("\\.rules\\'"         . conf-mode)
                     ("\\PKGBUILD\\'"       . sh-mode)
                     ("\\.glade$\\'"        . xml-mode)
                     ("\\.mzn\\'"           . minizinc-mode)
