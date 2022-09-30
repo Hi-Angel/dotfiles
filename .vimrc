@@ -164,7 +164,7 @@ else
     imap <Esc><f> <C-Right>
 endif
 
-" I wanna start on the first line when I edit a git commit msg
-if expand('%:t') =~ 'COMMIT_EDITMSG'
+" I wanna start on the first line when I edit a git msgs
+if expand('%:t') =~ '\(COMMIT_EDITMSG\|git-rebase-todo\)'
    :au! fedora BufReadPost
 endif
