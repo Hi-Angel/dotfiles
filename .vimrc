@@ -168,3 +168,6 @@ endif
 if expand('%:t') =~ '\(COMMIT_EDITMSG\|git-rebase-todo\)'
    :au! fedora BufReadPost
 endif
+
+" don't create swp files
+set noswapfile
