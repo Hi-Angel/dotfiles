@@ -613,7 +613,7 @@ c.content.blocking.whitelist = ['www.phoronix.com', 'lwn.net', 'cpu-world.com']
 ##   - true
 ##   - false
 ##   - ask
-c.content.notifications = False
+c.content.notifications.enabled = False
 
 ## Enable pdf.js to view PDF files in the browser. Note that the files
 ## can still be downloaded by clicking the download button in the pdf.js
