@@ -5,9 +5,9 @@
 [pager]
     # Use `diffr` to improve diff highlighting. Its algo is betterr than that of
     # diff-highlight
-	log  = diffr --line-numbers aligned | ifne less
-	show = diffr --line-numbers aligned | ifne less
-	diff = diffr --line-numbers aligned | ifne less
+	log  = diffr --line-numbers | ifne less
+	show = diffr --line-numbers | ifne less
+	diff = diffr --line-numbers | ifne less
 [user]
 	email = Hi-Angel@yandex.ru
 	name = Konstantin Kharlamov
@@ -38,7 +38,7 @@
 [pack]
 	writeReverseIndex = true
 [interactive]
-    diffFilter = diffr --line-numbers aligned --colors refine-added:foreground:white --colors refine-removed:foreground:white
+    diffFilter = diffr --line-numbers --colors refine-added:foreground:white --colors refine-removed:foreground:white
 [color "grep"]
     linenumber = bold
     match = bold brightred
