@@ -1,6 +1,7 @@
 [core]
     editor = "vim -c 'set spell spelllang=en_us'"
     hooksPath = "~/.git_hooks"
+	quotePath = false
 [pager]
     # Use `diffr` to improve diff highlighting. Its algo is betterr than that of
     # diff-highlight
