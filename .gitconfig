@@ -42,3 +42,5 @@
     linenumber = bold
     match = bold brightred
     filename = magenta
+[init]
+	defaultBranch = master
