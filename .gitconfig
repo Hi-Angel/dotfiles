@@ -26,7 +26,7 @@
 [alias]
 	grep1 = "!git --no-pager grep -In"
 	d = difftool
-	l = "log --format=\"%cd %an, %h:\t[34m%s[0m\""
+	l = "log --format=\"%ad %an, %h:\t[34m%s[0m\""
 	ret = checkout @{-1}
     lastbranches = "!git for-each-ref --sort='-committerdate:iso8601' --format=' %(committerdate:relative)%09%(refname:short)' refs/heads | less"
     newbranch = "!f() { git checkout -b $1 upstream/master; }; f"
