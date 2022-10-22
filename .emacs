@@ -28,6 +28,7 @@
 ;; starts loading unneeded bars increasing a load time without a sense)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(toggle-indicate-empty-lines) ;; visually indicate where a file ends
 
 (bind-key "C-x C-c" nil) ;; I never use it, but do accidantally press
 
