@@ -17,6 +17,10 @@ def last_dir_or_filename(filepath):
         return 'baum-manager'
     elif 'tests/tests/' in filepath:
         return f'tests/{path_units[-1].split(".")[0]}'
+    elif 'tests/api/' in filepath:
+        return 'tests/api'
+    elif 'tests/gui/' in filepath:
+        return 'tests/gui'
     elif 'gitlab-ci/' in filepath:
         return 'gitlab-ci'
     elif 'image/' in filepath:
