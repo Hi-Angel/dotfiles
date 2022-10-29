@@ -9,7 +9,7 @@ def fold_threads(accum, func):
         accum = func(accum, thr)
     return accum
 
-def backtrace():
+def backtrace() -> str:
     return gdb.execute('bt', to_string=True)
 
 ######## gdb python commands
