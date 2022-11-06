@@ -1482,3 +1482,10 @@ h1. Доп. информация
   ;; use old good recalculation upon saving the buffer
   (setq diff-update-on-the-fly nil)
   )
+
+(use-package paren
+  :defer t
+  :init
+  ;; I use smartparens, so have show-parens mode disabled
+  (setq show-paren-mode nil)
+  )
