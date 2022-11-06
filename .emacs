@@ -1496,4 +1496,5 @@ h1. Доп. информация
   (defalias 'redmine-mode 'textile-mode)
   :custom-face
   (textile-inline-code-face ((t (:background "light blue"))))
+  (textile-pre-face ((t (:background "light blue"))))
   )
