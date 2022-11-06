@@ -1489,3 +1489,11 @@ h1. Доп. информация
   ;; I use smartparens, so have show-parens mode disabled
   (setq show-paren-mode nil)
   )
+
+(use-package textile-mode
+  :defer t
+  :init
+  (defalias 'redmine-mode 'textile-mode)
+  :custom-face
+  (textile-inline-code-face ((t (:background "light blue"))))
+  )
