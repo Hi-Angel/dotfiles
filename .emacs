@@ -50,10 +50,7 @@
  '(evil-goggles-yank-face ((t (:background "#ffff55"))))
  '(evil-goggles-indent-face ((t (:background "light blue"))))
  '(fixed-pitch ((t (:family "Ubuntu Mono"))))
- '(flycheck-error-list-warning ((t (:inherit warning :foreground "blue"))))
- '(flycheck-fringe-warning ((t (:inherit warning :foreground "blue"))))
- '(flycheck-warning ((t (:underline (:color "blue" :style wave)))))
- '(font-lock-comment-face ((t (:foreground "dim gray" :slant italic :weight bold :height 95 :family "Ubuntu Mono"))))
+ '(font-lock-comment-face ((t (:foreground "dim gray" :slant italic :weight bold :height 105 :family "Ubuntu Mono"))))
  '(font-lock-doc-face ((t (:foreground "blue"))))
  '(font-lock-doc-string-face ((t (:foreground "medium blue" :slant italic :height 95 :family "Ubuntu Mono"))))
  '(font-lock-function-name-face ((t (:foreground "magenta"))))
@@ -102,6 +99,10 @@
   :defer t
   :init
   (setq flycheck-check-syntax-automatically '(save)) ;; I only want it on save
+  :custom-face
+  (flycheck-error-list-warning ((t (:inherit warning :foreground "blue"))))
+  (flycheck-fringe-warning ((t (:inherit warning :foreground "blue"))))
+  (flycheck-warning ((t (:underline (:color "blue" :style wave)))))
   :config
   (defun myactions-flycheck-mode-hook ()
     (when (and (bound-and-true-p flycheck-mode) ;; flycheck hooks is called upon disabling it
