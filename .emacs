@@ -61,7 +61,6 @@
  '(font-lock-preprocessor-face ((t (:inherit font-lock-builtin-face :underline t))))
  '(font-lock-type-face ((t (:foreground "ForestGreen" :height 105 :family "Ubuntu Mono"))))
  '(line-number ((t (:inherit (shadow default) :family "Ubuntu Mono"))))
- '(markdown-inline-code-face ((t (:inherit markdown-code-face :background "light blue"))))
  '(mode-line ((t (:background "light yellow" :foreground "dim gray"))))
  '(mode-line-inactive ((t (:background "dim gray" :foreground "white"))))
  '(region ((t (:background "gray")))))
@@ -861,6 +860,8 @@ Version 2015-04-12"
   :defer t
   :init
     (setq-default markdown-enable-math t) ;; enable latex delimiters
+  :custom-face
+  (markdown-inline-code-face ((t (:inherit markdown-code-face :background "light blue"))))
   :config
   (defun myfunc-markdown-mode ()
     (setq case-fold-search t) ;; ignore case in search
