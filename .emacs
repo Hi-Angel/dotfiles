@@ -110,7 +110,7 @@
         (flycheck-haskell-setup))
       ))
   (add-hook 'flycheck-mode-hook 'myactions-flycheck-mode-hook)
-  (add-to-list 'flycheck-clang-warnings '"-Wno-missing-braces")
+  (add-to-list 'flycheck-clang-warnings "-Wno-missing-braces")
   (add-to-list 'flycheck-clang-args "-frelaxed-template-template-args")
   )
 
