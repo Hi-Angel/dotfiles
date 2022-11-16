@@ -67,7 +67,7 @@ autoload -U select-word-style
 select-word-style bash
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=12'
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion) # first history, then what tab would suggest
 export ZSH_AUTOSUGGEST_USE_ASYNC=t
 
