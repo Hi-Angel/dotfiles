@@ -178,12 +178,19 @@ function co_prev() {
     git checkout HEAD^ "$@" && git reset
 }
 
+function p() {
+    if [ -z $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) ]; then
+        echo "INFO: setting the branch to track origin"
+        git push -u origin HEAD "$@"
+    else
+        git push "$@"
+    fi
+}
+
 alias gd="git diff -p --stat"
 alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
 alias cax="git add -u && git commit --amend -v --no-edit"
-alias po="git push origin HEAD"
-alias pu="git push upstream HEAD"
 alias or="git pull origin   HEAD --rebase"
 alias ur="git pull upstream HEAD --rebase"
 alias co="git checkout"
