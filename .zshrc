@@ -49,7 +49,7 @@ export COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-export HIST_STAMPS="dd/mm/yyyy"
+export HIST_STAMPS="%d.%m.%y %T"
 export HISTSIZE=10000
 export HISTFILESIZE=$HISTSIZE
 
