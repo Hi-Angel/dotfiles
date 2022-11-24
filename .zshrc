@@ -208,3 +208,15 @@ PROMPT='%{$fg[yellow]%}[%D{%d.%m.%Y-%H:%M:%S}] '$PROMPT
 # when a command finishes, everything I typed will get executed. Usually, ^R isn't
 # passed, only the usual text. This setting makes ^R to get passed as well.
 stty rprnt ''
+
+# Re-execute prev. command and insert its output at the caret. Mostly useful for when
+# a command returned single line that you want to re-use, like cd into the directory
+# and the like.
+function _insert-last-command-output () {
+    local hist=$history[$((HISTCMD-1))] REPLY
+
+    autoload -U read-from-minibuffer
+    LBUFFER+=${(j: :)${(qf)"$(eval $hist 2> /dev/null)"}}
+}
+bindkey "^X^H"    _insert-last-command-output
+zle -N _insert-last-command-output
