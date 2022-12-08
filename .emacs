@@ -857,6 +857,12 @@ Version 2015-04-12"
   (ispell-change-dictionary "en_US,ru_RU" t) ;; with t set dict globally
   )
 
+(defun common-hook-for-text-modes ()
+  (setq case-fold-search t) ;; ignore case in search
+  (set (make-local-variable 'dabbrev-upcase-means-case-search) nil) ;; ignore case
+  (flyspell-mode)
+  )
+
 (use-package markdown-mode
   :defer t
   :init
@@ -864,12 +870,7 @@ Version 2015-04-12"
   :custom-face
   (markdown-inline-code-face ((t (:inherit markdown-code-face :background "light blue"))))
   :config
-  (defun myfunc-markdown-mode ()
-    (setq case-fold-search t) ;; ignore case in search
-    (set (make-local-variable 'dabbrev-upcase-means-case-search) nil) ;; ignore case
-    (flyspell-mode)
-    )
-  (add-hook 'markdown-mode-hook 'myfunc-markdown-mode)
+  (add-hook 'markdown-mode-hook 'common-hook-for-text-modes)
   )
 
 (defun just-one-space-region ()
@@ -1499,4 +1500,6 @@ h1. Доп. информация
   :custom-face
   (textile-inline-code-face ((t (:background "light blue"))))
   (textile-pre-face ((t (:foreground "dark cyan"))))
+  :config
+  (add-hook 'textile-mode-hook 'common-hook-for-text-modes)
   )
