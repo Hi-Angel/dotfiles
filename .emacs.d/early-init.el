@@ -12,6 +12,7 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq create-lockfiles nil)
+(setq native-compile-prune-cache t) ;; with native compilation, remove unused .eln's
 
 ;; case sensitive dabbrev
 (setq dabbrev-upcase-means-case-search t)
