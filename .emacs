@@ -1300,6 +1300,11 @@ upon or for the selected text if it's active"
 (use-package python
   :defer t
   :init
+  ;; Note: we don't set python-indent-offset to anything other than 4. But it may get
+  ;; changed automatically by a python-mode, which scans the file it opens to see
+  ;; what indentation size should be used. I presume one can disable that, but am not
+  ;; sure, that sounds useful actually.
+
   (defun python-insert__init__ (params-w-comma)
     "Creates a python __init__() based on arguments"
     (let ((params-list (split-string params-w-comma "," t "\s-*")))
