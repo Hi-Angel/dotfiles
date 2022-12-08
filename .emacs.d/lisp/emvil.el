@@ -49,6 +49,7 @@
          ;; after having insert-state keymap wiped out make [escape] switch back to
          ;; normal state
          ([escape] . 'evil-normal-state)
+
          :map evil-normal-state-map
          ("C-u"    . 'evil-scroll-up)
          ("k"      . 'evil-previous-visual-line)
@@ -59,9 +60,15 @@
          ("\C-]"   . 'find-tag) ;; same as in insert mode
          ("S"      . 'evil-surround-region)
          ("M-q"    . 'fill-paragraph-or-region)
+
          :map evil-visual-state-map
          ("k"      . 'evil-previous-visual-line)
          ("j"      . 'evil-next-visual-line)
+
+         :map isearch-mode-map
+         ;; allow for "up/down" history scrolling in / search
+         ("<down>" . 'isearch-ring-advance)
+         ("<up>"   . 'isearch-ring-retreat)
          )
   )
 
