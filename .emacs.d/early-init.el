@@ -13,10 +13,11 @@
       create-lockfiles nil
       native-compile-prune-cache t ;; with native compilation, remove unused .eln's
       dabbrev-upcase-means-case-search t) ;; case sensitive dabbrev
-(setq-default case-fold-search nil)
 
-(setq-default display-line-numbers 'visual) ;; show the line numbers
-(setq-default tab-width 4) ;; set tab width
-(setq-default fill-column 85) ;; set apropriate lenght of a line
-(setq-default cursor-type 'bar) ;; set flat cursor type
-(setq-default major-mode 'text-mode) ;; why Fundamental-mode is default? Text-mode is more aproppriate
+(setq-default
+ case-fold-search nil
+ display-line-numbers 'visual ;; show the line numbers
+ tab-width 4 ;; set tab width
+ fill-column 85 ;; set apropriate lenght of a line
+ cursor-type 'bar ;; set flat cursor type
+ major-mode 'text-mode) ;; why Fundamental-mode is default? Text-mode is more aproppriate
