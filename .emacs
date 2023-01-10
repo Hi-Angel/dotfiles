@@ -481,7 +481,7 @@ point reaches the beginning or end of the buffer, stop there."
   (when mark-active
 	  (kill-region (region-beginning) (region-end)))
   (let ((select-enable-clipboard t))
-	(x-clipboard-yank)))
+	(clipboard-yank)))
 (bind-key "C-y" 'clipboard-yank-fixed)
 
 (defun clipboard-copy-fixed ()
