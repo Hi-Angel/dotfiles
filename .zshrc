@@ -1,6 +1,7 @@
 # the config installation on clean system (from my last attempt):
 #    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 #    git clone https://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh
+#    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
 #    chsh -s $(which zsh)
 #
 # optionally: to migrate bash_history use command below. The grep is to skip
@@ -220,3 +221,6 @@ function _insert-last-command-output () {
 }
 bindkey "^X^H"    _insert-last-command-output
 zle -N _insert-last-command-output
+
+# NOTE: the pluging documentation states it should be sourced at the end of .zshrc
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
