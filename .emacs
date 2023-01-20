@@ -1508,3 +1508,12 @@ h1. Доп. информация
   :config
   (add-hook 'textile-mode-hook 'common-hook-for-text-modes)
   )
+
+(use-package projectile
+  :init
+  (setq projectile-git-command "git ls-files -z")
+  :bind (("C-c p" . projectile-command-map)
+         ("C-x C-h" . projectile-find-file))
+  :config
+  (projectile-mode 1)
+  )
