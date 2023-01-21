@@ -1507,6 +1507,7 @@ h1. Доп. информация
   :custom-face
   (textile-inline-code-face ((t (:background "light blue"))))
   (textile-pre-face ((t (:foreground "dark cyan"))))
+  (textile-class-face ((t (:foreground "dim gray" :slant italic)))) ;; actually, that's not what I think it is. Textile-mode is buggy, it applies the wrong highlight.
   :config
   (add-hook 'textile-mode-hook 'common-hook-for-text-modes)
   )
