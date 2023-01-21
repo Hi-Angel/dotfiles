@@ -433,6 +433,7 @@ backward, so you can mutate text forward"
   (c-set-offset 'func-decl-cont 0)
   (c-set-offset 'cpp-macro 0 nil)
   (c-set-offset 'substatement-open 0) ;; brackets the same level as the statement
+  (c-set-offset 'statement-case-open 0) ;; last `{' after `switch() { case foo: {` on the same level
   (c-set-offset 'brace-list-intro c-basic-offset) ;; enums
   (c-set-offset 'inextern-lang 0) ;; extern "C" { … }
   (c-set-offset 'inlambda '+) ;; extern "C" { … }
