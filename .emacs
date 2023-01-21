@@ -901,7 +901,8 @@ Version 2015-04-12"
 		      (set-window-dedicated-p window nil)))
 
 (use-package color-identifiers-mode
-  :defer 2 ;; lazy-load after 2 seconds of being idle
+  :init
+  (setq color-identifiers:recoloring-delay 1)
   :config
 
   (defun myfunc-color-identifiers-mode-hook ()
@@ -955,7 +956,6 @@ Version 2015-04-12"
   ;;          ;; (put-text-property start end 'face `(:weight ,'bold))
   ;;          (put-text-property start end 'color-identifiers:fontified t))))
   ;;    limit))
-  (setq-default color-identifiers:timer (run-with-idle-timer 2 t 'color-identifiers:refresh))
   (global-color-identifiers-mode 1) ;; semantic highlight of variables
 )
 
