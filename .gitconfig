@@ -2,12 +2,9 @@
     editor = "vim -c 'set spell spelllang=en_us'"
     hooksPath = "~/.git_hooks"
 	quotePath = false
-[pager]
     # Use `diffr` to improve diff highlighting. Its algo is betterr than that of
     # diff-highlight
-	log  = diffr --line-numbers | ifne less
-	show = diffr --line-numbers | ifne less
-	diff = diffr --line-numbers | ifne less
+    pager = diffr --line-numbers | ifne less
 [user]
 	email = Hi-Angel@yandex.ru
 	name = Konstantin Kharlamov
@@ -38,7 +35,7 @@
 [pack]
 	writeReverseIndex = true
 [interactive]
-    diffFilter = diffr --line-numbers --colors refine-added:foreground:white --colors refine-removed:foreground:white
+    diffFilter = diffr --line-numbers
 [color "grep"]
     linenumber = bold
     match = bold brightred
