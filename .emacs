@@ -1371,6 +1371,7 @@ indentation is implemented there"
   :defer t
   :init
   (setq lsp-enable-indentation nil ;; I prefer default indentation functional
+        lsp-enable-on-type-formatting nil ;; don't reformat my code
 
         ;; disable "path in project + in class hierarchy" header. Not useful to me.
         lsp-headerline-breadcrumb-enable nil
