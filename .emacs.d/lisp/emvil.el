@@ -44,6 +44,16 @@
         (fill-region (region-beginning) (region-end))
       (fill-paragraph))
     )
+  (defun end-of-buffer-keep-bottom (&optional count)
+    "Without a digit-argument it goes to the end of a buffer, but
+keeps the bottom of the buffer at the bottom, as opposed to
+bringing it to the middle of the screen."
+    (interactive "P")
+    (if count
+        ;; `let`ting scroll-conservatively actually won't work w evil-goto-line
+        (evil-goto-line count)
+      (let ((scroll-conservatively 101))
+        (end-of-buffer))))
   (evil-mode)
   :bind (:map evil-insert-state-map
          ;; after having insert-state keymap wiped out make [escape] switch back to
@@ -54,6 +64,7 @@
          ("C-u"    . 'evil-scroll-up)
          ("k"      . 'evil-previous-visual-line)
          ("j"      . 'evil-next-visual-line)
+         ("G"      . 'end-of-buffer-keep-bottom)
          ("g a"    . 'evil-avy-goto-char) ;; let's have some avy integration!
          ("u"      . 'undo-fu-only-undo)
          ("\C-r"   . 'undo-fu-only-redo)
@@ -64,6 +75,7 @@
          :map evil-visual-state-map
          ("k"      . 'evil-previous-visual-line)
          ("j"      . 'evil-next-visual-line)
+         ("G"      . 'end-of-buffer-keep-bottom)
 
          :map isearch-mode-map
          ;; allow for "up/down" history scrolling in / search
