@@ -1514,7 +1514,9 @@ h1. Доп. информация
 
 (use-package projectile
   :init
-  (setq projectile-git-command "git ls-files -z")
+  (setq projectile-git-command "git ls-files -z"
+        ;; don't want submodules in my list of files
+        projectile-git-submodule-command nil)
   :bind (("C-c p" . projectile-command-map)
          ("C-x C-h" . projectile-find-file))
   :config
