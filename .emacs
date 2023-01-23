@@ -1521,5 +1521,8 @@ h1. Доп. информация
   :bind (("C-c p" . projectile-command-map)
          ("C-x C-h" . projectile-find-file))
   :config
+  ;; I mount sshfs and stuff at /tmp, and I definitely wouldn't want a `git whatever'
+  ;; to be run over a slow network link. So exclude it.
+  (add-to-list 'projectile-globally-ignored-directories "/tmp")
   (projectile-mode 1)
   )
