@@ -66,6 +66,7 @@ bringing it to the middle of the screen."
          ("j"      . 'evil-next-visual-line)
          ("G"      . 'end-of-buffer-keep-bottom)
          ("g a"    . 'evil-avy-goto-char) ;; let's have some avy integration!
+         ("C-j "   . 'evil-avy-goto-char)
          ("u"      . 'undo-fu-only-undo)
          ("C-r"    . 'undo-fu-only-redo)
          ("C-]"    . 'find-tag) ;; same as in insert mode
