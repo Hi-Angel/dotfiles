@@ -75,7 +75,10 @@ bringing it to the middle of the screen."
          :map evil-visual-state-map
          ("k"      . 'evil-previous-visual-line)
          ("j"      . 'evil-next-visual-line)
-         ("G"      . 'end-of-buffer-keep-bottom)
+
+         ;; The (end-of-buffer) is buggy, it doesn't work when visual selection is
+         ;; active. Gotta debug it when have time.
+         ;; ("G"      . 'end-of-buffer-keep-bottom)
 
          :map isearch-mode-map
          ;; allow for "up/down" history scrolling in / search
