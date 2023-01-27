@@ -62,13 +62,6 @@
  '(mode-line-inactive ((t (:background "dim gray" :foreground "white"))))
  '(region ((t (:background "gray")))))
 
-;;theme loading should be done first, as below I changing some it's variables
-;; (require 'color-theme)
-;; (eval-after-load "color-theme"
-;;   '(progn
-;;      (color-theme-initialize)
-;;      (color-theme-oswald)))
-
 (defalias 'ar 'align-regexp)
 (defalias 'ss 'server-start)
 
