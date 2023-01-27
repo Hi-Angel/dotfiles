@@ -122,6 +122,16 @@
         company-idle-delay 0.2 ;; delay before completition
         ;; below is default value, but with company-capf removed 'cause it's laggy
         company-backends '(company-bbdb company-semantic company-cmake company-clang company-files (company-dabbrev-code company-gtags company-etags company-keywords) company-oddmuse company-dabbrev))
+  :bind (:map company-active-map
+         ("C-n" . nil)
+         ("C-p" . nil)
+         ("M-n" . 'company-select-next)
+         ("M-p" . 'company-select-previous)
+         (:map company-search-map
+         ("C-n" . nil)
+         ("C-p" . nil)
+         ("M-n" . 'company-select-next)
+         ("M-p" . 'company-select-previous)))
   :config
   (global-company-mode 1)
   (add-list-to-list 'company-dabbrev-code-modes
