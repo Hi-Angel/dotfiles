@@ -6,21 +6,21 @@
 ;; It's unfortunately a bit involved, but not too much.
 ;;
 ;; 1. In `.emacs' remove `:defer t', so all packages required by use-package would be
-;; searched immediately. You'll return them back later
+;; searched immediately. You'll restore them later
 ;; 2. `emacs -Q', then evaluate (for older emacs (package-initialize)),
 ;;   (push '("melpa" . "https://melpa.org/packages/") package-archives)
 ;;   then `M-x package-list-packages', then install `use-package'
 ;; 3. Insert at the top of .emacs:
-;;   (require 'use-package-ensure)
-;;   (setq use-package-always-ensure t)
-;;   then start emacs. It will start installing packages, but will fail at some of them
-;; 4. Optional: restart Emacs. At point 2 it will print lots of stuff (during
-;;   compilation etc), so restart might be useful to regenerate solely ones about
-;;   packages that use-package failed installing
-;; 5. Repeat 1, and install those packages that use-package failed to install at 3.
-;;   use-package is buggy, and can't install some modules.
-;; 6. Return back all `defer t' removed in step 1.
-
+;;       (require 'use-package-ensure)
+;;       (setq use-package-always-ensure t)
+;;   then start emacs. It will start installing packages, but will fail at some of
+;;   them
+;; 4. Optional: restart Emacs. At point 3 it printed lots of stuff (during
+;;   compilation etc), so restart might be useful to regenerate only prints about
+;;   failed installations, so you have the list.
+;; 5. Manually install packages that use-package failed to at 3. use-package has a
+;;   bug that it can't install some modules.
+;; 6. Restore back all `defer t' removed in step 1.
 ;; This warns about replace-regexp, and I tried rewriting this function in terms of
 ;; others — the simple loop they documented is not what I get. Screw this warning, it
 ;; is not worth the hassle, really.
