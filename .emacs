@@ -1531,3 +1531,16 @@ h1. Доп. информация
   (add-to-list 'projectile-globally-ignored-directories "/tmp")
   (projectile-mode 1)
   )
+
+(use-package eldoc
+  :config
+  (defun myhook-eldoc-mode ()
+    (when (and eldoc-mode ;; eldoc calls hooks upon being disabled, bail out in that case
+               buffer-file-name
+               (string-prefix-p "/tmp" buffer-file-name))
+      ;; I mount sshfs and stuff at /tmp, so minimize IO there
+      (print ".emacs: disabling eldoc in /tmp")
+      (eldoc-mode -1))
+    )
+  :hook (eldoc-mode . myhook-eldoc-mode)
+  )
