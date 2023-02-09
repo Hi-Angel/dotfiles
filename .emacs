@@ -500,6 +500,10 @@ point reaches the beginning or end of the buffer, stop there."
   (with-temp-buffer
     (insert text)
     (clipboard-kill-region (point-min) (point-max))))
+
+(defun copy-obj-to-clipboard (obj)
+  (copy-text-to-clipboard (prin1-to-string obj)))
+
 (defun what-face (pos)
   (interactive "d")
   (let ((face (or (get-char-property (point) 'read-face-name)
