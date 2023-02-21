@@ -21,6 +21,7 @@
 ;; 5. Manually install packages that use-package failed to at 3. use-package has a
 ;;   bug that it can't install some modules.
 ;; 6. Restore back all `defer t' removed in step 1.
+
 ;; This warns about replace-regexp, and I tried rewriting this function in terms of
 ;; others — the simple loop they documented is not what I get. Screw this warning, it
 ;; is not worth the hassle, really.
