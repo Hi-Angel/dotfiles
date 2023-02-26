@@ -1549,3 +1549,9 @@ h1. Доп. информация
     )
   :hook (eldoc-mode . myhook-eldoc-mode)
   )
+
+(use-package git-commit
+  :defer t
+  :config
+  (setq fill-column 70)
+  )
