@@ -1550,8 +1550,20 @@ h1. Доп. информация
   :hook (eldoc-mode . myhook-eldoc-mode)
   )
 
-(use-package git-commit
+(use-package magit
   :defer t
   :config
-  (setq fill-column 70)
+  ;; Don't use magit for interactive rebase, git-rebase-mode-map is a bunch of
+  ;; annoying keybinds
+  (setq auto-mode-alist (rassq-delete-all 'git-rebase-mode auto-mode-alist)))
+
+
+(use-package git-commit
+  ;; can't ":defer t" it, otherwise it wouldn't load
+  :init
+  :config
+  (defun myhook-git-commit-mode ()
+    (setq fill-column 70)
+    )
+  :hook (git-commit-setup-hook . myhook-git-commit-mode)
   )
