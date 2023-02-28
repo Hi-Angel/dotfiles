@@ -110,6 +110,12 @@
   (add-to-list 'flycheck-clang-args "-frelaxed-template-template-args")
   )
 
+(use-package minibuffer
+  :defer t
+  :init
+  ;; we want partial-completion to be the default one
+  (setq completion-styles '(partial-completion basic emacs22)))
+
 (use-package company
   :defer nil ;; :bind implies `defer t', override it
   :bind ("s-/" . company-complete)
