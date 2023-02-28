@@ -12,7 +12,9 @@
       auto-save-default nil
       create-lockfiles nil
       native-compile-prune-cache t ;; with native compilation, remove unused .eln's
-      dabbrev-upcase-means-case-search t) ;; case sensitive dabbrev
+      dabbrev-upcase-means-case-search t ;; case sensitive dabbrev
+      compilation-scroll-output t ;; follow the compilation buffer output
+      )
 
 (setq-default
  case-fold-search nil
