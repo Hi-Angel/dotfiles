@@ -1567,3 +1567,8 @@ h1. Доп. информация
     )
   :hook (git-commit-setup-hook . myhook-git-commit-mode)
   )
+
+(use-package server
+  :config
+  (unless (server-running-p)
+    (server-start)))
