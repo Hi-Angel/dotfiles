@@ -1557,21 +1557,15 @@ h1. Доп. информация
   )
 
 (use-package magit
-  :defer t
+  ;; can't ":defer t" it, otherwise `git-commit` doesn't work
   :config
   ;; Don't use magit for interactive rebase, git-rebase-mode-map is a bunch of
   ;; annoying keybinds
-  (setq auto-mode-alist (rassq-delete-all 'git-rebase-mode auto-mode-alist)))
-
-
-(use-package git-commit
-  ;; can't ":defer t" it, otherwise it wouldn't load
-  :init
-  :config
+  (setq auto-mode-alist (rassq-delete-all 'git-rebase-mode auto-mode-alist))
   (defun myhook-git-commit-mode ()
     (setq fill-column 70)
     )
-  :hook (git-commit-setup-hook . myhook-git-commit-mode)
+  (add-hook 'git-commit-setup-hook 'myhook-git-commit-mode)
   )
 
 (use-package server
