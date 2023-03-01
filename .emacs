@@ -387,7 +387,7 @@ backward, so you can mutate text forward"
   :config
   (yas-minor-mode -1) ;; useless in term-mode, and causes troubles with <tab>
   ;; (global-set-key (kbd "<RET>")
-  ;; 				'(lambda ()
+  ;; 				(lambda ()
   ;; 				   (comint-truncate-buffer)
   ;; 				   (term-send-input)
   ;; 				   ))
@@ -779,7 +779,7 @@ languages with similar syntax"
   (local-set-key (kbd "C-d") 'delete-char) ;; gdb rebinds the key
   )
 (add-hook 'gud-mode-hook 'myfunc-gud-gdb-mode)
-(add-hook 'gdb-mode-hook '(lambda () (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)))
+(add-hook 'gdb-mode-hook (lambda () (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)))
 (put 'erase-buffer 'disabled nil)
 
 (defun latin-to-gothic (φp1 φp2 φreverse-direction-p)
@@ -993,7 +993,7 @@ Version 2015-04-12"
       ""
     "\n"))
 (global-set-key [f12]
-                '(lambda ()
+                (lambda ()
                    (interactive)
                    (if (buffer-file-name)
                        (let*
@@ -1273,7 +1273,7 @@ The first arg is the one with point in it."
 
 ;; By default keyboard-quit is giltchy, it randomly fails to work until you press it
 ;; second time. Let's just bind C-g to press it twice always
-(global-set-key (kbd "C-g") '(lambda () (interactive) (keyboard-quit) (keyboard-quit)))
+(global-set-key (kbd "C-g") (lambda () (interactive) (keyboard-quit) (keyboard-quit)))
 
 (defun insert-print-for-the-word()
   "Inserts a print above current line for the word a cursor is
