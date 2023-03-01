@@ -1567,7 +1567,7 @@ h1. Доп. информация
     )
   (add-hook 'git-commit-setup-hook 'myhook-git-commit-mode)
 
-  ;; I use plain auto-revert mode instead, which works much better with
+  ;; I use plain global-auto-revert mode instead, which works much better with
   ;; network-mounted dirs
   (magit-auto-revert-mode -1)
   )
