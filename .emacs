@@ -1566,6 +1566,10 @@ h1. Доп. информация
     (setq fill-column 70)
     )
   (add-hook 'git-commit-setup-hook 'myhook-git-commit-mode)
+
+  ;; I use plain auto-revert mode instead, which works much better with
+  ;; network-mounted dirs
+  (magit-auto-revert-mode -1)
   )
 
 (use-package server
