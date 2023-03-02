@@ -1557,6 +1557,8 @@ h1. Доп. информация
   )
 
 (use-package magit
+  :init
+  (setq magit-save-repository-buffers nil)
   ;; can't ":defer t" it, otherwise `git-commit` doesn't work
   :config
   ;; Don't use magit for interactive rebase, git-rebase-mode-map is a bunch of
