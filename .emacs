@@ -123,8 +123,7 @@
   :init
   (setq company-minimum-prefix-length 3
         company-idle-delay 0.2 ;; delay before completition
-        ;; below is default value, but with company-capf removed 'cause it's laggy
-        company-backends '(company-bbdb company-semantic company-cmake company-clang company-files (company-dabbrev-code company-gtags company-etags company-keywords) company-oddmuse company-dabbrev))
+        )
   :bind (:map company-active-map
          ("C-n" . nil)
          ("C-p" . nil)
