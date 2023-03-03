@@ -1425,6 +1425,31 @@ indentation is implemented there"
   (window-swap-states (window-normalize-window nil t) (previous-window))
   )
 
+;;;; a few functions to remember/recall layout of opened buffers
+(defvar winstack-stack '()
+  "A Stack holding window configurations.
+Use `winstack-push' and
+`winstack-pop' to modify it.")
+
+(defun winstack-push()
+  "Push the current window configuration onto `winstack-stack'."
+  (interactive)
+  (if (and (window-configuration-p (first winstack-stack))
+         (compare-window-configurations (first winstack-stack) (current-window-configuration)))
+      (message "Current config already pushed")
+    (progn (push (current-window-configuration) winstack-stack)
+           (message (concat "pushed " (number-to-string
+                                       (length (window-list (selected-frame)))) " frame config")))))
+
+(defun winstack-pop()
+  "Pop the last window configuration off `winstack-stack' and apply it."
+  (interactive)
+  (if (first winstack-stack)
+      (progn (set-window-configuration (pop winstack-stack))
+             (message "popped"))
+    (message "End of window stack")))
+;;;; END OF a few functions to remember/recall layout of opened buffers
+
 ;;;; some perofrmance related changes, credits to https://github.com/geza-herman/emacs/tree/fast-emacs
 ;; Don't care about bidirectional text. These settings make processing long lines faster.
 (setq bidi-inhibit-bpa t)
