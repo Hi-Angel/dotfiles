@@ -33,7 +33,8 @@
 (menu-bar-mode -1)
 (toggle-indicate-empty-lines) ;; visually indicate where a file ends
 
-(bind-key "C-x C-c" nil) ;; I never use it, but do accidantally press
+(bind-key "C-x C-c" nil) ;; I never use it, but do accidentally press
+(bind-key "C-x s" 'save-buffer) ;; I accidentally press it instead of C-x C-s
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
