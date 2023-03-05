@@ -1399,7 +1399,9 @@ indentation is implemented there"
         ;; For these purposes I use symbol-overlay mode instead. Not that am against having
         ;; the two at the same time, but due to some bug in either clangd or lsp-mode, on
         ;; rare occasions I get the wrong symbol highlighted. So let's just disable that.
-        lsp-enable-symbol-highlighting nil)
+        lsp-enable-symbol-highlighting nil
+        lsp-pylsp-plugins-pydocstyle-enabled nil
+        )
   :config
 
   (defun myactionsfor-lsp-mode-hook ()
@@ -1413,7 +1415,9 @@ indentation is implemented there"
   ;; even if given python project has typing utterly broken, mypy still gives
   ;; immensely useful syntax checking that is lacking otherwise with pyls.
   (lsp-register-custom-settings '(("pyls.plugins.pyls_mypy.enabled" t t)
-                                  ("pyls.plugins.pyls_mypy.live_mode" nil t)))
+                                  ("pyls.plugins.pyls_mypy.live_mode" nil t)
+                                  ("pylsp.plugins.pylsp_mypy.enabled" t t)
+                                  ("pylsp.plugins.pylsp_mypy.live_mode" nil t)))
   )
 
 ;; make `rgrep' function skip binary files
