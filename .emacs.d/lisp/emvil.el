@@ -1,7 +1,9 @@
 (use-package evil
   :init
   (setq evil-jumps-cross-buffers nil
-        evil-undo-system 'undo-fu)
+        evil-undo-system 'undo-fu
+        ;; use vanilla Emacs keybindings in insert-mode excluding Escape
+        evil-disable-insert-state-bindings t)
   (setq-default evil-shift-round nil ;; make '>' not to round the indentation
                 evil-goto-definition-functions '(evil-lsp-find-definition
                                                  evil-goto-definition-imenu
@@ -9,8 +11,6 @@
                                                  evil-goto-definition-search))
 
   :config
-  ;; remove all keybindings from insert-state keymap https://lists.ourproject.org/pipermail/implementations-list/2012-February/001513.html
-  (setcdr evil-insert-state-map nil)
   ;; disable undo-tree-mode mandated by Evil as it's broken (see "unrecognized
   ;; entry in undo list" on the internet), and use undo-fu instead.
   ;; UPD: apparently in newer release it's no longer mandatory, so check if it's even defined.
@@ -55,12 +55,7 @@ bringing it to the middle of the screen."
       (let ((scroll-conservatively 101))
         (end-of-buffer))))
   (evil-mode)
-  :bind (:map evil-insert-state-map
-         ;; after having insert-state keymap wiped out make [escape] switch back to
-         ;; normal state
-         ([escape] . 'evil-normal-state)
-
-         :map evil-normal-state-map
+  :bind (:map evil-normal-state-map
          ("C-u"    . 'evil-scroll-up)
          ("k"      . 'evil-previous-visual-line)
          ("j"      . 'evil-next-visual-line)
