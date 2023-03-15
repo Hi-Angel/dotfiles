@@ -153,11 +153,14 @@
    ;; https://github.com/magit/magit/issues/4442
    revert-buffer-insert-file-contents-function 'revert-buffer-insert-file-contents-delicately
    ;; For some undocumented reason Emacs uses both inotify and polls on
-   ;; files. That's stupid, just a waste of resoureces, sure let's avoid that.
+   ;; files. That's stupid, just a waste of resources, sure let's avoid that.
    auto-revert-avoid-polling t)
   :config
   (global-auto-revert-mode 1) ;; automatically revert any buffeers, whose files changed on disk
-  )
+  (defun autorevert-on-focus ()
+    (when (frame-focus-state)
+      (auto-revert-buffers)))
+  (add-function :after after-focus-change-function #'autorevert-on-focus)
 
 (add-list-to-list 'auto-mode-alist
                   '(("\\.m$"               . octave-mode)
