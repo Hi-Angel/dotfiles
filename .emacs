@@ -161,6 +161,7 @@
     (when (frame-focus-state)
       (auto-revert-buffers)))
   (add-function :after after-focus-change-function #'autorevert-on-focus)
+  )
 
 (add-list-to-list 'auto-mode-alist
                   '(("\\.m$"               . octave-mode)
