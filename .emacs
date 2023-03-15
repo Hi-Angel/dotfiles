@@ -1401,6 +1401,7 @@ indentation is implemented there"
         ;; rare occasions I get the wrong symbol highlighted. So let's just disable that.
         lsp-enable-symbol-highlighting nil
         lsp-pylsp-plugins-pydocstyle-enabled nil
+        lsp-lens-enable nil ;; more doc annotations, disable them
         )
   :config
 
