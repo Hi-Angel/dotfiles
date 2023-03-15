@@ -51,7 +51,7 @@ export COMPLETION_WAITING_DOTS="true"
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 export HIST_STAMPS="%d.%m.%y %T"
-export HISTSIZE=10000
+export HISTSIZE=100000
 export HISTFILESIZE=$HISTSIZE
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
