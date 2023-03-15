@@ -1439,8 +1439,8 @@ Use `winstack-push' and
 (defun winstack-push()
   "Push the current window configuration onto `winstack-stack'."
   (interactive)
-  (if (and (window-configuration-p (first winstack-stack))
-         (compare-window-configurations (first winstack-stack) (current-window-configuration)))
+  (if (and (window-configuration-p (car winstack-stack))
+         (compare-window-configurations (car winstack-stack) (current-window-configuration)))
       (message "Current config already pushed")
     (progn (push (current-window-configuration) winstack-stack)
            (message (concat "pushed " (number-to-string
@@ -1449,7 +1449,7 @@ Use `winstack-push' and
 (defun winstack-pop()
   "Pop the last window configuration off `winstack-stack' and apply it."
   (interactive)
-  (if (first winstack-stack)
+  (if (car winstack-stack)
       (progn (set-window-configuration (pop winstack-stack))
              (message "popped"))
     (message "End of window stack")))
