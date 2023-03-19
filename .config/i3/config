@@ -235,7 +235,7 @@ for_window [class="plasmashell" window_type="notification"] border none, move po
 no_focus [window_type="notification"]
 
 # kill the giant window that covers everything up
-for_window [title="Desktop — Plasma"] kill; floating enable; border none
+for_window [title="Desktop @ QRect"] kill; floating enable; border none
 
 ### END of  KDE/Plasma compatibility improvements
 
