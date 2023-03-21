@@ -1601,6 +1601,7 @@ h1. Доп. информация
   (setq auto-mode-alist (rassq-delete-all 'git-rebase-mode auto-mode-alist))
   (defun myhook-git-commit-mode ()
     (setq fill-column 70)
+    (flyspell-mode)
     )
   (add-hook 'git-commit-setup-hook 'myhook-git-commit-mode)
 
