@@ -67,7 +67,8 @@ bringing it to the middle of the screen."
          ("C-]"    . 'find-tag) ;; same as in insert mode
          ("S"      . 'evil-surround-region)
          ("M-q"    . 'fill-paragraph-or-region)
-
+         :map evil-insert-state-map
+         ("C-j "   . 'evil-avy-goto-char)
          :map evil-visual-state-map
          ("k"      . 'evil-previous-visual-line)
          ("j"      . 'evil-next-visual-line)
