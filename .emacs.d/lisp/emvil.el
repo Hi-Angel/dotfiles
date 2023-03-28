@@ -84,6 +84,13 @@ bringing it to the middle of the screen."
          )
   )
 
+(defun myhook-evil-mode ()
+  (unless (or (eq major-mode 'special-mode) (minibufferp))
+    ;; make underscore part of a word
+    (modify-syntax-entry ?_ "w")))
+;; doesn't work with :hook for some reason, so have to call add-hook manually
+(add-hook 'evil-local-mode-hook 'myhook-evil-mode)
+
 (defun find-window (f)
   "loops over subwindows in current window until they're finished
 to `f' returns t. Returns nil on fail or a window on success"
