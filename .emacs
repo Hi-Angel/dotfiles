@@ -1566,6 +1566,14 @@ h1. Доп. информация
   (unless (server-running-p)
     (server-start)))
 
+(use-package ninja-mode
+  :defer t
+  :config
+  ;; make sure `$' and `/' symbols not word constituents
+  (modify-syntax-entry ?$ "_")
+  (modify-syntax-entry ?/ "_")
+  )
+
 (defun yank-prev-killring ()
   (interactive)
   (insert (nth 1 kill-ring)))
