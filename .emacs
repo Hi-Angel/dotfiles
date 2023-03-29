@@ -1565,3 +1565,8 @@ h1. Доп. информация
   :config
   (unless (server-running-p)
     (server-start)))
+
+(defun yank-prev-killring ()
+  (interactive)
+  (insert (nth 1 kill-ring)))
+(global-set-key (kbd "M-y") #'yank-prev-killring)

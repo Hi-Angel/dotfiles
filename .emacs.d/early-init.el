@@ -5,7 +5,7 @@
 (run-with-idle-timer 2 t (lambda () (garbage-collect)))
 (setq gc-cons-threshold (* 1024 1024 1024)
       frame-resize-pixelwise t ;; needs to be set before a frame is created
-      kill-ring-max 1 ;; I never use more than one entry anyway
+      kill-ring-max 2 ;; I only use two levels
       reb-re-syntax 'string ;; standard syntax for re-builder
 
       make-backup-files nil
