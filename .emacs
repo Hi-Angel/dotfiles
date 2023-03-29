@@ -584,7 +584,8 @@ in a few lines, and puts the cursor at the middle line"
   :init
   (setq-default sp-autoskip-closing-pair t) ;; skip only when pair is active
   (setq sp-show-pair-from-inside t
-        sp-escape-quotes-after-insert nil) ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
+        sp-escape-quotes-after-insert nil ;; https://github.com/Fuco1/smartparens/issues/783#issuecomment-324598759
+        sp-python-insert-colon-in-function-definitions t)
   :config
   (use-package sp-sublimetext-like :ensure nil) ;; sublime-like behavior of smartparens
   (smartparens-global-mode 1)
