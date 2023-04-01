@@ -444,10 +444,16 @@ backward, so you can mutate text forward"
   (c-set-offset 'inlambda '+) ;; extern "C" { … }
   )
 
-(setq-default inferior-lisp-program "/usr/bin/sbcl")
-(add-hook 'lisp-mode-hook (lambda ()
-							(turn-on-auto-fill) ;;auto fill mode for c modes.
-							))
+(use-package
+  :defer t
+  :init
+  ;; the inferior-lisp-program is actually defined by `inf-lisp' but should work
+  (setq-default inferior-lisp-program "/usr/bin/sbcl")
+  :config
+  (add-hook 'lisp-mode-hook (lambda ()
+                              (turn-on-auto-fill)
+                              ))
+  )
 
 ;;force inserting tabs instead of spaces
 ;; (setq indent-tabs-mode t)
