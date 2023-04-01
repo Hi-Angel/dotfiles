@@ -455,10 +455,7 @@ backward, so you can mutate text forward"
                               ))
   )
 
-;;force inserting tabs instead of spaces
-;; (setq indent-tabs-mode t)
-
-;;Make c-a key to work as the home key in a most code editors
+;;Make C-a key to work as the home key in a most code editors
 (defun smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
 
@@ -935,33 +932,6 @@ Version 2015-04-12"
     (face-remap-add-relative 'haskell-operator-face '((:foreground "#b33200000000")))
     )
   (add-hook 'color-identifiers-mode-hook 'myfunc-color-identifiers-mode-hook)
-
-  ;; (defun test ()
-  ;;   (let ((faces '(font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-builtin-face font-lock-preprocessor-face font-lock-constant-face)))
-  ;;     (dolist (face faces)
-  ;;       (add-to-list 'face-remapping-alist (cons face '((:foreground nil :weight normal :slant normal))))))
-  ;;   (add-to-list 'face-remapping-alist (cons 'font-lock-keyword-face '((:weight bold))))
-  ;;   (add-to-list 'face-remapping-alist (cons 'font-lock-builtin-face '((:weight bold))))
-  ;;   (add-to-list 'face-remapping-alist (cons 'font-lock-preprocessor-face '((:weight bold))))
-  ;;   (add-to-list 'face-remapping-alist (cons 'font-lock-function-name-face '((:weight bold))))
-  ;;   (add-to-list 'face-remapping-alist (cons 'font-lock-constant-face '((:weight bold))))
-  ;;   (add-to-list 'face-remapping-alist (cons 'font-lock-string-face '((:foreground "#b33200000000"))))
-  ;;   (add-to-list 'face-remapping-alist (cons 'haskell-operator-face '((:foreground "#b33200000000"))))
-  ;;   )
-  ;; (add-hook 'color-identifiers-mode-hook 'test)
-
-
-  ;; (let ((faces '(font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-builtin-face font-lock-preprocessor-face)))
-  ;;   (dolist (face faces)
-  ;;     (set-face-attribute face nil :foreground nil :weight 'normal :slant 'normal)))
-
-  ;; (set-face-attribute 'font-lock-keyword-face nil :weight 'bold)
-  ;; (set-face-attribute 'font-lock-builtin-face nil :weight 'bold)
-  ;; (set-face-attribute 'font-lock-preprocessor-face nil :weight 'bold)
-  ;; (set-face-attribute 'font-lock-function-name-face nil :weight 'bold)
-  ;; (set-face-attribute 'font-lock-string-face nil :foreground "#b33200000000")
-  ;; (set-face-attribute 'font-lock-constant-face nil :weight 'bold)
-  ;; (set-face-attribute 'haskell-operator-face nil :foreground "#b33200000000")
 
   ;; (defun color-identifiers:colorize (limit) — the function changed to make vars "bold". FTR.
   ;;   (color-identifiers:scan-identifiers
