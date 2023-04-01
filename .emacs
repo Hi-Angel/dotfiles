@@ -444,11 +444,11 @@ backward, so you can mutate text forward"
   (c-set-offset 'inlambda '+) ;; extern "C" { … }
   )
 
-(use-package
+(use-package lisp-mode
   :defer t
   :init
   ;; the inferior-lisp-program is actually defined by `inf-lisp' but should work
-  (setq-default inferior-lisp-program "/usr/bin/sbcl")
+  (setq inferior-lisp-program "/usr/bin/sbcl")
   :config
   (add-hook 'lisp-mode-hook (lambda ()
                               (turn-on-auto-fill)
