@@ -382,7 +382,6 @@ backward, so you can mutate text forward"
       (:success t)))
 
   :config
-
   (defun myactionsfor-lsp-mode-hook ()
     (set (make-local-variable 'company-backends)
          ;; lsp-mode provides company-capf. company-lsp they say not supported, Idk
