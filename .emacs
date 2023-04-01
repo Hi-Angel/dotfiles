@@ -351,7 +351,7 @@ backward, so you can mutate text forward"
 (use-package avy
   :config
   (setq avy-case-fold-search nil) ;; make searches case sensitive. Well, at least
-  ;; upcase ones, that as good as avy allows.
+                                  ;; upcase ones, that as good as avy allows.
   )
 
 (use-package lsp-mode
