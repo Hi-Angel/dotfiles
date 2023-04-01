@@ -354,11 +354,50 @@ backward, so you can mutate text forward"
   ;; upcase ones, that as good as avy allows.
   )
 
-(defun evil-lsp-find-definition (_string _position)
-  (condition-case nil
-      (lsp-find-definition)
-    ('error nil)
-    (:success t)))
+(use-package lsp-mode
+  :defer t
+  :init
+  (setq lsp-enable-indentation nil ;; I prefer default indentation functional
+        lsp-enable-on-type-formatting nil ;; don't reformat my code
+
+        ;; disable "path in project + in class hierarchy" header. Not useful to me.
+        lsp-headerline-breadcrumb-enable nil
+
+        ;; don't show signature/docs in the minibuffer. For me it's almost never useful; at
+        ;; the same time, I find annoying that it overrides flycheck messages.
+        lsp-eldoc-enable-hover nil
+
+        ;; For these purposes I use symbol-overlay mode instead. Not that am against having
+        ;; the two at the same time, but due to some bug in either clangd or lsp-mode, on
+        ;; rare occasions I get the wrong symbol highlighted. So let's just disable that.
+        lsp-enable-symbol-highlighting nil
+        lsp-pylsp-plugins-pydocstyle-enabled nil
+        lsp-lens-enable nil ;; more doc annotations, disable them
+        )
+
+  (defun evil-lsp-find-definition (_string _position)
+    (condition-case nil
+        (lsp-find-definition)
+      ('error nil)
+      (:success t)))
+
+  :config
+
+  (defun myactionsfor-lsp-mode-hook ()
+    (set (make-local-variable 'company-backends)
+         ;; lsp-mode provides company-capf. company-lsp they say not supported, Idk
+         ;; why. Perhaps because last commit was at 2019, so it may be unmaintainted
+         '(company-capf company-etags company-dabbrev))
+    )
+  (add-hook 'lsp-mode-hook 'myactionsfor-lsp-mode-hook)
+
+  ;; even if given python project has typing utterly broken, mypy still gives
+  ;; immensely useful syntax checking that is lacking otherwise with pyls.
+  (lsp-register-custom-settings '(("pyls.plugins.pyls_mypy.enabled" t t)
+                                  ("pyls.plugins.pyls_mypy.live_mode" nil t)
+                                  ("pylsp.plugins.pylsp_mypy.enabled" t t)
+                                  ("pylsp.plugins.pylsp_mypy.live_mode" nil t)))
+  )
 
 (use-package emvil ;; my Evil config, in a separate file
   :ensure nil)
@@ -1338,44 +1377,6 @@ indentation is implemented there"
           (delete-file filename)
           (message "Deleted file %s" filename)
           (kill-buffer))))))
-
-(use-package lsp-mode
-  :defer t
-  :init
-  (setq lsp-enable-indentation nil ;; I prefer default indentation functional
-        lsp-enable-on-type-formatting nil ;; don't reformat my code
-
-        ;; disable "path in project + in class hierarchy" header. Not useful to me.
-        lsp-headerline-breadcrumb-enable nil
-
-        ;; don't show signature/docs in the minibuffer. For me it's almost never useful; at
-        ;; the same time, I find annoying that it overrides flycheck messages.
-        lsp-eldoc-enable-hover nil
-
-        ;; For these purposes I use symbol-overlay mode instead. Not that am against having
-        ;; the two at the same time, but due to some bug in either clangd or lsp-mode, on
-        ;; rare occasions I get the wrong symbol highlighted. So let's just disable that.
-        lsp-enable-symbol-highlighting nil
-        lsp-pylsp-plugins-pydocstyle-enabled nil
-        lsp-lens-enable nil ;; more doc annotations, disable them
-        )
-  :config
-
-  (defun myactionsfor-lsp-mode-hook ()
-    (set (make-local-variable 'company-backends)
-         ;; lsp-mode provides company-capf. company-lsp they say not supported, Idk
-         ;; why. Perhaps because last commit was at 2019, so it may be unmaintainted
-         '(company-capf company-etags company-dabbrev))
-    )
-  (add-hook 'lsp-mode-hook 'myactionsfor-lsp-mode-hook)
-
-  ;; even if given python project has typing utterly broken, mypy still gives
-  ;; immensely useful syntax checking that is lacking otherwise with pyls.
-  (lsp-register-custom-settings '(("pyls.plugins.pyls_mypy.enabled" t t)
-                                  ("pyls.plugins.pyls_mypy.live_mode" nil t)
-                                  ("pylsp.plugins.pylsp_mypy.enabled" t t)
-                                  ("pylsp.plugins.pylsp_mypy.live_mode" nil t)))
-  )
 
 ;; make `rgrep' function skip binary files
 (setq grep-find-template "find <D> <X> -type f <F> -exec grep <C> -nHI --null -e <R> \{\} +")
