@@ -421,11 +421,11 @@ backward, so you can mutate text forward"
 ;; (setq whitespace-style (list 'face 'tabs 'spaces 'space-before-tab 'empty 'space-mark 'tab-mark))
 ;; (global-whitespace-mode 1) commented out due to problems with markdown
 
-;;scrolling related fixes
-(setq mouse-wheel-scroll-amount '(3 ((shift) . 1))) ;; three line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scroll
-(setq mouse-wheel-follow-mouse t) ;; scroll window under mouse
-(setq scroll-step 2) ;; keyboard scroll two line at a time$
+;; scrolling related changes
+(setq mouse-wheel-scroll-amount '(3 ((shift) . 1)) ;; three line at a time
+      mouse-wheel-progressive-speed nil            ;; don't accelerate scroll
+      mouse-wheel-follow-mouse t                   ;; scroll window under mouse
+      scroll-step 2) ;; keyboard scroll two lines at a time
 
 ;;A few c-like indentation fixes follows
 (setq-default indent-tabs-mode nil)
