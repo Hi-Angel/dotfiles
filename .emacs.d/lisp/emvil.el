@@ -26,7 +26,9 @@
 
   (use-package evil-surround
     :config
-    (global-evil-surround-mode 1))
+    (global-evil-surround-mode 1)
+    (push '(?» . ("«" . "»")) evil-surround-pairs-alist) ;; add a « » pair
+    )
   (use-package evil-magit ;; without this package Evil keys are broken in magit
     :after magit)
 
