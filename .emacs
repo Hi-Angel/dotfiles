@@ -708,11 +708,7 @@ languages with similar syntax"
   (setq highlight-parentheses-colors nil
         highlight-parentheses-background-colors '("green" "light blue" "yellow" "orange"))
   :config
-  (define-globalized-minor-mode global-highlight-parentheses-mode
-    highlight-parentheses-mode
-    (lambda ()
-      (highlight-parentheses-mode t)))
-  (global-highlight-parentheses-mode t)
+  (global-highlight-parentheses-mode)
   )
 
 ;; package managment
