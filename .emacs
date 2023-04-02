@@ -702,7 +702,7 @@ languages with similar syntax"
   (sp-local-pair 'rust-mode "(" nil :post-handlers '(:add maybe-add-semicolon-paren-rust))
   )
 
-;; mode to highlight a matching parentheses from the inside
+;; mode to highlight outside parentheses
 (use-package highlight-parentheses
   :init
   (setq highlight-parentheses-colors nil
