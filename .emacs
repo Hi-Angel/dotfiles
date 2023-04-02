@@ -706,7 +706,6 @@ languages with similar syntax"
 (use-package highlight-parentheses
   :init
   (setq highlight-parentheses-colors nil
-        highlight-parentheses-attributes '(:weight bold)
         highlight-parentheses-background-colors '("green" "light blue" "yellow" "orange"))
   :config
   (define-globalized-minor-mode global-highlight-parentheses-mode
