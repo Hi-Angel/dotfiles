@@ -560,8 +560,7 @@ in a few lines, and puts the cursor at the middle line"
         (forward-line -1)
         (indent-according-to-mode) ;; indent the line
         )
-    (newline-and-indent)
-    ))
+    (newline-and-indent)))
 
 ;;set copy/paste work as usual, i.e. not overwrite when delete a characters
 ;;(and a few another useful keybindings)
@@ -569,8 +568,7 @@ in a few lines, and puts the cursor at the middle line"
 (bind-key "C-w" 'clipboard-kill-region)
 (bind-key "s-y" 'yank)
 (use-package idomenu
-  :bind ("s-i" . idomenu)
-  )
+  :bind ("s-i" . idomenu))
 (bind-key "<RET>" 'improved-newline-and-indent)
 (global-set-key (kbd "<f11>") (lambda () (interactive) (ff-find-other-file nil t))) ;switch between a corresponding c/c++ header and a file
 (bind-key "<C-mouse-4>" 'text-scale-decrease);set in wheel font decrease
@@ -578,15 +576,13 @@ in a few lines, and puts the cursor at the middle line"
 
 (use-package highlight-numbers
   :config
-  (set-face-attribute 'highlight-numbers-number nil :weight 'bold :foreground "blue" :background "light gray")
-  )
+  (set-face-attribute 'highlight-numbers-number nil :weight 'bold :foreground "blue" :background "light gray"))
 
 ;;some useful minor modes
 (defun myfunc-prog-mode ()
   (highlight-numbers-mode)
   (column-number-mode)
-  (delete-selection-mode)
-  )
+  (delete-selection-mode))
 (add-hook 'prog-mode-hook 'myfunc-prog-mode)
 
 ;;allows in a case of an ∞ loop send with «killall -SIGUSR1 emacs» to break it
@@ -882,8 +878,7 @@ Version 2015-04-12"
   :custom-face
   (markdown-inline-code-face ((t (:inherit markdown-code-face :background "light blue"))))
   :config
-  (add-hook 'markdown-mode-hook 'common-hook-for-text-modes)
-  )
+  (add-hook 'markdown-mode-hook 'common-hook-for-text-modes))
 
 (defun just-one-space-region ()
   "Replaces every space in active region between words to one
