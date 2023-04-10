@@ -1553,3 +1553,10 @@ h1. Доп. информация
   (interactive)
   (insert (nth 1 kill-ring)))
 (global-set-key (kbd "M-y") #'yank-prev-killring)
+
+(use-package desktop
+  :defer t
+  :init
+  ;; I find this query useless and annoying, even if an Emacs is using the session
+  (setq desktop-load-locked-desktop t)
+  )
