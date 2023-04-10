@@ -22,7 +22,7 @@ def last_dir_or_filename(filepath):
     elif 'tests/gui/' in filepath:
         return 'tests/gui'
     elif 'gitlab-ci/' in filepath:
-        return 'gitlab-ci'
+        return 'ci'
     elif 'image/' in filepath:
         return 'image'
     #### job addition ↑
