@@ -578,11 +578,12 @@ in a few lines, and puts the cursor at the middle line"
   :config
   (set-face-attribute 'highlight-numbers-number nil :weight 'bold :foreground "blue" :background "light gray"))
 
+(column-number-mode)
+(delete-selection-mode)
+
 ;;some useful minor modes
 (defun myfunc-prog-mode ()
-  (highlight-numbers-mode)
-  (column-number-mode)
-  (delete-selection-mode))
+  (highlight-numbers-mode))
 (add-hook 'prog-mode-hook 'myfunc-prog-mode)
 
 ;;allows in a case of an ∞ loop send with «killall -SIGUSR1 emacs» to break it
