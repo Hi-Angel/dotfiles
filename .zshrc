@@ -188,6 +188,11 @@ function p() {
     fi
 }
 
+# show the commit whose application triggered the conflict
+function conflicted_commit() {
+    git log -1 -p --stat $(awk 'END{print $2}' .git/rebase-merge/done)
+}
+
 alias gd="git diff -p --stat"
 alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
