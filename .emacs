@@ -581,10 +581,9 @@ in a few lines, and puts the cursor at the middle line"
 (column-number-mode)
 (delete-selection-mode)
 
-;;some useful minor modes
-(defun myfunc-prog-mode ()
-  (highlight-numbers-mode))
-(add-hook 'prog-mode-hook 'myfunc-prog-mode)
+(define-globalized-minor-mode global-highlight-numbers-mode
+  highlight-numbers-mode #'highlight-numbers-mode)
+
 
 ;;allows in a case of an ∞ loop send with «killall -SIGUSR1 emacs» to break it
 (setq debug-on-event 'sigusr1)
