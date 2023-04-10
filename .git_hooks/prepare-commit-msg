@@ -25,6 +25,8 @@ def last_dir_or_filename(filepath):
         return 'ci'
     elif 'image/' in filepath:
         return 'image'
+    elif 'web_server/' in filepath:
+        return 'web'
     #### job addition ↑
     list_to_prefer_filename = ['src', 'scripts']
     last_dir = path_units[-2] if len(path_units) > 2 else None
