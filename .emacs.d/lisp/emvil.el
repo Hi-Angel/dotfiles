@@ -87,7 +87,7 @@ bringing it to the middle of the screen."
   )
 
 (defun myhook-evil-mode ()
-  (unless (or (eq major-mode 'special-mode) (minibufferp))
+  (unless (or (member major-mode '(special-mode fundamental-mode lisp-interaction-mode)) (minibufferp))
     ;; make underscore part of a word
     (modify-syntax-entry ?_ "w")))
 ;; doesn't work with :hook for some reason, so have to call add-hook manually
