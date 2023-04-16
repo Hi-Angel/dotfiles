@@ -1497,6 +1497,16 @@ h1. Доп. информация
   ;; to be run over a slow network link. So exclude it.
   (add-to-list 'projectile-globally-ignored-directories "/tmp")
   (projectile-mode 1)
+  (defun projectile-clean-changes()
+    "Cleans up changes in a project.
+TODO: perhaps contribute it upstream?"
+    (interactive)
+    (let ((project-root (projectile-acquire-root)))
+      (if (null project-root)
+          (error "No project root here")
+        (let ((default-directory project-root))
+          (shell-command "git checkout -- .")
+          (revert-buffer nil t t)))))
   )
 
 (use-package eldoc
