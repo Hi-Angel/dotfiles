@@ -582,7 +582,7 @@ in a few lines, and puts the cursor at the middle line"
 (delete-selection-mode)
 
 (define-globalized-minor-mode global-highlight-numbers-mode
-  highlight-numbers-mode (lambda () (highlight-numbers-mode)))
+  highlight-numbers-mode highlight-numbers-mode)
 (global-highlight-numbers-mode)
 
 ;;allows in a case of an ∞ loop send with «killall -SIGUSR1 emacs» to break it
