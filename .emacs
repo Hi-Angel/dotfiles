@@ -756,7 +756,9 @@ languages with similar syntax"
   )
 
 (defun make-«»-pairs ()
-  ;; TODO: ask on emacs-devel how to make it work globally
+  ;; TODO: I can make it globally by using (standard-syntax-table) but for some
+  ;; reason pairing it makes it think that ( is a pair to ». Looks like a bug to
+  ;; me. Gotta ask on the mailing list.
   (modify-syntax-entry ?« "(»")
   (modify-syntax-entry ?» ")«"))
 
