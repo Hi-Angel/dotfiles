@@ -755,6 +755,11 @@ languages with similar syntax"
   (global-symbol-overlay-mode)
   )
 
+(defun make-«»-pairs ()
+  ;; TODO: ask on emacs-devel how to make it work globally
+  (modify-syntax-entry ?« "(»")
+  (modify-syntax-entry ?» ")«"))
+
 (use-package text-mode
   :defer t
   :ensure nil
@@ -866,10 +871,10 @@ Version 2015-04-12"
   )
 
 (defun common-hook-for-text-modes ()
+  (make-«»-pairs)
   (setq case-fold-search t) ;; ignore case in search
   (set (make-local-variable 'dabbrev-upcase-means-case-search) nil) ;; ignore case
-  (flyspell-mode)
-  )
+  (flyspell-mode))
 
 (use-package markdown-mode
   :defer t
