@@ -760,13 +760,17 @@ languages with similar syntax"
   (modify-syntax-entry ?« "(»")
   (modify-syntax-entry ?» ")«"))
 
+(defun common-hook-for-text-modes ()
+  (make-«»-pairs)
+  (setq case-fold-search t) ;; ignore case in search
+  (set (make-local-variable 'dabbrev-upcase-means-case-search) nil) ;; ignore case
+  (set (make-local-variable 'company-minimum-prefix-length) 2)
+  (flyspell-mode))
+
 (use-package text-mode
   :defer t
   :ensure nil
-  :init
-  (defun myfunc-text-mode ()
-    (set (make-local-variable 'company-minimum-prefix-length) 2))
-  :hook (text-mode . myfunc-text-mode)
+  :hook (text-mode . common-hook-for-text-modes)
   )
 
 (defun myfunc-gud-gdb-mode ()
@@ -869,12 +873,6 @@ Version 2015-04-12"
   (ispell-hunspell-add-multi-dic "en_US,ru_RU")
   (ispell-change-dictionary "en_US,ru_RU" t) ;; with t set dict globally
   )
-
-(defun common-hook-for-text-modes ()
-  (make-«»-pairs)
-  (setq case-fold-search t) ;; ignore case in search
-  (set (make-local-variable 'dabbrev-upcase-means-case-search) nil) ;; ignore case
-  (flyspell-mode))
 
 (use-package markdown-mode
   :defer t
