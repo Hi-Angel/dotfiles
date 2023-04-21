@@ -1512,6 +1512,34 @@ TODO: perhaps contribute it upstream?"
         (let ((default-directory project-root))
           (shell-command "git checkout -- .")
           (revert-buffer nil t t)))))
+
+  (defun projectile-try-find-file-from-pimary-clipboard ()
+    "Opens a file represented by a string foo/bar/buzz.c:777 in the
+current project and goes to line 777. It is allowed some starting
+path components to be invalid (it's useful e.g. when copying from
+gdb or whatever, where the path is relative to a build dir used)"
+    (interactive)
+    (let ((project-root (projectile-project-root))
+          (path (x-get-selection 'PRIMARY 'STRING)))
+      (if project-root
+          (let ((file-path (replace-regexp-in-string "\\(:[0-9]+$\\)" "" path))
+                (line-number (string-to-number (car (last (split-string path ":"))))))
+            (let ((found-file nil))
+              (while (and (not found-file) file-path)
+                (let ((full-path (concat project-root file-path)))
+                  (if (file-exists-p full-path)
+                      (progn
+                        (find-file full-path)
+                        (setq found-file t)
+                        (goto-line line-number))
+                    (let ((new-path (replace-regexp-in-string "^[^/]+/" "" file-path)))
+                      (setq file-path
+                            (if (string= file-path new-path)
+                                nil ;; all components were removed, file not found
+                              new-path))))))
+              (if (not found-file)
+                  (message "File not found"))))
+        (message "No active Projectile project found"))))
   )
 
 (use-package eldoc
