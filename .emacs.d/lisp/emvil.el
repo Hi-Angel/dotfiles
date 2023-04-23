@@ -90,7 +90,7 @@ bringing it to the middle of the screen."
   ;; I want underscore be part of word syntax table, but not in regexp-replace buffer
   ;; where I'm more comfortable having more verbose navigation with underscore not
   ;; being a part of a word. To achieve this I check if current mode has a syntax
-  ;; table different from the global one. the `(eq)' is a lightweight test of whether
+  ;; table different from the global one. The `(eq)' is a lightweight test of whether
   ;; the args point to the same object.
   (unless (eq (standard-syntax-table) (syntax-table))
     ;; make underscore part of a word
