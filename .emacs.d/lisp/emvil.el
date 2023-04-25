@@ -17,6 +17,7 @@
   (when (boundp 'global-undo-tree-mode)
     (global-undo-tree-mode -1))
   (bind-key "C-z"   'undo-fu-only-undo)
+  (bind-key "C-/"   'undo-fu-only-undo)
   (bind-key "C-S-z" 'undo-fu-only-redo)
 
   ;; newer Evil versions seem to handle this by default, however the older one was
