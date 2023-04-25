@@ -1495,13 +1495,15 @@ h1. Доп. информация
         ;; don't want submodules in my list of files
         projectile-git-submodule-command nil
         projectile-enable-caching t)
+  (projectile-mode 1)
+
+
   :bind (("C-c p" . projectile-command-map)
          ("C-x C-h" . projectile-find-file))
   :config
   ;; I mount sshfs and stuff at /tmp, and I definitely wouldn't want a `git whatever'
   ;; to be run over a slow network link. So exclude it.
   (add-to-list 'projectile-globally-ignored-directories "/tmp")
-  (projectile-mode 1)
   (defun projectile-clean-changes()
     "Cleans up changes in a project.
 TODO: perhaps contribute it upstream?"
@@ -1513,7 +1515,7 @@ TODO: perhaps contribute it upstream?"
           (shell-command "git checkout -- .")
           (revert-buffer nil t t)))))
 
-  (defun projectile-try-find-file-from-pimary-clipboard ()
+  (defun projectile-try-find-file-from-primary-clipboard ()
     "Opens a file represented by a string foo/bar/buzz.c:777 in the
 current project and goes to line 777. It is allowed some starting
 path components to be invalid (it's useful e.g. when copying from
