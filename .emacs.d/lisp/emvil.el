@@ -1,7 +1,7 @@
 (use-package evil
   :init
   (setq evil-jumps-cross-buffers nil
-        evil-undo-system 'undo-fu
+        evil-undo-system 'undo-redo
         ;; use vanilla Emacs keybindings in insert-mode excluding Escape
         evil-disable-insert-state-bindings t)
   (setq-default evil-shift-round nil ;; make '>' not to round the indentation
@@ -16,9 +16,7 @@
   ;; UPD: apparently in newer release it's no longer mandatory, so check if it's even defined.
   (when (boundp 'global-undo-tree-mode)
     (global-undo-tree-mode -1))
-  (bind-key "C-z"   'undo-fu-only-undo)
-  (bind-key "C-/"   'undo-fu-only-undo)
-  (bind-key "C-S-z" 'undo-fu-only-redo)
+  (bind-key "C-/"   'evil-undo)
 
   ;; newer Evil versions seem to handle this by default, however the older one was
   ;; removing trailing space when you press Escape. This however can be worked around
@@ -65,8 +63,6 @@ bringing it to the middle of the screen."
          ("G"      . 'end-of-buffer-keep-bottom)
          ("g a"    . 'evil-avy-goto-char) ;; let's have some avy integration!
          ("C-j "   . 'evil-avy-goto-char)
-         ("u"      . 'undo-fu-only-undo)
-         ("C-r"    . 'undo-fu-only-redo)
          ("C-]"    . 'find-tag) ;; same as in insert mode
          ("S"      . 'evil-surround-region)
          ("M-q"    . 'fill-paragraph-or-region)
