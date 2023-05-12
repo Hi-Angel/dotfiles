@@ -401,8 +401,6 @@ backward, so you can mutate text forward"
 (use-package emvil ;; my Evil config, in a separate file
   :ensure nil)
 
-(use-package undo-fu)
-
 (use-package ido
   :init
   (setq-default ido-case-fold t) ;; case insensistivity
