@@ -232,6 +232,7 @@ for_window [class="Klipper"] floating enable; border none
 for_window [class="Plasmoidviewer"] floating enable; border none
 for_window [class="plasmashell"] floating enable;
 for_window [class="plasmashell" window_type="notification"] border none, move position 70 ppt 81 ppt
+for_window [class="spectacle"] floating enable;
 no_focus [window_type="notification"]
 
 # kill the giant window that covers everything up
