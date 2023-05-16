@@ -1250,6 +1250,7 @@ upon or for the selected text if it's active"
                 (thing-at-point 'word 'no-properties)))
         (print-str (pcase major-mode
                      ('c++mode '("printf(\"%s\", " ");"))
+                     ('c-mode '("printf(\"%s\", " ");"))
                      ('rust-mode '("println!(\"{}\", " ");"))
                      )))
     (if (not word)
