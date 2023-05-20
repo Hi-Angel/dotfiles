@@ -1311,9 +1311,9 @@ manually. Arguably, it is a bug in python-mode, because
 indentation is implemented there"
     (let ((params-list (split-string params-w-comma "," t "\s-*")))
       (let ((init-header "def __init__(self")
-            (init-body "")
-            (init "")
-            (repr-body "")
+            (init-body "    ")
+            (init "    ")
+            (repr-body "    ")
             (fst-param-is-processed t))
         (dolist (param params-list)
           (setq init-header (concat init-header ", " param))
@@ -1323,15 +1323,15 @@ indentation is implemented there"
                                     (if fst-param-is-processed
                                         ;; Note: the 4 spaces is a workaround because otherwise
                                         ;; python-mode refuses to properly indent the body
-                                        "\n    return f'{{"
-                                      "\\\n+ f'")
+                                        "\n        return f'{{"
+                                      "\\\n    + f'")
                                     param-no-type " = {self." param-no-type "}, '"))
             (setq fst-param-is-processed nil))
           )
         ;; now replace last "}" with "}}}" since it's hard to set it in place beforehand otherwise.
         (setq repr-body (replace-regexp-in-string "}, '$" "}}}'" repr-body))
         (setq init (concat init-header "):" init-body
-                           "\n\ndef __repr__(self):" repr-body
+                           "\n\n    def __repr__(self):" repr-body
                            ))
         (insert-and-indent-align init)
         )))
