@@ -14,6 +14,7 @@
       native-compile-prune-cache t ;; with native compilation, remove unused .eln's
       dabbrev-upcase-means-case-search t ;; case sensitive dabbrev
       compilation-scroll-output t ;; follow the compilation buffer output
+      pop-up-windows nil ;; I usually prefer having full control over my splits
       )
 
 (setq-default

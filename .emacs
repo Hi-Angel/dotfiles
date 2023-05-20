@@ -1565,10 +1565,16 @@ gdb or whatever, where the path is relative to a build dir used)"
   ;; annoying keybinds
   (setq auto-mode-alist (rassq-delete-all 'git-rebase-mode auto-mode-alist))
   (defun myhook-git-commit-mode ()
-    (setq fill-column 70)
+    (setq fill-column 70
+          pop-up-windows t ;; for good usability magit needs control over splits
+          )
     (flyspell-mode)
     )
   (add-hook 'git-commit-setup-hook 'myhook-git-commit-mode)
+
+  (defun unset-magit-pop-up-windows (_)
+    (setq pop-up-windows nil)) ;; we change it in magit hook, so undo after its buffer quits
+  (add-hook 'delete-frame-functions 'unset-magit-pop-up-windows)
 
   ;; I use plain global-auto-revert mode instead, which works much better with
   ;; network-mounted dirs
