@@ -1486,6 +1486,9 @@ h1. Доп. информация
   :config
   (sp-local-pair 'textile-mode "@" "@")
   (add-hook 'textile-mode-hook 'common-hook-for-text-modes)
+  (defun rm-insert-code()
+    (interactive)
+    (insert "<pre><code class=\"\">\n</pre>"))
   )
 
 (use-package projectile
