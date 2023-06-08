@@ -198,6 +198,19 @@ function p() {
     fi
 }
 
+function ct() {
+    if [ -f .git/REBASE_HEAD ]; then
+        git add -u && git rebase --continue
+    elif [ -f .git/CHERRY_PICK_HEAD ]; then
+        git add -u && git cherry-pick --continue
+    elif [ -d .git/rebase-apply ]; then
+        git add -u && git am --continue
+    else
+        echo "Conflict due to an unknown operation"
+        return 1
+    fi
+}
+
 # show the commit whose application triggered the conflict
 function conflicted_commit() {
     git log -1 -p --stat $(awk 'END{print $2}' .git/rebase-merge/done)
