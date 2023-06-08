@@ -179,6 +179,16 @@ function co_prev() {
     git checkout HEAD^ "$@" && git reset
 }
 
+function newbranch() {
+    if   [[ $# == 1 ]]; then
+        git checkout --no-track -b $1 upstream/master
+    elif [[ $# == 2 ]]; then
+        git checkout --no-track -b $1 $2
+    else
+        echo "Wrong params number!"
+    fi
+}
+
 function p() {
     if [ -z $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) ]; then
         echo "INFO: setting the branch to track origin"
