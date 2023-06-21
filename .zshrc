@@ -199,12 +199,12 @@ function p() {
 }
 
 function ct() {
-    if [ -f .git/REBASE_HEAD ]; then
-        git add -u && git rebase --continue
-    elif [ -f .git/CHERRY_PICK_HEAD ]; then
-        git add -u && git cherry-pick --continue
+    if [ -f .git/CHERRY_PICK_HEAD ]; then
+        git add -u && GIT_EDITOR=true git cherry-pick --continue
+    elif [ -f .git/REBASE_HEAD ]; then
+        git add -u && GIT_EDITOR=true git rebase --continue
     elif [ -d .git/rebase-apply ]; then
-        git add -u && git am --continue
+        git add -u && GIT_EDITOR=true git am --continue
     else
         echo "Conflict due to an unknown operation"
         return 1
