@@ -211,6 +211,19 @@ function ct() {
     fi
 }
 
+function ab() {
+    if [ -f .git/CHERRY_PICK_HEAD ]; then
+        git cherry-pick --abort
+    elif [ -f .git/REBASE_HEAD ]; then
+        git rebase --abort
+    elif [ -d .git/rebase-apply ]; then
+        git am --abort
+    else
+        echo "Conflict due to an unknown operation"
+        return 1
+    fi
+}
+
 # show the commit whose application triggered the conflict
 function conflicted_commit() {
     git log -1 -p --stat $(awk 'END{print $2}' .git/rebase-merge/done)
