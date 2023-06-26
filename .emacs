@@ -1497,14 +1497,6 @@ h1. Доп. информация
     (goto-line line-num)
     (thing-at-point 'line t)))
 
-(defun string-trim-right (s)
-  "Remove whitespace at the end of S."
-  (save-match-data
-    (declare (pure t) (side-effect-free t))
-    (if (string-match "[ \t\n\r]+\\'" s)
-        (replace-match "" t t s)
-      s)))
-
 (use-package projectile
   :init
   (setq projectile-git-command "git ls-files -z"
