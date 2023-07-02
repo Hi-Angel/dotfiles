@@ -1,5 +1,5 @@
 [core]
-    editor = "if [ -S /run/user/1000/emacs/server ]; then ED='emacsclient -tc'; else ED='emacs -nw'; fi; $ED"
+    editor = "if [ -S /run/user/$(id -u)/emacs/server ]; then ED='emacsclient -tc'; else ED='emacs -nw'; fi; $ED"
     hooksPath = "~/.git_hooks"
 	quotePath = false
     # Use `diffr` to improve diff highlighting. Its algo is betterr than that of
