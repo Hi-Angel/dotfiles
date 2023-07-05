@@ -1488,7 +1488,7 @@ h1. Доп. информация
   (add-hook 'textile-mode-hook 'common-hook-for-text-modes)
   (defun rm-insert-code()
     (interactive)
-    (insert "<pre><code class=\"\">\n</pre>"))
+    (insert "<pre><code class=\"haskell\">\n</pre>"))
   )
 
 (defun line-to-string (buffer line-num)
@@ -1530,7 +1530,7 @@ current project and goes to line 777. It is allowed some starting
 path components to be invalid (it's useful e.g. when copying from
 gdb or whatever, where the path is relative to a build dir used)"
     (interactive)
-    (let* ((path (x-get-selection 'PRIMARY 'STRING))
+    (let* ((path (string-trim (x-get-selection 'PRIMARY 'STRING)))
            (file-path (replace-regexp-in-string "\\(:[0-9]+$\\)" "" path))
            (line-number (string-to-number (car (last (split-string path ":")))))
            (stdout-buf (get-buffer-create "*git-ls-files-output*"))
