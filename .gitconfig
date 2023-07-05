@@ -11,6 +11,7 @@
 [diff]
 	tool = gvimdiff
 	algorithm = histogram
+    noprefix = true
 [credential "https://github.com"]
     username = Hi-Angel
 [sendemail]
