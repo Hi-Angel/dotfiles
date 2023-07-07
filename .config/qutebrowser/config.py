@@ -1264,7 +1264,10 @@ c.url.searchengines = { 'DEFAULT': 'https://www.google.ru/search?q={}'
 #                      , 'enru':    'https://translate.google.com/?hl=ru#en/ru/{}'
 #                      , 'ruen':    'https://translate.google.com/?hl=ru#ru/en/{}'}
                       , 'enru':    'https://translate.yandex.com/?lang=en-ru&text={}'
-                      , 'ruen':    'https://translate.yandex.com/?lang=ru-en&text={}'}
+                      , 'ruen':    'https://translate.yandex.com/?lang=ru-en&text={}'
+                      , 'debp':    'https://packages.ubuntu.com/search?keywords={}&searchon=names&suite=kinetic&section=all'
+                      , 'debf':    'https://packages.ubuntu.com/search?searchon=contents&keywords={}&mode=exactfilename&suite=kinetic&arch=any'
+                       }
 
 ## The page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
