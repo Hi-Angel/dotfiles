@@ -584,7 +584,7 @@ include "%L"
 <Multi_key> <semicolon> <less>	 		  : "⁏"	 U204F	# REVERSED SEMICOLON
 <Multi_key> <semicolon> <BackSpace>	 		  : "⁏"	 U204F	# REVERSED SEMICOLON
 # Keep looking into big hunks of Latin Extended-D, A720- et seq.
-<Multi_key> <less> <3>                  : "♥"  U2665            # BLACK HEART SUIT
+<Multi_key> <less> <3>                  : "❤️"  U2764            # HEAVY BLACK HEART
 <Multi_key> <3> <3>			: "♣" U2663		# BLACK CLUB SUIT
 <Multi_key> <o> <8>			: "♣" U2663		# BLACK CLUB SUIT
 <Multi_key> <c> <3>			: "♣" U2663		# BLACK CLUB SUIT
@@ -1211,5 +1211,10 @@ include "%L"
 <Multi_key> <bar> <minus> : "⊢" U22A2 # turnstile, stands for «proves», «satisfies»
 <Multi_key> <minus> <space>	: "— "
     # just a frequently used superscript word
-    <Multi_key> <a> <u>	<r>: "ᴬᵁᴿ"
+<Multi_key> <a> <u>	<r>: "ᴬᵁᴿ"
 <Multi_key> <D> <colon>                      : "😱"
+<Multi_key> <s> <h>                      : "🤷‍♂️"
+<Multi_key> <z> <z>                      : "💤"
+<Multi_key> <3> <d>                      : "😹"
+<Multi_key> <colon> <parenright>                      : "😊"
+<Multi_key> <apostrophe> <d>                      : "😅"
