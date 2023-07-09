@@ -143,6 +143,7 @@
 (use-package yasnippet
   :defer 2 ;; lazy-load after 2 seconds of being idle
   :config
+  (use-package yasnippet-snippets)
   (yas-global-mode)
   )
 
