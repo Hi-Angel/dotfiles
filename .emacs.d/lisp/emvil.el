@@ -2,6 +2,7 @@
   :init
   (setq evil-jumps-cross-buffers nil
         evil-undo-system 'undo-redo
+        evil-want-keybinding nil ;; evil-collection replaces/conflicts evil-keybindings
         ;; use vanilla Emacs keybindings in insert-mode excluding Escape
         evil-disable-insert-state-bindings t)
   (setq-default evil-shift-round nil ;; make '>' not to round the indentation
@@ -28,8 +29,6 @@
     (global-evil-surround-mode 1)
     (push '(?» . ("«" . "»")) evil-surround-pairs-alist) ;; add a « » pair
     )
-  (use-package evil-magit ;; without this package Evil keys are broken in magit
-    :after magit)
 
   ;; highlight regions I work with. Just fancies.
   (use-package evil-goggles
@@ -38,6 +37,11 @@
     :config
     (evil-goggles-mode 1)
     )
+
+  (use-package evil-collection
+    :init
+    :config
+    (evil-collection-init))
 
   (defun fill-paragraph-or-region ()
     (interactive)
