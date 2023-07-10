@@ -18,9 +18,7 @@
 ;; 4. Optional: restart Emacs. At point 3 it printed lots of stuff (during
 ;;   compilation etc), so restart might be useful to regenerate only prints about
 ;;   failed installations, so you have the list.
-;; 5. Manually install packages that use-package failed to at 3. use-package has a
-;;   bug that it can't install some modules.
-;; 6. Restore back all `defer t' removed in step 1.
+;; 5. Restore back all `defer t' removed in step 1.
 
 ;; This warns about replace-regexp, and I tried rewriting this function in terms of
 ;; others — the simple loop they documented is not what I get. Screw this warning, it
@@ -91,6 +89,13 @@
   "Similar to `add-to-list', but accepts a list as 2nd argument"
   (set dst
        (append (eval dst) src)))
+
+(use-package package
+  :defer t
+  :config
+  (push '("melpa" . "https://melpa.org/packages/")
+        package-archives)
+  )
 
 (use-package flycheck
   :defer t
@@ -704,14 +709,6 @@ languages with similar syntax"
         highlight-parentheses-background-colors '("light green" "yellow" "orange" "pink"))
   :config
   (global-highlight-parentheses-mode)
-  )
-
-;; package managment
-(use-package package
-  :defer t
-  :config
-  (push '("melpa" . "https://melpa.org/packages/")
-        package-archives)
   )
 
 (defun myfunc-before-save-hook ()
