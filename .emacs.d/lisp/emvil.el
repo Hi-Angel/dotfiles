@@ -43,6 +43,9 @@
     :config
     (evil-collection-init))
 
+  (use-package goto-chg
+    defer :t)
+
   (defun fill-paragraph-or-region ()
     (interactive)
     (if (region-active-p)
