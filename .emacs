@@ -108,8 +108,8 @@
   :config
   (defun myactions-flycheck-mode-hook ()
     (when (and (bound-and-true-p flycheck-mode) ;; flycheck hooks is called upon disabling it
-               (bound-and-true-p haskell-mode)
-        (flycheck-haskell-setup))
+               (bound-and-true-p haskell-mode))
+      (flycheck-haskell-setup)
       ))
   (add-hook 'flycheck-mode-hook 'myactions-flycheck-mode-hook)
   (add-to-list 'flycheck-clang-warnings "-Wno-missing-braces")
