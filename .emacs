@@ -397,6 +397,10 @@ backward, so you can mutate text forward"
                                   ("pyls.plugins.pyls_mypy.live_mode" nil t)
                                   ("pylsp.plugins.pylsp_mypy.enabled" t t)
                                   ("pylsp.plugins.pylsp_mypy.live_mode" nil t)))
+
+  ;; I am forgetting the actual name to apply a "fix available" of clangd, because
+  ;; it's a bit non-intuitive. So let's alias it to somethig clearer
+  (defalias 'lsp-apply-fix 'lsp-execute-code-action)
   )
 
 (use-package emvil ;; my Evil config, in a separate file
