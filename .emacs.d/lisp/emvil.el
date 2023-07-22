@@ -62,6 +62,11 @@ bringing it to the middle of the screen."
         (evil-goto-line count)
       (let ((scroll-conservatively 101))
         (end-of-buffer))))
+
+  (defun advice-push-jumps(&rest _)
+    (evil--jumps-push))
+  (advice-add 'evil-up-paren :before #'advice-push-jumps)
+
   (evil-mode)
   :bind (:map evil-normal-state-map
          ("C-u"    . 'evil-scroll-up)
