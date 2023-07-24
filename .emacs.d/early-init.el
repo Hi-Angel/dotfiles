@@ -1,12 +1,10 @@
 ;;;; I set defaults in early-init rather than in .emacs to not waste CPU cycles
 ;;;; in excessive overwrites to them
 
-;; only run garbage collection on idle
-(run-with-idle-timer 2 t (lambda ()
-                           (garbage-collect)
-                           (malloc-trim)))
-(setq gc-cons-threshold (* 1024 1024 1024)
-      frame-resize-pixelwise t ;; needs to be set before a frame is created
+(when (fboundp (malloc-trim))
+  (run-with-idle-timer 2 t (lambda () (malloc-trim))))
+
+(setq frame-resize-pixelwise t ;; needs to be set before a frame is created
       kill-ring-max 2 ;; I only use two levels
       reb-re-syntax 'string ;; standard syntax for re-builder
 
