@@ -206,7 +206,7 @@ function ct() {
     elif [ -d .git/rebase-apply ]; then
         git add -u && GIT_EDITOR=true git am --continue
     else
-        echo "Conflict due to an unknown operation"
+        echo "No operation in progress that is suitable for continue"
         return 1
     fi
 }
