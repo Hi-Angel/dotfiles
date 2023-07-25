@@ -198,7 +198,8 @@ function p() {
     fi
 }
 
-function ct() {
+function ct() (
+    cd "$(git rev-parse --show-toplevel)"
     if [ -f .git/CHERRY_PICK_HEAD ]; then
         git add -u && GIT_EDITOR=true git cherry-pick --continue
     elif [ -f .git/REBASE_HEAD ]; then
@@ -209,9 +210,10 @@ function ct() {
         echo "No operation in progress that is suitable for continue"
         return 1
     fi
-}
+ )
 
-function ab() {
+function ab() (
+    cd "$(git rev-parse --show-toplevel)"
     if [ -f .git/CHERRY_PICK_HEAD ]; then
         git cherry-pick --abort
     elif [ -f .git/REBASE_HEAD ]; then
@@ -222,12 +224,13 @@ function ab() {
         echo "Conflict due to an unknown operation"
         return 1
     fi
-}
+ )
 
 # show the commit whose application triggered the conflict
-function conflicted_commit() {
+function conflicted_commit() (
+    cd "$(git rev-parse --show-toplevel)"
     git log -1 -p --stat $(awk 'END{print $2}' .git/rebase-merge/done)
-}
+ )
 
 alias gd="git diff -p --stat"
 alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
