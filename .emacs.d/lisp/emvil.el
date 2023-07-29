@@ -6,7 +6,7 @@
         ;; use vanilla Emacs keybindings in insert-mode excluding Escape
         evil-disable-insert-state-bindings t)
   (setq-default evil-shift-round nil ;; make '>' not to round the indentation
-                evil-goto-definition-functions '(evil-lsp-find-definition
+                evil-goto-definition-functions '(evil-lsp-find-definition ;; declared in main .emacs file
                                                  evil-goto-definition-imenu
                                                  evil-goto-definition-xref
                                                  evil-goto-definition-search))
