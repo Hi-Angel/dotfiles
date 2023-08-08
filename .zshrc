@@ -189,6 +189,24 @@ function newbranch() {
     fi
 }
 
+# Define autocompletion for newbranch
+_newbranch_comp() {
+    _arguments \
+        '1: :->branch' \
+        '2: :->source'
+
+    case $state in
+        branch)
+            # nothing
+            ;;
+        source)
+            compadd $(git branch -r | awk '{print $1}')
+            ;;
+    esac
+}
+
+compdef _newbranch_comp newbranch
+
 function p() {
     if [ -z $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) ]; then
         echo "INFO: setting the branch to track origin"
