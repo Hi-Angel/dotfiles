@@ -1536,9 +1536,12 @@ gdb or whatever, where the path is relative to a build dir used)"
         (let ((cmd (concat "git ls-files --error-unmatch \":/*" file-path "\"")))
           (if (= 0 (shell-command cmd stdout-buf))
               (progn
-                (find-file (string-trim-right (line-to-string stdout-buf 1)))
-                (setq found-file t)
-                (goto-line line-number))
+                (let ((older-buf (buffer-name)))
+                  (find-file (string-trim-right (line-to-string stdout-buf 1)))
+                  (when (string= older-buf (buffer-name))
+                    (evil--jumps-push))
+                  (setq found-file t)
+                  (goto-line line-number)))
             (let ((new-path (replace-regexp-in-string "^[^/]+/" "" file-path)))
               (setq file-path
                     (if (string= file-path new-path)
