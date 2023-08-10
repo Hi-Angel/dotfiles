@@ -1475,6 +1475,9 @@ h1. Доп. информация
 (use-package textile-mode
   :defer t
   :init
+  (defun rm-insert-code()
+    (interactive)
+    (insert "<pre><code class=\"haskell\">\n</pre>"))
   (defalias 'redmine-mode 'textile-mode)
   :custom-face
   (textile-inline-code-face ((t (:background "light blue"))))
@@ -1483,9 +1486,6 @@ h1. Доп. информация
   :config
   (sp-local-pair 'textile-mode "@" "@")
   (add-hook 'textile-mode-hook 'common-hook-for-text-modes)
-  (defun rm-insert-code()
-    (interactive)
-    (insert "<pre><code class=\"haskell\">\n</pre>"))
   )
 
 (defun line-to-string (buffer line-num)
