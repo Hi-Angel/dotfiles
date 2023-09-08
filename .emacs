@@ -139,6 +139,8 @@
   (add-list-to-list 'company-dabbrev-code-modes
                     '(c++-mode c-mode php-mode))
   )
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
 (use-package yasnippet
   :defer 2 ;; lazy-load after 2 seconds of being idle
