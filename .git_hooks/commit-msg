@@ -52,7 +52,12 @@ is not marked as WIP
         if len(lines_added_cache) > len(lines_removed_cache):
             lines_w_mark = str(lines_added_cache) + str(lines_removed_cache)
     if lines_w_mark is not None and not commit_msg_split[0].lower().startswith('wip:'):
-        print(f'ERR: A line that contains aTBM was found, mark your commit as WIP. Line: {lines_w_mark}')
+        print(f'ERR: A line that contains aTBM was found, mark your commit as WIP. Line: \n\n{lines_w_mark}\n\nYour commit message text was:\n\n')
+        for line in commit_msg_split:
+            if line.startswith('diff --git'):
+                break
+            if not line.startswith('#'):
+                print(line)
         exit(1)
 
 abort_if_wip()
