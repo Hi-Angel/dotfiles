@@ -234,7 +234,7 @@ function ab() (
     cd "$(git rev-parse --show-toplevel)"
     if [ -f .git/CHERRY_PICK_HEAD ]; then
         git cherry-pick --abort
-    elif [ -f .git/REBASE_HEAD ]; then
+    elif [ -f .git/REBASE_HEAD ] || [ -d .git/rebase-merge ]; then
         git rebase --abort
     elif [ -d .git/rebase-apply ]; then
         git am --abort
