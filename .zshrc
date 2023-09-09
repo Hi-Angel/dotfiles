@@ -250,6 +250,11 @@ function conflicted_commit() (
     git log -1 -p --stat $(awk 'END{print $2}' .git/rebase-merge/done)
  )
 
+# git-infix: find file in the repo containing the word
+function gnfx () {
+    git ls-files ":/*$1*"
+}
+
 alias gd="git diff -p --stat"
 alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
