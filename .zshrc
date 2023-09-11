@@ -251,7 +251,7 @@ function conflicted_commit() (
  )
 
 # git-infix: find file in the repo containing the word
-function gnfx () {
+function fnfx () {
     git ls-files ":/*$1*"
 }
 
