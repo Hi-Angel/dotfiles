@@ -1527,11 +1527,14 @@ TODO: perhaps contribute it upstream?"
     "Opens a file represented by a string foo/bar/buzz.c:777 in the
 current project and goes to line 777. It is allowed some starting
 path components to be invalid (it's useful e.g. when copying from
-gdb or whatever, where the path is relative to a build dir used)"
+gdb or whatever, where the path is relative to a build dir
+used). It also supports syntax `foo.c:123:345' where the 345 is
+being ignored, currently at the cost of assuming a file won't
+contain a colon. May be fixed, but I don't bother for now."
     (interactive)
     (let* ((path (string-trim (x-get-selection 'PRIMARY 'STRING)))
-           (file-path (replace-regexp-in-string "\\(:[0-9]+$\\)" "" path))
-           (line-number (string-to-number (car (last (split-string path ":")))))
+           (file-path (replace-regexp-in-string "\\(:[^/]*$\\)" "" path))
+           (line-number (string-to-number (car (cdr (split-string path ":")))))
            (stdout-buf (get-buffer-create "*git-ls-files-output*"))
            (found-file nil))
       (while (and (not found-file) file-path)
