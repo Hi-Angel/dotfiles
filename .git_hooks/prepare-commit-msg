@@ -69,7 +69,8 @@ def maybe_repeat_title(fst_changed_file: str,
     return prefix_curr
 
 (prev_commit_title, prev_commit_fst_changed_file) = get_prev_commit_stats()
-fst_changed_file = run_cmd("git diff --name-only --cached")[0]
+maybe_changed_files = run_cmd("git diff --name-only --cached") # an empty commits would lack changed files
+fst_changed_file = maybe_changed_files[0] if maybe_changed_files else ''
 
 # this one is a switch for my current job workflow
 bug_number = (lambda: [maybe_bug := prev_commit_title.split(),
