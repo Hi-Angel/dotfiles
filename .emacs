@@ -1502,7 +1502,8 @@ h1. Доп. информация
         ;; don't want submodules in my list of files
         projectile-git-submodule-command nil
         projectile-auto-update-cache nil ;; don't want random files in cache
-        projectile-enable-caching t)
+        projectile-enable-caching t
+        projectile-use-git-grep t)
   (projectile-mode 1)
 
 
