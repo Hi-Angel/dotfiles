@@ -67,6 +67,16 @@ bringing it to the middle of the screen."
     (evil--jumps-push))
   (advice-add 'evil-up-paren :before #'advice-push-jumps)
 
+  (defun evil-select-pasted ()
+    "Visually select last pasted text."
+    (interactive)
+    (if (= (evil-get-marker ?\[)
+           (evil-get-marker ?\]))
+        (exchange-point-and-mark)
+      (evil-goto-mark ?\[)
+      (evil-visual-char)
+      (evil-goto-mark ?\])))
+
   (defadvice evil-execute-macro (around evil-execute-macro-no-ding activate)
 "Make mistyped search while recording a macro never break the replay"
   (let ((isearch-wrap-pause 'no-ding))
@@ -83,6 +93,7 @@ bringing it to the middle of the screen."
          ("C-]"    . 'find-tag) ;; same as in insert mode
          ("S"      . 'evil-surround-region)
          ("M-q"    . 'fill-paragraph-or-region)
+         ("g C-y"  . 'exchange-point-and-mark)
          :map evil-insert-state-map
          ("C-j "   . 'evil-avy-goto-char)
          :map evil-visual-state-map
