@@ -523,6 +523,11 @@ point reaches the beginning or end of the buffer, stop there."
   (let ((indent-tabs-mode nil))
     ad-do-it))
 
+(defadvice kmacro-call-macro (around kmacro-call-macro-no-ding activate)
+  "Make mistyped search while recording a macro never break the replay"
+  (let ((isearch-wrap-pause 'no-ding))
+    ad-do-it))
+
 ;;I am using only eng and ru layout, and sometimes TeX. So it would be better to use layout toggling
 ;;only with this two layouts, and don't mess it with TeX or whatever some day come in my mind to try.
 (defun input-switch-eng-ru ()

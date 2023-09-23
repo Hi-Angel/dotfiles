@@ -67,6 +67,11 @@ bringing it to the middle of the screen."
     (evil--jumps-push))
   (advice-add 'evil-up-paren :before #'advice-push-jumps)
 
+  (defadvice evil-execute-macro (around evil-execute-macro-no-ding activate)
+"Make mistyped search while recording a macro never break the replay"
+  (let ((isearch-wrap-pause 'no-ding))
+    ad-do-it))
+
   (evil-mode)
   :bind (:map evil-normal-state-map
          ("C-u"    . 'evil-scroll-up)
