@@ -255,6 +255,12 @@ function fnfx () {
     git ls-files ":/*$1*"
 }
 
+# run interactive git-rebase over the commits of the current branch
+function ri () {
+    target_branch=$([ -z $1 ] && echo upstream/master || echo "$1")
+    git rebase -i HEAD~$(l ${target_branch}.. | wc -l)
+}
+
 alias gd="git diff -p --stat"
 alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
