@@ -272,6 +272,7 @@ alias co="git checkout"
 alias l="git l"
 alias lp="git log -p --stat"
 alias gg="git --no-pager grep -In"
+alias ggf="git --no-pager grep -In --files-with-matches"
 alias ip="ip -c"
 
 # I often find useful being able to peek at command timestamps in the scrollback
