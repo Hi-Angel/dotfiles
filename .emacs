@@ -1508,7 +1508,7 @@ h1. Доп. информация
         projectile-git-submodule-command nil
         projectile-auto-update-cache nil ;; don't want random files in cache
         projectile-enable-caching t
-        projectile-use-git-grep t)
+        projectile-use-git-grep t) ;; FTR: git-grep cmd is determined by vc-git-grep-template var
   (projectile-mode 1)
 
 
