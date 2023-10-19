@@ -40,7 +40,6 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 set nobackup
-set number
 
 set tabstop=4
 set shiftwidth=4
@@ -122,6 +121,7 @@ endfunction
 call pathogen#infect()
 
 set relativenumber  " turn relative line numbers on
+set number          " …and make curr line show its number instead of 0
 set numberwidth=1 " to make vim to not align number to right very often
 
 set hlsearch " highlighting all search occurences
