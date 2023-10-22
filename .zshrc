@@ -217,10 +217,10 @@ function p() {
 }
 
 function ct() (
-    cd "$(git rev-parse --show-toplevel)"
+    local git_status=$(git status -u no)
     if [ -f .git/CHERRY_PICK_HEAD ]; then
         git add -u && GIT_EDITOR=true git cherry-pick --continue
-    elif [ -f .git/REBASE_HEAD ]; then
+    elif [[ "$git_status" == *"rebase in progress"* ]]; then
         git add -u && GIT_EDITOR=true git rebase --continue
     elif [ -d .git/rebase-apply ]; then
         git add -u && GIT_EDITOR=true git am --continue
@@ -231,10 +231,10 @@ function ct() (
  )
 
 function ab() (
-    cd "$(git rev-parse --show-toplevel)"
+    local git_status=$(git status -u no)
     if [ -f .git/CHERRY_PICK_HEAD ]; then
         git cherry-pick --abort
-    elif [ -f .git/REBASE_HEAD ] || [ -d .git/rebase-merge ]; then
+    elif [[ "$git_status" == *"rebase in progress"* ]]; then
         git rebase --abort
     elif [ -d .git/rebase-apply ]; then
         git am --abort
