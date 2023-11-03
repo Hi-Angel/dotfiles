@@ -529,6 +529,15 @@ point reaches the beginning or end of the buffer, stop there."
   (let ((isearch-wrap-pause 'no-ding))
     ad-do-it))
 
+(defadvice exchange-point-and-mark (around evil-exchange-point-and-mark activate)
+  "Move caret one char to the right before passing control
+over. Needed in my case because I use `exchange-point-and-mark'
+to select last pasted text, and I usually go to normal mode
+before doing that, whic by itself makes caret move one char left"
+  (when (memq evil-state '(visual normal))
+   (forward-char))
+  ad-do-it)
+
 ;;I am using only eng and ru layout, and sometimes TeX. So it would be better to use layout toggling
 ;;only with this two layouts, and don't mess it with TeX or whatever some day come in my mind to try.
 (defun input-switch-eng-ru ()
