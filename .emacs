@@ -1637,3 +1637,9 @@ contain a colon. May be fixed, but I don't bother for now."
   ;; I find this query useless and annoying, even if an Emacs is using the session
   (setq desktop-load-locked-desktop t)
   )
+
+(use-package emacspeak-setup
+  :defer t
+  :init
+  (setq espeak-default-speech-rate 250)
+  )
