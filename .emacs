@@ -1641,5 +1641,7 @@ contain a colon. May be fixed, but I don't bother for now."
 (use-package emacspeak-setup
   :defer t
   :init
-  (setq espeak-default-speech-rate 250)
+  (setq espeak-default-speech-rate 250
+        ;; Make hotkeys start with C-t. Inconvenient, but I don't use the keymap too often
+        emacspeak-prefix (vector ?\C-t))
   )
