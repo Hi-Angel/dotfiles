@@ -1626,6 +1626,13 @@ contain a colon. May be fixed, but I don't bother for now."
   (modify-syntax-entry ?/ "_")
   )
 
+(use-package yaml-mode
+  :defer t
+  :config
+  ;; make sure `$' symbol is not a word constituent
+  (modify-syntax-entry ?$ "_")
+  )
+
 (defun yank-prev-killring ()
   (interactive)
   (insert (nth 1 kill-ring)))
