@@ -17,12 +17,13 @@ def find(iterable_object, comparator):
 
 def run_cmd_no_fail(cmd: str):
     ret = subprocess.run(cmd.split(), stdout=subprocess.PIPE)
-    return (ret.stdout.decode('utf-8').split('\n'), ret.returncode)
+    return (ret.stdout.decode('utf-8', errors = 'replace').split('\n'),
+            ret.returncode)
 
 def run_cmd(cmd: str) -> List[str]:
     ret = subprocess.run(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout = ret.stdout.decode('utf-8')
-    stderr = ret.stderr.decode('utf-8')
+    stdout = ret.stdout.decode('utf-8', errors = 'replace')
+    stderr = ret.stderr.decode('utf-8', errors = 'replace')
     if ret.returncode != 0:
         raise Exception(f'cmd {cmd} returned error. stdout was {stdout}\n. stderr was: {stderr}')
     return stdout.split('\n') if len(stdout) > 0 else []
