@@ -263,6 +263,11 @@ function ri () {
     git rebase -i HEAD~$(l ${target_branch}.. | wc -l)
 }
 
+# `sedperl` but only runs over git-controlled files that matched.
+function spf () (
+    set -u
+    sp "$1" "$2" $(ggf -P "$1")
+)
 alias gd="git diff -p --stat"
 alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
