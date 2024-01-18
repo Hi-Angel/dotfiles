@@ -175,6 +175,7 @@
                     ("\\.glade$\\'"        . xml-mode)
                     ("\\.mzn\\'"           . minizinc-mode)
                     ("[Dd]ockerfile[^.]*$" . dockerfile-mode)
+                    ("\\tsx\\'"       . tsx-ts-mode)
                     ))
 
 (defun sort-lines-nocase (beg end)
@@ -1651,4 +1652,19 @@ contain a colon. May be fixed, but I don't bother for now."
   (setq espeak-default-speech-rate 250
         ;; Make hotkeys start with C-t. Inconvenient, but I don't use the keymap too often
         emacspeak-prefix (vector ?\C-t))
+  )
+
+(use-package treesitter
+  ;; Refrences: there's an amazing tutorial mentioning various features
+  ;; https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+  :defer t
+  :init
+  ;; TODO: use `treesit-language-available-p' when it's a new Emacs installation to
+  ;; install libs in `treesit-language-source-alist'
+
+  ;; variables to use with M-x treesit-install-language-grammar
+  (setq
+   treesit-language-source-alist
+   '((tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")))
   )
