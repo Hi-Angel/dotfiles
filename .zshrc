@@ -242,6 +242,8 @@ function ab() (
         echo "Conflict due to an unknown operation"
         return 1
     fi
+    # aborts have no hook where we could fix submodule commit, so do that here
+    git submodule update
  )
 
 # show the commit whose application triggered the conflict
