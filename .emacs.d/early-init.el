@@ -16,6 +16,7 @@
       compilation-scroll-output t ;; follow the compilation buffer output
       pop-up-windows nil ;; I usually prefer having full control over my splits
       isearch-lazy-count t
+      sentence-end-double-space nil ;; make fill-paragraph count one space after the dot
       )
 
 (setq-default
