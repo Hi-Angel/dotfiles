@@ -1655,7 +1655,7 @@ contain a colon. May be fixed, but I don't bother for now."
   )
 
 (use-package treesitter
-  ;; Refrences: there's an amazing tutorial mentioning various features
+  ;; References: there's an amazing tutorial mentioning various features
   ;; https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
   :defer t
   :init
