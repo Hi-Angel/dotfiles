@@ -1498,7 +1498,7 @@ h1. Доп. информация
     (insert "<pre><code class=\"haskell\">\n</pre>"))
   (defalias 'redmine-mode 'textile-mode)
   :custom-face
-  (textile-inline-code-face ((t (:background "light blue"))))
+  (textile-inline-code-face ((t (:background "light blue" :foreground "black"))))
   (textile-pre-face ((t (:foreground "dark cyan"))))
   (textile-class-face ((t (:foreground "dim gray" :slant italic)))) ;; actually, that's not what I think it is. Textile-mode is buggy, it applies the wrong highlight.
   :config
