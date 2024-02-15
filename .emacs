@@ -520,24 +520,27 @@ point reaches the beginning or end of the buffer, stop there."
                   (get-char-property (point) 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
-(defadvice align-regexp (around align-regexp-with-spaces activate)
+(defun align-regexp-with-spaces (orig-func BEG END REGEXP &optional GROUP SPACING REPEAT)
   "Make align-regexp always align with spaces rather than tabs"
   (let ((indent-tabs-mode nil))
-    ad-do-it))
+    (funcall orig-func BEG END REGEXP &optional GROUP SPACING REPEAT)))
+(advice-add 'align-regexp :around #'align-regexp-with-spaces)
 
-(defadvice kmacro-call-macro (around kmacro-call-macro-no-ding activate)
+(defun kmacro-call-macro-no-ding (orig-func arg &optional no-repeat end-macro macro)
   "Make mistyped search while recording a macro never break the replay"
   (let ((isearch-wrap-pause 'no-ding))
-    ad-do-it))
+    (funcall orig-func arg no-repeat end-macro macro)))
+(advice-add 'kmacro-call-macro :around #'kmacro-call-macro-no-ding)
 
-(defadvice exchange-point-and-mark (around evil-exchange-point-and-mark activate)
+(defun evil-exchange-point-and-mark (orig-func &optional arg)
   "Move caret one char to the right before passing control
 over. Needed in my case because I use `exchange-point-and-mark'
 to select last pasted text, and I usually go to normal mode
 before doing that, whic by itself makes caret move one char left"
   (when (memq evil-state '(visual normal))
    (forward-char))
-  ad-do-it)
+  (funcall orig-func arg))
+(advice-add 'exchange-point-and-mark :around #'evil-exchange-point-and-mark)
 
 ;;I am using only eng and ru layout, and sometimes TeX. So it would be better to use layout toggling
 ;;only with this two layouts, and don't mess it with TeX or whatever some day come in my mind to try.

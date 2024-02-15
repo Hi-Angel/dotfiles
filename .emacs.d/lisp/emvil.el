@@ -79,10 +79,11 @@ bringing it to the middle of the screen."
       (evil-visual-char)
       (evil-goto-mark ?\])))
 
-  (defadvice evil-execute-macro (around evil-execute-macro-no-ding activate)
+  (defun evil-execute-macro-no-ding (orig-func count macro)
     "Make mistyped search while recording a macro never break the replay"
     (let ((isearch-wrap-pause 'no-ding))
-      ad-do-it))
+      (funcall orig-func count macro)))
+  (advice-add 'evil-execute-macro :around #'evil-execute-macro-no-ding)
 
   (evil-mode)
   :bind (:map evil-normal-state-map
