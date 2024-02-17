@@ -268,13 +268,21 @@ function spf () (
     set -u
     sp "$1" "$2" $(ggf -P "$1")
 )
+
+function um () {
+    if [ $# = 0 ]; then
+        git fetch upstream master && git rebase upstream/master
+    else
+        git fetch upstream ${1} && git rebase upstream/${1}
+    fi
+}
+
 alias gd="git diff -p --stat"
 alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
 alias cax="git add -u && git commit --amend -v --no-edit"
 alias or="git pull origin   HEAD --rebase"
 alias ur="git pull upstream HEAD --rebase"
-alias um="git fetch upstream master && git rebase upstream/master"
 alias co="git checkout"
 alias l="git l"
 alias lp="git log -p --stat"
