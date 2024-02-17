@@ -289,6 +289,7 @@ alias lp="git log -p --stat"
 alias gg="git --no-pager grep -In"
 alias ggf="git --no-pager grep -In --files-with-matches"
 alias ip="ip -c"
+alias ec="emacsclient -ct" # have emacsclient for quick edits instead of vim
 
 # I often find useful being able to peek at command timestamps in the scrollback
 PROMPT='%{$fg[yellow]%}[%D{%d.%m.%Y-%H:%M:%S}] '$PROMPT
