@@ -263,7 +263,7 @@ function ri () {
     git rebase -i HEAD~$(l ${target_branch}.. | wc -l)
 }
 
-# `sedperl` but only runs over git-controlled files that matched.
+# `sed_perl` but runs only over git-controlled files that matched.
 function spf () (
     set -u
     sp "$1" "$2" $(ggf -P "$1")
