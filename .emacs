@@ -1476,7 +1476,31 @@ h1. Доп. информация
   (add-hook 'meson-mode-hook 'myfunc-meson-mode-hook)
   )
 
-(use-package smerge-mode) ;; make smerge-vc-next-conflict always available
+(use-package smerge-mode ;; make smerge-vc-next-conflict always available
+  :config
+
+  (defun smerge-resolve-all-in-file-to (to-keep)
+    "Resolves all conflicts inside a file in preference of TO-KEEP
+
+TO-KEEP decides which part to keep and is one of `upper',
+`lower', `base'"
+    (interactive
+     (list (completing-read "Keeping (upper, base, lower): "
+                            '(upper base lower))))
+    (let ((resolve-func
+           (pcase to-keep
+             ("upper" 'smerge-keep-upper)
+             ("base"  'smerge-keep-base)
+             ("lower" 'smerge-keep-lower)
+             (t (error "Unknown resolution argument!"))))
+          (num-chars-bfore (point-max)))
+      (save-excursion
+        (goto-char (point-min))
+        (while (ignore-errors (not (smerge-next)))
+          (funcall resolve-func)))
+      (when (= num-chars-bfore (point-max))
+        (message "No conflicts were found"))))
+  )
 
 (use-package diff-mode
   :defer t
