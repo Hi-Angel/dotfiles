@@ -1478,27 +1478,25 @@ h1. Доп. информация
 
 (use-package smerge-mode ;; make smerge-vc-next-conflict always available
   :config
-
   (defun smerge-resolve-all-in-file-to (to-keep)
-    "Resolves all conflicts inside a file in preference of TO-KEEP
+    "Resolves all conflicts inside a file in preference of TO-KEEP.
 
-TO-KEEP decides which part to keep and is one of `upper',
-`lower', `base'"
+TO-KEEP decides which part to keep and is one of `upper', `base',
+`lower'."
     (interactive
-     (list (completing-read "Keeping (upper, base, lower): "
-                            '(upper base lower))))
+     (list (completing-read "Keeping: " '(upper base lower))))
     (let ((resolve-func
            (pcase to-keep
              ("upper" 'smerge-keep-upper)
              ("base"  'smerge-keep-base)
              ("lower" 'smerge-keep-lower)
-             (t (error "Unknown resolution argument!"))))
-          (num-chars-bfore (point-max)))
+             (_ (error "Unknown resolution argument!"))))
+          (num-chars-before (point-max)))
       (save-excursion
         (goto-char (point-min))
         (while (ignore-errors (not (smerge-next)))
           (funcall resolve-func)))
-      (when (= num-chars-bfore (point-max))
+      (when (= num-chars-before (point-max))
         (message "No conflicts were found"))))
   )
 
