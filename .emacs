@@ -523,7 +523,7 @@ point reaches the beginning or end of the buffer, stop there."
 (defun align-regexp-with-spaces (orig-func BEG END REGEXP &optional GROUP SPACING REPEAT)
   "Make align-regexp always align with spaces rather than tabs"
   (let ((indent-tabs-mode nil))
-    (funcall orig-func BEG END REGEXP &optional GROUP SPACING REPEAT)))
+    (funcall orig-func BEG END REGEXP GROUP SPACING REPEAT)))
 (advice-add 'align-regexp :around #'align-regexp-with-spaces)
 
 (defun kmacro-call-macro-no-ding (orig-func arg &optional no-repeat end-macro macro)
