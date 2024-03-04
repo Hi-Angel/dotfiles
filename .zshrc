@@ -217,6 +217,7 @@ function p() {
 }
 
 function ct() (
+    cd "$(git rev-parse --show-toplevel)"
     local git_status=$(git status -u no)
     if [ -f .git/CHERRY_PICK_HEAD ]; then
         git add -u && GIT_EDITOR=true git cherry-pick --continue
@@ -231,6 +232,7 @@ function ct() (
  )
 
 function ab() (
+    cd "$(git rev-parse --show-toplevel)"
     local git_status=$(git status -u no)
     if [ -f .git/CHERRY_PICK_HEAD ]; then
         git cherry-pick --abort
