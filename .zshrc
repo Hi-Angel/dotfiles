@@ -256,7 +256,10 @@ function conflicted_commit() (
 
 # git-infix: find file in the repo containing the word
 function fnfx () {
-    git ls-files ":/*$1*"
+    # `last_arg` is the infix, so separate it from the rest of args
+    last_arg="${@: -1}"
+    remaining_args="${@:1:$(($# - 1))}"
+    git ls-files ${remaining_args} ":/*$last_arg*"
 }
 
 # run interactive git-rebase over the commits of the current branch
