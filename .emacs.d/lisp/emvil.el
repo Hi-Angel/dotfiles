@@ -44,6 +44,7 @@
     :config
     ;; I don't want to modify hotkeys for modes below
     (delete 'go-mode evil-collection-mode-list)
+    (delete 'term evil-collection-mode-list)
     (evil-collection-init))
 
   (use-package goto-chg
