@@ -12,10 +12,11 @@
 ;;       (setq use-package-always-ensure t)
 ;;   then start emacs.
 
-;; This warns about replace-regexp, and I tried rewriting this function in terms of
-;; others — the simple loop they documented is not what I get. Screw this warning, it
-;; is not worth the hassle, really.
-(setq byte-compile-warnings '(not interactive-only))
+;; * `interactive-only' warns about replace-regexp, and I tried rewriting this
+;; function in terms of others — the simple loop they documented is not what I get.
+;; * `docstring' works around poorly designed behavior of single quotes
+;; https://emacs.stackexchange.com/questions/73047/emacs-29-docstring-single-quote-escaping-rules-compiler-level-event#comment135034_73048
+(setq byte-compile-warnings '(not interactive-only docstrings))
 
 ;; turn off the bars (I prefer to disable it in the very beginning ⇒ before Emacs
 ;; starts loading unneeded bars increasing a load time without a sense)
