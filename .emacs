@@ -726,8 +726,8 @@ languages with similar syntax"
     "Text-mode is used for editing the commit messages. Emacs has style where
 a backtick ends with a singular quote, so let's check if current dir is
 part of Emacs repo, in which case replace the pair that SP inserted."
-    (save-excursion
-      (when (string-match-p "\\bemacs\\b" default-directory)
+    (when (string-match-p "\\bemacs\\b" default-directory)
+      (save-excursion
         (delete-char 1)
         (insert "'"))))
 
