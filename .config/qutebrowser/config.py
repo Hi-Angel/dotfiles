@@ -1260,7 +1260,7 @@ c.url.default_page = 'about:blank'
 ## `:open google qutebrowser`.
 ## Type: Dict
 # c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
-c.url.searchengines = { 'DEFAULT': 'https://www.google.ru/search?q={}'
+c.url.searchengines = { 'DEFAULT': 'https://www.google.com/search?q={}'
 #                      , 'enru':    'https://translate.google.com/?hl=ru#en/ru/{}'
 #                      , 'ruen':    'https://translate.google.com/?hl=ru#ru/en/{}'}
                       , 'enru':    'https://translate.yandex.com/?lang=en-ru&text={}'
