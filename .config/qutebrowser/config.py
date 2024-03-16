@@ -1576,3 +1576,4 @@ config.bind('<Escape>', 'mode-leave ;; jseval -q document.activeElement.blur()',
 
 # don't quit hints when pages continues loading
 c.hints.leave_on_load = False
+c.downloads.prevent_mixed_content = False
