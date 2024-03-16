@@ -721,6 +721,17 @@ languages with similar syntax"
     (sp-local-pair "{" nil :post-handlers '(:add maybe-add-semicolon-bracket)))
   (sp-local-pair 'c++-mode "[" nil :post-handlers '(:add maybe-complete-lambda))
   (sp-local-pair 'rust-mode "(" nil :post-handlers '(:add maybe-add-semicolon-paren-rust))
+
+  (defun sp-emacs-style-backtick (_ _ _)
+    "Text-mode is used for editing the commit messages. Emacs has style where
+a backtick ends with a singular quote, so let's check if current dir is
+part of Emacs repo, in which case replace the pair that SP inserted."
+    (save-excursion
+      (when (string-match-p "\\bemacs\\b" default-directory)
+        (delete-char 1)
+        (insert "'"))))
+
+  (sp-local-pair 'text-mode "`" nil :post-handlers '(:add sp-emacs-style-backtick))
   )
 
 ;; mode to highlight outside parentheses
