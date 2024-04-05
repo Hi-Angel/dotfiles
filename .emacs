@@ -538,7 +538,8 @@ point reaches the beginning or end of the buffer, stop there."
 over. Needed in my case because I use `exchange-point-and-mark'
 to select last pasted text, and I usually go to normal mode
 before doing that, whic by itself makes caret move one char left"
-  (when (memq evil-state '(visual normal))
+  (when (and (memq evil-state '(visual normal))
+             (< (point) (point-max)))
    (forward-char))
   (funcall orig-func arg))
 (advice-add 'exchange-point-and-mark :around #'evil-exchange-point-and-mark)
