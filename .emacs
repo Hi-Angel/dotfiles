@@ -379,6 +379,7 @@ backward, so you can mutate text forward"
         lsp-enable-symbol-highlighting nil
         lsp-pylsp-plugins-pydocstyle-enabled nil
         lsp-lens-enable nil ;; more doc annotations, disable them
+        lsp-completion-default-behaviour :insert ;; in foo|buzz complete to foobar|buzz \wout eating buzz
         )
 
   (defun evil-lsp-find-definition (_string _position)
