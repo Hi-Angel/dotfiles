@@ -269,7 +269,7 @@ function ri () {
 }
 
 # `sed_perl` but runs only over git-controlled files that matched.
-function spf () (
+function spg () (
     set -u
     sp "$1" "$2" $(ggf -P "$1")
 )
