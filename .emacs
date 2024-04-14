@@ -26,6 +26,7 @@
 
 (bind-key "C-x C-c" nil) ;; I never use it, but do accidentally press
 (bind-key "C-x s" 'save-buffer) ;; I accidentally press it instead of C-x C-s
+(bind-key "<f1>" nil) ; am not using it in Emacs, but do globally for recording
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
