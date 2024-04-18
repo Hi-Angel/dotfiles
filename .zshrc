@@ -271,7 +271,10 @@ function ri () {
 # `sed_perl` but runs only over git-controlled files that matched.
 function spg () (
     set -u
-    sp "$1" "$2" $(ggf -P "$1")
+    old="$1"
+    new="$2"
+    shift 2
+    sp "$old" "$new" $(ggf -P "$old" "$@")
 )
 
 function um () {
