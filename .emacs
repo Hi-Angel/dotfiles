@@ -982,12 +982,14 @@ Version 2015-04-12"
 
 ;; heaader guards, source https://www.emacswiki.org/emacs/AutoInsertHeaderGuards
 (defun maybe-add-newline-at-buf-start ()
-  (if (and (char-equal (char-after (point-min)) ?\n)
+  (if (and (not (= (point-min) (point-max)))
+           (char-equal (char-after (point-min)) ?\n)
            (char-equal (char-after (1+ (point-min))) ?\n))
       ""
     "\n"))
 (defun maybe-add-newline-at-buf-end ()
-  (if (and (char-equal (char-before (point-max)) ?\n)
+  (if (and (not (= (point-min) (point-max)))
+           (char-equal (char-before (point-max)) ?\n)
            (char-equal (char-before (1- (point-max))) ?\n))
       ""
     "\n"))
