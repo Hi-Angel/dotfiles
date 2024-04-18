@@ -993,29 +993,29 @@ Version 2015-04-12"
            (char-equal (char-before (1- (point-max))) ?\n))
       ""
     "\n"))
-(global-set-key [f12]
-                (lambda ()
-                   (interactive)
-                   (if (buffer-file-name)
-                       (let*
-                           ((fName (upcase (replace-in-string "-" "_" (file-name-nondirectory (file-name-sans-extension buffer-file-name)))))
-                            (ifDef (concat "#ifndef " fName "_H" "\n#define " fName "_H"
-                                           (maybe-add-newline-at-buf-start)))
-                            (begin (point-marker))
-                            )
-                         (progn
-                           ;; Insert the Header Guard
-                           (goto-char (point-min))
-  			               (insert ifDef)
-  			               (goto-char (point-max))
-  			               (insert (maybe-add-newline-at-buf-end) "#endif" " // " fName "_H")
-  			               (goto-char begin))
-  			             )
+
+(defun my-insert-C-header ()
+  (interactive)
+  (if (buffer-file-name)
+      (let*
+          ((fName (upcase (replace-in-string "-" "_" (file-name-nondirectory (file-name-sans-extension buffer-file-name)))))
+           (ifDef (concat "#ifndef " fName "_H" "\n#define " fName "_H"
+                          (maybe-add-newline-at-buf-start)))
+           (begin (point-marker))
+           )
+        (progn
+          ;; Insert the Header Guard
+          (goto-char (point-min))
+          (insert ifDef)
+          (goto-char (point-max))
+          (insert (maybe-add-newline-at-buf-end) "#endif" " // " fName "_H")
+          (goto-char begin))
+        )
                                         ;else
-  		             (message (concat "Buffer " (buffer-name) " must have a filename"))
-  		             )
-  		           )
-  		        )
+    (message (concat "Buffer " (buffer-name) " must have a filename"))
+    )
+  )
+(global-set-key [f12] #'my-insert-C-header)
 
 (setq compile-command "ninja -C build")
 
