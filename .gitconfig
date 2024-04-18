@@ -4,7 +4,7 @@
 	quotePath = false
     # Use `diffr` to improve diff highlighting. Its algo is betterr than that of
     # diff-highlight
-    pager = diffr --line-numbers | ifne less
+    pager = diffr --line-numbers | ifne less -n
 [user]
 	email = Hi-Angel@yandex.ru
 	name = Konstantin Kharlamov
