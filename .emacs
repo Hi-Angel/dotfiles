@@ -606,15 +606,23 @@ in a few lines, and puts the cursor at the middle line"
 (bind-key "<C-mouse-5>" 'text-scale-increase);set in wheel font increase
 
 (use-package highlight-numbers
+  :init
+  (defun enable-highlight-numbers-mode ()
+    ;; the mode breaks rendering in eww, so e.g. URLs are no longer highlighted in
+    ;; blue, etc. It has to be fixed, but for now let's work around it.
+    (unless (derived-mode-p 'eww-mode)
+      (highlight-numbers-mode t)))
+  (define-globalized-minor-mode global-highlight-numbers-mode
+    highlight-numbers-mode enable-highlight-numbers-mode)
+
   :config
-  (set-face-attribute 'highlight-numbers-number nil :weight 'bold :foreground "blue" :background "light gray"))
+  (set-face-attribute 'highlight-numbers-number nil :weight 'bold :foreground "blue" :background "light gray")
+  (global-highlight-numbers-mode)
+  )
 
 (column-number-mode)
 (delete-selection-mode)
 
-(define-globalized-minor-mode global-highlight-numbers-mode
-  highlight-numbers-mode highlight-numbers-mode)
-(global-highlight-numbers-mode)
 
 ;;allows in a case of an ∞ loop send with «killall -SIGUSR1 emacs» to break it
 (setq debug-on-event 'sigusr1)
