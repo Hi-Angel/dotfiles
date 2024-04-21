@@ -381,6 +381,11 @@ backward, so you can mutate text forward"
         lsp-pylsp-plugins-pydocstyle-enabled nil
         lsp-lens-enable nil ;; more doc annotations, disable them
         lsp-completion-default-behaviour :insert ;; in foo|buzz complete to foobar|buzz \wout eating buzz
+
+        ;; even if given python project has typing utterly broken, mypy still gives
+        ;; immensely useful syntax checking that is lacking otherwise with pyls.
+        lsp-pylsp-plugins-mypy-live-mode nil
+        lsp-pylsp-plugins-mypy-enabled t
         )
 
   (defun evil-lsp-find-definition (_string _position)
@@ -401,9 +406,7 @@ backward, so you can mutate text forward"
   ;; even if given python project has typing utterly broken, mypy still gives
   ;; immensely useful syntax checking that is lacking otherwise with pyls.
   (lsp-register-custom-settings '(("pyls.plugins.pyls_mypy.enabled" t t)
-                                  ("pyls.plugins.pyls_mypy.live_mode" nil t)
-                                  ("pylsp.plugins.pylsp_mypy.enabled" t t)
-                                  ("pylsp.plugins.pylsp_mypy.live_mode" nil t)))
+                                  ("pyls.plugins.pyls_mypy.live_mode" nil t)))
 
   ;; I am forgetting the actual name to apply a "fix available" of clangd, because
   ;; it's a bit non-intuitive. So let's alias it to somethig clearer
