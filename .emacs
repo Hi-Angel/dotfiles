@@ -757,6 +757,12 @@ part of Emacs repo, in which case replace the pair that SP inserted."
   (global-highlight-parentheses-mode)
   )
 
+(defun large-files-throttling ()
+  "Disables certain features if file is too large"
+  (when (> (buffer-size) (* 1024 1024 10))
+    (highlight-parentheses-mode -1)))
+(add-hook 'find-file-hook #'large-files-throttling)
+
 (defun myfunc-before-save-hook ()
   (unless (derived-mode-p 'diff-mode)
     (delete-trailing-whitespace))
