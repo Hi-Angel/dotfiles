@@ -608,9 +608,16 @@ in a few lines, and puts the cursor at the middle line"
 (use-package highlight-numbers
   :init
   (defun enable-highlight-numbers-mode ()
-    ;; the mode breaks rendering in eww, so e.g. URLs are no longer highlighted in
-    ;; blue, etc. It has to be fixed, but for now let's work around it.
-    (unless (derived-mode-p 'eww-mode)
+    ;; the mode breaks rendering in the following modes. The upstream fix would
+    ;; simple (or not): the
+    ;;      `((,regexp . 'highlight-numbers-number))
+    ;; line has to be replaced with
+    ;;      `((,regexp . (0 highlight-numbers-number prepend)))
+    ;; or something similar. Unfortunately it makes font-lock fail with "unknown
+    ;; variable highlight-numbers-number" even though it is not not a variable but a
+    ;; facename and the syntax is correct per `font-lock-keywords' Help. That's as
+    ;; much of a motivation I had to debug that.
+    (unless (derived-mode-p 'eww-mode 'diff-mode)
       (highlight-numbers-mode t)))
   (define-globalized-minor-mode global-highlight-numbers-mode
     highlight-numbers-mode enable-highlight-numbers-mode)
