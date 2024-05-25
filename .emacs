@@ -1448,7 +1448,7 @@ Use `winstack-push' and
 (setq bidi-inhibit-bpa t)
 (setq-default bidi-paragraph-direction 'left-to-right)
 
-(defun insert-redmine-issue-template ()
+(defun redmine-insert-issue-template ()
   (interactive)
   (insert "
 h1. Шаги к воспроизведению
@@ -1466,7 +1466,7 @@ h2. На самом деле
 h1. Доп. информация
 "))
 
-(defun insert-markdown-spoiler ()
+(defun markdown-insert-spoiler ()
   (interactive)
   (insert "
 <details>
@@ -1475,7 +1475,7 @@ h1. Доп. информация
     Text here. A mandatory empty line above, otherwise markdown misrenders it.
 </details>"))
 
-(defun insert-markdown-issue-template ()
+(defun markdown-insert-issue-template ()
   (interactive)
   (insert "
 # Steps to reproduce
