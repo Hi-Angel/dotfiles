@@ -1629,7 +1629,7 @@ contain a colon. May be fixed, but I don't bother for now."
                 (let ((older-buf (buffer-name)))
                   (find-file (string-trim-right (line-to-string stdout-buf 1)))
                   (when (string= older-buf (buffer-name))
-                    (evil--jumps-push))
+                    (evil-set-jump))
                   (setq found-file t)
                   (goto-line line-number)))
             (let ((new-path (replace-regexp-in-string "^[^/]+/" "" file-path)))

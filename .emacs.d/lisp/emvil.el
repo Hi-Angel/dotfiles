@@ -69,7 +69,7 @@ bringing it to the middle of the screen."
         (end-of-buffer))))
 
   (defun advice-push-jumps(&rest _)
-    (evil--jumps-push))
+    (evil-set-jump))
   (advice-add 'evil-up-paren :before #'advice-push-jumps)
 
   (defun evil-select-pasted ()
@@ -330,13 +330,13 @@ jump to definition in the next split as usual"
 (defun beginning-of-defun-mark (&optional ARG)
   "Wrapper around beginning-of-defun that saves jump position"
   (interactive)
-  (evil--jumps-push)
+  (evil-set-jump)
   (beginning-of-defun ARG))
 
 (defun end-of-defun-mark (&optional ARG)
   "Wrapper around end-of-defun that saves jump position"
   (interactive)
-  (evil--jumps-push)
+  (evil-set-jump)
   (end-of-defun ARG))
 
 (define-key evil-normal-state-map (kbd "[ m") 'beginning-of-defun-mark)
