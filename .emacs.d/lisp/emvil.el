@@ -143,12 +143,13 @@ to `f' returns t. Returns nil on fail or a window on success"
       next-window)))
 
 (defun evil-goto-definition-next-split ()
-  "If the buffer where definition found has a frame, jump
-there. Otherwise jump to definition in the next split"
+  "If the buffer with the definition is visible in a window, jump
+in there, i.e. avoid making buffer visible in multiple places. Otherwise
+jump to definition in the next split as usual"
   (interactive)
   (let ((origin-spl (selected-window))
         (origin-buf (current-buffer)))
-    (evil--jumps-push)
+    (evil-set-jump)
     (evil-goto-definition)
     (when (and (eq origin-spl (selected-window)) ;; otherwise it's done
                (not (eq origin-buf (current-buffer)))) ;; otherwise either definition not found, or
