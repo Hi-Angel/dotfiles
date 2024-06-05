@@ -13,11 +13,6 @@
                                                  evil-goto-definition-search))
 
   :config
-  ;; disable undo-tree-mode mandated by Evil as it's broken (see "unrecognized
-  ;; entry in undo list" on the internet), and use undo-fu instead.
-  ;; UPD: apparently in newer release it's no longer mandatory, so check if it's even defined.
-  (when (boundp 'global-undo-tree-mode)
-    (global-undo-tree-mode -1))
   (bind-key "C-/"   'evil-undo)
 
   ;; newer Evil versions seem to handle this by default, however the older one was
