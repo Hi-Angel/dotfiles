@@ -500,7 +500,7 @@ point reaches the beginning or end of the buffer, stop there."
   "Fixed version of clipboard-yank — it is pastes «instead» of
   selection if such exist(like any normal text editor)"
   (interactive)
-  (when mark-active
+  (when (use-region-p)
 	  (kill-region (region-beginning) (region-end)))
   (let ((select-enable-clipboard t))
 	(clipboard-yank)))
