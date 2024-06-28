@@ -1615,7 +1615,7 @@ used). It also supports syntax `foo.c:123:345' where the 345 is
 being ignored, currently at the cost of assuming a file won't
 contain a colon. May be fixed, but I don't bother for now."
     (interactive)
-    (let* ((path (string-trim (x-get-selection 'PRIMARY 'STRING)))
+    (let* ((path (string-trim (gui-get-selection 'PRIMARY)))
            (file-path (replace-regexp-in-string "\\(:[^/]*$\\)" "" path))
            (line-number (if (string-match-p ":" path)
                             (string-to-number (car (cdr (split-string path ":"))))
