@@ -949,8 +949,6 @@ Version 2015-04-12"
 	(just-one-space)))
 (bind-key "M-<SPC>" 'just-one-space-region)
 
-(setq-default enable-local-variables :all)
-
 ;; Force gdb-mi to not dedicate any windows
 (advice-add 'gdb-display-buffer
 	    :around (lambda (orig-fun &rest r)
