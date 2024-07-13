@@ -1447,19 +1447,19 @@ Use `winstack-push' and
 (defun redmine-insert-issue-template ()
   (interactive)
   (insert "
-h1. Шаги к воспроизведению
+h2. Шаги к воспроизведению
 
 
 
-h2. Ожидается
+h3. Ожидается
 
 
 
-h2. На самом деле
+h3. На самом деле
 
 
 
-h1. Доп. информация
+h2. Доп. информация
 "))
 
 (defun markdown-insert-spoiler ()
