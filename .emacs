@@ -18,8 +18,7 @@
 ;; https://emacs.stackexchange.com/questions/73047/emacs-29-docstring-single-quote-escaping-rules-compiler-level-event#comment135034_73048
 (setq byte-compile-warnings '(not interactive-only docstrings))
 
-;; turn off the bars (I prefer to disable it in the very beginning ⇒ before Emacs
-;; starts loading unneeded bars increasing a load time without a sense)
+;; Turn off the bars
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (toggle-indicate-empty-lines) ;; visually indicate where a file ends
