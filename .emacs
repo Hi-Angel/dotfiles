@@ -495,10 +495,9 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
 
-;;fixed version of clipboard-yank
 (defun clipboard-yank-fixed ()
-  "Fixed version of clipboard-yank — it is pastes «instead» of
-  selection if such exist(like any normal text editor)"
+  "A version of clipboard-yank that pastes \"instead\" of selection if one
+exists"
   (interactive)
   (when (use-region-p)
 	  (kill-region (region-beginning) (region-end)))
@@ -593,9 +592,6 @@ in a few lines, and puts the cursor at the middle line"
         )
     (newline-and-indent)))
 
-;;set copy/paste work as usual, i.e. not overwrite when delete a characters
-;;(and a few another useful keybindings)
-(setq select-enable-clipboard nil)
 (bind-key "C-w" 'clipboard-kill-region)
 (bind-key "s-y" 'yank)
 (use-package idomenu
