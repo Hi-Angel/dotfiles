@@ -10,7 +10,6 @@
 
       make-backup-files nil
       auto-save-default nil
-      visible-bell 1
       create-lockfiles nil
       native-compile-prune-cache t ;; with native compilation, remove unused .eln's
       dabbrev-upcase-means-case-search t ;; case sensitive dabbrev
