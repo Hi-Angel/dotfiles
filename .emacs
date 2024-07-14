@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
-;; Note: this file is accompanied by .emacs.d/early-init.el, some vars are set there
+;; NOTE: this file is accompanied by .emacs.d/early-init.el, many vars are set there
 
 ;;;; Installation of packages required by this config:
 ;; It's unfortunately a bit involved, but not too much.
