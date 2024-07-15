@@ -23,15 +23,13 @@
   (use-package evil-surround
     :config
     (global-evil-surround-mode 1)
-    (push '(?» . ("«" . "»")) evil-surround-pairs-alist) ;; add a « » pair
-    )
+    (push '(?» . ("«" . "»"))) evil-surround-pairs-alist) ;; add a « » pair
 
   ;; highlight regions I work with. Just fancies.
   (use-package evil-goggles
     :config
     (setq evil-goggles-blocking-duration 0.05)
-    (evil-goggles-mode 1)
-    )
+    (evil-goggles-mode 1))
 
   (use-package evil-collection
     :config
@@ -48,8 +46,7 @@
     (interactive)
     (if (region-active-p)
         (fill-region (region-beginning) (region-end))
-      (fill-paragraph))
-    )
+      (fill-paragraph)))
   (defun end-of-buffer-keep-bottom (&optional count)
     "Without a digit-argument it goes to the end of a buffer, but
 keeps the bottom of the buffer at the bottom, as opposed to
@@ -107,8 +104,7 @@ bringing it to the middle of the screen."
          ;; allow for "up/down" history scrolling in / search
          ("<down>" . 'isearch-ring-advance)
          ("<up>"   . 'isearch-ring-retreat)
-         )
-  )
+         ))
 
 (defun myhook-evil-mode ()
   ;; I want underscore be part of word syntax table, but not in regexp-replace buffer
