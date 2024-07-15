@@ -28,9 +28,8 @@
 
   ;; highlight regions I work with. Just fancies.
   (use-package evil-goggles
-    :init
-    (setq evil-goggles-blocking-duration 0.05)
     :config
+    (setq evil-goggles-blocking-duration 0.05)
     (evil-goggles-mode 1)
     )
 
