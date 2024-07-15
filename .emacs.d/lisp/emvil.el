@@ -34,7 +34,6 @@
     )
 
   (use-package evil-collection
-    :init
     :config
     ;; I don't want to modify hotkeys for modes below
     (delete 'go-mode evil-collection-mode-list)
