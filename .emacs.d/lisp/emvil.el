@@ -23,7 +23,7 @@
   (use-package evil-surround
     :config
     (global-evil-surround-mode 1)
-    (push '(?» . ("«" . "»"))) evil-surround-pairs-alist) ;; add a « » pair
+    (push '(?» . ("«" . "»")) evil-surround-pairs-alist)) ;; add a « » pair
 
   ;; highlight regions I work with. Just fancies.
   (use-package evil-goggles
