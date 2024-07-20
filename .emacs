@@ -12,11 +12,13 @@
 ;;       (setq use-package-always-ensure t)
 ;;   then start emacs.
 
-;; * `interactive-only' warns about replace-regexp, and I tried rewriting this
-;; function in terms of others — the simple loop they documented is not what I get.
-;; * `docstring' works around poorly designed behavior of single quotes
-;; https://emacs.stackexchange.com/questions/73047/emacs-29-docstring-single-quote-escaping-rules-compiler-level-event#comment135034_73048
-(setq byte-compile-warnings '(not interactive-only docstrings))
+(setq
+ compile-command "ninja -C build"
+ ;; * `interactive-only' warns about replace-regexp, and I tried rewriting this
+ ;; function in terms of others — the simple loop they documented is not what I get.
+ ;; * `docstring' works around poorly designed behavior of single quotes
+ ;; https://emacs.stackexchange.com/questions/73047/emacs-29-docstring-single-quote-escaping-rules-compiler-level-event#comment135034_73048
+ byte-compile-warnings '(not interactive-only docstrings))
 
 ;; Turn off the bars
 (tool-bar-mode -1)
@@ -1033,8 +1035,6 @@ Version 2015-04-12"
     )
   )
 (global-set-key [f12] #'my-insert-C-header)
-
-(setq compile-command "ninja -C build")
 
 (use-package winum
   :defer nil ;; :bind implies `defer t', override it
