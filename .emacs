@@ -46,6 +46,7 @@
  '(evil-goggles-undo-redo-remove-face ((t (:background "#bbffbb"))))
  '(evil-goggles-yank-face ((t (:background "#ffff55"))))
  '(evil-goggles-indent-face ((t (:background "light blue"))))
+ '(fixed-pitch ((t (:inherit default)))) ; isn't inherited by default
  '(font-lock-comment-face ((t (:foreground "dim gray" :slant italic :weight bold))))
  '(font-lock-doc-face ((t (:foreground "blue"))))
  '(font-lock-doc-string-face ((t (:foreground "medium blue" :slant italic))))
