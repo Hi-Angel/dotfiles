@@ -60,6 +60,30 @@
  '(mode-line-inactive ((t (:background "dim gray" :foreground "white"))))
  '(region ((t (:background "gray")))))
 
+;; >> Dynamic font calculation based on current screen size
+(defun my-best-font-size ()
+  "Calculates comfortable font size for the screen that Emacs is on"
+  (let ((height (nth 2 (assoc 'mm-size (frame-monitor-attributes)))))
+    (cond
+      ((<= height 250) 105)
+      (t 95))))
+
+(defvar my-last-screen-height 0)
+(defun my-set-best-font-size ()
+  "Sets font size based on the screen height. Differently sized screens may
+have same resolution, so we're interested in height millimeters."
+  ;; Turns out the window hook gets called far too often, so we have to cache last
+  ;; value to avoid font changes for no reason
+  (let ((curr-screen-height (nth 2 (assoc 'mm-size (frame-monitor-attributes)))))
+    (when (/= my-last-screen-height curr-screen-height)
+      (set-face-attribute 'default nil :height (my-best-font-size))
+      (setq my-last-screen-height curr-screen-height))))
+(add-hook 'window-configuration-change-hook 'my-set-best-font-size)
+
+;; To avoid fiddling with `(custom-set-faces)' change font-size afterwards
+(my-set-best-font-size)
+;; << Dynamic font calculation based on current screen size
+
 (defalias 'ar 'align-regexp)
 (defalias 'ss 'server-start)
 
