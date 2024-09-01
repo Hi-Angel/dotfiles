@@ -19,6 +19,7 @@
       sentence-end-double-space nil ;; make fill-paragraph count one space after the dot
       select-enable-clipboard nil ;; don't overwrite clipboard content with deleted text
       enable-local-variables :all ;; evaluate .dir-locals.el files
+      ring-bell-function 'ignore ;; don't randomly produce annoying sounds
       )
 
 (setq-default
