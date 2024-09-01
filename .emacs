@@ -61,12 +61,11 @@
  '(region ((t (:background "gray")))))
 
 ;; >> Dynamic font calculation based on current screen size
-(defun my-best-font-size ()
+(defun my-best-font-size (screen-height-mm)
   "Calculates comfortable font size for the screen that Emacs is on"
-  (let ((height (nth 2 (assoc 'mm-size (frame-monitor-attributes)))))
-    (cond
-      ((<= height 250) 105)
-      (t 95))))
+  (cond
+   ((<= screen-height-mm 250) 105)
+   (t 95)))
 
 (defvar my-last-screen-height 0)
 (defun my-set-best-font-size ()
@@ -76,7 +75,7 @@ have same resolution, so we're interested in height millimeters."
   ;; value to avoid font changes for no reason
   (let ((curr-screen-height (nth 2 (assoc 'mm-size (frame-monitor-attributes)))))
     (when (/= my-last-screen-height curr-screen-height)
-      (set-face-attribute 'default nil :height (my-best-font-size))
+      (set-face-attribute 'default nil :height (my-best-font-size curr-screen-height))
       (setq my-last-screen-height curr-screen-height))))
 (add-hook 'window-configuration-change-hook 'my-set-best-font-size)
 
