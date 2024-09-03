@@ -955,10 +955,14 @@ Version 2015-04-12"
   :defer t
   :init
     (setq-default markdown-enable-math t) ;; enable latex delimiters
+    (setq markdown-command "pandoc")
+    (defun my-markdown-hook ()
+      (common-hook-for-text-modes)
+      (setq-local evil-shift-width 2))
   :custom-face
   (markdown-inline-code-face ((t (:inherit markdown-code-face :background "light blue"))))
   :config
-  (add-hook 'markdown-mode-hook 'common-hook-for-text-modes))
+  (add-hook 'markdown-mode-hook 'my-markdown-hook))
 
 (defun just-one-space-region ()
   "Replaces every space in active region between words to one
