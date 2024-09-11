@@ -533,7 +533,7 @@ exists"
 (defun clipboard-copy-fixed ()
   (interactive)
   (let ((select-enable-clipboard t))
-	(clipboard-kill-ring-save (region-beginning)(region-end))))
+	(clipboard-kill-ring-save (region-beginning) (region-end))))
 (bind-key "M-w" 'clipboard-copy-fixed)
 
 (defun copy-text-to-clipboard (text)
@@ -758,7 +758,7 @@ languages with similar syntax"
               (insert ";"))
             )))))
 
-  (sp-with-modes '(c-mode c++-mode java-mode csharp-mode lua-mode vala-mode js-mode)
+  (sp-with-modes '(c-mode c++-mode java-mode csharp-mode vala-mode js-mode)
     (sp-local-pair "(" nil :post-handlers '(:add maybe-add-semicolon-paren))
     (sp-local-pair "{" nil :post-handlers '(:add maybe-add-semicolon-bracket)))
   (sp-local-pair 'c++-mode "[" nil :post-handlers '(:add maybe-complete-lambda))
