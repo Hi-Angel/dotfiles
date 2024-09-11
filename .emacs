@@ -74,7 +74,8 @@ have same resolution, so we're interested in height millimeters."
   ;; Turns out the window hook gets called far too often, so we have to cache last
   ;; value to avoid font changes for no reason
   (let ((curr-screen-height (nth 2 (assoc 'mm-size (frame-monitor-attributes)))))
-    (when (/= my-last-screen-height curr-screen-height)
+    (when (and curr-screen-height ; terminal would have it equal nil
+               (/= my-last-screen-height curr-screen-height))
       (set-face-attribute 'default nil :height (my-best-font-size curr-screen-height))
       (setq my-last-screen-height curr-screen-height))))
 (add-hook 'window-configuration-change-hook 'my-set-best-font-size)
