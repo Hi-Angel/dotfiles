@@ -1754,3 +1754,11 @@ contain a colon. May be fixed, but I don't bother for now."
    '((tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
      (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")))
   )
+
+(use-package purescript-mode
+  :defer t
+  :config
+  (defun myhook-purescript-mode ()
+    (turn-on-purescript-indentation))
+  (add-hook 'purescript-mode-hook 'myhook-purescript-mode)
+  )
