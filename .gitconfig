@@ -8,6 +8,9 @@
 [user]
 	email = Hi-Angel@yandex.ru
 	name = Konstantin Kharlamov
+[includeIf "gitdir:~/Projects/baum/**"]
+    path = ~/Projects/baum/.gitconfig
+
 [diff]
 	tool = gvimdiff
 	algorithm = histogram
