@@ -1760,6 +1760,7 @@ contain a colon. May be fixed, but I don't bother for now."
   :defer t
   :config
   (defun myhook-purescript-mode ()
-    (turn-on-purescript-indentation))
+    (turn-on-purescript-indentation)
+    (setq-local evil-shift-width purescript-indentation-left-offset))
   (add-hook 'purescript-mode-hook 'myhook-purescript-mode)
   )
