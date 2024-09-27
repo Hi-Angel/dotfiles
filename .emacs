@@ -71,17 +71,11 @@
 (defun my-set-best-font-size ()
   "Sets font size based on the screen height. Differently sized screens may
 have same resolution, so we're interested in height millimeters."
-  ;; Turns out the window hook gets called far too often, so we have to cache last
-  ;; value to avoid font changes for no reason
   (let ((curr-screen-height (nth 2 (assoc 'mm-size (frame-monitor-attributes)))))
     (when (and curr-screen-height ; terminal would have it equal nil
                (/= my-last-screen-height curr-screen-height))
       (set-face-attribute 'default nil :height (my-best-font-size curr-screen-height))
       (setq my-last-screen-height curr-screen-height))))
-(add-hook 'window-configuration-change-hook 'my-set-best-font-size)
-
-;; To avoid fiddling with `(custom-set-faces)' change font-size afterwards
-(my-set-best-font-size)
 ;; << Dynamic font calculation based on current screen size
 
 (defalias 'ar 'align-regexp)
@@ -188,10 +182,11 @@ have same resolution, so we're interested in height millimeters."
    auto-revert-avoid-polling t)
   :config
   (global-auto-revert-mode 1) ;; automatically revert any buffeers, whose files changed on disk
-  (defun autorevert-on-focus ()
+  (defun my-on-focus-hook ()
     (when (frame-focus-state)
-      (auto-revert-buffers)))
-  (add-function :after after-focus-change-function #'autorevert-on-focus)
+      (auto-revert-buffers)
+      (my-set-best-font-size)))
+  (add-function :after after-focus-change-function #'my-on-focus-hook)
   )
 
 (add-list-to-list 'auto-mode-alist
