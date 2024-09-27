@@ -987,7 +987,8 @@ Version 2015-04-12"
 
 (use-package color-identifiers-mode
   :init
-  (setq color-identifiers:recoloring-delay 1)
+  (setq color-identifiers:recoloring-delay 1
+        color-identifiers:extra-face-attributes '(:weight bold))
   :config
 
   (defun myfunc-color-identifiers-mode-hook ()
