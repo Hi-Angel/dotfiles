@@ -74,15 +74,16 @@
    ((<= screen-height-mm 250) 105)
    (t 95)))
 
-(defvar my-last-screen-height 0)
+(defvar my-last-screen-height (make-hash-table :test 'equal))
 (defun my-set-best-font-size ()
   "Sets font size based on the screen height. Differently sized screens may
 have same resolution, so we're interested in height millimeters."
-  (let ((curr-screen-height (nth 2 (assoc 'mm-size (frame-monitor-attributes)))))
+  (let ((curr-screen-height (nth 2 (assoc 'mm-size (frame-monitor-attributes))))
+        (last-screen-height (gethash (selected-frame) my-last-screen-height)))
     (when (and curr-screen-height ; terminal would have it equal nil
-               (/= my-last-screen-height curr-screen-height))
+               (/= (or last-screen-height 0) curr-screen-height))
       (set-face-attribute 'default (selected-frame) :height (my-best-font-size curr-screen-height))
-      (setq my-last-screen-height curr-screen-height))))
+      (puthash (selected-frame) curr-screen-height my-last-screen-height))))
 ;; << Dynamic font calculation based on current screen size
 
 (defalias 'ar 'align-regexp)
