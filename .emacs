@@ -1377,6 +1377,7 @@ upon or for the selected text if it's active"
 
 (use-package python
   :defer t
+  :ensure nil
   :init
   ;; Note: we don't set python-indent-offset to anything other than 4. But it may get
   ;; changed automatically by a python-mode, which scans the file it opens to see
