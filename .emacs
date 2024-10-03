@@ -1035,7 +1035,7 @@ Version 2015-04-12"
     "\n"))
 
 (defun my-insert-C-header ()
-  (interactive)
+  "Inserts C header guard"
   (if (buffer-file-name)
       (let*
           ((fName (upcase (replace-in-string "-" "_" (file-name-nondirectory (file-name-sans-extension buffer-file-name)))))
@@ -1051,11 +1051,32 @@ Version 2015-04-12"
           (insert (maybe-add-newline-at-buf-end) "#endif" " // " fName "_H")
           (goto-char begin))
         )
-                                        ;else
-    (message (concat "Buffer " (buffer-name) " must have a filename"))
-    )
-  )
-(global-set-key [f12] #'my-insert-C-header)
+    (message (concat "Buffer " (buffer-name) " must have a filename"))))
+
+(defun my-insert-purescript-header ()
+  "Inserts typical purescript module header"
+  (if (buffer-file-name)
+      (let*
+          ((fName (file-name-sans-extension (file-name-nondirectory buffer-file-name)))
+           (str-intro (concat "module " fName " where" "\n\nimport Prelude\n")))
+        ;; Insert the Header Guard
+        (goto-char (point-min))
+        (insert str-intro)
+        ;; don't bother restoring the point 'cause unlike c-like langs, here the file
+        ;; without the header is nonfunctional, so most likely the file was empty
+        ;; when this got called
+        (goto-char (point-max)))
+    (message (concat "Buffer " (buffer-name) " must have a filename"))))
+
+(defun my-insert-lang-header ()
+  (interactive)
+  (funcall
+   (pcase major-mode
+     ('c-mode          #'my-insert-C-header)
+     ('purescript-mode #'my-insert-purescript-header)
+     (_                 #'ignore))))
+
+(global-set-key [f12] #'my-insert-lang-header)
 
 (use-package winum
   :defer nil ;; :bind implies `defer t', override it
