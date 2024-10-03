@@ -12,6 +12,13 @@
 ;;       (setq use-package-always-ensure t)
 ;;   then start emacs.
 
+;; Allows in a case of an ∞ loop send with «killall -SIGUSR1 emacs» to break it
+(setq debug-on-event 'sigusr1)
+(define-key special-event-map [sigusr2]
+            (lambda () (interactive)
+              (save-some-buffers t)
+              (kill-emacs)))
+
 (setq
  compile-command "ninja -C build"
  ;; * `interactive-only' warns about replace-regexp, and I tried rewriting this
@@ -645,16 +652,6 @@ in a few lines, and puts the cursor at the middle line"
 
 (column-number-mode)
 (delete-selection-mode)
-
-
-;;allows in a case of an ∞ loop send with «killall -SIGUSR1 emacs» to break it
-(setq debug-on-event 'sigusr1)
-(define-key special-event-map [sigusr2]
-  (lambda
-      ()
-    (interactive)
-    (save-some-buffers t)
-    (kill-emacs)))
 
 ;; setup and enable flyspell mode
 (setq-default flyspell-issue-message-flag nil)
