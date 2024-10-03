@@ -74,7 +74,7 @@ have same resolution, so we're interested in height millimeters."
   (let ((curr-screen-height (nth 2 (assoc 'mm-size (frame-monitor-attributes)))))
     (when (and curr-screen-height ; terminal would have it equal nil
                (/= my-last-screen-height curr-screen-height))
-      (set-face-attribute 'default nil :height (my-best-font-size curr-screen-height))
+      (set-face-attribute 'default (selected-frame) :height (my-best-font-size curr-screen-height))
       (setq my-last-screen-height curr-screen-height))))
 ;; << Dynamic font calculation based on current screen size
 
