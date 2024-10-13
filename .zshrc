@@ -285,6 +285,12 @@ function um () {
     fi
 }
 
+# have emacsclient for quick edits instead of vim
+alias ec="emacsclient -ct"
+function sudoec () {
+    ec "/sudo::/$1"
+}
+
 alias gd="git diff -p --stat"
 alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
@@ -298,7 +304,6 @@ alias lp="git log -p --stat"
 alias gg="git --no-pager grep -In"
 alias ggf="git --no-pager grep -In --files-with-matches"
 alias ip="ip -c"
-alias ec="emacsclient -ct" # have emacsclient for quick edits instead of vim
 
 # I often find useful being able to peek at command timestamps in the scrollback
 PROMPT='%{$fg[yellow]%}[%D{%d.%m.%Y-%H:%M:%S}] '$PROMPT
