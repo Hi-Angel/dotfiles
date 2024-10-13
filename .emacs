@@ -1599,7 +1599,7 @@ TO-KEEP decides which part to keep and is one of `upper', `base',
   (defun rm-insert-code()
     (interactive)
     (insert "<pre><code class=\"haskell\">\n</code></pre>"))
-  (defalias 'redmine-mode 'textile-mode)
+  (defalias 'rm-mode 'textile-mode) ;; rm = redmine
   :custom-face
   (textile-inline-code-face ((t (:background "light blue" :foreground "black"))))
   (textile-pre-face ((t (:foreground "dark cyan"))))
