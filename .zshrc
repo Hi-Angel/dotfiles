@@ -288,7 +288,7 @@ function um () {
 # have emacsclient for quick edits instead of vim
 alias ec="emacsclient -ct"
 function sudoec () {
-    ec "/sudo::/$1"
+    ec "/sudo::$1"
 }
 
 alias gd="git diff -p --stat"
