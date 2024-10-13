@@ -120,8 +120,7 @@ have same resolution, so we're interested in height millimeters."
             (append (list (nth 0 mode-line-format) (nth 1 mode-line-format))
                     root-indicator
                     (nthcdr 2 mode-line-format))))))
-
-(add-hook 'find-file-hook 'my-root-mode-line-indicator)
+(add-hook 'find-file-hook 'my-tramp-root-mode-line-indicator)
 
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
