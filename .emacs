@@ -919,7 +919,7 @@ Version 2015-04-12"
     (haskell-indent-mode)
     (make-local-variable 'before-save-hook)
     (add-hook 'before-save-hook 'haskell-sort-n-align-imports))
-  (add-hook 'haskell-mode-hook 'myactions-haskell-mode-hook)
+  (add-hook 'haskell-mode-hook 'myhook-haskell-mode)
   :hook (haskell-mode . myhook-haskell-mode)
   )
 
