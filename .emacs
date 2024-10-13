@@ -112,6 +112,17 @@ have same resolution, so we're interested in height millimeters."
   (set dst
        (append (eval dst) src)))
 
+(defun my-tramp-root-mode-line-indicator ()
+  "Add a red 'root' indicator to the mode line when editing as tramp-root."
+  (when (and buffer-file-name (string-match "^/sudo:" buffer-file-name))
+    (let ((root-indicator '((:eval (propertize " root " 'face '(:foreground "red"))))))
+      (setq mode-line-format
+            (append (list (nth 0 mode-line-format) (nth 1 mode-line-format))
+                    root-indicator
+                    (nthcdr 2 mode-line-format))))))
+
+(add-hook 'find-file-hook 'my-root-mode-line-indicator)
+
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
