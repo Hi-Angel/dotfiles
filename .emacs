@@ -1636,6 +1636,16 @@ TO-KEEP decides which part to keep and is one of `upper', `base',
   (add-hook 'textile-mode-hook 'common-hook-for-text-modes)
   )
 
+(use-package nxml-mode
+  :defer t
+  :ensure nil
+  :config
+  (defun my-nxml-hook ()
+    ;; I prefer commenting out XMLs with a single comment
+    (setq-local comment-style 'multi-line))
+  (add-hook 'nxml-mode-hook 'my-nxml-hook)
+  )
+
 (defun line-to-string (buffer line-num)
   "Retrieve the nth line from a buffer into a string variable."
   (with-current-buffer buffer
