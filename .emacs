@@ -1802,8 +1802,40 @@ contain a colon. May be fixed, but I don't bother for now."
 (use-package purescript-mode
   :defer t
   :config
+  (defun my-purescript-insert-func-impl ()
+    "Given `foo :: …', makes newline and inserts `foo ' i.e. implementation"
+    (let ((line (thing-at-point 'line t))
+          (indentation (current-indentation))
+          (re-typehint (rx line-start (0+ whitespace) (group (1+ wordchar))
+                           ;; match :: unless followed by <-
+                           (0+ whitespace) "::" (0+ whitespace) (not ?<))))
+      (if (not (string-match re-typehint line))
+          nil
+        (end-of-line)
+        (newline)
+        (indent-to indentation)
+        (insert (concat (match-string-no-properties 1 line) " "))
+        t)))
+  (defun my-purescript-newline-and-indent (orig-fun)
+    (unless (my-purescript-insert-func-impl)
+      (funcall orig-fun)))
+  (advice-add 'purescript-newline-and-indent
+              :around #'my-purescript-newline-and-indent)
+
+  (defun my-purescript-evil-open-below ()
+    (interactive)
+    (if (my-purescript-insert-func-impl)
+        (evil-insert-state)
+      (evil-open-below 1)))
+
   (defun myhook-purescript-mode ()
+    ;; Fix completion for operators and functions with symbols in the name
+    (dolist (ch '(?' ?/))
+      (modify-syntax-entry ch "w"))
     (turn-on-purescript-indentation)
+    ;; When completing dot-separated `foo.bar', don't consider it a single word
+    (setq dabbrev-abbrev-char-regexp "\\sw")
+    (evil-local-set-key 'normal (kbd "o") #'my-purescript-evil-open-below)
     (setq-local evil-shift-width purescript-indentation-left-offset))
   (add-hook 'purescript-mode-hook 'myhook-purescript-mode)
   )
