@@ -1342,6 +1342,20 @@ The first arg is the one with point in it."
         (copy-text-to-clipboard ret)
       ret)))
 
+(defun blame-curr-line ()
+  "Get to clipboard last Git commit that modified current line."
+  (interactive)
+  (let* ((file-name (buffer-file-name))
+         (line-number (line-number-at-pos))
+         (command (append
+                   (split-string
+                    (format "git blame -L %d,%d --"
+                            line-number line-number))
+                   (list file-name)))
+         (line (car (apply 'process-lines command)))
+         (commit-hash (car (split-string line))))
+    (copy-text-to-clipboard commit-hash)))
+
 ;; note: some modes override this. In particular, C and C++ standard requires a newline
 (setq-default require-final-newline nil)
 
