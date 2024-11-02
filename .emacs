@@ -368,8 +368,11 @@ backward, so you can mutate text forward"
 
 (defun expand-c-args-in-region ()
   (interactive)
-  (exec-cmd-foreach-backward ",\\( \\)" 'newline-and-indent
-                             (region-beginning) (region-end)))
+  (let ((re (if (member major-mode '(purescript-mode haskell-mode))
+                "\\(\\), " ; the style where comma goes first
+              ",\\( \\)")))
+    (exec-cmd-foreach-backward re 'newline-and-indent
+                               (region-beginning) (region-end))))
 
 (use-package csharp-mode
   :defer t
