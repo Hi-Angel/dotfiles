@@ -1849,3 +1849,10 @@ contain a colon. May be fixed, but I don't bother for now."
     (setq-local evil-shift-width purescript-indentation-left-offset))
   (add-hook 'purescript-mode-hook 'myhook-purescript-mode)
   )
+
+(use-package register
+  :defer t
+  :ensure nil ; built-in package
+  :bind (("C-x <f1>" . 'window-configuration-to-register)
+         ("C-x <f2>" . jump-to-register))
+  )
