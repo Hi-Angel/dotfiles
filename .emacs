@@ -560,6 +560,8 @@ exists"
 (defun copy-obj-to-clipboard (obj)
   (copy-text-to-clipboard (prin1-to-string obj)))
 
+(defalias 'obj-to-string #'prin1-to-string)
+
 (defun what-face (pos)
   (interactive "d")
   (let ((face (or (get-char-property (point) 'read-face-name)
