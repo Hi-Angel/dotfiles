@@ -1853,6 +1853,6 @@ contain a colon. May be fixed, but I don't bother for now."
 (use-package register
   :defer t
   :ensure nil ; built-in package
-  :bind (("C-x <f1>" . 'window-configuration-to-register)
+  :bind (("C-x <f1>" . window-configuration-to-register)
          ("C-x <f2>" . jump-to-register))
   )
