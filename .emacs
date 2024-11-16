@@ -1342,7 +1342,7 @@ The first arg is the one with point in it."
         (copy-text-to-clipboard ret)
       ret)))
 
-(defun blame-curr-line ()
+(defun get-line-commit ()
   "Get to clipboard last Git commit that modified current line."
   (interactive)
   (let* ((file-name (buffer-file-name))
