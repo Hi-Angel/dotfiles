@@ -1861,3 +1861,97 @@ contain a colon. May be fixed, but I don't bother for now."
   :bind (("C-x <f1>" . window-configuration-to-register)
          ("C-x <f2>" . jump-to-register))
   )
+
+(defun create-or-clear-buffer (buffer-name)
+  "Create a new buffer with BUFFER-NAME or clear it if it already exists."
+  (let ((buffer (get-buffer-create buffer-name)))
+    (with-current-buffer buffer
+      (erase-buffer))
+    buffer))
+
+(defun markdown-to-textile ()
+  "Convert the active region or the entire buffer from Textile to Markdown
+and output to a new buffer."
+  (interactive)
+  (let ((textile-content
+         (if (region-active-p)
+             (buffer-substring (region-beginning) (region-end))
+           (buffer-string))))
+    (switch-to-buffer (create-or-clear-buffer "*markdown-to-textile*"))
+    (insert textile-content)
+    (shell-command-on-region (point-min) (point-max) "pandoc -f markdown -t textile" t t)))
+
+(defvar my-re-markdown-ordered-list
+  (rx line-start (* space)
+      (group (+ digit)) ". "
+      (group (+ (not (any "\n"))))))
+
+(defun markdown-ordered-lists-to-bbcode ()
+  "Convert Markdown ordered lists to BBCode ordered lists in the current buffer."
+  (while (re-search-forward my-re-markdown-ordered-list nil t)
+    (let ((start (match-beginning 0))
+          (end (progn (while (re-search-forward my-re-markdown-ordered-list nil t))
+               (point))))
+      (insert "\n[/list]")
+      ;; Convert items to BBCode
+      (goto-char start)
+      (insert "[list=1]\n")
+      (while (re-search-forward my-re-markdown-ordered-list end t)
+        (replace-match "[*]\\2" t)))))
+
+(defun markdown-to-bbcode ()
+  "Convert the current buffer's Markdown content to BBCode format.
+
+A hacky O(n²) written by AI and edited by me, but good enough."
+  (interactive)
+  (let ((markdown-text (buffer-substring-no-properties (point-min) (point-max))))
+    (switch-to-buffer (create-or-clear-buffer "*markdown-to-bbcode*"))
+    (insert markdown-text)
+
+    ;; Convert headers: # Header -> [h1]Header[/h1]
+    (goto-char (point-min))
+    (while (re-search-forward (rx line-start
+                                  (group (+ "#")) " "
+                                  (group (+ (not (any "\n")))))
+                              nil t)
+      (let ((level (length (match-string 1)))
+            (text (match-string 2)))
+        (replace-match (format "[h%d]%s[/h%d]" level text level))))
+
+    ;; Convert links: [text](url) -> [url=url]text[/url]
+    (goto-char (point-min))
+    (while (re-search-forward (rx "[" (group (+ (not (any "]")))) "]"
+                                  "(" (group (+ (not (any "()")))) ")")
+                              nil t)
+      (replace-match "[url=\\2]\\1[/url]" t))
+
+    ;; Convert unordered lists: - Item -> [*]Item
+    (goto-char (point-min))
+    (while (re-search-forward (rx line-start (* space) (or ?- ?*) " ") nil t)
+      (replace-match "[*]" t))
+
+    ;; Convert bold: **text** -> [b]text[/b]
+    (goto-char (point-min))
+    (while (re-search-forward (rx "**" (group (+? any)) "**") nil t)
+      (replace-match "[b]\\1[/b]" t))
+
+    ;; Convert italics: *text* -> [i]text[/i]
+    (goto-char (point-min))
+    (while (re-search-forward (rx "*" (group
+                                       (not ?\]) ; avoid matching BBCode's [*]
+                                       (+? any)) "*") nil t)
+      (replace-match "[i]\\1[/i]" t))
+
+    ;; Convert ordered lists: - Item -> [*]Item
+    (goto-char (point-min))
+    (markdown-ordered-lists-to-bbcode)
+
+    ;; Wrap code blocks: ```code``` -> [code]code[/code]
+    (goto-char (point-min))
+    (while (re-search-forward (rx "```" (group (+ (not (any "`")))) "```") nil t)
+      (replace-match "[code]\\1[/code]" t))
+
+    ;; Replace current buffer with converted BBCode
+    (let ((bbcode-text (buffer-string)))
+      (erase-buffer)
+      (insert bbcode-text))))
