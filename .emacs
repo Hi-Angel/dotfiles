@@ -199,7 +199,10 @@ have same resolution, so we're interested in height millimeters."
    ;; files. That's stupid, just a waste of resources, sure let's avoid that.
    auto-revert-avoid-polling t)
   :config
-  (global-auto-revert-mode 1) ;; automatically revert any buffeers, whose files changed on disk
+  ;; Auto-revert buffers, whose files changed on disk. NOTE: even if I don't use the
+  ;; mode per se (because the "on-focus" hook seems to be enough), the
+  ;; `auto-revert-buffers' won't work without it being enabled.
+  (global-auto-revert-mode 1)
   (defun my-on-focus-hook ()
     (when (frame-focus-state)
       (auto-revert-buffers)
