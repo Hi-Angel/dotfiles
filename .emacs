@@ -1920,8 +1920,8 @@ A hacky O(n²) written by AI and edited by me, but good enough."
 
     ;; Convert links: [text](url) -> [url=url]text[/url]
     (goto-char (point-min))
-    (while (re-search-forward (rx "[" (group (+ (not (any "]")))) "]"
-                                  "(" (group (+ (not (any "()")))) ")")
+    (while (re-search-forward (rx "[" (group (+? any)) "]"
+                                  "(" (group (+? any)) ")")
                               nil t)
       (replace-match "[url=\\2]\\1[/url]" t))
 
