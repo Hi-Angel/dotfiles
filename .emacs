@@ -1862,6 +1862,8 @@ contain a colon. May be fixed, but I don't bother for now."
          ("C-x <f2>" . jump-to-register))
   )
 
+;;;;;;;;;;;;;; START utils: miscellaneous utility functions
+
 (defun create-or-clear-buffer (buffer-name)
   "Create a new buffer with BUFFER-NAME or clear it if it already exists."
   (let ((buffer (get-buffer-create buffer-name)))
@@ -1869,17 +1871,37 @@ contain a colon. May be fixed, but I don't bother for now."
       (erase-buffer))
     buffer))
 
-(defun markdown-to-textile ()
-  "Convert the active region or the entire buffer from Textile to Markdown
-and output to a new buffer."
+(defun markdown-to-textile (&optional curr-buffer)
+  "Convert the active region or the entire buffer from Textile to Markdown.
+
+By default it pops result to a new buffer, but if CURR-BUFFER is t it
+will replace the current one."
   (interactive)
   (let ((textile-content
          (if (region-active-p)
              (buffer-substring (region-beginning) (region-end))
            (buffer-string))))
-    (switch-to-buffer (create-or-clear-buffer "*markdown-to-textile*"))
+    (if curr-buffer
+        (erase-buffer)
+      (switch-to-buffer (create-or-clear-buffer "*markdown-to-textile*")))
     (insert textile-content)
     (shell-command-on-region (point-min) (point-max) "pandoc -f markdown -t textile" t t)))
+
+(defun markdown-to-textile-and-close ()
+  "Backup the current file, convert its Markdown content to Textile, save,
+and close the frame."
+  (interactive)
+  (let ((current-file (buffer-file-name)))
+    (unless current-file
+      (error "Buffer is not visiting a file"))
+    (let ((backup-file (concat current-file "-BCKP")))
+      (copy-file current-file backup-file t)
+      (message "Backup created: %s" backup-file))
+    (markdown-to-textile t)
+    (save-buffer)
+    (delete-frame)))
+
+(evil-ex-define-cmd "xr" #'markdown-to-textile-and-close)
 
 (defvar my-re-markdown-ordered-list
   (rx line-start (* space)
@@ -1955,3 +1977,5 @@ A hacky O(n²) written by AI and edited by me, but good enough."
     (let ((bbcode-text (buffer-string)))
       (erase-buffer)
       (insert bbcode-text))))
+
+;;;;;;;;;;;;;; END of utils
