@@ -1823,7 +1823,7 @@ contain a colon. May be fixed, but I don't bother for now."
           (indentation (current-indentation))
           (re-typehint (rx line-start (0+ whitespace) (group (1+ wordchar))
                            ;; match :: unless followed by <-
-                           (0+ whitespace) "::" (0+ whitespace) (not ?<))))
+                           (0+ whitespace) "::" (1+ (not ?<)) string-end)))
       (if (not (string-match re-typehint line))
           nil
         (end-of-line)
