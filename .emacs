@@ -214,7 +214,6 @@ have same resolution, so we're interested in height millimeters."
                   '(("\\.m$"               . octave-mode)
                     ("\\.service\\'"       . conf-mode)
                     ("\\.rules\\'"         . conf-mode)
-                    ("\\PKGBUILD\\'"       . sh-mode)
                     ("\\.glade$\\'"        . xml-mode)
                     ("\\.mzn\\'"           . minizinc-mode)
                     ("[Dd]ockerfile[^.]*$" . dockerfile-mode)
