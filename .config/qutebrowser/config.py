@@ -1261,12 +1261,14 @@ c.url.default_page = 'about:blank'
 ## Type: Dict
 # c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
 c.url.searchengines = { 'DEFAULT': 'https://www.google.com/search?q={}'
-#                      , 'enru':    'https://translate.google.com/?hl=ru#en/ru/{}'
-#                      , 'ruen':    'https://translate.google.com/?hl=ru#ru/en/{}'}
                       , 'enru':    'https://translate.yandex.com/?lang=en-ru&text={}'
                       , 'ruen':    'https://translate.yandex.com/?lang=ru-en&text={}'
-                      , 'debp':    'https://packages.ubuntu.com/search?keywords={}&searchon=names&suite=kinetic&section=all'
-                      , 'debf':    'https://packages.ubuntu.com/search?searchon=contents&keywords={}&mode=exactfilename&suite=kinetic&arch=any'
+                      , 'debp':    'https://packages.ubuntu.com/search?keywords={}&searchon=names&suite=lunar&section=all'
+                      , 'debf':    'https://packages.ubuntu.com/search?searchon=contents&keywords={}&mode=exactfilename&suite=lunar&arch=any'
+                      , 'ya':    'https://ya.ru/search/?text={}'
+                      , 'purs':    'https://pursuit.purescript.org/search?q={}'
+                      , 'perp':    'https://www.perplexity.ai/search/?q={}'
+                      , 'perpp':    'https://www.perplexity.ai/search/?q={}&copilot=true'
                        }
 
 ## The page(s) to open at the start.
