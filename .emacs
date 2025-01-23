@@ -1931,7 +1931,7 @@ A hacky O(n²) written by AI and edited by me, but good enough."
       (switch-to-buffer (create-or-clear-buffer "*markdown-to-bbcode*")))
     (insert markdown-text)
 
-    ;; Convert headers: # Header -> [h1]Header[/h1]
+    ;; Convert headers: # Header -> [SIZE=Xem][B]Header[/B][/SIZE]
     (goto-char (point-min))
     (while (re-search-forward (rx line-start
                                   (group (+ "#")) " "
