@@ -1920,13 +1920,15 @@ and close the frame."
       (while (re-search-forward my-re-markdown-ordered-list end t)
         (replace-match "[*]\\2" t)))))
 
-(defun markdown-to-bbcode ()
+(defun markdown-to-bbcode (&optional curr-buffer)
   "Convert the current buffer's Markdown content to BBCode format.
 
 A hacky O(n²) written by AI and edited by me, but good enough."
   (interactive)
   (let ((markdown-text (buffer-substring-no-properties (point-min) (point-max))))
-    (switch-to-buffer (create-or-clear-buffer "*markdown-to-bbcode*"))
+    (if curr-buffer
+        (erase-buffer)
+      (switch-to-buffer (create-or-clear-buffer "*markdown-to-bbcode*")))
     (insert markdown-text)
 
     ;; Convert headers: # Header -> [h1]Header[/h1]
@@ -1977,4 +1979,19 @@ A hacky O(n²) written by AI and edited by me, but good enough."
       (erase-buffer)
       (insert bbcode-text))))
 
+(defun markdown-to-bbcode-and-close ()
+  "Backup the current file, convert its Markdown content to bbcode, save,
+and close the frame."
+  (interactive)
+  (let ((current-file (buffer-file-name)))
+    (unless current-file
+      (error "Buffer is not visiting a file"))
+    (let ((backup-file (concat current-file "-BCKP")))
+      (copy-file current-file backup-file t)
+      (message "Backup created: %s" backup-file))
+    (markdown-to-bbcode t)
+    (save-buffer)
+    (delete-frame)))
+
+(evil-ex-define-cmd "xb" #'markdown-to-bbcode-and-close)
 ;;;;;;;;;;;;;; END of utils
