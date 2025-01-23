@@ -1937,9 +1937,16 @@ A hacky O(n²) written by AI and edited by me, but good enough."
                                   (group (+ "#")) " "
                                   (group (+ (not (any "\n")))))
                               nil t)
-      (let ((level (length (match-string 1)))
-            (text (match-string 2)))
-        (replace-match (format "[h%d]%s[/h%d]" level text level))))
+      (let ((text (match-string 2))
+            (em-len (pcase (length (match-string 1))
+                      (1 "2em")
+                      (2 "1.5em")
+                      (3 "1.25em")
+                      (4 "1em")
+                      (5 "0.875em")
+                      (6 "0.85em")
+                      (_ "UNSUPPORTED"))))
+        (replace-match (format "[SIZE=%s][B]%s[/B][/SIZE]" em-len text))))
 
     ;; Convert links: [text](url) -> [url=url]text[/url]
     (goto-char (point-min))
