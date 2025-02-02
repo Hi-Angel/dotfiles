@@ -122,6 +122,8 @@ have same resolution, so we're interested in height millimeters."
                     (nthcdr 2 mode-line-format))))))
 (add-hook 'find-file-hook 'my-tramp-root-mode-line-indicator)
 
+(xterm-mouse-mode -1) ; don't want clicking in terminal to move the pointer
+
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
