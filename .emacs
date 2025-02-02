@@ -123,6 +123,7 @@ have same resolution, so we're interested in height millimeters."
 (add-hook 'find-file-hook 'my-tramp-root-mode-line-indicator)
 
 (xterm-mouse-mode -1) ; don't want clicking in terminal to move the pointer
+(save-place-mode 1) ; save last caret position in a file
 
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
