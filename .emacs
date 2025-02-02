@@ -434,6 +434,9 @@ backward, so you can mutate text forward"
         ;; immensely useful syntax checking that is lacking otherwise with pyls.
         lsp-pylsp-plugins-mypy-live-mode nil
         lsp-pylsp-plugins-mypy-enabled t
+
+        ;; Disable square boxes with css-ls https://github.com/emacs-lsp/lsp-mode/issues/4659
+        lsp-enable-text-document-color nil
         )
 
   (defun evil-lsp-find-definition (_string _position)
