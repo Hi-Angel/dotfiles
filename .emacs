@@ -138,7 +138,9 @@ have same resolution, so we're interested in height millimeters."
 (use-package flycheck
   :defer t
   :init
-  (setq flycheck-check-syntax-automatically '(save)) ;; I only want it on save
+  (setq flycheck-check-syntax-automatically '(save) ; I only want it on save
+        ;; Works around a bug: https://github.com/doomemacs/doomemacs/issues/2497#issuecomment-1440885847
+        next-error-find-buffer-function 'next-error-buffer-unnavigated-current)
   :custom-face
   (flycheck-error-list-warning ((t (:inherit warning :foreground "blue"))))
   (flycheck-fringe-warning ((t (:inherit warning :foreground "blue"))))
