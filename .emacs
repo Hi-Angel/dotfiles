@@ -595,8 +595,9 @@ exists"
   "Move caret one char to the right before passing control
 over. Needed in my case because I use `exchange-point-and-mark'
 to select last pasted text, and I usually go to normal mode
-before doing that, whic by itself makes caret move one char left"
-  (when (and (memq evil-state '(visual normal))
+before doing that, which by itself makes caret move one char left"
+  (when (and (equal last-command 'yank)
+             (memq evil-state '(visual normal))
              (< (point) (point-max)))
    (forward-char))
   (funcall orig-func arg))
