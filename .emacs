@@ -639,12 +639,9 @@ in a few lines, and puts the cursor at the middle line"
           ;; mode.
           (smartparens-mode 0)
           (smartparens-mode 1))
-        (indent-according-to-mode) ;; indent the line
-        (newline 2) ;; 2 newlines
-        (indent-according-to-mode) ;; indent the line
-        (forward-line -1)
-        (indent-according-to-mode) ;; indent the line
-        )
+        (newline-and-indent 2)
+        (end-of-line 0) ; go to end of previous line
+        (indent-according-to-mode))
     (newline-and-indent)))
 
 (bind-key "C-w" 'clipboard-kill-region)
