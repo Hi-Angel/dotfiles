@@ -222,7 +222,8 @@ have same resolution, so we're interested in height millimeters."
                     ("\\.glade$\\'"        . xml-mode)
                     ("\\.mzn\\'"           . minizinc-mode)
                     ("[Dd]ockerfile[^.]*$" . dockerfile-mode)
-                    ("\\tsx\\'"       . tsx-ts-mode)
+                    ("\\.ts\\'"            . tsx-ts-mode)
+                    ("\\.tsx\\'"           . typescript-ts-mode)
                     ))
 
 (defun sort-lines-nocase (beg end)
