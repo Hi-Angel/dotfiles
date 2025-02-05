@@ -287,6 +287,7 @@ function um () {
 
 # have emacsclient for quick edits instead of vim
 alias ec="emacsclient -ct"
+alias gec="emacsclient -c"
 function suec () {
     ec "/sudo::$1"
 }
