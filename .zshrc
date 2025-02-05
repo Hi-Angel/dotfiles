@@ -118,7 +118,7 @@ function sed_perl() {
 	local from=$1
 	local to=$2
 	shift 2
-	$ack_binary -l --print0 "$from" "$@" | xargs -r0 perl -Mutf8 -i -CS -pe "s α${from}α${to}αg"
+	$ack_binary -l --print0 "$from" "$@" | xargs -r0 perl -Mutf8 -i -C -pe "s α${from}α${to}αg"
 }
 alias sp=sed_perl
 
