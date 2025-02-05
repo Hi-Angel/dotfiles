@@ -305,6 +305,7 @@ alias lp="git log -p --stat"
 alias gg="git --no-pager grep -In"
 alias ggf="git --no-pager grep -In --files-with-matches"
 alias ip="ip -c"
+alias cmake_dbg_ninja_mold='cmake -Bbuild -GNinja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_FLAGS="-fuse-ld=mold -g3"'
 
 # I often find useful being able to peek at command timestamps in the scrollback
 PROMPT='%{$fg[yellow]%}[%D{%d.%m.%Y-%H:%M:%S}] '$PROMPT
