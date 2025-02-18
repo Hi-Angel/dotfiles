@@ -388,8 +388,7 @@ backward, so you can mutate text forward"
   (defun myhook-csharp-mode ()
     (flycheck-mode -1) ;; for some reason it lags with C#
     (c-set-offset 'innamespace '+)
-    (make-local-variable 'before-save-hook)
-    (add-hook 'before-save-hook 'csharp-sort-usings))
+    (add-hook 'before-save-hook #'csharp-sort-usings nil t))
   :hook (csharp-mode . myhook-csharp-mode)
   )
 
@@ -814,7 +813,7 @@ part of Emacs repo, in which case replace the pair that SP inserted."
   ;; (when (derived-mode-p 'c-mode 'c++-mode)
   ;; 	 (c-sort-includes))
   )
-(add-hook 'before-save-hook 'myfunc-before-save-hook)
+(add-hook 'before-save-hook #'myfunc-before-save-hook)
 
 (use-package rust-mode
   :defer t
@@ -941,8 +940,7 @@ Version 2015-04-12"
 
   (defun myhook-haskell-mode ()
     (haskell-indent-mode)
-    (make-local-variable 'before-save-hook)
-    (add-hook 'before-save-hook 'haskell-sort-n-align-imports))
+    (add-hook 'before-save-hook #'haskell-sort-n-align-imports nil t))
   (add-hook 'haskell-mode-hook 'myhook-haskell-mode)
   :hook (haskell-mode . myhook-haskell-mode)
   )
