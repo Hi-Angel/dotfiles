@@ -2006,4 +2006,13 @@ and close the frame."
     (delete-frame)))
 
 (evil-ex-define-cmd "xb" #'markdown-to-bbcode-and-close)
+
+(defun reverse-words (beg end)
+ "Reverse words between BEG and END."
+ (interactive "r")
+ (let* ((region-str (buffer-substring beg end))
+        (words (split-string region-str))
+        (reversed (string-join (reverse words) " ")))
+   (delete-region beg end)
+   (insert reversed)))
 ;;;;;;;;;;;;;; END of utils
