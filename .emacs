@@ -605,12 +605,12 @@ before doing that, which by itself makes caret move one char left"
 ;;I am using only eng and ru layout, and sometimes TeX. So it would be better to use layout toggling
 ;;only with this two layouts, and don't mess it with TeX or whatever some day come in my mind to try.
 (defun input-switch-eng-ru ()
-  (interactive)
   "Swithes an input methods between russian and english.
 
 Works just as the standard «toggle-input-method»(and in fact
 calls it), but before checks if an input method one of russian or
 english. If it isn't, set the lang to english."
+  (interactive)
   (if (not current-input-method)
       (set-input-method "russian-computer")
     (deactivate-input-method)))
