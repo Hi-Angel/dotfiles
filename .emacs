@@ -1854,7 +1854,8 @@ contain a colon. May be fixed, but I don't bother for now."
     ;; When completing dot-separated `foo.bar', don't consider it a single word
     (setq dabbrev-abbrev-char-regexp "\\sw")
     (evil-local-set-key 'normal (kbd "o") #'my-purescript-evil-open-below)
-    (setq-local evil-shift-width purescript-indentation-left-offset))
+    (setq-local evil-shift-width purescript-indentation-left-offset)
+    (add-hook 'before-save-hook #'purescript-sort-imports nil t))
   (add-hook 'purescript-mode-hook 'myhook-purescript-mode)
   )
 
