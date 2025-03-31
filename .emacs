@@ -939,7 +939,7 @@ Version 2015-04-12"
       (haskell-sort-imports)))
 
   (defun myhook-haskell-mode ()
-    (haskell-indent-mode)
+    (haskell-indentation-mode)
     (add-hook 'before-save-hook #'haskell-sort-n-align-imports nil t))
   (add-hook 'haskell-mode-hook 'myhook-haskell-mode)
   :hook (haskell-mode . myhook-haskell-mode)
