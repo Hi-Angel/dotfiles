@@ -1840,11 +1840,27 @@ contain a colon. May be fixed, but I don't bother for now."
   (advice-add 'purescript-newline-and-indent
               :around #'my-purescript-newline-and-indent)
 
+  (defun my-purescript-evil-open-above ()
+    (interactive)
+    ;; can't use (evil-open-above 1) here due to purescript-mode bug: it has
+    ;; implemented `purescript-newline-and-indent' and
+    ;; `purescript-indentation-indent-line' in very different ways, and the latter
+    ;; inserts unnecessary indentation.
+    (end-of-line 0)
+    (purescript-newline-and-indent)
+    (evil-insert-state))
+
   (defun my-purescript-evil-open-below ()
     (interactive)
     (if (my-purescript-insert-func-impl)
         (evil-insert-state)
-      (evil-open-below 1)))
+      ;; can't use (evil-open-below 1) here due to purescript-mode bug: it has
+      ;; implemented `purescript-newline-and-indent' and
+      ;; `purescript-indentation-indent-line' in very different ways, and the latter
+      ;; inserts unnecessary indentation.
+      (end-of-line)
+      (purescript-newline-and-indent)
+      (evil-insert-state)))
 
   (defun myhook-purescript-mode ()
     ;; Fix completion for operators and functions with symbols in the name
@@ -1853,6 +1869,7 @@ contain a colon. May be fixed, but I don't bother for now."
     (turn-on-purescript-indentation)
     ;; When completing dot-separated `foo.bar', don't consider it a single word
     (setq dabbrev-abbrev-char-regexp "\\sw")
+    (evil-local-set-key 'normal (kbd "O") #'my-purescript-evil-open-above)
     (evil-local-set-key 'normal (kbd "o") #'my-purescript-evil-open-below)
     (setq-local evil-shift-width purescript-indentation-left-offset)
     (add-hook 'before-save-hook #'purescript-sort-imports nil t))
