@@ -1544,7 +1544,7 @@ h2. Доп. информация
 <details>
     <summary>Details</summary>
 
-    Text here. A mandatory empty line above, otherwise markdown misrenders it.
+Text here. A mandatory empty line above, otherwise markdown misrenders it.
 </details>"))
 
 (defun markdown-insert-issue-template ()
