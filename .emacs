@@ -1667,6 +1667,9 @@ TO-KEEP decides which part to keep and is one of `upper', `base',
         projectile-git-submodule-command nil
         projectile-auto-update-cache nil ;; don't want random files in cache
         projectile-enable-caching t
+        ;; Idk why they consider fd better than git-ls-files, given that fd
+        ;; lists build artifacts whereas git-ls-files doesn't. Disable it.
+        projectile-git-use-fd nil
         projectile-use-git-grep t) ;; FTR: git-grep cmd is determined by vc-git-grep-template var
   (projectile-mode 1)
 
