@@ -221,7 +221,6 @@ have same resolution, so we're interested in height millimeters."
                     ("\\.rules\\'"         . conf-mode)
                     ("\\.glade$\\'"        . xml-mode)
                     ("\\.mzn\\'"           . minizinc-mode)
-                    ("[Dd]ockerfile[^.]*$" . dockerfile-mode)
                     ("\\.ts\\'"            . tsx-ts-mode)
                     ("\\.tsx\\'"           . typescript-ts-mode)
                     ))
