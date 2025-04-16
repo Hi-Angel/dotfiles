@@ -353,11 +353,7 @@ opening symbol, thus the function seeks only the closing"
   (turn-on-auto-fill) ;;auto fill mode for c modes.
   (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'csharp-mode 'lua-mode)
     (init-prettify-table-c-like)
-    (prettify-symbols-mode 1)
-    (if (derived-mode-p 'c-mode)
-        (setq flycheck-clang-language-standard "c11")
-      (setq flycheck-clang-language-standard "c++17"))
-    ))
+    (prettify-symbols-mode 1)))
 
 (use-package cc-mode
   :defer t
