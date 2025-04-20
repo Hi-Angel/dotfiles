@@ -659,7 +659,7 @@ in a few lines, and puts the cursor at the middle line"
     ;; variable highlight-numbers-number" even though it is not not a variable but a
     ;; facename and the syntax is correct per `font-lock-keywords' Help. That's as
     ;; much of a motivation I had to debug that.
-    (unless (derived-mode-p 'eww-mode 'diff-mode)
+    (unless (derived-mode-p 'eww-mode 'diff-mode 'xref--xref-buffer-mode)
       (highlight-numbers-mode t)))
   (define-globalized-minor-mode global-highlight-numbers-mode
     highlight-numbers-mode enable-highlight-numbers-mode)
