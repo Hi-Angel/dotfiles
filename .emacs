@@ -971,6 +971,7 @@ Version 2015-04-12"
     (setq-default markdown-enable-math t) ;; enable latex delimiters
     (setq markdown-command "pandoc")
     (defun my-markdown-hook ()
+      (unbind-key "<backtab>") ; it's more annoying than it's useful
       (common-hook-for-text-modes))
   :custom-face
   (markdown-inline-code-face ((t (:inherit markdown-code-face :background "light blue"))))
