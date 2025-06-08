@@ -331,4 +331,27 @@ jump to definition in the next split as usual"
 (define-key evil-normal-state-map (kbd "[ m") 'beginning-of-defun-mark)
 (define-key evil-normal-state-map (kbd "] m") 'end-of-defun-mark)
 
+(defun my-evil-lsp-rename ()
+  (interactive)
+  (declare-function lsp-rename nil) ; don't care to require
+  (call-interactively #'lsp-rename)
+  ;; (evil-normal-state) for some reason doesn't work here to stay in "normal"
+  )
+
+(defmacro my-evil-bind-operator-command (keymap key op-name func)
+  "Allow to use operator key (such as \"d\" or \"c\") as a prefix key.
+
+KEYMAP and FUNC are hopefully self-explanatory.
+
+KEY is the key to get pressed after the prefix.
+
+OP-NAME is the function shown upon `C-h k' then pressing the prefix key."
+  `(evil-define-key 'operator ,keymap
+     ,key (lambda ()
+            (interactive)
+            (when (eq evil-this-operator ,op-name)
+              (funcall ,func)))))
+
+(my-evil-bind-operator-command 'evil-normal-state-map "r" 'evil-change 'my-evil-lsp-rename)
+
 (provide 'emvil)
