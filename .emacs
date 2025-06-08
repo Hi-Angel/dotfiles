@@ -1867,7 +1867,7 @@ contain a colon. May be fixed, but I don't bother for now."
     (evil-local-set-key 'normal (kbd "o") #'my-purescript-evil-open-below)
     (setq-local evil-shift-width purescript-indentation-left-offset)
     (add-hook 'before-save-hook #'purescript-sort-imports nil t))
-  (add-hook 'purescript-mode-hook 'myhook-purescript-mode)
+  (add-hook 'purescript-mode-hook #'myhook-purescript-mode)
   )
 
 (use-package register
@@ -2028,4 +2028,50 @@ and close the frame."
         (reversed (string-join (reverse words) " ")))
    (delete-region beg end)
    (insert reversed)))
+
+(defun get-face-ranges ()
+  "Return a list of ranges in the current buffer where the 'face property is applied.
+Each range is represented as a list of (START END FACE)."
+  (let ((ranges '())
+        (pos (point-min))
+        (end (point-max))
+        (current-face nil)
+        (start nil))
+    (while (< pos end)
+      (let ((next-face (get-text-property pos 'face)))
+        (cond
+         ;; If the face changes and we were tracking a range, save it.
+         ((and current-face (not (eq next-face current-face)))
+          (push (list start (- pos 1) current-face) ranges)
+          (setq current-face nil))
+         ;; If we encounter a new face, start tracking a range.
+         ((and (not current-face) next-face)
+          (setq current-face next-face)
+          (setq start pos))))
+      (setq pos (next-single-property-change pos 'face nil end)))
+    ;; If we were tracking a range at the end of the buffer, save it.
+    (when current-face
+      (push (list start pos current-face) ranges))
+    (nreverse ranges)))
+
+(defun collect-face-ranges ()
+  "Return a list of face ranges in the current buffer, merging consecutive
+ranges with the same face.
+
+Each element is a list (BEGIN END FACE-NAME), where BEGIN and END are
+buffer positions, and FACE-NAME is the face applied to that range."
+  (let ((pos (point-min))
+        result)
+    (while (< pos (point-max))
+      (let* ((face (get-text-property pos 'face))
+             (next (or (next-single-char-property-change pos 'face) (point-max)))
+             (last-range (car result)))  ; Get the most recent range, if any
+        (if (and last-range
+                 (eq (nth 2 last-range) face) ; Same face as last range
+                 (= (+ 1 (nth 1 last-range)) pos)) ; last range continues
+            ;; Extend the last range's end position
+            (setcar (cdr last-range) (- next 1))
+          (push (list pos (- next 1) face) result))
+        (setq pos next)))
+    (nreverse result)))
 ;;;;;;;;;;;;;; END of utils
