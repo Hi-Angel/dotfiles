@@ -1612,14 +1612,6 @@ TO-KEEP decides which part to keep and is one of `upper', `base',
         (message "No conflicts were found"))))
   )
 
-(use-package diff-mode
-  :defer t
-  :init
-  ;; update-on-the-fly is broken https://debbugs.gnu.org/cgi/bugreport.cgi?bug=50762
-  ;; use old good recalculation upon saving the buffer
-  (setq diff-update-on-the-fly nil)
-  )
-
 (use-package paren
   :defer t
   :init
