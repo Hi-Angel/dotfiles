@@ -4,6 +4,7 @@
   (setq evil-jumps-cross-buffers nil
         evil-undo-system 'undo-redo
         evil-want-keybinding nil ;; evil-collection replaces/conflicts evil-keybindings
+        evil-want-fine-undo t
         ;; use vanilla Emacs keybindings in insert-mode excluding Escape
         evil-disable-insert-state-bindings t)
   (setq-default evil-shift-round nil ;; make '>' not to round the indentation
