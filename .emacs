@@ -72,7 +72,8 @@
   "Calculates comfortable font size for the screen that Emacs is on"
   (cond
    ((<= screen-height-mm 250) 105)
-   (t 95)))
+   ((<= screen-height-mm 300) 95)
+   (t 85)))
 
 (defvar my-last-screen-height (make-hash-table :test 'equal))
 (defun my-set-best-font-size ()
