@@ -78,6 +78,20 @@ bringing it to the middle of the screen."
       (funcall orig-func count macro)))
   (advice-add 'evil-execute-macro :around #'evil-execute-macro-no-ding)
 
+  (evil-define-motion evil-previous-open-bracket (count)
+    "Go to COUNT previous unmatched \"[\"."
+    :jump t
+    :type exclusive
+    (evil-up-paren ?[ ?] (- (or count 1))))
+
+  (evil-define-motion evil-next-close-bracket (count)
+    "Go to COUNT next unmatched \"]\"."
+    :jump t
+    :type exclusive
+    (forward-char)
+    (evil-up-paren ?[ ?] (or count 1))
+    (backward-char))
+
   (evil-mode)
   :bind (:map evil-normal-state-map
          ("C-u"    . 'evil-scroll-up)
@@ -90,6 +104,8 @@ bringing it to the middle of the screen."
          ("S"      . 'evil-surround-region)
          ("M-q"    . 'fill-paragraph-or-region)
          ("g C-y"  . 'exchange-point-and-mark)
+         ("\[ \["  . 'evil-previous-open-bracket)
+         ("\] \]"  . 'evil-next-close-bracket)
          :map evil-insert-state-map
          ("C-j "   . 'evil-avy-goto-char)
          :map evil-visual-state-map
