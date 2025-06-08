@@ -1985,7 +1985,9 @@ A hacky O(n²) written by AI and edited by me, but good enough."
     (goto-char (point-min))
     (while (re-search-forward (rx "*" (group
                                        (not ?\]) ; avoid matching BBCode's [*]
-                                       (+? any)) "*") nil t)
+                                       (+? any))
+                                  "*")
+                              nil t)
       (replace-match "[i]\\1[/i]" t))
 
     ;; Convert ordered lists: - Item -> [*]Item
