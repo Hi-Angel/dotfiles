@@ -786,6 +786,8 @@ part of Emacs repo, in which case replace the pair that SP inserted."
         (insert "'"))))
 
   (sp-local-pair 'text-mode "`" nil :post-handlers '(:add sp-emacs-style-backtick))
+  (sp-local-pair 'typescript-ts-mode "/*" "*/")
+  (sp-local-pair 'typescript-tsx-mode "/*" "*/")
   )
 
 ;; mode to highlight outside parentheses
