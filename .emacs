@@ -1963,6 +1963,7 @@ and close the frame."
     (unless current-file
       (error "Buffer is not visiting a file"))
     (let ((backup-file (concat current-file "-BCKP")))
+      (save-buffer) ;; TODO: simplify to just save buf to backup directly?
       (copy-file current-file backup-file t)
       (message "Backup created: %s" backup-file))
     (markdown-to-redmine t)
@@ -2065,6 +2066,7 @@ and close the frame."
     (unless current-file
       (error "Buffer is not visiting a file"))
     (let ((backup-file (concat current-file "-BCKP")))
+      (save-buffer) ;; TODO: simplify to just save buf to backup directly?
       (copy-file current-file backup-file t)
       (message "Backup created: %s" backup-file))
     (markdown-to-bbcode t)
