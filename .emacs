@@ -1886,23 +1886,76 @@ contain a colon. May be fixed, but I don't bother for now."
       (erase-buffer))
     buffer))
 
-(defun markdown-to-textile (&optional curr-buffer)
+(defun my-markdown-transform-inline (line)
+  "Transform inline Markdown elements to Textile."
+  (let ((line (replace-regexp-in-string "`\\([^`]+\\)`" "@\\1@" line)))
+    (setq line (replace-regexp-in-string "\\[\\([^]]+\\)\\](\\([^)]+\\))" "\"\\1\":\\2" line))
+    (setq line (replace-regexp-in-string "\\*\\*\\([^\\*]+\\)\\*\\*" "*\\1*" line))
+    (setq line (replace-regexp-in-string "__\\([^_]+\\)__" "*\\1*" line))
+    (setq line (replace-regexp-in-string "\\*\\([^\\*]+\\)\\*" "_\\1_" line))
+    line))
+
+(defun my-markdown-string-to-redmine (md-string)
+  "Convert a Markdown string to Textile format.
+
+Impl. by AI, edited by me. Ain't perfect, but good enough for my
+purposes."
+  (let ((lines (split-string md-string "\n"))
+        (result "")
+        (state 'normal))
+    (dolist (line lines)
+      (cond
+       ((eq state 'codeblock)
+        (if (string-match "^```" line)
+            (progn
+              (setq result (concat result "</pre></code>\n"))
+              (setq state 'normal))
+          (setq result (concat result line "\n"))))
+       (t
+        (cond
+         ((string-match "^```" line)
+          (setq result (concat result "<code class=\"haskell\"><pre>\n"))
+          (setq state 'codeblock))
+         ((string-match "^\\(#+\\) " line)
+          (let* ((level (length (match-string 1 line)))
+                 (text (substring line (+ level 1))))
+            (setq result (concat result
+                                 (format "h%d. %s\n"
+                                         level
+                                         (my-markdown-transform-inline text))))))
+         ;; bullet list
+         ((string-match "^\\s-*\\*" line)
+          (let* ((bullet (substring line 0 (match-end 0)))
+                 (rest-of-line (substring line (match-end 0))))
+            (setq result (concat result
+                                 bullet
+                                 (my-markdown-transform-inline rest-of-line)
+                                 "\n"))))
+         ;; ordered list
+         ((string-match "^[0-9]+\\." line)
+          (let ((text (substring line (match-end 0))))
+            (setq result (concat result "# " (my-markdown-transform-inline text) "\n"))))
+         (t
+          (let ((transformed-line (my-markdown-transform-inline line)))
+            (setq result (concat result transformed-line "\n"))))))))
+    result))
+
+(defun markdown-to-redmine (&optional curr-buffer)
   "Convert the active region or the entire buffer from Textile to Markdown.
 
 By default it pops result to a new buffer, but if CURR-BUFFER is t it
 will replace the current one."
   (interactive)
-  (let ((textile-content
+  (let ((redmine-content
          (if (region-active-p)
              (buffer-substring (region-beginning) (region-end))
            (buffer-string))))
     (if curr-buffer
         (erase-buffer)
-      (switch-to-buffer (create-or-clear-buffer "*markdown-to-textile*")))
-    (insert textile-content)
-    (shell-command-on-region (point-min) (point-max) "pandoc -f markdown -t textile" t t)))
+      (switch-to-buffer (create-or-clear-buffer "*markdown-to-redmine*")))
+    (insert (my-markdown-string-to-redmine redmine-content))))
 
-(defun markdown-to-textile-and-close ()
+(defun markdown-to-redmine-and-close ()
   "Backup the current file, convert its Markdown content to Textile, save,
 and close the frame."
   (interactive)
@@ -1912,11 +1965,11 @@ and close the frame."
     (let ((backup-file (concat current-file "-BCKP")))
       (copy-file current-file backup-file t)
       (message "Backup created: %s" backup-file))
-    (markdown-to-textile t)
+    (markdown-to-redmine t)
     (save-buffer)
     (delete-frame)))
 
-(evil-ex-define-cmd "xr" #'markdown-to-textile-and-close)
+(evil-ex-define-cmd "xr" #'markdown-to-redmine-and-close)
 
 (defvar my-re-markdown-ordered-list
   (rx line-start (* space)
