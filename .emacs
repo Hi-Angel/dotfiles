@@ -1972,91 +1972,96 @@ and close the frame."
 
 (evil-ex-define-cmd "xr" #'markdown-to-redmine-and-close)
 
-(defvar my-re-markdown-ordered-list
-  (rx line-start (* space)
-      (group (+ digit)) ". "
-      (group (+ (not (any "\n"))))))
+(defun my-markdown-transform-inline-to-bbcode (line)
+  "Transform inline Markdown elements to BBCode."
+  ;; note: inline-code isn't supported by BBCode.
+  (let ((line
+         ;; Links: [text](url) -> [url=url]text[/url]
+         (replace-regexp-in-string "\\[\\([^]]+\\)\\](\\([^)]+\\))" "[url=\\2]\\1[/url]" line)))
+    (setq line (replace-regexp-in-string "\\*\\*\\([^\\*]+\\)\\*\\*" "[b]\\1[/b]" line))
+    (setq line (replace-regexp-in-string "__\\([^_]+\\)__" "[b]\\1[/b]" line))
+    (setq line (replace-regexp-in-string "\\*\\([^\\*]+\\)\\*" "[i]\\1[/i]" line))
+    (setq line (replace-regexp-in-string "_\\([^_]+\\)_" "[i]\\1[/i]" line))
+    line))
 
-(defun markdown-ordered-lists-to-bbcode ()
-  "Convert Markdown ordered lists to BBCode ordered lists in the current buffer."
-  (while (re-search-forward my-re-markdown-ordered-list nil t)
-    (let ((start (match-beginning 0))
-          (end (progn (while (re-search-forward my-re-markdown-ordered-list nil t))
-               (point))))
-      (insert "\n[/list]")
-      ;; Convert items to BBCode
-      (goto-char start)
-      (insert "[list=1]\n")
-      (while (re-search-forward my-re-markdown-ordered-list end t)
-        (replace-match "[*]\\2" t)))))
+(defun my-markdown-string-to-bbcode (md-string)
+  "Convert a Markdown string to BBCode format.
+
+Impl. by AI, edited by me. Ain't perfect, but good enough."
+  (let ((lines (split-string md-string "\n"))
+        (result "")
+        (state 'normal)
+        (in-list nil)
+        (list-type nil))
+    (dolist (line lines)
+      (cond
+       ((eq state 'codeblock)
+        (if (string-match "^```" line)
+            (progn
+              (setq result (concat result "[/code]\n"))
+              (setq state 'normal))
+          (setq result (concat result line "\n"))))
+       (t
+        (if (or (string-match "^\\s-*\\*" line) (string-match "^[0-9]+\\." line))
+            (let ((current-type (if (string-match "^\\s-*\\*" line) 'bullet 'ordered)))
+              (if (not in-list)
+                  (progn
+                    (setq in-list t)
+                    (setq list-type current-type)
+                    (setq result (concat result (if (eq list-type 'bullet) "[list]\n" "[list=1]\n"))))
+                (if (not (eq list-type current-type))
+                    (progn
+                      (setq result (concat result "[/list]\n"))
+                      (setq list-type current-type)
+                      (setq result (concat result (if (eq list-type 'bullet) "[list]\n" "[list=1]\n"))))))
+              (let ((text (substring line (match-end 0))))
+                (setq result (concat result "[*] " (my-markdown-transform-inline-to-bbcode text) "\n"))))
+          (progn
+            (if in-list
+                (progn
+                  (setq result (concat result "[/list]\n"))
+                  (setq in-list nil)
+                  (setq list-type nil)))
+            (cond
+             ((string-match "^```" line)
+              (setq result (concat result "[code]\n"))
+              (setq state 'codeblock))
+             ((string-match "^\\(#+\\) " line)
+              (let* ((level (length (match-string 1 line)))
+                     (text (substring line (+ level 1)))
+                     (em-len (pcase level
+                               (1 "2em")
+                               (2 "1.5em")
+                               (3 "1.25em")
+                               (4 "1em")
+                               (5 "0.875em")
+                               (6 "0.85em")
+                               (_ "UNSUPPORTED"))))
+                (setq result (concat result
+                                     (format "[SIZE=%s][B]%s[/B][/SIZE]\n"
+                                             em-len
+                                             (my-markdown-transform-inline-to-bbcode text))))))
+             (t
+              (let ((transformed-line (my-markdown-transform-inline-to-bbcode line)))
+                (setq result (concat result transformed-line "\n"))))))))))
+    (if in-list
+        (setq result (concat result "[/list]\n")))
+    result))
 
 (defun markdown-to-bbcode (&optional curr-buffer)
   "Convert the current buffer's Markdown content to BBCode format.
 
-A hacky O(n²) written by AI and edited by me, but good enough."
+By default it pops result to a new buffer, but if CURR-BUFFER is t it
+will replace the current one."
   (interactive)
-  (let ((markdown-text (buffer-substring-no-properties (point-min) (point-max))))
+  (let ((bbcode-content
+         (if (region-active-p)
+             (buffer-substring (region-beginning) (region-end))
+           (buffer-string))))
     (if curr-buffer
         (erase-buffer)
       (switch-to-buffer (create-or-clear-buffer "*markdown-to-bbcode*")))
-    (insert markdown-text)
-
-    ;; Convert headers: # Header -> [SIZE=Xem][B]Header[/B][/SIZE]
-    (goto-char (point-min))
-    (while (re-search-forward (rx line-start
-                                  (group (+ "#")) " "
-                                  (group (+ (not (any "\n")))))
-                              nil t)
-      (let ((text (match-string 2))
-            (em-len (pcase (length (match-string 1))
-                      (1 "2em")
-                      (2 "1.5em")
-                      (3 "1.25em")
-                      (4 "1em")
-                      (5 "0.875em")
-                      (6 "0.85em")
-                      (_ "UNSUPPORTED"))))
-        (replace-match (format "[SIZE=%s][B]%s[/B][/SIZE]" em-len text))))
-
-    ;; Convert links: [text](url) -> [url=url]text[/url]
-    (goto-char (point-min))
-    (while (re-search-forward (rx "[" (group (+? any)) "]"
-                                  "(" (group (+? any)) ")")
-                              nil t)
-      (replace-match "[url=\\2]\\1[/url]" t))
-
-    ;; Convert unordered lists: - Item -> [*]Item
-    (goto-char (point-min))
-    (while (re-search-forward (rx line-start (* space) (or ?- ?*) " ") nil t)
-      (replace-match "[*]" t))
-
-    ;; Convert bold: **text** -> [b]text[/b]
-    (goto-char (point-min))
-    (while (re-search-forward (rx "**" (group (+? any)) "**") nil t)
-      (replace-match "[b]\\1[/b]" t))
-
-    ;; Convert italics: *text* -> [i]text[/i]
-    (goto-char (point-min))
-    (while (re-search-forward (rx "*" (group
-                                       (not ?\]) ; avoid matching BBCode's [*]
-                                       (+? any))
-                                  "*")
-                              nil t)
-      (replace-match "[i]\\1[/i]" t))
-
-    ;; Convert ordered lists: - Item -> [*]Item
-    (goto-char (point-min))
-    (markdown-ordered-lists-to-bbcode)
-
-    ;; Wrap code blocks: ```code``` -> [code]code[/code]
-    (goto-char (point-min))
-    (while (re-search-forward (rx "```" (group (+ (not (any "`")))) "```") nil t)
-      (replace-match "[code]\\1[/code]" t))
-
-    ;; Replace current buffer with converted BBCode
-    (let ((bbcode-text (buffer-string)))
-      (erase-buffer)
-      (insert bbcode-text))))
+    (insert (my-markdown-string-to-bbcode bbcode-content))))
 
 (defun markdown-to-bbcode-and-close ()
   "Backup the current file, convert its Markdown content to bbcode, save,
