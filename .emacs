@@ -1887,13 +1887,44 @@ contain a colon. May be fixed, but I don't bother for now."
     buffer))
 
 (defun my-markdown-transform-inline (line)
-  "Transform inline Markdown elements to Textile."
-  (let ((line (replace-regexp-in-string "`\\([^`]+\\)`" "@\\1@" line)))
-    (setq line (replace-regexp-in-string "\\[\\([^]]+\\)\\](\\([^)]+\\))" "\"\\1\":\\2" line))
-    (setq line (replace-regexp-in-string "\\*\\*\\([^\\*]+\\)\\*\\*" "*\\1*" line))
-    (setq line (replace-regexp-in-string "__\\([^_]+\\)__" "*\\1*" line))
-    (setq line (replace-regexp-in-string "\\*\\([^\\*]+\\)\\*" "_\\1_" line))
-    line))
+  "Transform inline Markdown elements to Textile, handling nested contexts.
+
+For simplicity, underscore italic/bold isn't handled (underscores often
+come as part of a word so require special care, but I'm using asterisks
+instead so why bother).
+
+Written by AI, the explanation of the idea:
+
+The key insight is to protect regions that should not be processed (like
+code spans) before handling other formatting, and then to use temporary
+markers to avoid interference between different formatting passes."
+  (let* ((code-storage '())
+         (index 0)
+         (protected-line
+          (replace-regexp-in-string
+           "`\\([^`]+\\)`"
+           (lambda (match)
+             (let ((code (match-string 1 match)))
+               (setq code-storage (append code-storage (list code)))
+               (let ((placeholder (format "\000CODE%d\000" index)))
+                 (setq index (1+ index))
+                 placeholder)))
+           line
+           t)))
+    (setq protected-line (replace-regexp-in-string "\\*\\*\\([^\\*]+\\)\\*\\*" "<bold>\\1</bold>" protected-line t))
+    (setq protected-line (replace-regexp-in-string "\\*\\([^\\*]+\\)\\*" "<italic>\\1</italic>" protected-line t))
+    (setq protected-line (replace-regexp-in-string "<bold>\\([^<]+\\)</bold>" "*\\1*" protected-line t))
+    (setq protected-line (replace-regexp-in-string "<italic>\\([^<]+\\)</italic>" "_\\1_" protected-line t))
+    (setq protected-line (replace-regexp-in-string "\\[\\([^]]+\\)\\](\\([^)]+\\))" "\"\\1\":\\2" protected-line t))
+    (let ((idx 0))
+      (dolist (code code-storage)
+        (setq protected-line (replace-regexp-in-string
+                              (format "\000CODE%d\000" idx)
+                              (format "@%s@" code)
+                              protected-line
+                              t))
+        (setq idx (1+ idx))))
+  protected-line))
 
 (defun my-markdown-string-to-redmine (md-string)
   "Convert a Markdown string to Textile format.
