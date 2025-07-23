@@ -1975,13 +1975,12 @@ and close the frame."
 (defun my-markdown-transform-inline-to-bbcode (line)
   "Transform inline Markdown elements to BBCode."
   ;; note: inline-code isn't supported by BBCode.
+  ;; for simplicity, underscore italic/bold isn't handled.
   (let ((line
          ;; Links: [text](url) -> [url=url]text[/url]
          (replace-regexp-in-string "\\[\\([^]]+\\)\\](\\([^)]+\\))" "[url=\\2]\\1[/url]" line)))
     (setq line (replace-regexp-in-string "\\*\\*\\([^\\*]+\\)\\*\\*" "[b]\\1[/b]" line))
-    (setq line (replace-regexp-in-string "__\\([^_]+\\)__" "[b]\\1[/b]" line))
     (setq line (replace-regexp-in-string "\\*\\([^\\*]+\\)\\*" "[i]\\1[/i]" line))
-    (setq line (replace-regexp-in-string "_\\([^_]+\\)_" "[i]\\1[/i]" line))
     line))
 
 (defun my-markdown-string-to-bbcode (md-string)
