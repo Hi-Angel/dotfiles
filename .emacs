@@ -1924,7 +1924,11 @@ purposes."
                                          level
                                          (my-markdown-transform-inline text))))))
          ;; bullet list
-         ((string-match "^\\s-*\\*" line)
+         ((string-match
+           ;; to avoid conflicts with italic/bold assume a bullet should be
+           ;; followed by space.
+           "^\\s-*\\* "
+           line)
           (let* ((bullet (substring line 0 (match-end 0)))
                  (rest-of-line (substring line (match-end 0))))
             (setq result (concat result
@@ -2001,8 +2005,10 @@ Impl. by AI, edited by me. Ain't perfect, but good enough."
               (setq state 'normal))
           (setq result (concat result line "\n"))))
        (t
-        (if (or (string-match "^\\s-*\\*" line) (string-match "^[0-9]+\\." line))
-            (let ((current-type (if (string-match "^\\s-*\\*" line) 'bullet 'ordered)))
+        ;; to avoid conflicts with italic/bold assume a bullet should be
+        ;; followed by space.
+        (if (or (string-match "^\\s-*\\* " line) (string-match "^[0-9]+\\." line))
+            (let ((current-type (if (string-match "^\\s-*\\* " line) 'bullet 'ordered)))
               (if (not in-list)
                   (progn
                     (setq in-list t)
