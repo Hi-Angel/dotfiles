@@ -1939,13 +1939,13 @@ purposes."
        ((eq state 'codeblock)
         (if (string-match "^```" line)
             (progn
-              (setq result (concat result "</pre></code>\n"))
+              (setq result (concat result "</code></pre>\n"))
               (setq state 'normal))
           (setq result (concat result line "\n"))))
        (t
         (cond
          ((string-match "^```" line)
-          (setq result (concat result "<code class=\"haskell\"><pre>\n"))
+          (setq result (concat result "<pre><code class=\"haskell\">\n"))
           (setq state 'codeblock))
          ((string-match "^\\(#+\\) " line)
           (let* ((level (length (match-string 1 line)))
