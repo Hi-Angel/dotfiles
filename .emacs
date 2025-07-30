@@ -1967,9 +1967,11 @@ purposes."
                                  (my-markdown-transform-inline rest-of-line)
                                  "\n"))))
          ;; ordered list
-         ((string-match "^[0-9]+\\." line)
-          (let ((text (substring line (match-end 0))))
-            (setq result (concat result "# " (my-markdown-transform-inline text) "\n"))))
+         ((string-match "^\\(\\s-*\\)[0-9]+\\." line)
+          (let ((whitespace (match-string 1 line))
+                (text (substring line (match-end 0))))
+            (setq result (concat result
+                                 whitespace "# " (my-markdown-transform-inline text) "\n"))))
          (t
           (let ((transformed-line (my-markdown-transform-inline line)))
             (setq result (concat result transformed-line "\n"))))))))
