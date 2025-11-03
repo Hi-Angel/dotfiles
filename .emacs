@@ -1922,7 +1922,9 @@ markers to avoid interference between different formatting passes."
                               (format "\000CODE%d\000" idx)
                               (format "@%s@" code)
                               protected-line
-                              t))
+                              t ; fixedcase
+                              t ; literal: avoids interpreting \\1, etc.
+                              ))
         (setq idx (1+ idx))))
   protected-line))
 
