@@ -108,6 +108,8 @@ have same resolution, so we're interested in height millimeters."
  '(smtpmail-smtp-server "smtp.yandex.com")
  '(smtpmail-smtp-service 25))
 
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
 (defun add-list-to-list (dst src)
   "Similar to `add-to-list', but accepts a list as 2nd argument"
   (set dst
