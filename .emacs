@@ -838,7 +838,7 @@ part of Emacs repo, in which case replace the pair that SP inserted."
                 (derived-mode-p 'magit-mode)
                 (derived-mode-p 'xref--xref-buffer-mode))
       (symbol-overlay-mode t)))
-  (define-global-minor-mode global-symbol-overlay-mode ;; name of the new global mode
+  (define-globalized-minor-mode global-symbol-overlay-mode ;; name of the new global mode
     symbol-overlay-mode ;; name of the minor mode
     enable-symbol-overlay-mode)
   :config
