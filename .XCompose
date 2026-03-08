@@ -1,4 +1,5 @@
 # for Emacs: -*- coding: utf-8 -*-
+# original: https://github.com/kragen/xcompose/blob/master/dotXCompose
 include "%L"
 
 # def emit(keys, codepoint, word):
@@ -1222,3 +1223,4 @@ include "%L"
 <Multi_key> <m> <m>	:   "📝"
 <Multi_key> <h> <m>	:   "🤔"
 <Multi_key> <c> <equal> <greater>		: "⇏"
+<Multi_key> <h> <u> <g>		: "🤗"
