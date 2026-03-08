@@ -1888,6 +1888,131 @@ contain a colon. May be fixed, but I don't bother for now."
       (erase-buffer))
     buffer))
 
+(defun my-markdown-to-jira-transform-inline (line)
+  "Transform inline Markdown elements to Jira, handling nested contexts.
+
+For simplicity, underscore italic/bold isn't handled (underscores often
+come as part of a word so require special care, but I'm using asterisks
+instead so why bother).
+
+Written by AI, the explanation of the idea:
+
+The key insight is to protect regions that should not be processed (like
+code spans) before handling other formatting, and then to use temporary
+markers to avoid interference between different formatting passes."
+  (let* ((code-storage '())
+         (index 0)
+         (protected-line
+          (replace-regexp-in-string
+           "`\\([^`]+\\)`"
+           (lambda (match)
+             (let ((code (match-string 1 match)))
+               (setq code-storage (append code-storage (list code)))
+               (let ((placeholder (format "\000CODE%d\000" index)))
+                 (setq index (1+ index))
+                 placeholder)))
+           line
+           t)))
+    (setq protected-line (replace-regexp-in-string "\\*\\*\\([^\\*]+\\)\\*\\*" "<bold>\\1</bold>" protected-line t))
+    (setq protected-line (replace-regexp-in-string "\\*\\([^\\*]+\\)\\*" "<italic>\\1</italic>" protected-line t))
+    (setq protected-line (replace-regexp-in-string "<bold>\\([^<]+\\)</bold>" "*\\1*" protected-line t))
+    (setq protected-line (replace-regexp-in-string "<italic>\\([^<]+\\)</italic>" "_\\1_" protected-line t))
+    (setq protected-line (replace-regexp-in-string "\\[\\([^]]+\\)\\](\\([^)]+\\))" "[\\1|\\2]" protected-line t))
+    (let ((idx 0))
+      (dolist (code code-storage)
+        (setq protected-line (replace-regexp-in-string
+                              (format "\000CODE%d\000" idx)
+                              (format "@%s@" code)
+                              protected-line
+                              t ; fixedcase
+                              t ; literal: avoids interpreting \\1, etc.
+                              ))
+        (setq idx (1+ idx))))
+  protected-line))
+
+(defun my-markdown-string-to-jira (md-string)
+  "Convert a Markdown string to Textile format.
+
+Impl. by AI, edited by me. Ain't perfect, but good enough for my
+purposes."
+  (let ((lines (split-string md-string "\n"))
+        (result "")
+        (state 'normal))
+    (dolist (line lines)
+      (cond
+       ((eq state 'codeblock)
+        (if (string-match "^```" line)
+            (progn
+              (setq result (concat result "</code></pre>\n"))
+              (setq state 'normal))
+          (setq result (concat result line "\n"))))
+       (t
+        (cond
+         ((string-match "^```" line)
+          (setq result (concat result "<pre><code class=\"haskell\">\n"))
+          (setq state 'codeblock))
+         ((string-match "^\\(#+\\) " line)
+          (let* ((level (length (match-string 1 line)))
+                 (text (substring line (+ level 1))))
+            (setq result (concat result
+                                 (format "h%d. %s\n"
+                                         level
+                                         (my-markdown-to-jira-transform-inline text))))))
+         ;; bullet list
+         ((string-match
+           ;; to avoid conflicts with italic/bold assume a bullet should be
+           ;; followed by space.
+           "^\\s-*\\* "
+           line)
+          (let* ((bullet (substring line 0 (match-end 0)))
+                 (rest-of-line (substring line (match-end 0))))
+            (setq result (concat result
+                                 bullet
+                                 (my-markdown-to-jira-transform-inline rest-of-line)
+                                 "\n"))))
+         ;; ordered list
+         ((string-match "^\\(\\s-*\\)[0-9]+\\." line)
+          (let ((whitespace (match-string 1 line))
+                (text (substring line (match-end 0))))
+            (setq result (concat result
+                                 whitespace "# " (my-markdown-to-jira-transform-inline text) "\n"))))
+         (t
+          (let ((transformed-line (my-markdown-to-jira-transform-inline line)))
+            (setq result (concat result transformed-line "\n"))))))))
+    result))
+
+(defun markdown-to-jira (&optional curr-buffer)
+  "Convert the active region or the entire buffer from Textile to Markdown.
+
+By default it pops result to a new buffer, but if CURR-BUFFER is t it
+will replace the current one."
+  (interactive)
+  (let ((jira-content
+         (if (region-active-p)
+             (buffer-substring (region-beginning) (region-end))
+           (buffer-string))))
+    (if curr-buffer
+        (erase-buffer)
+      (switch-to-buffer (create-or-clear-buffer "*markdown-to-jira*")))
+    (insert (my-markdown-string-to-jira jira-content))))
+
+(defun markdown-to-jira-and-close ()
+  "Backup the current file, convert its Markdown content to Textile, save,
+and close the frame."
+  (interactive)
+  (let ((current-file (buffer-file-name)))
+    (unless current-file
+      (error "Buffer is not visiting a file"))
+    (let ((backup-file (concat current-file "-BCKP")))
+      (save-buffer) ;; TODO: simplify to just save buf to backup directly?
+      (copy-file current-file backup-file t)
+      (message "Backup created: %s" backup-file))
+    (markdown-to-jira t)
+    (save-buffer)
+    (delete-frame)))
+
+(evil-ex-define-cmd "xj" #'markdown-to-jira-and-close)
+
 (defun my-markdown-transform-inline (line)
   "Transform inline Markdown elements to Textile, handling nested contexts.
 
