@@ -312,8 +312,11 @@ alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
 alias cax="git add -u && git commit --amend -v --no-edit"
 alias amend_date="git commit --amend --date=now --no-edit"
-alias or="git pull origin   HEAD --rebase"
-alias ur="git pull upstream HEAD --rebase"
+
+# use fetch + rebase instead of `git pull --rebase` to update remote branch
+alias or="git fetch origin   master && git rebase origin/master"
+alias ur="git fetch upstream master && git rebase upstream/master"
+
 alias co="git checkout"
 alias l="git l"
 alias lp="git log -p --stat"
