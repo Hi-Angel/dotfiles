@@ -254,6 +254,17 @@ function conflicted_commit() (
     git log -1 -p --stat $(awk 'END{print $2}' .git/rebase-merge/done)
  )
 
+function get_remote_branch() (
+    set -e
+    if (( $# != 2 )); then
+        echo "Error: wrong number of args $#"
+        exit 1
+    fi
+    # Can't replace `reset --hard` with `git branch -f` because the latter
+    # doesn't work if branch is already checked out.
+    git fetch "$1" "$2" && git checkout "$2" && git reset --hard "$1"/"$2"
+ )
+
 # git-infix: find file in the repo containing the word
 function fnfx () {
     # `last_arg` is the infix, so separate it from the rest of args
