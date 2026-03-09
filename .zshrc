@@ -303,6 +303,10 @@ function suec () {
     ec "/sudo::$1"
 }
 
+# grep removing trailing whitespaces (useful with `ss`)
+function tgrep () {
+    grep "$@" | sed -e 's/[ \t]*$//'
+}
 alias gd="git diff -p --stat"
 alias rc="git add -u && GIT_EDITOR=true git rebase --continue"
 alias ca="git add -u && git commit --amend -v"
