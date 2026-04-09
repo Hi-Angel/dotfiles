@@ -21,12 +21,13 @@
       select-enable-clipboard nil ; don't overwrite clipboard content with deleted text
       enable-local-variables :all ; evaluate .dir-locals.el files
       ring-bell-function 'ignore ; don't randomly produce annoying sounds
+      default-frame-alist '((fullscreen . maximized)) ; start maxmized
       )
 
 (setq-default
  case-fold-search nil
  display-line-numbers 'visual ; show the line numbers
  tab-width 4 ; set tab width
- fill-column 85 ; set apropriate lenght of a line
+ fill-column 80 ; set apropriate lenght of a line
  cursor-type 'bar ; set flat cursor type
  major-mode 'text-mode) ; why Fundamental-mode is default? Text-mode is more aproppriate
