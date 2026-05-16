@@ -1,0 +1,54 @@
+# these can't parse multisplit
+archlinux.org
+gosuslugi.ru
+freebsd.org
+ycombinator.com
+backupsolution.ru
+dns-shop.ru
+rosreestr.ru
+gstatic.com
+baculasystems.com
+bacula.org
+instagram.com
+rbc.ru
+rbk.ru
+beeline.ru
+avito.ru
+codon.org.uk
+discuss.kde.org
+distrowatch.com
+melpa.org
+windows.net
+helix.ru
+microsoftonline.com
+cloud.microsoft
+office.net
+live.com
+nginx.org
+imfreedom.org
+openwrt.org
+sys42.eu
+davidedmundson.co.uk
+xda-developers.com
+screenrant.com
+consultant.ru
+zx2c4.com
+debian.org
+sloyd.ai
+marc.info
+
+# this one *seems* to work better, tho Idk for sure
+telegram.org
+t.me
+
+# these youtube-related domains work better with other strats
+googlevideo.com
+googleapis.com
+ggpht.com
+ytimg.com
+youtube.com
+
+# these resolve to many IPs and apparently some are handled differently by DPI.
+# So use a more agressive strategy for them.
+google.com
+google.ru

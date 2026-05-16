@@ -1,0 +1,19 @@
+# kernel.org does work with disorder, but git.kernel.org subdomain hangs for
+# some reason, so use a separate strat.
+kernel.org
+
+# these won't work well with other strats
+figma.com
+reddit.app.link
+sciopen.com
+thingiverse.com
+printables.com
+blender.org
+cults3d.com
+freedesktop.org
+phoronix.com
+freecad.org
+
+# TG proxies
+beramaqhyou.cyou
+acharbashi.info
