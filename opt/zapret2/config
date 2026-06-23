@@ -148,6 +148,7 @@ NFQWS2_UDP_PKT_IN=3
 # experiments!
 
 # --lua-desync=syndata for youtube
+# --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_md5:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=sniext+4 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 NFQWS2_OPT="
 --payload=tls_client_hello --hostlist=/opt/zapret2/multisplit-exclude.list --lua-desync=multidisorder:pos=1,midsld
 --new
