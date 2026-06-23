@@ -2066,15 +2066,21 @@ purposes."
     (dolist (line lines)
       (cond
        ((eq state 'codeblock)
-        (if (string-match "^```" line)
+        (if (string-match "^\\(\\s-*\\)```" line)
             (progn
-              (setq result (concat result "</code></pre>\n"))
+              (setq result (concat result
+                                   ;; properties may make whitespace invisible
+                                   (substring-no-properties (match-string 1 line)) ; whitespace
+                                   "</code></pre>\n"))
               (setq state 'normal))
           (setq result (concat result line "\n"))))
        (t
         (cond
-         ((string-match "^```" line)
-          (setq result (concat result "<pre><code class=\"haskell\">\n"))
+         ((string-match "^\\(\\s-*\\)```" line)
+          (setq result (concat result
+                               ;; properties may make whitespace invisible
+                               (substring-no-properties (match-string 1 line)) ; whitespace
+                               "<pre><code class=\"haskell\">\n"))
           (setq state 'codeblock))
          ((string-match "^\\(#+\\) " line)
           (let* ((level (length (match-string 1 line)))
