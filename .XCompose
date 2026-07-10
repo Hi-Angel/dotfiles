@@ -854,7 +854,8 @@ include "%L"
 
 
 # Combining accents, for making things you don't have precomposed chars or keystrokes for:
-<Multi_key> <backslash> <grave>	: "̀"  U0300   # COMBINING GRAVE ACCENT
+<Multi_key> <backslash> <grave>	        : "̀"  U0300   # COMBINING GRAVE ACCENT
+<Multi_key> <backslash> <Cyrillic_io>	: "̀"  U0300   # COMBINING GRAVE ACCENT
 <Multi_key> <backslash> <apostrophe>    : "́"   U0301   # COMBINING ACUTE ACCENT
 <Multi_key> <backslash> <asciicircum>    : "̂"   U0302   # COMBINING CIRCUMFLEX ACCENT
 <Multi_key> <backslash> <asciitilde>       : "̃"   U0303	# COMBINING TILDE
