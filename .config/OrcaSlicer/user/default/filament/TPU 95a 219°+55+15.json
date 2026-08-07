@@ -1,0 +1,33 @@
+{
+	"compatible_printers": [
+		"Qidi X-Plus 4 0.6 nozzle"
+	],
+	"filament_extruder_variant": [
+		"Direct Drive Standard"
+	],
+	"filament_settings_id": [
+		"TPU 95a 219°+55+15"
+	],
+	"from": "User",
+	"hot_plate_temp": [
+		"55"
+	],
+	"hot_plate_temp_initial_layer": [
+		"55"
+	],
+	"inherits": "Generic TPU @System",
+	"name": "TPU 95a 219°+55+15",
+	"nozzle_temperature": [
+		"219"
+	],
+	"nozzle_temperature_initial_layer": [
+		"219"
+	],
+	"nozzle_temperature_range_high": [
+		"219"
+	],
+	"slow_down_layer_time": [
+		"15"
+	],
+	"version": "2.4.0.3"
+}

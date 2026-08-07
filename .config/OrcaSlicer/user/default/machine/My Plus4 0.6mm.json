@@ -1,0 +1,18 @@
+{
+	"from": "User",
+	"inherits": "Qidi X-Plus 4 0.6 nozzle",
+	"name": "My Plus4 0.6mm",
+	"nozzle_type": [
+		"stainless_steel"
+	],
+	"print_host": "192.168.31.95",
+	"printer_extruder_id": [
+		"1"
+	],
+	"printer_extruder_variant": [
+		"Direct Drive Standard"
+	],
+	"printer_settings_id": "My Plus4 0.6mm",
+	"support_multi_bed_types": "1",
+	"version": "2.4.0.6"
+}

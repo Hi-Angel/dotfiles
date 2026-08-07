@@ -1,0 +1,60 @@
+{
+	"activate_air_filtration": [
+		"1"
+	],
+	"compatible_printers": [
+		"Qidi X-Plus 4 0.6 nozzle"
+	],
+	"complete_print_exhaust_fan_speed": [
+		"100"
+	],
+	"default_filament_colour": [
+		"#000000"
+	],
+	"fan_max_speed": [
+		"15"
+	],
+	"filament_extruder_variant": [
+		"Direct Drive Standard"
+	],
+	"filament_flow_ratio": [
+		"0.935"
+	],
+	"filament_max_volumetric_speed": [
+		"25"
+	],
+	"filament_notes": [
+		"Profiling:\n• temp 230..270: 240° and 255° has the least stringing. Overhangs are terrible everywhere except 270, but 270 has the most stringing.\n• max flowrate: looked good up to 30m²/s, but a single line changed its color a bit at 28.5. Then -10% is 25.6, let's use 25.\n• pressure advance: 0 is the only good one, 0.1 is already bad\n• flow ratio: 0 and -0.1 are both good, I chose in between — - .05, which from 0.95 resulted in 0.90. Afterwards a \"perfectionist\" test between 0 and 0.035 showed 0.035 as best result, so 0.9 + 0.035 = 0.935\n• retraction: 0.1 and higher seems to be okay, set to 0.2mm"
+	],
+	"filament_retraction_length": [
+		"0.2"
+	],
+	"filament_settings_id": [
+		"NIT ABS (black, bowden, 0.6nzl)"
+	],
+	"from": "User",
+	"inherits": "NIT ABS @System",
+	"name": "NIT ABS (black, bowden, 0.6nzl)",
+	"nozzle_temperature": [
+		"255"
+	],
+	"nozzle_temperature_initial_layer": [
+		"255"
+	],
+	"nozzle_temperature_range_high": [
+		"255"
+	],
+	"nozzle_temperature_range_low": [
+		"255"
+	],
+	"pressure_advance": [
+		"0"
+	],
+	"textured_plate_temp": [
+		"105"
+	],
+	"textured_plate_temp_initial_layer": [
+		"110"
+	],
+	"version": "2.4.0.3"
+}

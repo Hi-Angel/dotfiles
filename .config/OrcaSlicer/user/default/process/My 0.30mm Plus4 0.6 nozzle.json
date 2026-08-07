@@ -1,0 +1,14 @@
+{
+	"from": "User",
+	"inherits": "0.30mm Standard @Qidi XPlus4 0.6 nozzle",
+	"name": "My 0.30mm Plus4 0.6 nozzle",
+	"print_extruder_id": [
+		"1"
+	],
+	"print_extruder_variant": [
+		"Direct Drive Standard"
+	],
+	"print_settings_id": "My 0.30mm Plus4 0.6 nozzle",
+	"sparse_infill_pattern": "cubic",
+	"version": "2.4.0.6"
+}

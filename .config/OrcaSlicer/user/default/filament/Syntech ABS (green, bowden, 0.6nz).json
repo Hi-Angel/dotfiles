@@ -1,0 +1,66 @@
+{
+	"chamber_minimal_temperature": [
+		"40"
+	],
+	"chamber_temperature": [
+		"50"
+	],
+	"compatible_printers": [
+		"Qidi X-Plus 4 0.6 nozzle"
+	],
+	"default_filament_colour": [
+		"#26A269"
+	],
+	"enable_pressure_advance": [
+		"1"
+	],
+	"fan_max_speed": [
+		"15"
+	],
+	"filament_change_length": [
+		"0"
+	],
+	"filament_cost": [
+		"1006"
+	],
+	"filament_extruder_variant": [
+		"Direct Drive Standard"
+	],
+	"filament_flow_ratio": [
+		"0.946"
+	],
+	"filament_max_volumetric_speed": [
+		"19"
+	],
+	"filament_notes": [
+		"• temp°: 250° is the best, 230° second best. In manufacturer-approved range 230..250 every temp has a bit of stringing, but amusingly the largest amount was in between. 250 actually has *tiny bit* more stringing than 230, but has the very corner of overhang also printed tiny bit better.\n• Max flowrate: no visible artifacts from 5 up to 20 mm³/s. Presumably I can go higher, but set to 19 for now.\n• Pressure advance (w/ bowden tube): 0.1 already looks bad, 0 looks bad too but in a different way. Increasing values become worse. 0.05 seems to have been the best result.\n• Retraction: in between 0mm..6mm with step 0.25mm, the 2d ring shows best (0.25). In between 0mm..1.2mm with step 0.1mm the 0.1 is okay already. Set to 0.2 just in case. "
+	],
+	"filament_retraction_length": [
+		"0.2"
+	],
+	"filament_settings_id": [
+		"Syntech ABS (green, bowden, 0.6nz)"
+	],
+	"filament_vendor": [
+		"Syntech"
+	],
+	"from": "User",
+	"inherits": "Generic ABS @System",
+	"name": "Syntech ABS (green, bowden, 0.6nz)",
+	"nozzle_temperature": [
+		"250"
+	],
+	"nozzle_temperature_initial_layer": [
+		"250"
+	],
+	"nozzle_temperature_range_high": [
+		"250"
+	],
+	"nozzle_temperature_range_low": [
+		"230"
+	],
+	"pressure_advance": [
+		"0.05"
+	],
+	"version": "2.4.0.3"
+}

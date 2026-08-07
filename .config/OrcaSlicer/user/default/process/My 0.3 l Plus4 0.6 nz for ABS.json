@@ -1,0 +1,16 @@
+{
+	"from": "User",
+	"gyroid_optimized": "1",
+	"inherits": "0.30mm Standard @Qidi XPlus4 0.6 nozzle",
+	"name": "My 0.3 l Plus4 0.6 nz for ABS",
+	"notes": "For ABS: gyroid infill allows to even out shrinking stress during the cooling.",
+	"print_extruder_id": [
+		"1"
+	],
+	"print_extruder_variant": [
+		"Direct Drive Standard"
+	],
+	"print_settings_id": "My 0.3 l Plus4 0.6 nz for ABS",
+	"sparse_infill_pattern": "gyroid",
+	"version": "2.4.0.6"
+}

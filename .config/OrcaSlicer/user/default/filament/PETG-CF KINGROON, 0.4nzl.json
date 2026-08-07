@@ -1,0 +1,57 @@
+{
+	"activate_air_filtration": [
+		"1"
+	],
+	"compatible_printers": [
+		"Qidi X-Plus 4 0.4 nozzle"
+	],
+	"complete_print_exhaust_fan_speed": [
+		"100"
+	],
+	"during_print_exhaust_fan_speed": [
+		"80"
+	],
+	"enable_pressure_advance": [
+		"1"
+	],
+	"filament_extruder_variant": [
+		"Direct Drive Standard"
+	],
+	"filament_flow_ratio": [
+		"0.95"
+	],
+	"filament_max_volumetric_speed": [
+		"20"
+	],
+	"filament_notes": [
+		"• temp: honestly, not too much difference in 250°..230°. Not a lot of stringing in higher temperatures. 230° has no stringing and 235° has very small string of ≈2mm in length. Overhang looked best at 235° though.\n• max flow rate: 21.5 rate seems around where artifacts show. For safety set to 20.\n• pressure advance: best seems to be between .06 and .07, i.e. 0.065\n• flow ratio: 1-0.05=0.95 showed best result\n• retraction appears okay since 0.1mm, set 0.2mm for the safe case"
+	],
+	"filament_retraction_length": [
+		"0.2"
+	],
+	"filament_settings_id": [
+		"PETG-CF KINGROON, 0.4nzl"
+	],
+	"from": "User",
+	"inherits": "Generic PETG-CF @System",
+	"name": "PETG-CF KINGROON, 0.4nzl",
+	"nozzle_temperature": [
+		"235"
+	],
+	"nozzle_temperature_initial_layer": [
+		"250"
+	],
+	"nozzle_temperature_range_high": [
+		"250"
+	],
+	"nozzle_temperature_range_low": [
+		"230"
+	],
+	"pressure_advance": [
+		"0.065"
+	],
+	"textured_plate_temp": [
+		"75"
+	],
+	"version": "2.4.0.3"
+}

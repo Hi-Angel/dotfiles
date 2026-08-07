@@ -1,0 +1,16 @@
+{
+	"from": "User",
+	"inherits": "0.20mm Standard @Qidi XPlus4",
+	"initial_layer_speed": "15",
+	"name": "0.20mm Standard @Qidi XPlus4 — PETG-CF",
+	"notes": "PETG-CF overrides:\n\n• Speed → first layer: 15mm. Tried 25mm and more but that's just not enough time to stick to PEY plate.\n• wall generator: \"Aracne\" — no particular reason, just appears from the description as a better default.",
+	"print_extruder_id": [
+		"1"
+	],
+	"print_extruder_variant": [
+		"Direct Drive Standard"
+	],
+	"print_settings_id": "0.20mm Standard @Qidi XPlus4 — PETG-CF",
+	"version": "2.4.0.6",
+	"wall_generator": "arachne"
+}

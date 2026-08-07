@@ -1,0 +1,16 @@
+{
+	"from": "User",
+	"inherits": "Qidi X-Plus 4 0.4 nozzle",
+	"name": "My Plus4 0.4 nzl",
+	"print_host": "192.168.31.95",
+	"printer_extruder_id": [
+		"1"
+	],
+	"printer_extruder_variant": [
+		"Direct Drive Standard"
+	],
+	"printer_notes": "Changes:\n\n• \"✓ Support multiple bed types\"",
+	"printer_settings_id": "My Plus4 0.4 nzl",
+	"support_multi_bed_types": "1",
+	"version": "2.4.0.6"
+}
