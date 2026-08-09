@@ -1,10 +1,13 @@
 {
+	"bottom_surface_pattern": "hilbertcurve",
+	"brim_type": "no_brim",
 	"from": "User",
 	"inherits": "0.20mm Standard @Qidi XPlus4",
 	"initial_layer_infill_speed": "15",
+	"initial_layer_line_width": "0.62",
 	"initial_layer_speed": "15",
 	"name": "0.20mm Standard @Qidi XPlus4 — PETG-CF",
-	"notes": "PETG-CF overrides:\n\n• Speed → first layer: 15mm. Tried 25mm and more but that's just not enough time to stick to PEY plate.\n• wall generator: \"Aracne\" — no particular reason, just appears from the description as a better default.",
+	"notes": "PETG-CF overrides:\n\n• Speed → first layer: 15mm. Tried 25mm and more but that's just not enough time to stick to PEY plate.\n• wall generator: \"Aracne\" — no particular reason, just appears from the description as a better default.\n• \"1st layer\" 0.62mm and \"bottom layer pattern\" hilbert curve. That's 'cause I use smooth PEY plate and the pattern with the size makes best looking surface in terms of light reflection.\n•\"top layer pattern\" — Hilbert curve. Didn't change line size here, because PETG-CF doensn't reflect light enough for this to look interesting without smooth surface. But the pattern just looks better than lines.",
 	"print_extruder_id": [
 		"1"
 	],
@@ -12,6 +15,8 @@
 		"Direct Drive Standard"
 	],
 	"print_settings_id": "0.20mm Standard @Qidi XPlus4 — PETG-CF",
+	"sparse_infill_pattern": "cubic",
+	"top_surface_pattern": "hilbertcurve",
 	"version": "2.4.0.6",
 	"wall_generator": "arachne"
 }

@@ -8,11 +8,23 @@
 	"complete_print_exhaust_fan_speed": [
 		"100"
 	],
+	"cool_plate_temp": [
+		"75"
+	],
+	"cool_plate_temp_initial_layer": [
+		"80"
+	],
 	"during_print_exhaust_fan_speed": [
 		"80"
 	],
 	"enable_pressure_advance": [
 		"1"
+	],
+	"eng_plate_temp": [
+		"75"
+	],
+	"eng_plate_temp_initial_layer": [
+		"80"
 	],
 	"filament_extruder_variant": [
 		"Direct Drive Standard"
@@ -33,6 +45,9 @@
 		"PETG-CF KINGROON, 0.4nzl"
 	],
 	"from": "User",
+	"hot_plate_temp": [
+		"75"
+	],
 	"inherits": "Generic PETG-CF @System",
 	"name": "PETG-CF KINGROON, 0.4nzl",
 	"nozzle_temperature": [
@@ -49,6 +64,18 @@
 	],
 	"pressure_advance": [
 		"0.065"
+	],
+	"supertack_plate_temp": [
+		"75"
+	],
+	"supertack_plate_temp_initial_layer": [
+		"80"
+	],
+	"textured_cool_plate_temp": [
+		"75"
+	],
+	"textured_cool_plate_temp_initial_layer": [
+		"80"
 	],
 	"textured_plate_temp": [
 		"75"
