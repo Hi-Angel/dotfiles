@@ -95,10 +95,12 @@ NFQWS2_OPT="
 --new
 --filter-tcp=443,4515 --payload=tls_client_hello --hostlist=/opt/zapret2/no-multisplit-disorder.list --in-range=-s1 --lua-desync=oob:urp=0
 --new
---payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_md5:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=2 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
---new
---filter-udp=590-1400,3478 --filter-l7=stun --lua-desync=fake:blob=fake_default_tls:ip_ttl=1:repeats=1
+--payload=tls_client_hello --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_md5
 "
+# old defaults, testing the new options
+# --payload=tls_client_hello --hostlist=/opt/zapret2/desync-fake.list --lua-desync=fake:blob=fake_default_tls:tcp_md5:repeats=1 --lua-desync=fakeddisorder:pos=1:tcp_md5
+# --new
+# --payload=tls_client_hello --lua-desync=multisplit:blob=fake_default_tls:tcp_md5:pos=2:nodrop:repeats=1 --lua-desync=multisplit:pos=2 --payload=empty --out-range=<s1 --lua-desync=send:tcp_md5
 
 # NFQWS2_OPT="
 # --payload=tls_client_hello --hostlist=/opt/zapret2/multisplit-exclude.list --lua-desync=multidisorder:pos=1,midsld

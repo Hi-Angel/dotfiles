@@ -3,17 +3,13 @@
 kernel.org
 
 # these won't work well with other strats
-figma.com
-reddit.app.link
+melpa.org
 sciopen.com
 thingiverse.com
 blender.org
 cults3d.com
 freedesktop.org
-phoronix.com
 freecad.org
-kde-builder.kde.org
-blogs.kde.org
 bugs.kde.org
 your-objectstorage.com
 openwrt.org
@@ -22,13 +18,13 @@ offroadhotel.world
 builtwith.com
 pkgstats.archlinux.de
 retroarch.com
-amplitude.com
-kde.org
 lb.eu-1-id5-sync.com
-printables.com
 marcin.juszkiewicz.com.pl
 ru.mirrors.cicku.me
 public-ubiservices.ubi.com
+account.prusa3d.com
+forum.renoise.com
+wcostream.tv
 
 # this one works at home but doesn't at FNS.
 s3.amazonaws.com
