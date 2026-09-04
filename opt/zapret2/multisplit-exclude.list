@@ -30,7 +30,6 @@ marc.info
 khronos.org
 edu.af
 gfxstrand.net
-documentfoundation.org
 crwdcntrl.net
 mirrors.rpmfusion.org
 docs.kernel.org
@@ -39,6 +38,8 @@ obt.continent.ru
 yeggi.com
 pay.aeroflot.ru
 github.io
+rshb.ru
+pypi-mirror.gitverse.ru
 
 # this one *seems* to work better, tho Idk for sure
 telegram.org
