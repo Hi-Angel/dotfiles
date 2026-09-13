@@ -133,7 +133,7 @@ bringing it to the middle of the screen."
     ;; make underscore part of a word
     (modify-syntax-entry ?_ "w")))
 ;; doesn't work with :hook for some reason, so have to call add-hook manually
-(add-hook 'evil-local-mode-hook 'myhook-evil-mode)
+(add-hook 'after-change-major-mode-hook 'myhook-evil-mode)
 
 (defun find-window (f)
   "loops over subwindows in current window until they're finished
