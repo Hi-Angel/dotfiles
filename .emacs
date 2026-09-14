@@ -471,6 +471,7 @@ backward, so you can mutate text forward"
   (setq ido-enable-flex-matching t) ;; fuzzy match
   :config
   (ido-mode)
+  (ido-ubiquitous-mode 1)
   )
 
 (use-package smex
