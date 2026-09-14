@@ -2,7 +2,7 @@
 ;;;; I set defaults in early-init rather than in .emacs to not waste CPU cycles
 ;;;; in excessive overwrites to them
 
-(when (fboundp (malloc-trim))
+(when (fboundp 'malloc-trim)
   (run-with-idle-timer 7 t #'malloc-trim))
 
 (setq frame-resize-pixelwise t ; needs to be set before a frame is created
