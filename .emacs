@@ -224,8 +224,8 @@ have same resolution, so we're interested in height millimeters."
                     ("\\.rules\\'"         . conf-mode)
                     ("\\.glade$\\'"        . xml-mode)
                     ("\\.mzn\\'"           . minizinc-mode)
-                    ("\\.ts\\'"            . tsx-ts-mode)
-                    ("\\.tsx\\'"           . typescript-ts-mode)
+                    ("\\.tsx\\'"           . tsx-ts-mode)
+                    ("\\.ts\\'"            . typescript-ts-mode)
                     ))
 
 (defun sort-lines-nocase (beg end)
