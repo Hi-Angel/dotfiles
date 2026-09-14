@@ -83,14 +83,14 @@ bringing it to the middle of the screen."
     "Go to COUNT previous unmatched \"[\"."
     :jump t
     :type exclusive
-    (evil-up-paren ?[ ?] (- (or count 1))))
+    (evil-up-paren ?\[ ?\] (- (or count 1))))
 
   (evil-define-motion evil-next-close-bracket (count)
     "Go to COUNT next unmatched \"]\"."
     :jump t
     :type exclusive
     (forward-char)
-    (evil-up-paren ?[ ?] (or count 1))
+    (evil-up-paren ?\[ ?\] (or count 1))
     (backward-char))
 
   (evil-mode)
