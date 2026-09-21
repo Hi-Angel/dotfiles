@@ -1923,7 +1923,7 @@ markers to avoid interference between different formatting passes."
       (dolist (code code-storage)
         (setq protected-line (replace-regexp-in-string
                               (format "\000CODE%d\000" idx)
-                              (format "@%s@" code)
+                              (format "{{%s}}" code)
                               protected-line
                               t ; fixedcase
                               t ; literal: avoids interpreting \\1, etc.
@@ -1942,15 +1942,17 @@ purposes."
     (dolist (line lines)
       (cond
        ((eq state 'codeblock)
+        ;; codeblock end
         (if (string-match "^```" line)
             (progn
-              (setq result (concat result "</code></pre>\n"))
+              (setq result (concat result "{code}\n"))
               (setq state 'normal))
           (setq result (concat result line "\n"))))
        (t
         (cond
          ((string-match "^```" line)
-          (setq result (concat result "<pre><code class=\"haskell\">\n"))
+          ;; codeblock start
+          (setq result (concat result "{code:haskell}\n"))
           (setq state 'codeblock))
          ((string-match "^\\(#+\\) " line)
           (let* ((level (length (match-string 1 line)))
